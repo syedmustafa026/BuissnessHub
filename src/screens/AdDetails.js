@@ -33,7 +33,7 @@ const AdDetails = ({ navigation }) => {
                     activeOpacity={0.5}>
                     <MaterialIcon
                         name="favorite-outline"
-                        size={28}
+                         size={28}
                         style={{ alignSelf: 'center' }}
                         color={colors.black} />
                 </TouchableOpacity>
