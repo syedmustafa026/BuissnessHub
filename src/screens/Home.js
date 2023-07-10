@@ -15,7 +15,7 @@ const Home = ({navigation}) => {
     const onChangeSearch = query => setSearchQuery(query);
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.searchBar}>
+        <View style={styles.searchBar}>
                 <Searchbar
                     style={styles.search}
                     placeholder="What are you looking for?"
