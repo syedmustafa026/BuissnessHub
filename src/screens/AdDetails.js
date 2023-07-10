@@ -14,7 +14,7 @@ import Separator from '../components/Separator'
 const AdDetails = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
-            {/* header start */}
+             {/* header start */}
             <View style={{ position: 'relative' }}>
                 <TouchableOpacity
                     onPress={() => navigation.goBack()}
