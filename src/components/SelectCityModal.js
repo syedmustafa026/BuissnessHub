@@ -1,48 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal, FlatList, StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
 import Separator from '../components/Separator'
+import { useNavigation } from '@react-navigation/native';
 
-const Item = ({ name, navigation }) => {
+
+const Item = ({ name }) => {
     return (
         <>
-            <TouchableOpacity onPress={() => navigation.navigate('PlaceAdListing')} activeOpacity={0.5} style={styles.row}>
+            <TouchableOpacity activeOpacity={0.5} style={styles.row}>
                 <Text style={styles.h2}>{name}</Text>
             </TouchableOpacity>
             <Separator />
         </>
     )
 }
-const PlaceAd = ({ navigation }) => {
-
+const SelectCityModal = (props) => {
+    const navigation = useNavigation()
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.centeredView}>
-                <View style={styles.modalView}>
-                    <Icon
-                        style={{
-                            position: 'absolute',
-                            left: 10,
-                            top: 30
-                        }}
-                        name='close'
-                        size={24}
-                        onPress={() => navigation.goBack()}
-                        color={colors.gray} />
-                    <View style={{ justifyContent: 'center', marginVertical: 16 }}>
-                        <Text style={styles.h1}>Select a City</Text>
-                        <Text style={styles.h4}>Where should we place your ad?</Text>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={true}
+                onRequestClose={props.setModalVisible(false)}
+            >
+                <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                        <Icon
+                            onPress={() => props.setModalVisible(false)}
+                            style={{
+                                position: 'absolute',
+                                left: 10,
+                                top: 30
+                            }}
+                            name='close'
+                            size={30}
+                            color={colors.gray} />
+                        <View style={{ justifyContent: 'center', marginVertical: 16 }}>
+                            <Text style={styles.h1}>Select a City</Text>
+                            <Text style={styles.h4}>Where should we place your ad?</Text>
+                        </View>
+                        <FlatList
+                            data={['Abu Dhabi', 'Pakistan', 'India', "Bangladesh", 'Iran', 'kuwait', 'UAE']}
+                            renderItem={({ item }) => (<Item name={item} />)}
+                            keyExtractor={(item, index) => index.toString()}
+                        />
                     </View>
-                    <FlatList
-                        data={['Abu Dhabi', 'Pakistan', 'India', "Bangladesh", 'Iran', 'kuwait', 'UAE']}
-                        renderItem={({ item }) => (<Item name={item} navigation={navigation} />)}
-                        keyExtractor={(item, index) => index.toString()}
-                    />
                 </View>
-            </View>
+            </Modal>
         </SafeAreaView>
     );
 };
@@ -124,4 +133,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default PlaceAd;
+export default SelectCityModal;

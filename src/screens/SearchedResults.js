@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView, FlatList } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView, FlatList } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { Searchbar, Badge } from 'react-native-paper';
@@ -31,14 +31,14 @@ const SearchResults = () => {
                 />
             </View>
             <View style={styles.fiterRow}>
-                <ScrollView horizontal={true}>
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     <TouchableOpacity activeOpacity={0.6} style={{ flexDirection: 'row' }}>
                         <Icon
                             style={{ marginHorizontal: 2, marginVertical: 10 }}
                             name='sliders-h'
                             size={20}
                             color={colors.primary} />
-                        <Text style={{ fontSize: 16, margin: 10, color: colors.black }}>Filters</Text>
+                        <Text style={{ fontSize: 16, margin: 10, color: colors.black,fontFamily:fonts.SEMIBOLD }}>Filters</Text>
                         <Badge size={24} style={{
                             alignSelf: 'center',
                             marginRight: 5,

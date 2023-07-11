@@ -6,7 +6,7 @@ import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
 
 const LoginModal = () => {
-    const [modalVisible, setModalVisible] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false)
     return (
         <View style={styles.centeredView}>
             <Modal

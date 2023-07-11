@@ -60,6 +60,7 @@ const BottomNavigator = () => {
         component={Favorite} />
       <Tab.Screen options={{
         title: 'Place an ad',
+        headerShown: false,
         tabBarIcon: ({ focused }) => (
           <Icon name='plus-circle'
             size={32}
