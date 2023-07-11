@@ -1,11 +1,11 @@
 import React from "react";
-import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
-import * as colors from "../utilities/colors"
-import * as fonts from "../utilities/fonts"
+import * as colors from "../../utilities/colors"
+import * as fonts from "../../utilities/fonts"
 
 import { TouchableRipple } from 'react-native-paper';
 import { useNavigation } from "@react-navigation/native";
@@ -24,7 +24,7 @@ const SearchedCard = () => {
                     name='favorite-outline'
                     size={24}
                     color={colors.white} />
-                <Image style={styles.cardImg} source={require('../assets/images/ad.jpeg')} />
+                <Image style={styles.cardImg} source={require('../../assets/images/ad.jpeg')} />
                 <View style={{ margin: 5, padding: 10 }}>
                     <Text style={{ color: colors.black, fontFamily: fonts.SEMIBOLD, fontSize: 20 }} >AED 175,000 </Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 8 }}>

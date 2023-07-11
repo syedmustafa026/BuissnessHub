@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
-import { Modal, StyleSheet, Text, Pressable, View, Image, TouchableOpacity } from 'react-native';
+import { Modal, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import * as colors from "../utilities/colors"
-import * as fonts from "../utilities/fonts"
+import * as colors from "../../utilities/colors"
+import * as fonts from "../../utilities/fonts"
 
-const LoginModal = () => {
-    const [modalVisible, setModalVisible] = useState(false)
+const LoginModal = (props) => {
     return (
         <View style={styles.centeredView}>
             <Modal
                 animationType="slide"
                 transparent={true}
-                visible={modalVisible}
+                visible={props.modalVisible}
             >
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                        <Image style={styles.image} source={require("../assets/images/logo.png")} />
+                        <Image style={styles.image} source={require("../../assets/images/logo.png")} />
                         <Icon
-                            onPress={() => setModalVisible(false)}
+                            onPress={() => props.setModalVisible(false)}
                             style={{
                                 position: 'absolute',
                                 right: 10,
@@ -30,17 +29,17 @@ const LoginModal = () => {
 
                         {/* <Image
                             style={styles.wallpaper}
-                            source={require("../assets/images/chatIcon.png")}
+                            source={require("../../assets/images/chatIcon.png")}
                         />
                         <Text style={styles.h1}>Log in to use chat</Text> */}
                         {/* <Image
                             style={styles.wallpaper}
-                            source={require("../assets/images/likeIcon.png")}
+                            source={require("../../assets/images/likeIcon.png")}
                         />
                         <Text style={styles.h1}>Log in to favorite an ad</Text> */}
                         <Image
                             style={styles.wallpaper}
-                            source={require("../assets/images/ClipboardIcon.png")}
+                            source={require("../../assets/images/ClipboardIcon.png")}
                         />
                         <Text style={styles.h1}>Log in to post an ad</Text>
                         <TouchableOpacity
@@ -48,7 +47,7 @@ const LoginModal = () => {
                             style={styles.button}>
                             <Image
                                 style={{ width: 25, height: 25 }}
-                                source={require("../assets/images/facebook.png")}
+                                source={require("../../assets/images/facebook.png")}
                             />
                             <Text style={{ color: 'gray', paddingHorizontal: 15, fontSize: 18, fontFamily:fonts.REGULAR}}>Continue with Facebook</Text>
                         </TouchableOpacity>
@@ -57,7 +56,7 @@ const LoginModal = () => {
                             style={styles.button}>
                             <Image
                                 style={{ width: 30, height: 30 }}
-                                source={require("../assets/images/google.png")}
+                                source={require("../../assets/images/google.png")}
                             />
                             <Text style={{ color: 'gray', paddingHorizontal: 15, fontSize: 18, fontFamily:fonts.REGULAR}}>Continue with Google</Text>
                         </TouchableOpacity>
@@ -78,11 +77,6 @@ const LoginModal = () => {
                     </View>
                 </View>
             </Modal>
-            <Pressable
-                style={[styles.button, styles.buttonOpen]}
-                onPress={() => setModalVisible(true)}>
-                <Text style={styles.textStyle}>Show Modal</Text>
-            </Pressable>
         </View>
     );
 };
@@ -124,10 +118,6 @@ const styles = StyleSheet.create({
     textStyle: {
         color: 'white',
         fontFamily:fonts.BOLD,
-        textAlign: 'center',
-    },
-    modalText: {
-        marginBottom: 15,
         textAlign: 'center',
     },
     header: {

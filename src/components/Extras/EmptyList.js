@@ -2,8 +2,8 @@ import React from "react"
 import { View, StyleSheet, Text } from "react-native"
 import { heightPercentageToDP as hp } from "react-native-responsive-screen"
 
-import * as colors from "../utilities/colors"
-import * as fonts from "../utilities/fonts"
+import * as colors from "../../utilities/colors"
+import * as fonts from "../../utilities/fonts"
 
 const EmptyList = (props) => {
   return (

@@ -7,10 +7,10 @@ import { Searchbar, Badge } from 'react-native-paper';
 import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
-import ChipComponet from "../components/Chip";
-import SearchedCard from "../components/SearchedCard";
+import ChipComponet from "../components/Extras/Chip";
+import SearchedCard from "../components/Cards/SearchedCard";
 
-const SearchResults = () => {
+const SearchResults = ({navigation}) => {
     const [searchQuery, setSearchQuery] = useState('')
     const onChangeSearch = query => setSearchQuery(query)
 
@@ -18,6 +18,7 @@ const SearchResults = () => {
         <SafeAreaView style={styles.container}>
             <View style={styles.searchBar}>
                 <MaterialIcon
+                onPress={()=>navigation.goBack()}
                     name='arrow-back-ios'
                     size={24}
                     color={colors.black} />

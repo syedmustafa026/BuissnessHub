@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Chip } from 'react-native-paper';
 
-import * as colors from "../utilities/colors"
+import * as colors from "../../utilities/colors"
 
 const ChipComponet = ({ name }) => (
     <Chip

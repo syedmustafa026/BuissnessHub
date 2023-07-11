@@ -6,8 +6,8 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { Button } from "react-native-paper";
 import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
-import AdCard from '../components/AdCard'
-import Separator from '../components/Separator'
+import AdCard from '../components/Cards/AdCard'
+import Separator from '../components/Extras/Separator'
 
 const AdDetails = ({ navigation }) => {
     return (

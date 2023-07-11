@@ -1,7 +1,7 @@
 import React from "react"
 import { View, StyleSheet } from "react-native"
 
-import * as colors from "../utilities/colors"
+import * as colors from "../../utilities/colors"
 
 const Separator = () => {
   return (
@@ -12,8 +12,8 @@ const Separator = () => {
 const styles = StyleSheet.create({
   separator: {
     borderBottomColor: colors.silver,
-    borderBottomWidth: 1,
-    width: "92%",
+    borderBottomWidth: 0.8,
+    width: "94%",
     alignSelf:'center'
   },
 })

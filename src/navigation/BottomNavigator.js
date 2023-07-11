@@ -83,6 +83,7 @@ const BottomNavigator = () => {
         component={Messages} />
       <Tab.Screen
         options={{
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Icon name='reorder-horizontal'
               size={26}

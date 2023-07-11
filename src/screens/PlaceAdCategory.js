@@ -5,40 +5,31 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
 import Separator from '../components/Extras/Separator'
+import NameRow from '../components/Rows/NameRow'
 
-const Item = ({ name, navigation }) => {
-    return (
-        <>
-            <TouchableOpacity onPress={() => navigation.navigate('PlaceAdListing')} activeOpacity={0.5} style={styles.row}>
-                <Text style={styles.h2}>{name}</Text>
-            </TouchableOpacity>
-            <Separator />
-        </>
-    )
-}
-const PlaceAd = ({ navigation }) => {
+const PlaceAdCategory = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
-                    {/* <Icon
+                    <Icon
                         style={{
                             position: 'absolute',
                             left: 10,
                             top: 30
                         }}
-                        name='close'
+                        name='arrow-left'
                         size={24}
                         onPress={() => navigation.goBack()}
-                        color={colors.gray} /> */}
+                        color={colors.black} />
                     <View style={{ justifyContent: 'center', marginVertical: 16 }}>
-                        <Text style={styles.h1}>Select a City</Text>
-                        <Text style={styles.h4}>Where should we place your ad?</Text>
+                        <Text style={styles.h1}>Motors</Text>
+                        <Text style={styles.h4}>Choose the category that your fits into.</Text>
                     </View>
                     <FlatList
-                        data={['Abu Dhabi', 'Pakistan', 'India', "Bangladesh", 'Iran', 'kuwait', 'UAE']}
-                        renderItem={({ item }) => (<Item name={item} navigation={navigation} />)}
+                        data={['Used Cars', 'Motorcycles', 'Auto Accessories', "Heavy Vehicles", 'Boats', 'Number Plated']}
+                        renderItem={({ item }) => (<NameRow name={item} navigation={navigation} />)}
                         keyExtractor={(item, index) => index.toString()}
                     />
                 </View>
@@ -69,23 +60,6 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         padding: 10,
         elevation: 2,
-    },
-    row: { justifyContent: 'flex-start', marginTop: 16 },
-    header: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-    },
-    image: {
-        width: wp('35'),
-        height: hp('5'),
-        resizeMode: 'contain'
-    },
-    wallpaper: {
-        width: wp('30'),
-        height: hp('15'),
-        resizeMode: 'contain',
-        margin: wp('8')
     },
     h1: {
         color: colors.black,
@@ -124,4 +98,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default PlaceAd;
+export default PlaceAdCategory;

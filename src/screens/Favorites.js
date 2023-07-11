@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-nat
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import * as colors from "../utilities/colors"
-import Separator from '../components/Separator'
+import Separator from '../components/Extras/Separator'
 import { REGULAR, SEMIBOLD } from "../utilities/fonts";
 
 const Favorite = ({navigation}) => {
