@@ -1,16 +1,24 @@
 import React from "react";
-import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import * as colors from "../utilities/colors"
 import Separator from '../components/Extras/Separator'
 import { REGULAR, SEMIBOLD } from "../utilities/fonts";
+import FavoriteCard from "../components/Cards/FavoriteCard";
 
-const Favorite = ({navigation}) => {
+const Favorites = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={{ fontFamily: SEMIBOLD, fontSize: 16, marginHorizontal: 12, textAlign: 'center', color: colors.primaryLight }}>Its like a desert in here! You dont have any favorites :(</Text>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                
+            <FavoriteCard />
+            <FavoriteCard />
+            </ScrollView>
+
+            
+            {/* <Text style={{ fontFamily: SEMIBOLD, fontSize: 16, marginHorizontal: 12, textAlign: 'center', color: colors.primaryLight }}>Its like a desert in here! You dont have any favorites :(</Text>
             <TouchableOpacity
                 onPress={() =>navigation.goBack()}
                 activeOpacity={0.8}
@@ -21,14 +29,13 @@ const Favorite = ({navigation}) => {
                     fontSize: 18,
                     fontFamily: REGULAR
                 }}>Search For Something</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
         </SafeAreaView>
     )
 }
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.white,
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -54,4 +61,4 @@ const styles = StyleSheet.create({
         marginTop: 12
     },
 })
-export default Favorite
+export default Favorites

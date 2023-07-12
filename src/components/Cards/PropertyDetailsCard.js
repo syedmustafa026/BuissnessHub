@@ -11,7 +11,7 @@ import { TouchableRipple } from 'react-native-paper';
 import { useNavigation } from "@react-navigation/native";
 
 
-const SearchedCard = () => {
+const PropertyDetailsCard = () => {
     const navigation = useNavigation()
     return (
         <TouchableRipple
@@ -128,4 +128,4 @@ const styles = StyleSheet.create({
         zIndex: 2
     },
 })
-export default SearchedCard
+export default PropertyDetailsCard

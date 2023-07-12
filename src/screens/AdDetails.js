@@ -15,14 +15,13 @@ const AdDetails = ({ navigation }) => {
             <ScrollView>
                 {/* header start */}
                 <View style={{ position: 'relative' }}>
-                    <TouchableOpacity
+                <TouchableOpacity
                         onPress={() => navigation.goBack()}
                         style={styles.backIcon}
                         activeOpacity={0.5}>
-                        <Icon
+                       <Icon
                             name="arrow-left"
-                            size={36}
-                            style={styles.backButton}
+                            size={28}
                             color={colors.black} />
                     </TouchableOpacity>
                     <Image style={styles.mainImg} source={require('../assets/images/ad.jpeg')} />
@@ -34,7 +33,7 @@ const AdDetails = ({ navigation }) => {
                             name="favorite-outline"
                             size={28}
                             style={{ alignSelf: 'center' }}
-                            color={colors.black} />
+                            color={colors.gray} />
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => navigation.goBack()}
@@ -197,8 +196,8 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         zIndex: 3,
         backgroundColor: colors.white,
-        height: hp('5.6'),
-        width: wp('11.2'),
+        height: 40,
+        width: 40,
     },
     boldText: {
         color: colors.black,

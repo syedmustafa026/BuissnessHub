@@ -8,9 +8,9 @@ import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import ChipComponet from "../components/Extras/Chip";
-import SearchedCard from "../components/Cards/SearchedCard";
+import PropertyDetailsCard from "../components/Cards/PropertyDetailsCard";
 
-const SearchResults = ({navigation}) => {
+const CategorizedResults = ({navigation}) => {
     const [searchQuery, setSearchQuery] = useState('')
     const onChangeSearch = query => setSearchQuery(query)
 
@@ -57,8 +57,8 @@ const SearchResults = ({navigation}) => {
             </View>
             <ScrollView>
                 <View style={styles.cards}>
-                    <SearchedCard />
-                    <SearchedCard />
+                    <PropertyDetailsCard />
+                    <PropertyDetailsCard />
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -89,4 +89,4 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     }
 })
-export default SearchResults
+export default CategorizedResults

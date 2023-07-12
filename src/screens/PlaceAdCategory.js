@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
 import Separator from '../components/Extras/Separator'
-import NameRow from '../components/Rows/NameRow'
+import WideNameRow from '../components/Rows/WideNameRow'
 
 const PlaceAdCategory = ({ navigation }) => {
 
@@ -29,7 +29,7 @@ const PlaceAdCategory = ({ navigation }) => {
                     </View>
                     <FlatList
                         data={['Used Cars', 'Motorcycles', 'Auto Accessories', "Heavy Vehicles", 'Boats', 'Number Plated']}
-                        renderItem={({ item }) => (<NameRow name={item} navigation={navigation} />)}
+                        renderItem={({ item }) => (<WideNameRow name={item} navigation={navigation} />)}
                         keyExtractor={(item, index) => index.toString()}
                     />
                 </View>

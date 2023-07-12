@@ -1,7 +1,7 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Home from '../screens/Home'
-import Favorite from '../screens/Favorites'
+import Favorites from '../screens/Favorites'
 import Messages from '../screens/Messages'
 import PlaceAd from '../screens/PlaceAd'
 import Menu from '../screens/Menu'
@@ -50,6 +50,16 @@ const BottomNavigator = () => {
         title: 'Favorites',
         headerTitle: 'My Favorites',
         headerTitleAlign: 'center',
+        headerStyle: {
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.23,
+          shadowRadius: 2.62,
+          elevation: 4,
+        },
         tabBarIcon: ({ focused }) => (
           <Icon name='heart-outline'
             size={26}
@@ -57,7 +67,7 @@ const BottomNavigator = () => {
         ),
       }}
         name="Favorite"
-        component={Favorite} />
+        component={Favorites} />
       <Tab.Screen options={{
         title: 'Place an ad',
         headerShown: false,

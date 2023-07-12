@@ -22,7 +22,7 @@ const Home = ({ navigation }) => {
                     onChangeText={onChangeSearch}
                     value={searchQuery}
                     blurOnSubmit={true}
-
+                    onSubmitEditing={()=>navigation.navigate("SearchedResults")}
                 />
                 <Icon
                     name='bell-outline'
@@ -33,7 +33,7 @@ const Home = ({ navigation }) => {
                 <View style={styles.cards}>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('SearchResults')}
+                        onPress={() => navigation.navigate('ResultsSubCategory')}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/propertyRent.png')} />
@@ -42,7 +42,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('SearchResults')}
+                        onPress={() => navigation.navigate('ResultsSubCategory')}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/propertySale.png')} />
@@ -52,7 +52,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('SearchResults')}
+                        onPress={() => navigation.navigate('ResultsSubCategory')}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/room.png')} />
@@ -62,7 +62,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('SearchResults')}
+                        onPress={() => navigation.navigate('ResultsSubCategory')}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/motor.png')} />
@@ -72,7 +72,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('SearchResults')}
+                        onPress={() => navigation.navigate('ResultsSubCategory')}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/classified.png')} />
@@ -82,7 +82,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('SearchResults')}
+                        onPress={() => navigation.navigate('ResultsSubCategory')}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/furniture.png')} />
@@ -92,7 +92,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('SearchResults')}
+                        onPress={() => navigation.navigate('ResultsSubCategory')}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/mobile.png')} />
@@ -102,7 +102,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('SearchResults')}
+                        onPress={() => navigation.navigate('SearchedResults')}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/Community.png')} />
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     cards: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginVertical:12,
+        marginVertical: 12,
         flexDirection: 'row',
         flexWrap: 'wrap'
     },
