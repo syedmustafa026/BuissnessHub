@@ -12,6 +12,8 @@ import AdCard from "../components/Cards/AdCard";
 
 const Home = ({ navigation }) => {
     const [searchQuery, setSearchQuery] = useState('')
+    const [verifiedModal, setVerifiedModal] = useState(false)
+
     const onChangeSearch = query => setSearchQuery(query);
     return (
         <SafeAreaView style={styles.container}>
@@ -22,7 +24,7 @@ const Home = ({ navigation }) => {
                     onChangeText={onChangeSearch}
                     value={searchQuery}
                     blurOnSubmit={true}
-                    onSubmitEditing={()=>navigation.navigate("SearchedResults")}
+                    onSubmitEditing={() => navigation.navigate("SearchedResults")}
                 />
                 <Icon
                     name='bell-outline'
@@ -110,8 +112,15 @@ const Home = ({ navigation }) => {
                                 Community</Text>
                         </View>
                     </TouchableRipple>
+                    <View style={{
+                        width: wp('28'),
+                        height: hp('13'),
+                        marginRight: 12,
+                    }}>
+
+                    </View>
                 </View>
-                <View style={styles.banner} >
+                <TouchableOpacity activeOpacity={0.8} style={styles.banner} >
                     <View style={{
                         backgroundColor: '#cfe1fc',
                         width: '27%',
@@ -123,7 +132,7 @@ const Home = ({ navigation }) => {
                         borderBottomRightRadius: 0
                     }}>
                         <MaterialIcon name="verified" size={45} color={colors.primary} />
-                    </View>
+                    </View >
                     <View style={{ flexDirection: 'row', marginHorizontal: 10, marginVertical: 16 }}>
                         <View>
                             <Text style={{ fontFamily: fonts.BOLD, fontSize: 16, color: colors.black }}>Become a verified user</Text>
@@ -133,7 +142,7 @@ const Home = ({ navigation }) => {
                         </View>
                         <MaterialIcon name="arrow-forward-ios" style={{ margin: 10, alignSelf: 'center' }} size={20} color={colors.primaryLight} />
                     </View>
-                </View>
+                </TouchableOpacity>
                 <Text style={{ fontFamily: fonts.BOLD, fontSize: 16, color: colors.black, margin: 18 }}>Popular in Used Cars for Sale</Text>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     <AdCard />
