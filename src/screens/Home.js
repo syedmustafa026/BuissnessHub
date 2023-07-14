@@ -29,6 +29,7 @@ const Home = ({ navigation }) => {
                     onSubmitEditing={() => navigation.navigate("SearchedResults")}
                 />
                 <Icon
+                    onPress={() => navigation.navigate('Notifications')}
                     name='bell-outline'
                     size={28}
                     color={colors.gray500} />
@@ -37,7 +38,7 @@ const Home = ({ navigation }) => {
                 <View style={styles.cards}>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory')}
+                        onPress={() => navigation.navigate('Filters')}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/propertyRent.png')} />
@@ -46,7 +47,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory')}
+                        onPress={() => navigation.navigate('Filters')}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/propertySale.png')} />
@@ -56,7 +57,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory')}
+                        onPress={() => navigation.navigate('Filters')}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/room.png')} />

@@ -16,6 +16,8 @@ import PlaceAdSubCategory from '../screens/PlaceAdSubCategory'
 import PlaceAdDetails from '../screens/PlaceAdDetails'
 import SearchedResults from '../screens/SearchedResults'
 import ResultsSubCategory from '../screens/ResultsSubCategory'
+import Notifications from '../screens/Notifications'
+import Filters from '../screens/Filters'
 
 const Stack = createNativeStackNavigator()
 
@@ -28,7 +30,9 @@ const StackNavigator = () => {
 
                 <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
                 <Stack.Screen name="Home" component={Home} />
+                <Stack.Screen name="Filters" component={Filters} />
                 <Stack.Screen name="Favorite" component={Favorite} />
+                <Stack.Screen options={{headerShown:true, headerTitleAlign: 'center', headerStyle: { shadowColor: "#000", shadowOffset: { width: 0, height: 2, }, shadowOpacity: 0.23, shadowRadius: 2.62, elevation: 4, }, }} name="Notifications" component={Notifications} />
 
                 <Stack.Screen name="PlaceAd" component={PlaceAd} />
                 <Stack.Screen name="PlaceAdListing" component={PlaceAdListing} />
