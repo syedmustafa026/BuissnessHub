@@ -83,6 +83,16 @@ const BottomNavigator = () => {
         title: 'Messages',
         headerTitle: 'Messages',
         headerTitleAlign: 'center',
+        headerStyle: {
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.23,
+          shadowRadius: 2.62,
+          elevation: 4,
+        },
         tabBarIcon: ({ focused }) => (
           <Icon name='message-reply-text-outline'
             size={26}

@@ -9,6 +9,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import { Searchbar, TouchableRipple } from 'react-native-paper';
 import AdCard from "../components/Cards/AdCard";
+import VerifiedModal from "../components/Modals/VerifiedModal";
 
 const Home = ({ navigation }) => {
     const [searchQuery, setSearchQuery] = useState('')
@@ -17,6 +18,7 @@ const Home = ({ navigation }) => {
     const onChangeSearch = query => setSearchQuery(query);
     return (
         <SafeAreaView style={styles.container}>
+            <VerifiedModal visible={verifiedModal} setModalVisible={setVerifiedModal} />
             <View style={styles.searchBar}>
                 <Searchbar
                     style={styles.search}
@@ -120,7 +122,7 @@ const Home = ({ navigation }) => {
 
                     </View>
                 </View>
-                <TouchableOpacity activeOpacity={0.8} style={styles.banner} >
+                <TouchableOpacity onPress={() => setVerifiedModal(true)} activeOpacity={0.8} style={styles.banner} >
                     <View style={{
                         backgroundColor: '#cfe1fc',
                         width: '27%',

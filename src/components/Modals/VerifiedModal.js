@@ -1,9 +1,9 @@
 import React from "react"
 import { Image, Linking, Modal, StyleSheet, View, Text } from "react-native"
-import { Button, IconButton } from "react-native-paper"
+import { Button, IconButton, } from "react-native-paper"
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
-
+import Separator from '../Extras/Separator'
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 
@@ -17,44 +17,34 @@ const VerifiedModal = (props) => {
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <View style={styles.modalHeader}>
-            <Text style={styles.modalTitle}>Location Permission</Text>
-            <IconButton
-              icon="help-circle-outline"
-              size={24}
-              color={colors.warning}
-              style={styles.close}
-              onPress={() => Linking.openURL("https://www.privacypolicies.com/live/cef8512a-96d9-4d1b-9696-67a24529a259")}
-            />
-          </View>
-
           <View style={styles.modalBody}>
-            <Icon
-              name="map-marker-outline"
-              size={40}
-              color={colors.success}
-              style={styles.icon}
-            />
-            <Text style={styles.label}>Use your location</Text>
-            <Text style={styles.text}>To track your location while you are logged in, allow MyCabify Driver to use your location all of the time.</Text>
-            <Text style={styles.text}>MyCabify Driver collects location data to enable customer's safety, zone updates, nearby base and tracking report even when the app is closed or not in use.</Text>
+
+            <Image source={require("../../assets/images/verify.jpeg")} style={styles.brand} />
+
+            <Text style={styles.label}>Get a Verified on Buissness Hub!</Text>
+            <Separator />
+            <Text style={[styles.h2, { marginTop: 12 }]}>Build Trust.</Text>
+            <Text style={[styles.h4, { marginBottom: 12, marginTop: 4 }]}>Verify user and get upto 5x engagements.</Text>
+            <Text style={[styles.h2, { marginTop: 12 }]}>Build Trust.</Text>
+            <Text style={[styles.h4, { marginBottom: 12, marginTop: 4 }]}>Verify user and get upto 5x engagements.</Text>
+            <Text style={[styles.h2, { marginTop: 12 }]}>Build Trust.</Text>
+            <Text style={[styles.h4, { marginBottom: 12, marginTop: 4 }]}>Verify user and get upto 5x engagements.</Text>
+            <Separator />
             <View style={styles.row}>
               <Button
-                mode="outlined"
-                contentStyle={styles.buttonContent}
-                labelStyle={styles.buttonLabel}
-                style={[styles.button, styles.deny]}
-                onPress={() => declinedPermission()}
-                color={colors.danger}
-              >DENY</Button>
+                onPress={() => { props.setModalVisible(false) }}
+                mode="contained"
+                color={colors.white}
+                style={[styles.button, { marginVertical: 18, width: '40%', borderColor: colors.gray500, backgroundColor: colors.white, }]}
+                labelStyle={[styles.ButtonLabel, { color: colors.gray }]}
+              >Skip</Button>
               <Button
-                mode="outlined"
-                contentStyle={styles.buttonContent}
-                labelStyle={styles.buttonLabel}
-                style={[styles.button, styles.accept]}
-                onPress={() => requestPermission()}
-                color={colors.primary}
-              >ACCEPT</Button>
+                onPress={() => { props.setModalVisible(false) }}
+                mode="contained"
+                color={colors.white}
+                style={[styles.button, { marginVertical: 18, }]}
+                labelStyle={styles.ButtonLabel}
+              >Get Verified</Button>
             </View>
           </View>
         </View>
@@ -94,7 +84,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp("3"),
   },
   modalTitle: {
-    fontFamily: fonts.POPPINS_SEMIBOLD,
+    fontFamily: fonts.SEMIBOLD,
     fontSize: hp("2.2"),
     color: colors.black,
   },
@@ -107,14 +97,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   label: {
-    fontFamily: fonts.POPPINS_SEMIBOLD,
-    fontSize: hp("3.2"),
+    fontFamily: fonts.BOLD,
+    fontSize: hp("2.2"),
     color: colors.black,
-    textAlign: "center",
-    marginVertical: hp("0.6"),
+    marginVertical: hp("1.3"),
+    marginHorizontal: 20
   },
   text: {
-    fontFamily: fonts.POPPINS_REGULAR,
+    fontFamily: fonts.REGULAR,
     fontSize: hp("2"),
     textAlign: "justify",
     color: colors.black,
@@ -122,24 +112,50 @@ const styles = StyleSheet.create({
   },
   brand: {
     width: wp("100"),
-    height: hp("12"),
+    height: hp("32"),
     alignSelf: "center",
+    resizeMode: 'contain',
     marginVertical: hp("0.6"),
   },
+  h1: {
+    color: colors.black,
+    fontSize: 24,
+    zIndex: 2,
+    fontFamily: fonts.BOLD,
+    fontFamily: fonts.BOLD,
+    textAlign: 'center',
+  },
+  h2: {
+    fontSize: 16,
+    color: colors.black,
+    fontFamily: fonts.BOLD,
+    marginHorizontal: 20
+  },
+  h4: {
+    fontSize: 14,
+    color: colors.black,
+    fontFamily: fonts.REGULAR,
+    marginHorizontal: 20
 
+  },
   row: {
     flexDirection: "row",
     justifyContent: "flex-end",
     marginTop: hp("2"),
   },
-  buttonLabel: {
-    fontFamily: fonts.POPPINS_MEDIUM,
+  button: {
+    width: '48%',
+    borderRadius: 5,
+    height: 45,
+    marginHorizontal: 8,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    backgroundColor: colors.red,
+    borderWidth: 0.7,
   },
-  accept: {
-    marginLeft: hp("0.6"),
-  },
-  deny: {
-    marginRight: hp("0.6"),
+  ButtonLabel: {
+    fontSize: hp("2.2"),
+    fontFamily: fonts.SEMIBOLD,
   },
 })
 
