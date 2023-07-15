@@ -7,8 +7,9 @@ import { Searchbar, Badge } from 'react-native-paper';
 import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
-import ChipComponet from "../components/Extras/Chip";
+import ChipComponent from "../components/Chips/ChipComponent";
 import PropertyDetailsCard from "../components/Cards/PropertyDetailsCard";
+import SearchDetailsCard from "../components/Cards/SearchDetailsCard";
 
 const CategorizedResults = ({navigation}) => {
     const [searchQuery, setSearchQuery] = useState('')
@@ -50,7 +51,7 @@ const CategorizedResults = ({navigation}) => {
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         data={['Rent', 'All Residentials', 'Price Range', "Bathrooms", 'Rooms']}
-                        renderItem={({ item }) => (<ChipComponet name={item} />)}
+                        renderItem={({ item }) => (<ChipComponent name={item} />)}
                         keyExtractor={(item, index) => index.toString()}
                     />
                 </ScrollView>
@@ -59,6 +60,9 @@ const CategorizedResults = ({navigation}) => {
                 <View style={styles.cards}>
                     <PropertyDetailsCard />
                     <PropertyDetailsCard />
+                    <PropertyDetailsCard />
+                    <SearchDetailsCard />
+                  
                 </View>
             </ScrollView>
         </SafeAreaView>

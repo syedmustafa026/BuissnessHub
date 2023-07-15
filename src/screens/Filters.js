@@ -1,29 +1,24 @@
 import React, { useState } from "react";
-import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-
 import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-import { Searchbar, TouchableRipple } from 'react-native-paper'
+import { Searchbar, TextInput, TouchableRipple } from 'react-native-paper'
+import SelectBoxChip from "../components/Chips/SelectBoxChip";
+import SelectHorizontalChip from "../components/Chips/SelectHorizonatlChip";
 const Tab = createMaterialTopTabNavigator();
+import Rent from "../components/Filters/Rent";
 
-
-const Filters = ({navigation}) => {
-  const Rent = () => {
-    return (
-      <View style={styles.header}>
-
-      </View>
-    )
-  }
+const Filters = ({ navigation }) => {
+  
   const Buy = () => {
     return (
       <View style={styles.header}>
-          
+
       </View>
     )
   }
@@ -32,7 +27,7 @@ const Filters = ({navigation}) => {
       <View style={styles.header}>
         <View style={{ flexDirection: 'row', margin: 12 }}>
           <Icon
-          onPress={()=>navigation.goBack()}
+            onPress={() => navigation.goBack()}
             name='close'
             size={24}
             color={colors.gray} />
@@ -43,11 +38,12 @@ const Filters = ({navigation}) => {
       <Tab.Navigator screenOptions={{
         swipeEnabled: false,
         tabBarActiveTintColor: colors.primary,
-        tabBarAndroidRipple : true,
+        tabBarAndroidRipple: true,
+        tabBarIndicatorStyle: { backgroundColor: colors.primary },
         tabBarStyle: { backgroundColor: colors.white },
       }}>
-      <Tab.Screen name="Buy" component={Buy} />
         <Tab.Screen name="Rent" component={Rent} />
+        <Tab.Screen name="Buy" component={Buy} />
       </Tab.Navigator>
     </SafeAreaView>
   )
@@ -55,12 +51,12 @@ const Filters = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white
+    backgroundColor: colors.white,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: colors.gray100,
+    backgroundColor: colors.white,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -70,6 +66,47 @@ const styles = StyleSheet.create({
     shadowRadius: 2.62,
     elevation: 2,
   },
+  h1: {
+    color: colors.black,
+    fontSize: 20,
+    zIndex: 2,
 
+    fontFamily: fonts.BOLD,
+    fontFamily: fonts.BOLD,
+  },
+  h2: {
+    fontSize: 14,
+    color: colors.black,
+    fontFamily: fonts.BOLD,
+    marginBottom: 14,
+    marginHorizontal: 20
+  },
+  h4: {
+    fontSize: 12,
+    color: colors.gray,
+    fontFamily: fonts.REGULAR,
+    marginHorizontal: 12,
+  },
+  selectButton: {
+    width: '100%',
+    borderRadius: 10,
+    height: 55,
+    paddingHorizontal: 4,
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: colors.white,
+    borderColor: colors.gray300,
+    borderWidth: 1,
+    marginTop: 8,
+  },
+  selectLabel: {
+    fontSize: hp("2"),
+    color: colors.gray,
+    textAlign: 'justify',
+    alignSelf: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    fontFamily: fonts.MEDIUM,
+  },
 })
 export default Filters

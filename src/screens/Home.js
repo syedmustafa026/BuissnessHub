@@ -28,11 +28,13 @@ const Home = ({ navigation }) => {
                     blurOnSubmit={true}
                     onSubmitEditing={() => navigation.navigate("SearchedResults")}
                 />
-                <Icon
-                    onPress={() => navigation.navigate('Notifications')}
-                    name='bell-outline'
-                    size={28}
-                    color={colors.gray500} />
+                <TouchableOpacity activeOpacity={0.6}>
+                    <Icon
+                        onPress={() => navigation.navigate('Notifications')}
+                        name='bell-outline'
+                        size={28}
+                        color={colors.gray500} />
+                </TouchableOpacity>
             </View>
             <ScrollView>
                 <View style={styles.cards}>
@@ -57,7 +59,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('Filters')}
+                        onPress={() => navigation.navigate('CategorizedResults')}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/room.png')} />
@@ -67,7 +69,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory')}
+                        onPress={() => navigation.navigate('CategorizedResults')}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/motor.png')} />
@@ -77,7 +79,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory')}
+                        onPress={() => navigation.navigate('SearchDetailsCard')}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/classified.png')} />

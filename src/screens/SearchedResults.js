@@ -51,10 +51,10 @@ const SearchedResults = ({ navigation }) => {
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.cards}>
-          <NonImageCard />
-          <NonImageCard />
-          <NonImageCard />
-          <NonImageCard />
+          <PropertyDetailsCard/>
+          <PropertyDetailsCard/>
+          <SearchDetailsCard/>
+
         </View>
       </ScrollView>
     </SafeAreaView>

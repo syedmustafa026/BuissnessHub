@@ -3,7 +3,7 @@ import { Chip } from 'react-native-paper';
 
 import * as colors from "../../utilities/colors"
 
-const ChipComponet = ({ name }) => (
+const ChipComponent = ({ name }) => (
     <Chip
         style={{
             marginHorizontal: 3,
@@ -19,4 +19,4 @@ const ChipComponet = ({ name }) => (
     </Chip>
 );
 
-export default ChipComponet;
+export default ChipComponent;

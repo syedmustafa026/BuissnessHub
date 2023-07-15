@@ -7,7 +7,7 @@ const Splash = ({ navigation }) => {
 
     const handleLoad = async () => {
         const timeout = setTimeout(() => {
-            navigation.replace('BottomNavigator')
+            navigation.replace('OnBoard')
         }, 2000)
 
         return () => {

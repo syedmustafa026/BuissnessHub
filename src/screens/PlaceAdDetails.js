@@ -196,7 +196,6 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontFamily: fonts.REGULAR,
     marginHorizontal: 12,
-
   },
   button: {
     width: '100%',

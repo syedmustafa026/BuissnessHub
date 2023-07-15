@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native"
 import Separator from "../Extras/Separator"
 
 
-const VehicleDetailsCard = () => {
+const SearchDetailsCard = () => {
   const navigation = useNavigation()
   return (
     <TouchableRipple
@@ -126,4 +126,4 @@ const styles = StyleSheet.create({
     borderColor: colors.gray
   },
 })
-export default VehicleDetailsCard
+export default SearchDetailsCard
