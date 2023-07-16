@@ -1,21 +1,23 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, FlatList, ScrollView, Platform } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-import { Searchbar, TextInput, TouchableRipple } from 'react-native-paper'
-import SelectBoxChip from "../Chips/CheckBoxChip"
+import { TextInput, Button } from 'react-native-paper'
+import SelectBoxChip from "../Chips/SelectBoxChip"
 import SelectHorizontalChip from "../Chips/SelectHorizonatlChip"
+import CheckBoxChip from '../Chips/CheckBoxChip'
 import Slider from '../Extras/MultiSliders'
-const Tab = createMaterialTopTabNavigator();
+import { useNavigation } from "@react-navigation/native"
 
 
 const Buy = () => {
-    const [text, setText] = React.useState("");
+    const navigation = useNavigation()
+    const [text, setText] = useState("")
+    const [checkedItems, setCheckedItems] = useState([])
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -32,6 +34,16 @@ const Buy = () => {
                     <Text style={styles.h4}>Select the cities neighbourhood or buildings that you want to search in</Text>
                 </View>
                 <View style={{ marginHorizontal: 20, marginVertical: 15 }}>
+                    <Text style={styles.h1}> Categories</Text>
+                    <FlatList
+                        data={['All Residential', 'office', 'industrial', "retail", 'Iran', 'kuwait', 'UAE']}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                        renderItem={({ item }) => (<SelectHorizontalChip name={item} />)}
+                        keyExtractor={(item, index) => index.toString()}
+                    />
+                </View>
+                <View style={{ marginHorizontal: 20, marginVertical: 15 }}>
                     <Text style={styles.h1}> Type</Text>
                     <FlatList
                         style={{ marginTop: 12 }}
@@ -42,16 +54,7 @@ const Buy = () => {
                         keyExtractor={(item, index) => index.toString()}
                     />
                 </View>
-                <View style={{ marginHorizontal: 20, marginVertical: 15 }}>
-                    <Text style={styles.h1}> Categories</Text>
-                    <FlatList
-                        data={['All Residential', 'office', 'industrial', "retail", 'Iran', 'kuwait', 'UAE']}
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={false}
-                        renderItem={({ item }) => (<SelectHorizontalChip name={item} />)}
-                        keyExtractor={(item, index) => index.toString()}
-                    />
-                </View>
+
                 <View style={{ marginHorizontal: 20, marginVertical: 15 }}>
                     <Text style={styles.h1}> Price Range (AED)</Text>
                     <View style={{ justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center' }}>
@@ -125,11 +128,20 @@ const Buy = () => {
                         data={['Residential', 'Commercial', 'Room', "Bangladesh", 'Iran', 'kuwait', 'UAE']}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
-                        renderItem={({ item }) => (<SelectBoxChip name={item} checked={"Commercial"} />)}
+                        renderItem={({ item }) => (<CheckBoxChip handlePress={setCheckedItems} name={item} checked={"Residential"} />)}
                         keyExtractor={(item, index) => index.toString()}
                     />
                 </View>
             </ScrollView>
+            <View style={styles.box}>
+                <Button
+                    onPress={() => { navigation.navigate("CategorizedResults") }}
+                    mode="contained"
+                    color={colors.white}
+                    style={styles.button}
+                    labelStyle={styles.ButtonLabel}
+                >Show Results</Button>
+            </View>
         </View>
     )
 }
@@ -137,19 +149,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.white,
-    },
-    header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        backgroundColor: colors.white,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.23,
-        shadowRadius: 2.62,
-        elevation: 2,
     },
     h1: {
         color: colors.black,
@@ -194,6 +193,26 @@ const styles = StyleSheet.create({
     input: {
         backgroundColor: colors.white,
         width: "42%"
-    }
+    },
+    box: {
+        padding: 15,
+        paddingHorizontal: 20,
+        marginTop: 10,
+        backgroundColor: colors.white
+    },
+    button: {
+        width: '100%',
+        borderRadius: 5,
+        height: 45,
+        justifyContent: 'center',
+        alignSelf: 'center',
+        backgroundColor: colors.primary,
+
+    },
+    ButtonLabel: {
+        fontSize: hp("2"),
+        color: colors.white,
+        fontFamily: fonts.SEMIBOLD,
+    },
 })
 export default Buy

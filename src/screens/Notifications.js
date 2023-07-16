@@ -6,7 +6,7 @@ import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
 
 
-const Notifications = () => {
+const Notifications = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <Image source={require("../assets/images/ringbell.jpeg")} style={styles.img} />

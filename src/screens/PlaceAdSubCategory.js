@@ -13,14 +13,15 @@ const PlaceAdSubCategory = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={{ justifyContent: 'center', marginVertical: 16 }}>
         <Text style={styles.h2}>Now Choose the right category for your ad:</Text>
-        <Text style={styles.h4}><Text onPress={()=>navigation.navigate('PlaceAdListing')} style={{ color: colors.primary }}>...</Text>  &gt;<Text onPress={()=>navigation.goBack()} style={{ color: colors.primary }}> Motors</Text>  &gt; Motocycles</Text>
+        <Text style={styles.h4}><Text onPress={() => navigation.navigate('PlaceAdListing')} style={{ color: colors.primary }}>...</Text>
+          &gt;<Text onPress={() => navigation.goBack()} style={{ color: colors.primary }}> Motors</Text>  &gt; Motocycles</Text>
 
       </View>
       <FlatList
         data={['Used Cars', 'Motorcycles', 'Auto Accessories', "Heavy Vehicles", 'Boats', 'Number Plated']}
         renderItem={({ item }) => (<ArrowRow name={item} navigation={navigation} />)}
         keyExtractor={(item, index) => index.toString()}
-        ItemSeparatorComponent={<Separator/>}
+        ItemSeparatorComponent={<Separator />}
       />
     </SafeAreaView>
   );

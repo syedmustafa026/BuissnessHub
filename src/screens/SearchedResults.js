@@ -28,16 +28,18 @@ const SearchedResults = ({ navigation }) => {
         </View>
         <View style={{ flexDirection: 'row' }}>
           <Icon
+            onPress={() => navigation.navigate("Filters")}
             style={{ marginVertical: 10 }}
             name='sliders-h'
             size={20}
             color={colors.primary} />
-          <Text style={{ fontSize: 16, margin: 10, color: colors.black, fontFamily: fonts.SEMIBOLD }}>Filters</Text>
+          <Text onPress={() => navigation.navigate("Filters")} style={{ fontSize: 16, margin: 10, color: colors.black, fontFamily: fonts.SEMIBOLD }}>Filters</Text>
           <Badge size={24} style={{
             alignSelf: 'center',
             marginRight: 5,
             backgroundColor: colors.black
           }}>3</Badge>
+
         </View >
         <View style={{ flexDirection: 'row' }}>
           <Icon
@@ -51,9 +53,12 @@ const SearchedResults = ({ navigation }) => {
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.cards}>
-          <PropertyDetailsCard/>
-          <PropertyDetailsCard/>
-          <SearchDetailsCard/>
+          <SearchDetailsCard />
+          <SearchDetailsCard />
+          <SearchDetailsCard />
+          <SearchDetailsCard />
+          <SearchDetailsCard />
+          <SearchDetailsCard />
 
         </View>
       </ScrollView>

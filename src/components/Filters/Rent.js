@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, FlatList, ScrollView, Platform } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
@@ -6,16 +6,18 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 
-import {  TextInput, Button } from 'react-native-paper'
+import { TextInput, Button } from 'react-native-paper'
 import SelectBoxChip from "../Chips/SelectBoxChip"
 import SelectHorizontalChip from "../Chips/SelectHorizonatlChip"
 import CheckBoxChip from '../Chips/CheckBoxChip'
 import Slider from '../Extras/MultiSliders'
+import { useNavigation } from "@react-navigation/native"
 
 
 const Rent = () => {
-    const [text, setText] = useState("");
-    const [checkedItems, setCheckedItems] = useState([]);
+    const navigation = useNavigation()
+    const [text, setText] = useState("")
+    const [checkedItems, setCheckedItems] = useState([])
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -125,14 +127,14 @@ const Rent = () => {
                         data={['Residential', 'Commercial', 'Room', "Bangladesh", 'Iran', 'kuwait', 'UAE']}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
-                        renderItem={({ item }) => (<CheckBoxChip handlePress={setCheckedItems} name={item} checked={"Residential"}/>)}
+                        renderItem={({ item }) => (<CheckBoxChip handlePress={setCheckedItems} name={item} checked={"Residential"} />)}
                         keyExtractor={(item, index) => index.toString()}
                     />
                 </View>
             </ScrollView>
             <View style={styles.box}>
                 <Button
-                    onPress={() => { }}
+                    onPress={() => { navigation.navigate("CategorizedResults") }}
                     mode="contained"
                     color={colors.white}
                     style={styles.button}

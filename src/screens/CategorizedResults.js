@@ -10,6 +10,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import ChipComponent from "../components/Chips/ChipComponent";
 import PropertyDetailsCard from "../components/Cards/PropertyDetailsCard";
 import SearchDetailsCard from "../components/Cards/SearchDetailsCard";
+import NonImageCard from "../components/Cards/NonImageCard";
 
 const CategorizedResults = ({navigation}) => {
     const [searchQuery, setSearchQuery] = useState('')
@@ -34,7 +35,7 @@ const CategorizedResults = ({navigation}) => {
             </View>
             <View style={styles.fiterRow}>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    <TouchableOpacity activeOpacity={0.6} style={{ flexDirection: 'row' }}>
+                    <TouchableOpacity  onPress={()=> navigation.navigate("Filters")} activeOpacity={0.6} style={{ flexDirection: 'row' }}>
                         <Icon
                             style={{ marginHorizontal: 2, marginVertical: 10 }}
                             name='sliders-h'
@@ -60,8 +61,12 @@ const CategorizedResults = ({navigation}) => {
                 <View style={styles.cards}>
                     <PropertyDetailsCard />
                     <PropertyDetailsCard />
-                    <PropertyDetailsCard />
-                    <SearchDetailsCard />
+                    <NonImageCard/>
+                    <NonImageCard/>
+                    <NonImageCard/>
+                    <NonImageCard/>
+
+
                   
                 </View>
             </ScrollView>

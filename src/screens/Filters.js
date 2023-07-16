@@ -11,17 +11,11 @@ import { Searchbar, TextInput, TouchableRipple } from 'react-native-paper'
 import SelectBoxChip from "../components/Chips/SelectBoxChip";
 import SelectHorizontalChip from "../components/Chips/SelectHorizonatlChip";
 const Tab = createMaterialTopTabNavigator();
-import Rent from "../components/Filters/Rent";
+import Rent from "../components/Filters/Rent"
+import Buy from "../components/Filters/Buy"
 
 const Filters = ({ navigation }) => {
   
-  const Buy = () => {
-    return (
-      <View style={styles.header}>
-
-      </View>
-    )
-  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>

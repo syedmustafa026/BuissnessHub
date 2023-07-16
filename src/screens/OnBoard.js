@@ -25,7 +25,7 @@ const OnBoard = ({ navigation }) => {
             <Onboarding
                 containerStyles={{ marginBottom: hp('8') }}
                 bottomBarColor="#f7f7f7"
-                onSkip={() => navigation.navigate('Signin')}
+                onSkip={() => navigation.navigate('BottomNavigator')}
                 DoneButtonComponent={Done}
                 titleStyles={{ color: colors.primary, fontFamily: fonts.BOLD }}
                 subTitleStyles={{ marginHorizontal: 25, textAlign: 'center', fontFamily: fonts.SEMIBOLD }}

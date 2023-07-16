@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -7,15 +7,16 @@ import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
-import { Searchbar, TouchableRipple } from 'react-native-paper';
-import AdCard from "../components/Cards/AdCard";
-import VerifiedModal from "../components/Modals/VerifiedModal";
+import { Searchbar, TouchableRipple } from 'react-native-paper'
+import AdCard from "../components/Cards/AdCard"
+import VerifiedModal from "../components/Modals/VerifiedModal"
 
 const Home = ({ navigation }) => {
     const [searchQuery, setSearchQuery] = useState('')
     const [verifiedModal, setVerifiedModal] = useState(false)
 
-    const onChangeSearch = query => setSearchQuery(query);
+    const onChangeSearch = query => setSearchQuery(query)
+
     return (
         <SafeAreaView style={styles.container}>
             <VerifiedModal visible={verifiedModal} setModalVisible={setVerifiedModal} />
@@ -69,7 +70,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('CategorizedResults')}
+                        onPress={() => navigation.navigate('ResultsSubCategory')}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/motor.png')} />
@@ -79,7 +80,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('SearchDetailsCard')}
+                        onPress={() => navigation.navigate('ResultsSubCategory')}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/classified.png')} />
@@ -109,7 +110,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('SearchedResults')}
+                        onPress={() => navigation.navigate('ResultsSubCategory')}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/Community.png')} />

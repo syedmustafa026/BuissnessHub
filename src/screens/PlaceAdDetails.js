@@ -1,17 +1,39 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import React, { useState } from 'react'
+import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
 import { TextInput, Button, RadioButton } from 'react-native-paper'
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
-import SelectValueModal from '../components/Modals/SelectValueModal';
-
+import SelectValueModal from '../components/Modals/SelectValueModal'
+import { launchImageLibrary } from 'react-native-image-picker';
 const PlaceAdDetails = ({ navigation }) => {
   const [title, setTitle] = useState("")
-  const [value, setValue] = useState('first');
-  const [modal, setModal] = useState(false);
+  const [value, setValue] = useState('first')
+  const [modal, setModal] = useState(false)
+  const [imageUri, setImageUri] = useState(null)
+
+  const OpenGallery = () => {
+    const options = {
+      selectionLimit: 10,
+      storageOptions: {
+        path: 'images',
+        mediaType: 'photo',
+      },
+      includeBase64: true,
+      saveToPhotos: true
+    };
+    launchImageLibrary(options, response => {
+      if (response.didCancel) {
+        console.log("user Cancelled ")
+      }
+      else {
+        setImageUri({ uri: 'data:image/jpg;base64,' + response.assets[0].base64 })
+        console.log("Pic uploaded")
+      }
+    })
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -19,7 +41,7 @@ const PlaceAdDetails = ({ navigation }) => {
         <View style={{ justifyContent: 'center', marginVertical: 16 }}>
           <Text style={styles.h2}>You're Almost There!</Text>
           <Text style={[styles.h4, { textAlign: 'center', marginBottom: 12 }]}>Include as much details and pictures as possible and set the right price!</Text>
-          <Text onPress={() => navigation.goBack()} style={[styles.h4, { color: colors.primary }]}>Bikes &gt; Motors</Text>
+          <Text onPress={() => navigation.goBack()} style={[styles.h4, { color: colors.primary }]}>Bikes &gt Motors</Text>
         </View>
         <View>
           <TextInput
@@ -34,7 +56,7 @@ const PlaceAdDetails = ({ navigation }) => {
             onChangeText={text => setTitle(text)}
           />
           <Button
-            onPress={() => { }}
+            onPress={() => { OpenGallery() }}
             mode="contained"
             icon={'camera'}
             color={colors.white}
@@ -158,15 +180,15 @@ const PlaceAdDetails = ({ navigation }) => {
         </View>
       </ScrollView>
       <Button
-        onPress={() => { }}
+        onPress={() => {navigation.navigate("BottomNavigator")}}
         mode="contained"
         color={colors.white}
-        style={[styles.button, { marginTop: 8,backgroundColor:colors.primary }]}
-        labelStyle={[styles.ButtonLabel,{color:colors.white}]}
+        style={[styles.button, { marginTop: 8, backgroundColor: colors.primary }]}
+        labelStyle={[styles.ButtonLabel, { color: colors.white }]}
       >Next</Button>
     </SafeAreaView>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -233,6 +255,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     fontFamily: fonts.SEMIBOLD,
   },
-});
+})
 
-export default PlaceAdDetails;
+export default PlaceAdDetails
