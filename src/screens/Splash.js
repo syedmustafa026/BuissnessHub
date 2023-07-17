@@ -22,15 +22,15 @@ const Splash = ({ navigation }) => {
         <SafeAreaView style={styles.container}>
             <StatusBar
                 barStyle="light-content"
-                backgroundColor={colors.white}
+                backgroundColor={colors.primary}
             />
             <Image source={require("../assets/images/plainlogo.png")} style={styles.brand} />
             {/* <View style={styles.section}>
                 <Text style={styles.h1}>WHOLESALE APP</Text>
             </View> */}
-            <View style={styles.footer}>
-                <Text style={styles.h3}>1.0.0</Text>
-            </View>
+            {/* <View style={styles.footer}>
+                <Text style={styles.h3}>Version 1.0.0</Text>
+            </View> */}
         </SafeAreaView>
     )
 }
@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
     },
 
     brand: {
-        width: wp("60"),
-        height: wp("30"),
+        width: wp("80"),
+        height: wp("40"),
         resizeMode:'contain'
     },
     h1: {
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     h3: {
 
         fontSize: hp("2.4"),
-        color: colors.black,
+        color: colors.white,
     },
 })
 
