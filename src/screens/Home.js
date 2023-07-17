@@ -41,7 +41,7 @@ const Home = ({ navigation }) => {
                 <View style={styles.cards}>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('Filters')}
+                        onPress={() => navigation.navigate('ResultsSubCategory',{title: 'Property for Rent', data: 0})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/propertyRent.png')} />
@@ -50,7 +50,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('Filters')}
+                        onPress={() => navigation.navigate('ResultsSubCategory',{title: 'Property for Sale', data: 1})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/propertySale.png')} />
@@ -60,7 +60,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('CategorizedResults')}
+                        onPress={() => navigation.navigate('ResultsSubCategory',{title: 'Rooms for Rent', data: 2})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/room.png')} />
@@ -70,7 +70,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory')}
+                        onPress={() => navigation.navigate('ResultsSubCategory',{title: 'Motors', data: 3})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/motor.png')} />
@@ -80,7 +80,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory')}
+                        onPress={() => navigation.navigate('ResultsSubCategory',{title: 'Classified', data: 4})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/classified.png')} />
@@ -90,7 +90,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory')}
+                        onPress={() => navigation.navigate('ResultsSubCategory',{title: 'Furniture & Garden', data: 5})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/furniture.png')} />
@@ -100,7 +100,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory')}
+                        onPress={() => navigation.navigate('ResultsSubCategory',{title: 'Mobile & Tablets', data: 6})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/mobile.png')} />
@@ -110,7 +110,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory')}
+                        onPress={() => navigation.navigate('ResultsSubCategory',{title: 'Community', data: 7})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/Community.png')} />
@@ -200,7 +200,8 @@ const styles = StyleSheet.create({
         marginHorizontal: wp('2')
     },
     cards: {
-        alignItems: 'center',
+        alignSelf: 'center',
+        alignItems:"center",
         justifyContent: 'center',
         marginVertical: 12,
         flexDirection: 'row',
@@ -223,7 +224,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.23,
         shadowRadius: 2.62,
-        borderRadius: 15,
+        borderRadius: 10,
         elevation: 4,
 
     },
@@ -252,7 +253,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.23,
         shadowRadius: 2.62,
-        borderRadius: 15,
+        borderRadius: 10,
         elevation: 4,
     }
 })

@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native'
+import { StyleSheet, Text, View,Image, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
 import { TextInput, Button, RadioButton } from 'react-native-paper'
 import SelectValueModal from '../components/Modals/SelectValueModal'
-import { launchImageLibrary } from 'react-native-image-picker';
+import { launchImageLibrary } from 'react-native-image-picker'
+
 const PlaceAdDetails = ({ navigation }) => {
   const [title, setTitle] = useState("")
   const [value, setValue] = useState('first')
@@ -130,7 +131,7 @@ const PlaceAdDetails = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.6}
             onPress={() => setModal(true)} style={styles.selectButton}>
-            <Text style={styles.selectLabel}>Usage</Text>
+            <Text style={styles.selectLabel}>Year</Text>
             <Icon
               name='chevron-down'
               size={24}
@@ -138,7 +139,7 @@ const PlaceAdDetails = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.6}
             onPress={() => setModal(true)} style={styles.selectButton}>
-            <Text style={styles.selectLabel}>Usage</Text>
+            <Text style={styles.selectLabel}>Seller Type</Text>
             <Icon
               name='chevron-down'
               size={24}
@@ -146,7 +147,7 @@ const PlaceAdDetails = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.6}
             onPress={() => setModal(true)} style={styles.selectButton}>
-            <Text style={styles.selectLabel}>Usage</Text>
+            <Text style={styles.selectLabel}>Warranty</Text>
             <Icon
               name='chevron-down'
               size={24}
@@ -154,7 +155,7 @@ const PlaceAdDetails = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.6}
             onPress={() => setModal(true)} style={styles.selectButton}>
-            <Text style={styles.selectLabel}>Usage</Text>
+            <Text style={styles.selectLabel}>Final Drive System</Text>
             <Icon
               name='chevron-down'
               size={24}
@@ -162,7 +163,7 @@ const PlaceAdDetails = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.6}
             onPress={() => setModal(true)} style={styles.selectButton}>
-            <Text style={styles.selectLabel}>Usage</Text>
+            <Text style={styles.selectLabel}>Wheels</Text>
             <Icon
               name='chevron-down'
               size={24}
@@ -170,12 +171,13 @@ const PlaceAdDetails = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.6}
             onPress={() => setModal(true)} style={styles.selectButton}>
-            <Text style={styles.selectLabel}>Usage</Text>
+            <Text style={styles.selectLabel}>Manufacturer</Text>
             <Icon
               name='chevron-down'
               size={24}
               color={colors.black} />
           </TouchableOpacity>
+          <Image style={{ width: "90%", height: 160, alignSelf: 'center', marginVertical: 14 }} source={require('../assets/images/map.png')} />
 
         </View>
       </ScrollView>

@@ -15,42 +15,48 @@ const SelectValueModal = (props) => {
       transparent={true}
       visible={props.visible}
     >
-      <View style={styles.modalView}>
-        <View style={styles.header}>
-          <Text style={styles.heading}>Wheels</Text>
-          <Separator />
+      <View style={styles.centeredView}>
+        <View style={styles.modalView}>
+          <View style={styles.header}>
+            <Text style={styles.heading}>Wheels</Text>
+            <Separator />
+          </View>
+          <View style={styles.types}>
+            <RadioButton.Group onValueChange={(value) => props.onValueChange(value)} value={props.value}>
+              {
+                ['4 wheels', '2 wheels', '6 wheels'].map((value, key) => {
+                  return (
+                    <TouchableRipple onPress={() => console.log('prdd')} rippleColor={colors.gray}>
+                      <View style={styles.row} key={key}>
+                        <Text style={styles.label}>{value}</Text>
+                        <RadioButton value={key} color={colors.primaryLight} />
+                      </View>
+                    </TouchableRipple>
+                  )
+                })
+              }
+            </RadioButton.Group>
+          </View>
+          <Button
+            onPress={() => props.setVisible(false)}
+            mode="contained"
+            color={colors.white}
+            style={[styles.button, { marginTop: 8, }]}
+            labelStyle={styles.ButtonLabel}
+          >Select</Button>
         </View>
-        <View style={styles.types}>
-          <RadioButton.Group onValueChange={(value) => props.onValueChange(value)} value={props.value}>
-            {
-              ['4 wheels', '2 wheels', '6 wheels'].map((value, key) => {
-                return (
-                  <TouchableRipple onPress={() => console.log('prdd')} rippleColor={colors.gray}>
-                    <View style={styles.row} key={key}>
-                      <Text style={styles.label}>{value}</Text>
-                      <RadioButton value={key} color={colors.primaryLight} />
-                    </View>
-                  </TouchableRipple>
-                )
-              })
-            }
-          </RadioButton.Group>
-        </View>
-         <Button
-          onPress={() => props.setVisible(false)}
-          mode="contained"
-          color={colors.white}
-          style={[styles.button, { marginTop: 8, }]}
-          labelStyle={styles.ButtonLabel}
-        >Select</Button>
-        
-      </View>
-    </Modal>
+    </View>
+    </Modal >
   )
 }
 
 
 const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: "flex-end",
+    backgroundColor: "#00000099",
+  },
   modalView: {
     position: 'absolute',
     bottom: 0,
@@ -59,6 +65,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     width: '100%',
     alignItems: 'center',
+
   },
   header: {
     flexDirection: 'column',
@@ -67,7 +74,7 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 24,
-    marginHorizontal:12,
+    marginHorizontal: 12,
     color: colors.gray,
     marginBottom: 10,
     fontFamily: fonts.SEMIBOLD
@@ -83,7 +90,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 20,
-    marginHorizontal:12,
+    marginHorizontal: 12,
     fontFamily: fonts.MEDIUM,
     color: colors.black
   },

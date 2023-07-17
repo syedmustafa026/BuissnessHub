@@ -24,7 +24,7 @@ const Stack = createNativeStackNavigator()
 const StackNavigator = () => {
     return (
         <NavigationContainer >
-            <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='PlaceAdDetails' >
+            <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='Splash' >
                 <Stack.Screen name="Splash" component={Splash} />
                 <Stack.Screen name="OnBoard" component={OnBoard} />
 
@@ -32,14 +32,14 @@ const StackNavigator = () => {
                 <Stack.Screen name="Home" component={Home} />
                 <Stack.Screen name="Filters" component={Filters} />
                 <Stack.Screen name="Favorite" component={Favorite} />
-                <Stack.Screen options={{headerShown:true, headerTitleAlign: 'center', headerStyle: { shadowColor: "#000", shadowOffset: { width: 0, height: 2, }, shadowOpacity: 0.23, shadowRadius: 2.62, elevation: 4, }, }} name="Notifications" component={Notifications} />
+                <Stack.Screen options={{ headerShown: true, headerTitleAlign: 'center', headerStyle: { shadowColor: "#000", shadowOffset: { width: 0, height: 2, }, shadowOpacity: 0.23, shadowRadius: 2.62, elevation: 4, }, }} name="Notifications" component={Notifications} />
 
                 <Stack.Screen name="PlaceAd" component={PlaceAd} />
                 <Stack.Screen name="PlaceAdListing" component={PlaceAdListing} />
                 <Stack.Screen name="PlaceAdCategory" component={PlaceAdCategory} />
                 <Stack.Screen options={{ headerShown: true, title: 'Place an Ad', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="PlaceAdSubCategory" component={PlaceAdSubCategory} />
                 <Stack.Screen options={{ headerShown: true, title: 'Place an Ad', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="PlaceAdDetails" component={PlaceAdDetails} />
-                <Stack.Screen options={{ headerShown: true, title: 'Community', headerTitleStyle: { fontSize: 16 } }} name="ResultsSubCategory" component={ResultsSubCategory} />
+                <Stack.Screen options={{ headerShown: true, headerTitleStyle: { fontSize: 18 } }} name="ResultsSubCategory" component={ResultsSubCategory} />
                 <Stack.Screen name="CategorizedResults" component={CategorizedResults} />
                 <Stack.Screen name="AdDetails" component={AdDetails} />
                 <Stack.Screen options={{ headerShown: true, title: '2049 Results', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="SearchedResults" component={SearchedResults} />

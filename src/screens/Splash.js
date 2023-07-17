@@ -24,7 +24,7 @@ const Splash = ({ navigation }) => {
                 barStyle="light-content"
                 backgroundColor={colors.white}
             />
-            <Image source={require("../assets/images/logo.png")} style={styles.brand} />
+            <Image source={require("../assets/images/plainlogo.png")} style={styles.brand} />
             {/* <View style={styles.section}>
                 <Text style={styles.h1}>WHOLESALE APP</Text>
             </View> */}
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: colors.white,
+        backgroundColor: colors.primary,
     },
 
     brand: {

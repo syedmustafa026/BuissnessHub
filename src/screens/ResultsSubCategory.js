@@ -1,23 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FlatList, StyleSheet, View, SafeAreaView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
 import ThinNameRow from '../components/Rows/ThinNameRow';
-
-const ResultsSubCategory = ({ navigation }) => {
-
+import {categories}  from '../utilities/categories';
+const ResultsSubCategory = ({ route, navigation }) => {
+  console.log(route.params.data );
+  useEffect(() => { 
+    navigation.setOptions({
+      title: route.params.title
+    })
+  }, [])
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <View style={{ justifyContent: 'center', marginBottom: 1 }}>
-            <ThinNameRow name={'All in Community'} style={{ fontFamily: fonts.SEMIBOLD }} navigation={navigation} dir={'SearchedResults'} />
             <FlatList
-              data={['Motorcycles', "Heavy Vehicles", 'Boats', 'Motorcycles', 'Auto Accessories', 'Auto Accessories', "Heavy Vehicles", 'Boats', 'Motorcycles', 'Auto Accessories', "Heavy Vehicles", 'Boats', 'Number Plated']}
-              renderItem={({ item }) => (<ThinNameRow name={item} navigation={navigation} dir={'SearchedResults'} />)}
+              data={categories[route.params.data]}
+              renderItem={({ item }) => (<ThinNameRow name={item.name} navigation={navigation} dir={'SearchedResults'} />)}
               keyExtractor={(item, index) => index.toString()}
             />
+            <ThinNameRow name={`All in ${route.params.title}`} style={{ fontFamily: fonts.SEMIBOLD }} navigation={navigation} dir={'SearchedResults'} />
           </View>
         </View>
       </View>

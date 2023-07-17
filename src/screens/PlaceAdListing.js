@@ -31,7 +31,7 @@ const PlaceAdListing = ({ navigation }) => {
                     <View style={styles.cards}>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('PlaceAdCategory')}
+                        onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Property for Rent', data: 0})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/propertyRent.png')} />
@@ -40,7 +40,7 @@ const PlaceAdListing = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('PlaceAdCategory')}
+                        onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Property for Sale', data: 1})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/propertySale.png')} />
@@ -50,7 +50,7 @@ const PlaceAdListing = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('PlaceAdCategory')}
+                        onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Rooms for Rent', data: 2})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/room.png')} />
@@ -60,7 +60,7 @@ const PlaceAdListing = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('PlaceAdCategory')}
+                        onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Motors', data: 3})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/motor.png')} />
@@ -70,7 +70,7 @@ const PlaceAdListing = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('PlaceAdCategory')}
+                        onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Classified', data: 4})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/classified.png')} />
@@ -80,7 +80,7 @@ const PlaceAdListing = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('PlaceAdCategory')}
+                        onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Furniture & Garden', data: 5})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/furniture.png')} />
@@ -90,7 +90,7 @@ const PlaceAdListing = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('PlaceAdCategory')}
+                        onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Mobile & Tablets', data: 6})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/mobile.png')} />
@@ -100,12 +100,12 @@ const PlaceAdListing = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('PlaceAdCategory')}
+                        onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Community', data: 7})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/Community.png')} />
                             <Text style={styles.cardText}>
-                            Community</Text>
+                                Community</Text>
                         </View>
                     </TouchableRipple>
                 </View>
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.23,
         shadowRadius: 2.62,
-        borderRadius: 15,
+        borderRadius: 10,
         elevation: 4,
 
     },
