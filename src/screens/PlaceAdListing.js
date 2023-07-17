@@ -75,7 +75,7 @@ const PlaceAdListing = ({ navigation }) => {
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/classified.png')} />
                             <Text style={styles.cardText}>
-                                Classified</Text>
+                                Home Appliances</Text>
                         </View>
                     </TouchableRipple>
                     <TouchableRipple

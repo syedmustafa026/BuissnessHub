@@ -6,6 +6,7 @@ import {
     StyleSheet,
     Text,
     TouchableOpacity,
+    StatusBar,
     View
 } from 'react-native'
 import Onboarding from "react-native-onboarding-swiper";
@@ -22,6 +23,10 @@ const OnBoard = ({ navigation }) => {
     );
     return (
         <SafeAreaView style={styles.container}>
+           <StatusBar
+                barStyle="light-content"
+                backgroundColor={colors.white}
+            />
             <Onboarding
                 containerStyles={{ marginBottom: hp('8') }}
                 bottomBarColor="#f7f7f7"
@@ -69,6 +74,7 @@ const OnBoard = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: colors.white
     },
     img: {
         width: 500,
