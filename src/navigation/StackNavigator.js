@@ -18,13 +18,16 @@ import SearchedResults from '../screens/SearchedResults'
 import ResultsSubCategory from '../screens/ResultsSubCategory'
 import Notifications from '../screens/Notifications'
 import Filters from '../screens/Filters'
+import PlaceAdMotorDetails from '../screens/PlaceAdMotorDetails.js'
+import PaymentMethod from '../screens/PaymentMethod'
+import Checkout from '../screens/Checkout'
 
 const Stack = createNativeStackNavigator()
 
 const StackNavigator = () => {
     return (
         <NavigationContainer >
-            <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='PlaceAdDetails' >
+            <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='Splash' >
                 <Stack.Screen name="Splash" component={Splash} />
                 <Stack.Screen name="OnBoard" component={OnBoard} />
 
@@ -39,6 +42,11 @@ const StackNavigator = () => {
                 <Stack.Screen name="PlaceAdCategory" component={PlaceAdCategory} />
                 <Stack.Screen options={{ headerShown: true, title: 'Place an Ad', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="PlaceAdSubCategory" component={PlaceAdSubCategory} />
                 <Stack.Screen options={{ headerShown: true, title: 'Place an Ad', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="PlaceAdDetails" component={PlaceAdDetails} />
+                <Stack.Screen options={{ headerShown: true, title: 'Place an Ad', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="PlaceAdMotorDetails" component={PlaceAdMotorDetails} />
+                <Stack.Screen options={{ headerShown: true, title: 'Place an Ad', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="PaymentMethod" component={PaymentMethod} />
+                <Stack.Screen options={{ headerShown: true, title: 'Place an Ad', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="Checkout" component={Checkout} />
+
+
                 <Stack.Screen options={{ headerShown: true, headerTitleStyle: { fontSize: 18 } }} name="ResultsSubCategory" component={ResultsSubCategory} />
                 <Stack.Screen name="CategorizedResults" component={CategorizedResults} />
                 <Stack.Screen name="AdDetails" component={AdDetails} />

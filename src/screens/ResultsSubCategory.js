@@ -4,10 +4,11 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-nat
 import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
 import ThinNameRow from '../components/Rows/ThinNameRow';
-import {categories}  from '../utilities/categories';
+import { categories } from '../utilities/categories';
+import Separator from '../components/Extras/Separator';
 const ResultsSubCategory = ({ route, navigation }) => {
-  console.log(route.params.data );
-  useEffect(() => { 
+  console.log(route.params.data);
+  useEffect(() => {
     navigation.setOptions({
       title: route.params.title
     })
@@ -19,10 +20,13 @@ const ResultsSubCategory = ({ route, navigation }) => {
           <View style={{ justifyContent: 'center', marginBottom: 1 }}>
             <FlatList
               data={categories[route.params.data]}
-              renderItem={({ item }) => (<ThinNameRow name={item.name} navigation={navigation} handlePress={()=>navigation.navigate('SearchedResults')} />)}
+              renderItem={({ item }) => (<ThinNameRow name={item.name} navigation={navigation} handlePress={() => navigation.navigate('SearchedResults')} />)}
               keyExtractor={(item, index) => index.toString()}
+              ItemSeparatorComponent={<Separator />}
             />
+            <Separator />
             <ThinNameRow name={`All in ${route.params.title}`} style={{ fontFamily: fonts.SEMIBOLD }} navigation={navigation} dir={'SearchedResults'} />
+          
           </View>
         </View>
       </View>

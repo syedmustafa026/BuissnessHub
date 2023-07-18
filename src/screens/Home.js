@@ -122,9 +122,7 @@ const Home = ({ navigation }) => {
                         width: wp('28'),
                         height: hp('13'),
                         marginRight: 12,
-                    }}>
-
-                    </View>
+                    }}/>
                 </View>
                 <TouchableOpacity onPress={() => setVerifiedModal(true)} activeOpacity={0.8} style={styles.banner} >
                     <View style={{

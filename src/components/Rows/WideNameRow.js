@@ -5,10 +5,10 @@ import * as fonts from "../../utilities/fonts"
 import Separator from '../Extras/Separator'
 
 
-const NameRow = ({ name, navigation }) => {
+const NameRow = ({ name, handlePress }) => {
   return (
     <>
-      <TouchableOpacity onPress={() => navigation.navigate('PlaceAdSubCategory')} activeOpacity={0.5} style={styles.row}>
+      <TouchableOpacity onPress={handlePress} activeOpacity={0.5} style={styles.row}>
         <Text style={styles.h2}>{name}</Text>
       </TouchableOpacity>
       <Separator />

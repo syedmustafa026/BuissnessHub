@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native'
+import { StyleSheet, Text, View,Image, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import * as colors from "../utilities/colors"
@@ -7,19 +7,11 @@ import * as fonts from "../utilities/fonts"
 import { TextInput, Button, RadioButton } from 'react-native-paper'
 import SelectValueModal from '../components/Modals/SelectValueModal'
 import { launchImageLibrary } from 'react-native-image-picker'
-import Dropdown from '../components/Inputs/Dropdown'
 
 const PlaceAdDetails = ({ navigation }) => {
   const [title, setTitle] = useState("")
   const [value, setValue] = useState('first')
-  const [modal1, setModal1] = useState(false)
-  const [modal2, setModal2] = useState(false)
-  const [modal3, setModal3] = useState(false)
-  const [modal4, setModal4] = useState(false)
-  const [modal5, setModal5] = useState(false)
-  const [usage, setUsage] = useState('Usage')
-
-
+  const [modal, setModal] = useState(false)
   const [imageUri, setImageUri] = useState(null)
 
   const OpenGallery = () => {
@@ -46,7 +38,7 @@ const PlaceAdDetails = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* <SelectValueModal visible={modal} setVisible={setModal} value={value} onValueChange={setValue} /> */}
+        <SelectValueModal visible={modal} setVisible={setModal} value={value} onValueChange={setValue} />
         <View style={{ justifyContent: 'center', marginVertical: 16 }}>
           <Text style={styles.h2}>You're Almost There!</Text>
           <Text style={[styles.h4, { textAlign: 'center', marginBottom: 12 }]}>Include as much details and pictures as possible and set the right price!</Text>
@@ -59,8 +51,6 @@ const PlaceAdDetails = ({ navigation }) => {
             mode='outlined'
             activeOutlineColor={colors.gray}
             style={{
-              width: '95%',
-              alignSelf: 'center',
               backgroundColor: colors.white,
               borderBlockColor: colors.gray,
             }}
@@ -81,8 +71,6 @@ const PlaceAdDetails = ({ navigation }) => {
             activeOutlineColor={colors.gray}
             keyboardType='number-pad'
             style={{
-              width: '95%',
-              alignSelf: 'center',
               backgroundColor: colors.white,
               borderBlockColor: colors.gray,
             }}
@@ -95,8 +83,6 @@ const PlaceAdDetails = ({ navigation }) => {
             activeOutlineColor={colors.gray}
             keyboardType='number-pad'
             style={{
-              width: '95%',
-              alignSelf: 'center',
               backgroundColor: colors.white,
               borderBlockColor: colors.gray,
             }}
@@ -110,14 +96,19 @@ const PlaceAdDetails = ({ navigation }) => {
             activeOutlineColor={colors.gray}
             style={{
               height: 180,
-              width: '95%',
-              alignSelf: 'center',
               backgroundColor: colors.white,
               borderBlockColor: colors.gray,
             }}
             onChangeText={text => setTitle(text)}
           />
-          <Dropdown name={usage} toggleModal={() => setModal1(!modal1)} modal={modal1} setModal={setModal1} setValue={setUsage} />
+          <TouchableOpacity activeOpacity={0.6}
+            onPress={() => setModal(true)} style={styles.selectButton}>
+            <Text style={styles.selectLabel}>Usage</Text>
+            <Icon
+              name='chevron-down'
+              size={24}
+              color={colors.black} />
+          </TouchableOpacity>
           <TextInput
             label="Kilometers"
             value={title}
@@ -125,16 +116,20 @@ const PlaceAdDetails = ({ navigation }) => {
             keyboardType='number-pad'
             activeOutlineColor={colors.gray}
             style={{
-              width: '95%',
-              alignSelf: 'center',
               backgroundColor: colors.white,
               borderBlockColor: colors.gray,
             }}
             onChangeText={text => setTitle(text)}
           />
-          {/* <Dropdown name={'Year'} toggleModal={() => setModal(!modal)} modal={modal} setModal={setModal} /> */}
-          {/* <Dropdown name={'Seller Type'} setModal={setModal} /> */}
-          {/* <TouchableOpacity activeOpacity={0.6}
+          <TouchableOpacity activeOpacity={0.6}
+            onPress={() => setModal(true)} style={styles.selectButton}>
+            <Text style={styles.selectLabel}>Usage</Text>
+            <Icon
+              name='chevron-down'
+              size={24}
+              color={colors.black} />
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.6}
             onPress={() => setModal(true)} style={styles.selectButton}>
             <Text style={styles.selectLabel}>Year</Text>
             <Icon
@@ -181,13 +176,13 @@ const PlaceAdDetails = ({ navigation }) => {
               name='chevron-down'
               size={24}
               color={colors.black} />
-          </TouchableOpacity> */}
+          </TouchableOpacity>
           <Image style={{ width: "90%", height: 160, alignSelf: 'center', marginVertical: 14 }} source={require('../assets/images/map.png')} />
 
         </View>
       </ScrollView>
       <Button
-        onPress={() => { navigation.navigate("BottomNavigator") }}
+        onPress={() => {navigation.navigate("PaymentMethod")}}
         mode="contained"
         color={colors.white}
         style={[styles.button, { marginTop: 8, backgroundColor: colors.primary }]}
@@ -227,7 +222,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 12,
   },
   button: {
-    width: '95%',
+    width: '100%',
     borderRadius: 5,
     height: 45,
     justifyContent: 'center',

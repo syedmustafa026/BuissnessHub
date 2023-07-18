@@ -29,7 +29,7 @@ const PlaceAdCategory = ({ navigation }) => {
                     </View>
                     <FlatList
                         data={['Used Cars', 'Motorcycles', 'Auto Accessories', "Heavy Vehicles", 'Boats', 'Number Plated']}
-                        renderItem={({ item }) => (<WideNameRow name={item} navigation={navigation} />)}
+                        renderItem={({ item }) => (<WideNameRow name={item} handlePress={() => navigation.navigate('PlaceAdSubCategory')} />)}
                         keyExtractor={(item, index) => index.toString()}
                     />
                 </View>

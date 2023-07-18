@@ -19,7 +19,7 @@ const PlaceAdSubCategory = ({ navigation }) => {
       </View>
       <FlatList
         data={['Used Cars', 'Motorcycles', 'Auto Accessories', "Heavy Vehicles", 'Boats', 'Number Plated']}
-        renderItem={({ item }) => (<ArrowRow name={item} navigation={navigation} />)}
+        renderItem={({ item }) => (<ArrowRow name={item} handlePress={() => navigation.navigate("PlaceAdMotorDetails")} />)}
         keyExtractor={(item, index) => index.toString()}
         ItemSeparatorComponent={<Separator />}
       />

@@ -6,9 +6,9 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 
-const ArrowRow = ({ name, navigation }) => {
+const ArrowRow = ({ name,handlePress }) => {
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("PlaceAdDetails")} style={styles.selectRow}>
+    <TouchableOpacity onPress={handlePress} style={styles.selectRow}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <Text style={styles.selectText}>{name}</Text>
       </View>

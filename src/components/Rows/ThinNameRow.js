@@ -2,8 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, } from 'react-native';
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
-import Separator from '../Extras/Separator'
-
 
 const ThinNameRow = (props) => {
   return (
@@ -11,7 +9,7 @@ const ThinNameRow = (props) => {
       <TouchableOpacity onPress={props.handlePress} activeOpacity={0.5} style={styles.row}>
         <Text style={[styles.h2, props.style]}>{props.name}</Text>
       </TouchableOpacity>
-      <Separator />
+     
     </>
   )
 }
