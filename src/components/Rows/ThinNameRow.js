@@ -8,7 +8,7 @@ import Separator from '../Extras/Separator'
 const ThinNameRow = (props) => {
   return (
     <>
-      <TouchableOpacity onPress={() => props.navigation.navigate(props.dir)} activeOpacity={0.5} style={styles.row}>
+      <TouchableOpacity onPress={props.handlePress} activeOpacity={0.5} style={styles.row}>
         <Text style={[styles.h2, props.style]}>{props.name}</Text>
       </TouchableOpacity>
       <Separator />

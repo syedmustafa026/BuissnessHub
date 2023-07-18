@@ -19,7 +19,7 @@ const ResultsSubCategory = ({ route, navigation }) => {
           <View style={{ justifyContent: 'center', marginBottom: 1 }}>
             <FlatList
               data={categories[route.params.data]}
-              renderItem={({ item }) => (<ThinNameRow name={item.name} navigation={navigation} dir={'SearchedResults'} />)}
+              renderItem={({ item }) => (<ThinNameRow name={item.name} navigation={navigation} handlePress={()=>navigation.navigate('SearchedResults')} />)}
               keyExtractor={(item, index) => index.toString()}
             />
             <ThinNameRow name={`All in ${route.params.title}`} style={{ fontFamily: fonts.SEMIBOLD }} navigation={navigation} dir={'SearchedResults'} />
