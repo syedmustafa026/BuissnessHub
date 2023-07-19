@@ -1,17 +1,8 @@
 import React from "react";
-import {
-    Button,
-    Image,
-    SafeAreaView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    StatusBar,
-    View
-} from 'react-native'
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, StatusBar, View } from 'react-native'
 import Onboarding from "react-native-onboarding-swiper";
-import * as colors from "../utilities/colors"
-import * as fonts from "../utilities/fonts"
+import * as colors from "../../utilities/colors"
+import * as fonts from "../../utilities/fonts"
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 
 const OnBoard = ({ navigation }) => {
@@ -23,7 +14,7 @@ const OnBoard = ({ navigation }) => {
     );
     return (
         <SafeAreaView style={styles.container}>
-           <StatusBar
+            <StatusBar
                 barStyle="light-content"
                 backgroundColor={colors.white}
             />
@@ -39,7 +30,7 @@ const OnBoard = ({ navigation }) => {
                         backgroundColor:
                             '#f7f7f7',
                         image:
-                            <Image style={styles.img} source={require('../assets/images/img2.png')} />,
+                            <Image style={styles.img} source={require('../../assets/images/img2.png')} />,
                         title:
                             'Find you Home in UAE',
                         subtitle:
@@ -49,7 +40,7 @@ const OnBoard = ({ navigation }) => {
                         backgroundColor:
                             '#f7f7f7',
                         image:
-                            <Image style={styles.img} source={require('../assets/images/img3.png')} />,
+                            <Image style={styles.img} source={require('../../assets/images/img3.png')} />,
                         title:
                             'Upgrade your Lifestyle',
                         subtitle:
@@ -59,7 +50,7 @@ const OnBoard = ({ navigation }) => {
                         backgroundColor:
                             '#f7f7f7',
                         image:
-                            <Image style={styles.img} source={require('../assets/images/img1.png')} />,
+                            <Image style={styles.img} source={require('../../assets/images/img1.png')} />,
                         title:
                             'Get yourself a ride',
                         subtitle:

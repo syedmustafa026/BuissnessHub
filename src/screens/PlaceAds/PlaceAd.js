@@ -2,9 +2,9 @@ import React from 'react';
 import { Modal, FlatList, StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import * as colors from "../utilities/colors"
-import * as fonts from "../utilities/fonts"
-import Separator from '../components/Extras/Separator'
+import * as colors from "../../utilities/colors"
+import * as fonts from "../../utilities/fonts"
+import Separator from '../../components/Extras/Separator'
 
 const Item = ({ name, navigation }) => {
     return (

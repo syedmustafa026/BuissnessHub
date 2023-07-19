@@ -4,13 +4,13 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-nat
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { Searchbar, Badge } from 'react-native-paper';
 
-import * as colors from "../utilities/colors"
-import * as fonts from "../utilities/fonts"
+import * as colors from "../../utilities/colors"
+import * as fonts from "../../utilities/fonts"
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
-import ChipComponent from "../components/Chips/ChipComponent";
-import PropertyDetailsCard from "../components/Cards/PropertyDetailsCard";
-import SearchDetailsCard from "../components/Cards/SearchDetailsCard";
-import NonImageCard from "../components/Cards/NonImageCard";
+import ChipComponent from "../../components/Chips/ChipComponent";
+import PropertyDetailsCard from "../../components/Cards/PropertyDetailsCard";
+import SearchDetailsCard from "../../components/Cards/SearchDetailsCard";
+import NonImageCard from "../../components/Cards/NonImageCard";
 
 const CategorizedResults = ({navigation}) => {
     const [searchQuery, setSearchQuery] = useState('')

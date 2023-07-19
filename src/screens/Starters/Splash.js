@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { Image, SafeAreaView,StatusBar, StyleSheet, Text, View } from "react-native"
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
-import * as colors from "../utilities/colors"
+import * as colors from "../../utilities/colors"
 
 const Splash = ({ navigation }) => {
 
@@ -24,7 +24,7 @@ const Splash = ({ navigation }) => {
                 barStyle="light-content"
                 backgroundColor={colors.primary}
             />
-            <Image source={require("../assets/images/plainlogo.png")} style={styles.brand} />
+            <Image source={require("../../assets/images/plainlogo.png")} style={styles.brand} />
             {/* <View style={styles.section}>
                 <Text style={styles.h1}>WHOLESALE APP</Text>
             </View> */}

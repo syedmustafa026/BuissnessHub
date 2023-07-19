@@ -2,9 +2,8 @@ import React from 'react';
 import { Image, FlatList, StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import * as colors from "../utilities/colors"
-import * as fonts from "../utilities/fonts"
-import Separator from '../components/Extras/Separator'
+import * as colors from "../../utilities/colors"
+import * as fonts from "../../utilities/fonts"
 import { Searchbar, TouchableRipple } from 'react-native-paper';
 
 
@@ -31,29 +30,29 @@ const PlaceAdListing = ({ navigation }) => {
                     <View style={styles.cards}>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Property for Rent', data: 0})}
+                        onPress={() => navigation.navigate('PlaceAdTitle',{title: 'Property for Rent', data: 0})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../assets/images/propertyRent.png')} />
+                            <Image style={styles.cardImg} source={require('../../assets/images/propertyRent.png')} />
                             <Text style={styles.cardText}>Property for Rent</Text>
                         </View>
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Property for Sale', data: 1})}
+                        onPress={() => navigation.navigate('PlaceAdTitle',{title: 'Property for Sale', data: 1})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../assets/images/propertySale.png')} />
+                            <Image style={styles.cardImg} source={require('../../assets/images/propertySale.png')} />
                             <Text style={styles.cardText}>
                                 Property for Sale</Text>
                         </View>
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Rooms for Rent', data: 2})}
+                        onPress={() => navigation.navigate('PlaceAdTitle',{title: 'Rooms for Rent', data: 2})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../assets/images/room.png')} />
+                            <Image style={styles.cardImg} source={require('../../assets/images/room.png')} />
                             <Text style={styles.cardText}>
                                 Rooms for Rent</Text>
                         </View>
@@ -63,7 +62,7 @@ const PlaceAdListing = ({ navigation }) => {
                         onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Motors', data: 3})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../assets/images/motor.png')} />
+                            <Image style={styles.cardImg} source={require('../../assets/images/motor.png')} />
                             <Text style={styles.cardText}>
                                 Motors</Text>
                         </View>
@@ -73,7 +72,7 @@ const PlaceAdListing = ({ navigation }) => {
                         onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Classified', data: 4})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../assets/images/classified.png')} />
+                            <Image style={styles.cardImg} source={require('../../assets/images/classified.png')} />
                             <Text style={styles.cardText}>
                                 Home Appliances</Text>
                         </View>
@@ -83,7 +82,7 @@ const PlaceAdListing = ({ navigation }) => {
                         onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Furniture & Garden', data: 5})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../assets/images/furniture.png')} />
+                            <Image style={styles.cardImg} source={require('../../assets/images/furniture.png')} />
                             <Text style={styles.cardText}>
                                 Furniture & Garden</Text>
                         </View>
@@ -93,7 +92,7 @@ const PlaceAdListing = ({ navigation }) => {
                         onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Mobile & Tablets', data: 6})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../assets/images/mobile.png')} />
+                            <Image style={styles.cardImg} source={require('../../assets/images/mobile.png')} />
                             <Text style={styles.cardText}>
                                 Mobile & Tablets</Text>
                         </View>
@@ -103,7 +102,7 @@ const PlaceAdListing = ({ navigation }) => {
                         onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Community', data: 7})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../assets/images/Community.png')} />
+                            <Image style={styles.cardImg} source={require('../../assets/images/Community.png')} />
                             <Text style={styles.cardText}>
                                 Community</Text>
                         </View>

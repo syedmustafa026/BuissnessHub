@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View,Image, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import * as colors from "../utilities/colors"
-import * as fonts from "../utilities/fonts"
+import * as colors from "../../utilities/colors"
+import * as fonts from "../../utilities/fonts"
 import { TextInput, Button, RadioButton } from 'react-native-paper'
-import SelectValueModal from '../components/Modals/SelectValueModal'
+import SelectValueModal from '../../components/Modals/SelectValueModal'
 import { launchImageLibrary } from 'react-native-image-picker'
 
 const PlaceAdDetails = ({ navigation }) => {
@@ -177,7 +177,7 @@ const PlaceAdDetails = ({ navigation }) => {
               size={24}
               color={colors.black} />
           </TouchableOpacity>
-          <Image style={{ width: "90%", height: 160, alignSelf: 'center', marginVertical: 14 }} source={require('../assets/images/map.png')} />
+          <Image style={{ width: "90%", height: 160, alignSelf: 'center', marginVertical: 14 }} source={require('../../assets/images/map.png')} />
 
         </View>
       </ScrollView>

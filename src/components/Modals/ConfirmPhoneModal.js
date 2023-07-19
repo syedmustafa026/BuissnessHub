@@ -16,18 +16,16 @@ const ConfirmPhoneModal = (props) => {
         >
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
-                    <Icon
-                        onPress={() => props.setModalVisible(false)}
-                        style={{
-                            position: 'absolute',
-                            left: 10,
-                            top: 30
-                        }}
-                        name='close'
-                        size={30}
-                        color={colors.gray} />
-                    <View style={{ justifyContent: 'center', marginVertical: 12 }}>
-                        <Text style={styles.h2}>Confirm Phone Number</Text>
+                    <View style={styles.row}>
+                        <TouchableOpacity style={{}} onPress={() => props.setModalVisible(false)}>
+                            <Icon
+                                name='close'
+                                size={26}
+                                color={colors.gray} />
+                        </TouchableOpacity>
+                        <View style={{ justifyContent: 'center', marginVertical: 8,width:'87%' }}>
+                            <Text style={[styles.h2, { color: colors.black,textAlign:'center' }]}>Confirm Phone Number</Text>
+                        </View>
                     </View>
                     <View style={styles.center}>
                         <Image source={require("../../assets/images/sheild.jpeg")} style={styles.img} />
@@ -88,7 +86,11 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
 
-    row: { justifyContent: 'flex-start', marginTop: 16 },
+    row: {
+        flexDirection: 'row',
+        alignItems:'center',
+
+    },
     header: {
         flexDirection: 'row',
         alignItems: 'center',

@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, Image, KeyboardAvoidingView, SafeAreaView, ScrollView } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
-import * as colors from "../utilities/colors"
-import * as fonts from "../utilities/fonts"
+import * as colors from "../../utilities/colors"
+import * as fonts from "../../utilities/fonts"
 import { TextInput, Button, RadioButton } from 'react-native-paper'
-import Dropdown from '../components/Inputs/Dropdown'
+import Dropdown from '../../components/Inputs/Dropdown'
 
 const PlaceAdMotorDetails = ({ navigation }) => {
   const [modal1, setModal1] = useState(false)

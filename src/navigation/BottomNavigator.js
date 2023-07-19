@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Home from '../screens/Home'
 import Favorites from '../screens/Favorites'
 import Messages from '../screens/Messages'
-import PlaceAd from '../screens/PlaceAd'
+import PlaceAd from '../screens/PlaceAds/PlaceAd'
 import Menu from '../screens/Menu'
 
 import * as colors from "../utilities/colors"

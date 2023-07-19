@@ -7,7 +7,7 @@ import Separator from '../components/Extras/Separator'
 
 import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
-import LoginModal from "../components/Modals/LoginModal";
+import LoginModal from "../components/Modals/LoginModal"
 
 const Menu = () => {
     const [modalVisible, setModalVisible] = useState(false)

@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-import { Searchbar, TextInput, TouchableRipple } from 'react-native-paper'
-import SelectBoxChip from "../components/Chips/SelectBoxChip";
-import SelectHorizontalChip from "../components/Chips/SelectHorizonatlChip";
 const Tab = createMaterialTopTabNavigator();
 import Rent from "../components/Filters/Rent"
 import Buy from "../components/Filters/Buy"
@@ -64,8 +60,6 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontSize: 20,
     zIndex: 2,
-
-    fontFamily: fonts.BOLD,
     fontFamily: fonts.BOLD,
   },
   h2: {

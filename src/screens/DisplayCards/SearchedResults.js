@@ -4,12 +4,12 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-nat
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { Badge } from 'react-native-paper';
 
-import * as colors from "../utilities/colors"
-import * as fonts from "../utilities/fonts"
+import * as colors from "../../utilities/colors"
+import * as fonts from "../../utilities/fonts"
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
-import PropertyDetailsCard from "../components/Cards/PropertyDetailsCard";
-import SearchDetailsCard from "../components/Cards/SearchDetailsCard";
-import NonImageCard from "../components/Cards/NonImageCard";
+import PropertyDetailsCard from "../../components/Cards/PropertyDetailsCard";
+import SearchDetailsCard from "../../components/Cards/SearchDetailsCard";
+import NonImageCard from "../../components/Cards/NonImageCard";
 
 const SearchedResults = ({ navigation }) => {
 

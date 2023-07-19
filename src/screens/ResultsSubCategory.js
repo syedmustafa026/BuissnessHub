@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
-import { FlatList, StyleSheet, View, SafeAreaView } from 'react-native';
+import React, { useEffect } from 'react'
+import { FlatList, StyleSheet, View, SafeAreaView } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
-import ThinNameRow from '../components/Rows/ThinNameRow';
-import { categories } from '../utilities/categories';
-import Separator from '../components/Extras/Separator';
+import ThinNameRow from '../components/Rows/ThinNameRow'
+import { categories } from '../utilities/categories'
+import Separator from '../components/Extras/Separator'
+
 const ResultsSubCategory = ({ route, navigation }) => {
-  console.log(route.params.data);
+
   useEffect(() => {
     navigation.setOptions({
       title: route.params.title
@@ -26,13 +27,12 @@ const ResultsSubCategory = ({ route, navigation }) => {
             />
             <Separator />
             <ThinNameRow name={`All in ${route.params.title}`} style={{ fontFamily: fonts.SEMIBOLD }} navigation={navigation} dir={'SearchedResults'} />
-          
           </View>
         </View>
       </View>
     </SafeAreaView>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -90,6 +90,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   }
-});
+})
 
-export default ResultsSubCategory;
+export default ResultsSubCategory
