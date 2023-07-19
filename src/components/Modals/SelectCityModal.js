@@ -25,7 +25,7 @@ const SelectCityModal = (props) => {
             <Modal
                 animationType="slide"
                 transparent={true}
-                visible={true}
+                visible={props.visible}
                 onRequestClose={props.setModalVisible(false)}
             >
                 <View style={styles.centeredView}>

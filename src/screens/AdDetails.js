@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -8,18 +8,24 @@ import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
 import AdCard from '../components/Cards/AdCard'
 import Separator from '../components/Extras/Separator'
+import MakeOfferModal from "../components/Modals/MakeOfferModal";
+import ConfirmPhoneModal from "../components/Modals/ConfirmPhoneModal";
 
 const AdDetails = ({ navigation }) => {
+    const [makeOfferModal, setMakeOfferModal] = useState(false)
+    const [confirmPhoneModal, setConfirmPhoneModal] = useState(false)
+    const [makeOfferValue, setMakeOfferValue] = useState('')
+
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
                 {/* header start */}
                 <View style={{ position: 'relative' }}>
-                <TouchableOpacity
+                    <TouchableOpacity
                         onPress={() => navigation.goBack()}
                         style={styles.backIcon}
                         activeOpacity={0.5}>
-                       <Icon
+                        <Icon
                             name="arrow-left"
                             size={28}
                             color={colors.black} />
@@ -106,8 +112,7 @@ const AdDetails = ({ navigation }) => {
                         <Text style={styles.highlightedText}>Show More Details</Text>
                     </View>
                     <Button
-
-                        onPress={() => { }}
+                        onPress={() => { setMakeOfferModal(true) }}
                         mode="contained"
                         color={colors.white}
                         style={[styles.button, { marginVertical: 18, }]}
@@ -170,7 +175,7 @@ const AdDetails = ({ navigation }) => {
             {/* Chat now start */}
             <View style={styles.box}>
                 <Button
-                    onPress={() => { }}
+                   onPress={() => { setConfirmPhoneModal(true) }}
                     mode="contained"
                     color={colors.white}
                     style={styles.button}
@@ -178,7 +183,17 @@ const AdDetails = ({ navigation }) => {
                 >Chat</Button>
             </View>
             {/* Chat now finish */}
-
+            {/* Make offer Modal  */}
+            <MakeOfferModal
+                visible={makeOfferModal}
+                setModalVisible={setMakeOfferModal}
+                value={makeOfferValue}
+                setValue={setMakeOfferValue}
+            />
+            <ConfirmPhoneModal
+                visible={confirmPhoneModal}
+                setModalVisible={setConfirmPhoneModal}
+            />
         </SafeAreaView>
     )
 }

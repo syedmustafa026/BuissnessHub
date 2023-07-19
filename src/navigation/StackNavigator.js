@@ -27,7 +27,7 @@ const Stack = createNativeStackNavigator()
 const StackNavigator = () => {
     return (
         <NavigationContainer >
-            <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='Splash' >
+            <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='AdDetails' >
                 <Stack.Screen name="Splash" component={Splash} />
                 <Stack.Screen name="OnBoard" component={OnBoard} />
 
@@ -45,7 +45,6 @@ const StackNavigator = () => {
                 <Stack.Screen options={{ headerShown: true, title: 'Place an Ad', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="PlaceAdMotorDetails" component={PlaceAdMotorDetails} />
                 <Stack.Screen options={{ headerShown: true, title: 'Place an Ad', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="PaymentMethod" component={PaymentMethod} />
                 <Stack.Screen options={{ headerShown: true, title: 'Place an Ad', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="Checkout" component={Checkout} />
-
 
                 <Stack.Screen options={{ headerShown: true, headerTitleStyle: { fontSize: 18 } }} name="ResultsSubCategory" component={ResultsSubCategory} />
                 <Stack.Screen name="CategorizedResults" component={CategorizedResults} />
