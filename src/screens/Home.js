@@ -41,7 +41,7 @@ const Home = ({ navigation }) => {
                 <View style={styles.cards}>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory',{title: 'Property for Rent', data: 0})}
+                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Property for Rent', data: 0 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/propertyRent.png')} />
@@ -50,7 +50,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory',{title: 'Property for Sale', data: 1})}
+                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Property for Sale', data: 1 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/propertySale.png')} />
@@ -60,7 +60,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory',{title: 'Rooms for Rent', data: 2})}
+                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Rooms for Rent', data: 2 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/room.png')} />
@@ -70,7 +70,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory',{title: 'Motors', data: 3})}
+                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Motors', data: 3 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/motor.png')} />
@@ -80,7 +80,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory',{title: 'Classified', data: 4})}
+                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Classified', data: 4 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/classified.png')} />
@@ -90,7 +90,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory',{title: 'Furniture & Garden', data: 5})}
+                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Furniture & Garden', data: 5 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/furniture.png')} />
@@ -100,7 +100,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory',{title: 'Mobile & Tablets', data: 6})}
+                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Mobile & Tablets', data: 6 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/mobile.png')} />
@@ -110,7 +110,7 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory',{title: 'Community', data: 7})}
+                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Community', data: 7 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/Community.png')} />
@@ -122,7 +122,7 @@ const Home = ({ navigation }) => {
                         width: wp('28'),
                         height: hp('13'),
                         marginRight: 12,
-                    }}/>
+                    }} />
                 </View>
                 <TouchableOpacity onPress={() => setVerifiedModal(true)} activeOpacity={0.8} style={styles.banner} >
                     <View style={{
@@ -147,7 +147,14 @@ const Home = ({ navigation }) => {
                         <MaterialIcon name="arrow-forward-ios" style={{ margin: 10, alignSelf: 'center' }} size={20} color={colors.primaryLight} />
                     </View>
                 </TouchableOpacity>
-                <Text style={{ fontFamily: fonts.BOLD, fontSize: 16, color: colors.black, margin: 18 }}>Popular in Used Cars for Sale</Text>
+                <View style={styles.row}>
+                    <Text style={{ fontFamily: fonts.BOLD, fontSize: 16, color: colors.black, }}>Popular in Used Cars for Rent</Text>
+                    <Icon
+                        onPress={() => navigation.navigate('SearchedResults')}
+                        name='arrow-right'
+                        size={24}
+                        color={colors.black} />
+                </View>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     <AdCard />
                     <AdCard />
@@ -156,7 +163,14 @@ const Home = ({ navigation }) => {
                     <AdCard />
                     <AdCard />
                 </ScrollView>
-                <Text style={{ fontFamily: fonts.BOLD, fontSize: 16, color: colors.black, margin: 18 }}>Popular in Used Resdients for Sale</Text>
+                <View style={styles.row}>
+                    <Text style={{ fontFamily: fonts.BOLD, fontSize: 16, color: colors.black }}>Popular in Used Resdients for Sale</Text>
+                    <Icon
+                        onPress={() => navigation.navigate('SearchedResults')}
+                        name='arrow-right'
+                        size={24}
+                        color={colors.black} />
+                </View>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     <AdCard />
                     <AdCard />
@@ -165,7 +179,14 @@ const Home = ({ navigation }) => {
                     <AdCard />
                     <AdCard />
                 </ScrollView>
-                <Text style={{ fontFamily: fonts.BOLD, fontSize: 16, color: colors.black, margin: 18 }}>Popular in Property  for Sale for Sale</Text>
+                <View style={styles.row}>
+                <Text style={{ fontFamily: fonts.BOLD, fontSize: 16, color: colors.black}}>Popular in Property  for Sale for Sale</Text>
+                    <Icon
+                        onPress={() => navigation.navigate('SearchedResults')}
+                        name='arrow-right'
+                        size={24}
+                        color={colors.black} />
+                </View>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     <AdCard />
                     <AdCard />
@@ -189,6 +210,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         padding: wp('3')
     },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 15,
+        marginVertical: 17
+    },
     search: {
         width: wp('85'),
         height: hp('6.5'),
@@ -199,7 +226,7 @@ const styles = StyleSheet.create({
     },
     cards: {
         alignSelf: 'center',
-        alignItems:"center",
+        alignItems: "center",
         justifyContent: 'center',
         marginVertical: 12,
         flexDirection: 'row',

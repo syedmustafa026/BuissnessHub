@@ -28,8 +28,8 @@ const PlaceAdCategory = ({ navigation }) => {
                         <Text style={styles.h4}>Choose the category that your fits into.</Text>
                     </View>
                     <FlatList
-                        data={['Used Cars', 'Motorcycles', 'Auto Accessories', "Heavy Vehicles", 'Boats', 'Number Plated']}
-                        renderItem={({ item }) => (<WideNameRow name={item} handlePress={() => navigation.navigate('PlaceAdSubCategory')} />)}
+                        data={['Used Cars', 'Motorcycles', 'Auto Accessories & parts', "Heavy Vehicles", 'Boats', 'Number Plates']}
+                        renderItem={({ item }) => (<WideNameRow name={item} handlePress={() => navigation.navigate('PlaceAdAutoFillDetails')} />)}
                         keyExtractor={(item, index) => index.toString()}
                     />
                 </View>

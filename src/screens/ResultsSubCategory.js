@@ -21,7 +21,7 @@ const ResultsSubCategory = ({ route, navigation }) => {
           <View style={{ justifyContent: 'center', marginBottom: 1 }}>
             <FlatList
               data={categories[route.params.data]}
-              renderItem={({ item }) => (<ThinNameRow name={item.name} navigation={navigation} handlePress={() => navigation.navigate('SearchedResults')} />)}
+              renderItem={({ item }) => (<ThinNameRow name={item.name} handlePress={() => navigation.navigate('SearchedResults')} />)}
               keyExtractor={(item, index) => index.toString()}
               ItemSeparatorComponent={<Separator />}
             />

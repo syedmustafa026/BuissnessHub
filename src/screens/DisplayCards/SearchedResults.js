@@ -10,14 +10,16 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import PropertyDetailsCard from "../../components/Cards/PropertyDetailsCard";
 import SearchDetailsCard from "../../components/Cards/SearchDetailsCard";
 import NonImageCard from "../../components/Cards/NonImageCard";
+import SortModal from "../../components/Modals/SortModal";
 
 const SearchedResults = ({ navigation }) => {
+  const [sortModal, setSortModal] = useState(false)
 
   return (
     <SafeAreaView style={styles.container}>
-
+      <SortModal visible={sortModal} setModalVisible={setSortModal} />
       <View style={styles.fiterRow}>
-        <View style={{ flexDirection: 'row' }}>
+        <View style={styles.row}>
           <MaterialIcon
             style={{ marginVertical: 10 }}
             name='saved-search'
@@ -26,7 +28,7 @@ const SearchedResults = ({ navigation }) => {
           <Text style={{ fontSize: 16, margin: 10, color: colors.gray, fontFamily: fonts.SEMIBOLD }}>SEARCH ALERT</Text>
 
         </View>
-        <View style={{ flexDirection: 'row' }}>
+        <View style={styles.row}>
           <Icon
             onPress={() => navigation.navigate("Filters")}
             style={{ marginVertical: 10 }}
@@ -41,15 +43,14 @@ const SearchedResults = ({ navigation }) => {
           }}>3</Badge>
 
         </View >
-        <View style={{ flexDirection: 'row' }}>
+        <TouchableOpacity activeOpacity={0.7} onPress={() => setSortModal(true)} style={styles.row}>
           <Icon
             style={{ marginHorizontal: 2, marginVertical: 10 }}
             name='sort'
             size={20}
             color={colors.gray} />
           <Text style={{ fontSize: 16, margin: 10, color: colors.black, fontFamily: fonts.SEMIBOLD }}>SORT</Text>
-
-        </View>
+        </TouchableOpacity>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.cards}>
@@ -89,6 +90,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 12,
     marginBottom: 8,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center'
   }
 })
 export default SearchedResults

@@ -48,12 +48,12 @@ const Checkout = ({ navigation }) => {
           <Text style={styles.h5}>All prices listed above are exclusive of 5% VAT.</Text>
         </View>
       </View>
-        <Button
-          onPress={() => { }}
-          mode="contained"
-          style={styles.button}
-          labelStyle={styles.ButtonLabel}
-        >Pay AED 103.95 Now</Button>
+      <Button
+        onPress={() => { navigation.replace('BottomNavigator') }}
+        mode="contained"
+        style={styles.button}
+        labelStyle={styles.ButtonLabel}
+      >Pay AED 103.95 Now</Button>
     </SafeAreaView>
   );
 };
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     padding: 2
   },
   button: {
-    marginTop:15,
+    marginTop: 15,
     width: '90%',
     borderRadius: 5,
     height: 45,
@@ -135,12 +135,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     borderColor: colors.primary,
     borderWidth: 1
-},
+  },
   ButtonLabel: {
     fontSize: hp("2.2"),
     color: colors.white,
     fontFamily: fonts.SEMIBOLD,
-},
+  },
 });
 
 export default Checkout;

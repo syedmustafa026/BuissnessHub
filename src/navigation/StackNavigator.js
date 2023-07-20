@@ -23,6 +23,8 @@ import PaymentMethod from '../screens/PaymentMethod'
 import Checkout from '../screens/Checkout'
 import PlaceAdTitle from '../screens/PlaceAds/PlaceAdTitle'
 import PlaceAdPreCategory from '../screens/PlaceAds/PlaceAdPreCategory'
+import PlaceAdAutoFillDetails from '../screens/PlaceAds/PlaceAdAutofillDetails'
+import PlaceAdTermsConditions from '../screens/PlaceAds/PlaceAdTermsConditions'
 
 const Stack = createNativeStackNavigator()
 
@@ -32,7 +34,7 @@ const StackNavigator = () => {
             <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='BottomNavigator' >
                 <Stack.Screen name="Splash" component={Splash} />
                 <Stack.Screen name="OnBoard" component={OnBoard} />
-                
+
                 <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
                 <Stack.Screen name="Home" component={Home} />
                 <Stack.Screen name="Filters" component={Filters} />
@@ -49,6 +51,8 @@ const StackNavigator = () => {
                 <Stack.Screen options={{ headerShown: true, title: 'Place an Ad', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="Checkout" component={Checkout} />
                 <Stack.Screen options={{ headerShown: true, title: 'Place an Ad', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="PlaceAdTitle" component={PlaceAdTitle} />
                 <Stack.Screen options={{ headerShown: true, title: 'Place an Ad', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="PlaceAdPreCategory" component={PlaceAdPreCategory} />
+                <Stack.Screen options={{ headerShown: true, title: 'Place an Ad', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="PlaceAdAutoFillDetails" component={PlaceAdAutoFillDetails} />
+                <Stack.Screen options={{ headerShown: true, title: 'Place an Ad', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="PlaceAdTermsConditions" component={PlaceAdTermsConditions} />
 
 
                 <Stack.Screen options={{ headerShown: true, headerTitleStyle: { fontSize: 18 } }} name="ResultsSubCategory" component={ResultsSubCategory} />

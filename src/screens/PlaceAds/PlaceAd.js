@@ -1,7 +1,6 @@
 import React from 'react';
 import { Modal, FlatList, StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 import Separator from '../../components/Extras/Separator'
@@ -37,7 +36,7 @@ const PlaceAd = ({ navigation }) => {
                         <Text style={styles.h4}>Where should we place your ad?</Text>
                     </View>
                     <FlatList
-                        data={['Abu Dhabi', 'Pakistan', 'India', "Bangladesh", 'Iran', 'kuwait', 'UAE']}
+                        data={['Abu Dhabi', 'Ajman', 'Al Ain', "Dubai", 'Fuljairah', 'Ras al Khaimah', 'Sharjah', 'Umm al Quwain']}
                         renderItem={({ item }) => (<Item name={item} navigation={navigation} />)}
                         keyExtractor={(item, index) => index.toString()}
                     />
@@ -70,36 +69,24 @@ const styles = StyleSheet.create({
         padding: 10,
         elevation: 2,
     },
-    row: { justifyContent: 'flex-start', marginTop: 16 },
-    header: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
+    row: {
+        justifyContent: 'flex-start',
+        marginTop: 16
     },
-    image: {
-        width: wp('35'),
-        height: hp('5'),
-        resizeMode: 'contain'
-    },
-    wallpaper: {
-        width: wp('30'),
-        height: hp('15'),
-        resizeMode: 'contain',
-        margin: wp('8')
-    },
+
+
     h1: {
         color: colors.black,
         fontSize: 24,
         zIndex: 2,
-        fontFamily: fonts.BOLD,
-        fontFamily: fonts.BOLD,
+        fontFamily: fonts.SEMIBOLD,
         textAlign: 'center',
     },
     h2: {
         fontSize: 18,
         color: colors.black,
-        fontFamily: fonts.SEMIBOLD,
-        marginBottom: 30,
+        fontFamily: fonts.MEDIUM,
+        marginBottom: 26,
         marginHorizontal: 20
     },
     h4: {
@@ -108,20 +95,6 @@ const styles = StyleSheet.create({
         fontFamily: fonts.REGULAR,
         textAlign: 'center'
     },
-    button: {
-        flexDirection: 'row',
-        backgroundColor: 'white',
-        padding: 8,
-        paddingHorizontal: 14,
-        width: wp('80'),
-        marginTop: hp('2'),
-        height: 54,
-        borderColor: colors.black,
-        borderWidth: .6,
-        borderRadius: 10,
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-    }
 });
 
 export default PlaceAd;

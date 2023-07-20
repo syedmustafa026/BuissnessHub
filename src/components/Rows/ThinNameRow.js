@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   h2: {
     fontSize: 18,
     color: colors.black,
-    fontFamily: fonts.REGULAR,
+    fontFamily: fonts.MEDIUM,
     marginHorizontal: 12
   },
 })

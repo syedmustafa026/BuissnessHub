@@ -182,7 +182,7 @@ const PlaceAdDetails = ({ navigation }) => {
         </View>
       </ScrollView>
       <Button
-        onPress={() => {navigation.navigate("PaymentMethod")}}
+        onPress={() => {navigation.navigate("PlaceAdTermsConditions")}}
         mode="contained"
         color={colors.white}
         style={[styles.button, { marginTop: 8, backgroundColor: colors.primary }]}

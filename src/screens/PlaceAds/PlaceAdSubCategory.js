@@ -38,8 +38,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontSize: 24,
     zIndex: 2,
-    fontFamily: fonts.BOLD,
-    fontFamily: fonts.BOLD,
+    fontFamily: fonts.SEMIBOLD,
     textAlign: 'center',
   },
   h2: {

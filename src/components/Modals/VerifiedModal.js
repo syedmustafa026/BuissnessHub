@@ -1,5 +1,5 @@
 import React from "react"
-import { Image, Linking, Modal, StyleSheet, View, Text } from "react-native"
+import { Image, TouchableOpacity, Modal, StyleSheet, View, Text } from "react-native"
 import { Button, IconButton, } from "react-native-paper"
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
@@ -8,14 +8,13 @@ import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 
 const VerifiedModal = (props) => {
-
   return (
     <Modal
       animationType="slide"
       transparent={true}
       visible={props.visible}
     >
-      <View style={styles.centeredView}>
+      <TouchableOpacity activeOpacity={1} onPress={() => props.setModalVisible(false)} style={styles.centeredView}>
         <View style={styles.modalView}>
           <View style={styles.modalBody}>
 
@@ -48,7 +47,7 @@ const VerifiedModal = (props) => {
             </View>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     </Modal>
   )
 }

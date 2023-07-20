@@ -24,9 +24,9 @@ const styles = StyleSheet.create({
   h2: {
     fontSize: 18,
     color: colors.black,
-    fontFamily: fonts.SEMIBOLD,
-    marginBottom: 30,
-    marginHorizontal: 20
+    fontFamily: fonts.MEDIUM,
+    marginBottom: 25,
+    marginHorizontal: 10
   },
 })
 export default NameRow
