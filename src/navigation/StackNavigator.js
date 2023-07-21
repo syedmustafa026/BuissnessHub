@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Splash from '../screens/Starters/Splash'
 import BottomNavigator from './BottomNavigator'
 import OnBoard from '../screens/Starters/OnBoard'
-import AdDetails from '../screens/AdDetails'
+import AdDetails from '../screens/AdDetails/AdDetails'
 import CategorizedResults from '../screens/DisplayCards/CategorizedResults'
 import Home from '../screens/Home'
 import Favorite from '../screens/Favorites'
@@ -25,6 +25,8 @@ import PlaceAdTitle from '../screens/PlaceAds/PlaceAdTitle'
 import PlaceAdPreCategory from '../screens/PlaceAds/PlaceAdPreCategory'
 import PlaceAdAutoFillDetails from '../screens/PlaceAds/PlaceAdAutofillDetails'
 import PlaceAdTermsConditions from '../screens/PlaceAds/PlaceAdTermsConditions'
+import ReportAd from '../screens/AdDetails/ReportAd'
+import ConfirmReportAd from '../screens/AdDetails/ConfirmReportAd'
 
 const Stack = createNativeStackNavigator()
 
@@ -58,6 +60,9 @@ const StackNavigator = () => {
                 <Stack.Screen options={{ headerShown: true, headerTitleStyle: { fontSize: 18 } }} name="ResultsSubCategory" component={ResultsSubCategory} />
                 <Stack.Screen name="CategorizedResults" component={CategorizedResults} />
                 <Stack.Screen name="AdDetails" component={AdDetails} />
+                <Stack.Screen options={{ headerShown: true, title: 'Report an Ad', headerTitleStyle: { fontSize: 16 } }} name="ReportAd" component={ReportAd} />
+                <Stack.Screen options={{ headerShown: true, headerTitleStyle: { fontSize: 16 } }} name="ConfirmReportAd" component={ConfirmReportAd} />
+
                 <Stack.Screen options={{ headerShown: true, title: '2049 Results', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="SearchedResults" component={SearchedResults} />
 
                 <Stack.Screen name="Menu" component={Menu} />

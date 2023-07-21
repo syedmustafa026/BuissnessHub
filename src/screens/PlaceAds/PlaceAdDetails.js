@@ -7,6 +7,7 @@ import * as fonts from "../../utilities/fonts"
 import { TextInput, Button, RadioButton } from 'react-native-paper'
 import SelectValueModal from '../../components/Modals/SelectValueModal'
 import { launchImageLibrary } from 'react-native-image-picker'
+import RadioButtonModal from '../../components/Modals/RadioButtonModal'
 
 const PlaceAdDetails = ({ navigation }) => {
   const [title, setTitle] = useState("")
@@ -38,7 +39,7 @@ const PlaceAdDetails = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <SelectValueModal visible={modal} setVisible={setModal} value={value} onValueChange={setValue} />
+        <RadioButtonModal visible={modal} setVisible={setModal} value={value} onValueChange={setValue} />
         <View style={{ justifyContent: 'center', marginVertical: 16 }}>
           <Text style={styles.h2}>You're Almost There!</Text>
           <Text style={[styles.h4, { textAlign: 'center', marginBottom: 12 }]}>Include as much details and pictures as possible and set the right price!</Text>

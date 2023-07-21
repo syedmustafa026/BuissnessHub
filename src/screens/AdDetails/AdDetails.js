@@ -4,12 +4,12 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-nat
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { Button } from "react-native-paper";
-import * as colors from "../utilities/colors"
-import * as fonts from "../utilities/fonts"
-import AdCard from '../components/Cards/AdCard'
-import Separator from '../components/Extras/Separator'
-import MakeOfferModal from "../components/Modals/MakeOfferModal";
-import ConfirmPhoneModal from "../components/Modals/ConfirmPhoneModal";
+import * as colors from "../../utilities/colors"
+import * as fonts from "../../utilities/fonts"
+import AdCard from '../../components/Cards/AdCard'
+import Separator from '../../components/Extras/Separator'
+import MakeOfferModal from "../../components/Modals/MakeOfferModal";
+import ConfirmPhoneModal from "../../components/Modals/ConfirmPhoneModal";
 
 const AdDetails = ({ navigation }) => {
     const [makeOfferModal, setMakeOfferModal] = useState(false)
@@ -30,7 +30,7 @@ const AdDetails = ({ navigation }) => {
                             size={28}
                             color={colors.black} />
                     </TouchableOpacity>
-                    <Image style={styles.mainImg} source={require('../assets/images/ad.jpeg')} />
+                    <Image style={styles.mainImg} source={require('../../assets/images/ad.jpeg')} />
                     <TouchableOpacity
                         onPress={() => navigation.goBack()}
                         style={[styles.shareIcon, { right: 90, bottom: -20 }]}
@@ -141,10 +141,10 @@ const AdDetails = ({ navigation }) => {
                             color={colors.gray} />
                         <Text style={styles.h4}>AL-Mira Square</Text>
                     </View>
-                    <Image style={{ width: "90%", height: 160, alignSelf: 'center', marginVertical: 14 }} source={require('../assets/images/map.png')} />
+                    <Image style={{ width: "90%", height: 160, alignSelf: 'center', marginVertical: 14 }} source={require('../../assets/images/map.png')} />
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginHorizontal: 15 }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Image style={styles.image} source={require("../assets/images/Community.png")} />
+                            <Image style={styles.image} source={require("../../assets/images/Community.png")} />
                             <View >
                                 <Text style={[styles.regularText, { marginHorizontal: 15 }]}>Seller:</Text>
                                 <Text style={[styles.boldText, { marginHorizontal: 15 }]}>Ali Ali</Text>
@@ -168,14 +168,14 @@ const AdDetails = ({ navigation }) => {
                         <AdCard />
                         <AdCard />
                     </ScrollView>
-                    <Text style={styles.highlightedText}>Report an Ad</Text>
+                    <Text onPress={() => navigation.navigate('ReportAd')} style={styles.highlightedText}>Report an Ad</Text>
                 </View>
                 {/* SimilarAds Finished */}
             </ScrollView>
             {/* Chat now start */}
             <View style={styles.box}>
                 <Button
-                   onPress={() => { setConfirmPhoneModal(true) }}
+                    onPress={() => { setConfirmPhoneModal(true) }}
                     mode="contained"
                     color={colors.white}
                     style={styles.button}

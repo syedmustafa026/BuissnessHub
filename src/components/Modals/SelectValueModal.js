@@ -1,5 +1,4 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { Modal, StyleSheet, Text, View } from 'react-native'
 import { Button, RadioButton, TouchableRipple } from 'react-native-paper'
 import Separator from '../../components/Extras/Separator'
