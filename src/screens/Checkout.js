@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 
 import * as colors from "../utilities/colors"
@@ -11,6 +11,7 @@ const Checkout = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <ScrollView>
       <View style={{ justifyContent: 'center', marginVertical: 16 }}>
         <Text style={styles.h1}>Secure Checkout</Text>
       </View>
@@ -33,7 +34,7 @@ const Checkout = ({ navigation }) => {
           <Text style={[styles.h5, { fontFamily: fonts.BOLD }]}>AED 103.95</Text>
         </View>
       </View>
-      <View style={[styles.card, { height: hp('29') }]}>
+      <View style={[styles.card, { height: hp('32') }]}>
         <View style={styles.section}>
           <Text style={styles.h4}>PAYBLE AFTER CAR SOLD</Text>
         </View>
@@ -54,6 +55,7 @@ const Checkout = ({ navigation }) => {
         style={styles.button}
         labelStyle={styles.ButtonLabel}
       >Pay AED 103.95 Now</Button>
+      </ScrollView>
     </SafeAreaView>
   );
 };

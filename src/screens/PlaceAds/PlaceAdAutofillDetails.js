@@ -125,14 +125,13 @@ const styles = StyleSheet.create({
     fontFamily: fonts.SEMIBOLD,
   },
   input: {
-    width: '92%',
+    width: '95%',
     marginVertical: 8,
     alignSelf: 'center',
     backgroundColor: colors.white,
     borderBlockColor: colors.gray,
-    height: 45,
     color: colors.gray,
-    fontFamily: fonts.SEMIBOLD
+    fontFamily: fonts.SEMIBOLD,
   },
   button: {
     marginTop: 5,

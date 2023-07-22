@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { Button, RadioButton, TouchableRipple } from 'react-native-paper'
+import { RadioButton, TouchableRipple } from 'react-native-paper'
 import Separator from '../../components/Extras/Separator'
 
 import * as fonts from '../../utilities/fonts'
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     backgroundColor: "#00000099",
-    paddingHorizontal: 20
+    paddingHorizontal: 15
   },
   modalView: {
     backgroundColor: colors.white,

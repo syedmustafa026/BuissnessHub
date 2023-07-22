@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Image, Text, SafeAreaView,StatusBar, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
@@ -19,6 +19,10 @@ const Home = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
+            <StatusBar
+                barStyle="light-content"
+                backgroundColor={colors.white}
+            />
             <VerifiedModal visible={verifiedModal} setModalVisible={setVerifiedModal} />
             <View style={styles.searchBar}>
                 <Searchbar

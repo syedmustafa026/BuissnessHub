@@ -28,7 +28,6 @@ const PlaceAdMotorDetails = ({ navigation }) => {
           <Text style={styles.h1}>Tell us about your car</Text>
         </View>
         <KeyboardAvoidingView style={{ justifyContent: 'center', marginVertical: 16 }}>
-
           <Dropdown
           data={['Dubai', 'Abu Dhabi', 'Ras al Lhaimah', 'Sharjah','Ajman']}
             style={styles.input}

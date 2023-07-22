@@ -16,14 +16,14 @@ const PlaceAdPreCategory = ({ navigation }) => {
             <Text style={styles.h2}>Choosing the right category gets you more views and leads.</Text>
             <Text style={styles.h4}>"Bedroom".</Text>
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>navigation.navigate('PlaceAdSubCategory')}>
             <View style={styles.row}>
               <Text style={styles.lightText}>Residential for Sale &gt; </Text>
               <Text style={styles.boldText}>Appartments for Sale  </Text>
             </View>
           </TouchableOpacity>
           <Separator />
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>navigation.navigate('PlaceAdSubCategory')}>
             <View style={styles.row}>
               <Text style={styles.lightText}>Residential for Sale &gt; </Text>
               <Text style={styles.boldText}>Villa for Sale  </Text>
@@ -31,7 +31,7 @@ const PlaceAdPreCategory = ({ navigation }) => {
           </TouchableOpacity>
 
           <Separator />
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>navigation.navigate('PlaceAdSubCategory')}>
             <View style={styles.row}>
               <Text style={styles.lightText}>Commercial for Sale &gt; </Text>
               <Text style={styles.boldText}>Staff Accomm for Sale  </Text>

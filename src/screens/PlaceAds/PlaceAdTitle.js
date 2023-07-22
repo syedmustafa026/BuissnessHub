@@ -108,7 +108,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: colors.white,
     borderColor: colors.gray200,
-    height: 45,
     color: colors.black,
     fontFamily: fonts.SEMIBOLD
   },

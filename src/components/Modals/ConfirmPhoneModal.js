@@ -13,6 +13,7 @@ const ConfirmPhoneModal = (props) => {
             animationType="slide"
             transparent={true}
             visible={props.visible}
+            onRequestClose={()=>props.setModalVisible(false)}
         >
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
@@ -85,7 +86,6 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
     },
-
     row: {
         flexDirection: 'row',
         alignItems:'center',
@@ -128,7 +128,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         backgroundColor: colors.white,
         borderBlockColor: colors.gray,
-        height: 45,
         color: colors.gray,
         fontFamily: fonts.SEMIBOLD
     },
