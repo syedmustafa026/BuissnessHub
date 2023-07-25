@@ -8,7 +8,7 @@ import AdDetails from '../screens/AdDetails/AdDetails'
 import CategorizedResults from '../screens/DisplayCards/CategorizedResults'
 import Home from '../screens/Home'
 import Favorite from '../screens/Favorites'
-import Menu from '../screens/Menu'
+import Menu from '../screens/Menu/Menu'
 import PlaceAd from '../screens/PlaceAds/PlaceAd'
 import PlaceAdListing from '../screens/PlaceAds/PlaceAdListing'
 import PlaceAdCategory from '../screens/PlaceAds/PlaceAdCategory'
@@ -27,6 +27,9 @@ import PlaceAdAutoFillDetails from '../screens/PlaceAds/PlaceAdAutofillDetails'
 import PlaceAdTermsConditions from '../screens/PlaceAds/PlaceAdTermsConditions'
 import ReportAd from '../screens/AdDetails/ReportAd'
 import ConfirmReportAd from '../screens/AdDetails/ConfirmReportAd'
+import Profile from '../screens/Menu/Profile'
+import EditProfile from '../screens/Menu/EditProfile'
+import ChangePassword from '../screens/Menu/ChangePassword'
 
 const Stack = createNativeStackNavigator()
 
@@ -66,6 +69,10 @@ const StackNavigator = () => {
                 <Stack.Screen options={{ headerShown: true, title: '2049 Results', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="SearchedResults" component={SearchedResults} />
 
                 <Stack.Screen name="Menu" component={Menu} />
+                <Stack.Screen options={{ headerShown: true, title: 'Profile', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="Profile" component={Profile} />
+                <Stack.Screen options={{ headerShown: true, title: 'Edit Personal Details', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="EditProfile" component={EditProfile} />
+                <Stack.Screen options={{ headerShown: true, title: 'Change your Password', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="ChangePassword" component={ChangePassword} />
+
             </Stack.Navigator>
         </NavigationContainer>
     )

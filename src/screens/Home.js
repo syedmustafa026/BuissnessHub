@@ -64,12 +64,12 @@ const Home = ({ navigation }) => {
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Rooms for Rent', data: 2 })}
+                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Business & Industrial', data: 2 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/room.png')} />
                             <Text style={styles.cardText}>
-                                Rooms for Rent</Text>
+                                Business & Industrial</Text>
                         </View>
                     </TouchableRipple>
                     <TouchableRipple

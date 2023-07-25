@@ -23,7 +23,7 @@ const PlaceAdMotorDetails = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView>
         <View>
           <Text style={styles.h1}>Tell us about your car</Text>
         </View>

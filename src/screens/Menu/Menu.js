@@ -3,19 +3,19 @@ import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollVi
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
-import Separator from '../components/Extras/Separator'
+import Separator from '../../components/Extras/Separator'
 import { Button } from "react-native-paper";
-import * as colors from "../utilities/colors"
-import * as fonts from "../utilities/fonts"
-import LoginModal from "../components/Modals/LoginModal"
+import * as colors from "../../utilities/colors"
+import * as fonts from "../../utilities/fonts"
+import LoginModal from "../../components/Modals/LoginModal"
 
-const Menu = () => {
+const Menu = ({navigation}) => {
     const [modalVisible, setModalVisible] = useState(false)
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 {/* <View style={styles.header}>
-                    <Image style={styles.image} source={require("../assets/images/Community.png")} />
+                    <Image style={styles.image} source={require("../../assets/images/Community.png")} />
                     <View style={{ flexDirection: 'column' }}>
                         <Text style={styles.heading}>Hi there,</Text>
                         <Text style={styles.text}>Sign in for more personalized experienced</Text>
@@ -31,8 +31,8 @@ const Menu = () => {
                 <Text style={styles.signup}>Don't have an account? Create one</Text>
                 <Separator /> */}
                 <View style={{ backgroundColor: colors.infoLight, marginVertical: 12,marginHorizontal:15, paddingHorizontal: 5, paddingVertical: 15, borderRadius: 10 }}>
-                    <View style={[styles.header, {}]}>
-                        <Image style={styles.image} source={require("../assets/images/Community.png")} />
+                    <View style={[styles.header]}>
+                        <Image style={styles.image} source={require("../../assets/images/Community.png")} />
                         <View style={{ flexDirection: 'column' }}>
                             <Text numberOfLines={1} style={styles.heading}>Hi Mustafa Ahmed</Text>
                             <Text style={styles.text}>syedmustafaahmed@gmail.com</Text>
@@ -50,7 +50,7 @@ const Menu = () => {
                 </View>
                 <View style={{ padding: 22 }}>
                     <Text style={styles.topicHeading}>My Account</Text>
-                    <TouchableOpacity style={styles.selectRow}>
+                    <TouchableOpacity onPress={()=>navigation.navigate("Profile")} style={styles.selectRow}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Icon
                                 name='account-circle-outline'

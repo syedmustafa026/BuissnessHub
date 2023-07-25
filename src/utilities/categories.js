@@ -1,10 +1,4 @@
 export const categories = [
-  motors = [
-    { name: 'Used Cars for Sale' },
-    { name: 'Motorcycles' },
-    { name: 'Auto Accessories & Parts' },
-    { name: 'Heavy Vehicles' },
-  ],
   propertyForRent = [
     { name: 'Residential Units for Rent' },
     { name: 'Commercial for Rent' },
@@ -17,18 +11,17 @@ export const categories = [
     { name: 'Commercial for Sale' },
     { name: 'Land for Sale' },
   ],
-  Community = [
-    { name: 'Freelancers' },
-    { name: 'Home Maintenance' },
-    { name: ' Tutors & Classes' },
-    { name: 'Other Services' },
-  ],
   BusinessIndustrial = [
-    { name: 'Business & Industrial' },
     { name: 'Businesses for Sale' },
     { name: 'Construction' },
     { name: 'Food & Beverage' },
     { name: 'Industrial Supplies' },
+  ],
+  motors = [
+    { name: 'Used Cars for Sale' },
+    { name: 'Motorcycles' },
+    { name: 'Auto Accessories & Parts' },
+    { name: 'Heavy Vehicles' },
   ],
   HomeAppliances = [
     { name: 'Large Appliances / White Goods' },
@@ -47,5 +40,11 @@ export const categories = [
     { name: 'Mobile Phone & Tablet Accessories' },
     { name: 'Tablets' },
     { name: 'Other Mobile Phones & Tablets' },
+  ],
+  Community = [
+    { name: 'Freelancers' },
+    { name: 'Home Maintenance' },
+    { name: ' Tutors & Classes' },
+    { name: 'Other Services' },
   ],
 ]

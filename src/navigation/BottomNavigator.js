@@ -4,7 +4,7 @@ import Home from '../screens/Home'
 import Favorites from '../screens/Favorites'
 import Messages from '../screens/Messages'
 import PlaceAd from '../screens/PlaceAds/PlaceAd'
-import Menu from '../screens/Menu'
+import Menu from '../screens/Menu/Menu'
 
 import * as colors from "../utilities/colors"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
