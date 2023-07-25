@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View,Image, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import * as colors from "../../utilities/colors"
@@ -9,7 +9,7 @@ import SelectValueModal from '../../components/Modals/SelectValueModal'
 import { launchImageLibrary } from 'react-native-image-picker'
 import RadioButtonModal from '../../components/Modals/RadioButtonModal'
 
-const PlaceAdDetails = ({ navigation }) => {
+const PlaceAdDetails = ({ navigation, route }) => {
   const [title, setTitle] = useState("")
   const [value, setValue] = useState('first')
   const [modal, setModal] = useState(false)
@@ -43,7 +43,7 @@ const PlaceAdDetails = ({ navigation }) => {
         <View style={{ justifyContent: 'center', marginVertical: 16 }}>
           <Text style={styles.h2}>You're Almost There!</Text>
           <Text style={[styles.h4, { textAlign: 'center', marginBottom: 12 }]}>Include as much details and pictures as possible and set the right price!</Text>
-          <Text onPress={() => navigation.goBack()} style={[styles.h4, { color: colors.primary }]}>Bikes &gt Motors</Text>
+          <Text onPress={() => navigation.goBack()} style={[styles.h4, { color: colors.primary }]}>{route.params.title} &gt; {route.params.category}</Text>
         </View>
         <View>
           <TextInput
@@ -183,7 +183,7 @@ const PlaceAdDetails = ({ navigation }) => {
         </View>
       </ScrollView>
       <Button
-        onPress={() => {navigation.navigate("PlaceAdTermsConditions")}}
+        onPress={() => { navigation.navigate("PlaceAdTermsConditions") }}
         mode="contained"
         color={colors.white}
         style={[styles.button, { marginTop: 8, backgroundColor: colors.primary }]}

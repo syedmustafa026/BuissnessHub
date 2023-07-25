@@ -6,20 +6,20 @@ import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 import Separator from '../../components/Extras/Separator'
 import ArrowRow from '../../components/Rows/ArrowRow'
+import { categories } from '../../utilities/categories';
 
-const PlaceAdSubCategory = ({ navigation }) => {
-
+const PlaceAdSubCategory = ({ navigation, route }) => {
+  console.log(route.params);
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ justifyContent: 'center', marginVertical: 16 }}>
         <Text style={styles.h2}>Now Choose the right category for your ad:</Text>
-        <Text style={styles.h4}><Text onPress={() => navigation.navigate('PlaceAdListing')} style={{ color: colors.primary }}>...</Text>
-          &gt;<Text onPress={() => navigation.goBack()} style={{ color: colors.primary }}> Motors</Text>  &gt; Motocycles</Text>
-
+        <Text style={styles.h4}><Text onPress={() => navigation.navigate('PlaceAdListing')} style={{ color: colors.primary }}>...  </Text>
+          &gt;<Text onPress={() => navigation.goBack()} style={{ color: colors.primary }}>  Ad title</Text>  &gt; {route.params.title}</Text>
       </View>
       <FlatList
-        data={['Used Cars', 'Motorcycles', 'Auto Accessories', "Heavy Vehicles", 'Boats', 'Number Plated']}
-        renderItem={({ item }) => (<ArrowRow name={item} handlePress={() => navigation.navigate("PlaceAdMotorDetails")} />)}
+        data={categories[route.params.data]}
+        renderItem={({ item }) => (<ArrowRow name={item.name} handlePress={() => navigation.navigate("PlaceAdDetails",{title: route.params.title,category: item.name})} />)}
         keyExtractor={(item, index) => index.toString()}
         ItemSeparatorComponent={<Separator />}
       />

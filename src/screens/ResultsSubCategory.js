@@ -24,9 +24,8 @@ const ResultsSubCategory = ({ route, navigation }) => {
               renderItem={({ item }) => (<ThinNameRow name={item.name} handlePress={() => navigation.navigate('SearchedResults')} />)}
               keyExtractor={(item, index) => index.toString()}
               ItemSeparatorComponent={<Separator />}
+              ListFooterComponent={<><Separator /><ThinNameRow name={`All in ${route.params.title}`} style={{ fontFamily: fonts.SEMIBOLD }} navigation={navigation} dir={'SearchedResults'} /></>}
             />
-            <Separator />
-            <ThinNameRow name={`All in ${route.params.title}`} style={{ fontFamily: fonts.SEMIBOLD }} navigation={navigation} dir={'SearchedResults'} />
           </View>
         </View>
       </View>
@@ -37,10 +36,10 @@ const ResultsSubCategory = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.white
   },
   modalView: {
     width: wp('100'),
-    height: hp('105'),
     backgroundColor: 'white',
     padding: 20,
     shadowColor: '#000',

@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { View, Image, Text, SafeAreaView,StatusBar, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Image, Text, SafeAreaView, StatusBar, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
@@ -45,81 +45,81 @@ const Home = ({ navigation }) => {
                 <View style={styles.cards}>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Property for Rent', data: 0 })}
-                        style={styles.card}>
-                        <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../assets/images/propertyRent.png')} />
-                            <Text style={styles.cardText}>Property for Rent</Text>
-                        </View>
-                    </TouchableRipple>
-                    <TouchableRipple
-                        rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Property for Sale', data: 1 })}
+                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Business for Sale', data: 0 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/propertySale.png')} />
-                            <Text style={styles.cardText}>
-                                Property for Sale</Text>
+                            <Text style={styles.cardText}>Business for Sale</Text>
                         </View>
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Business & Industrial', data: 2 })}
+                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Shares for Sale', data: 1 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../assets/images/room.png')} />
+                            <Image style={styles.cardImg} source={require('../assets/images/shares.png')} />
                             <Text style={styles.cardText}>
-                                Business & Industrial</Text>
+                                Shares for Sale</Text>
                         </View>
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Motors', data: 3 })}
+                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Business Ideas', data: 2 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../assets/images/motor.png')} />
+                            <Image style={[styles.cardImg,{width:48,height:48}]} source={require('../assets/images/buisnessidea.png')} />
                             <Text style={styles.cardText}>
-                                Motors</Text>
+                                Business Ideas</Text>
                         </View>
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Classified', data: 4 })}
+                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Investors', data: 3 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../assets/images/classified.png')} />
+                            <Image style={[styles.cardImg,{width:47,height:47}]} source={require('../assets/images/investors.png')} />
                             <Text style={styles.cardText}>
-                                Home Appliances</Text>
+                                Investors</Text>
                         </View>
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Furniture & Garden', data: 5 })}
+                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Investors Required', data: 4 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../assets/images/furniture.png')} />
+                            <Image style={styles.cardImg} source={require('../assets/images/investorsreq.png')} />
                             <Text style={styles.cardText}>
-                                Furniture & Garden</Text>
+                                Investors Required</Text>
                         </View>
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Mobile & Tablets', data: 6 })}
+                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Franchise Opportunities', data: 5 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../assets/images/mobile.png')} />
+                            <Image style={[styles.cardImg,{width:42,height:42}]} source={require('../assets/images/franchise.png')} />
                             <Text style={styles.cardText}>
-                                Mobile & Tablets</Text>
+                                Franchise Opportunities</Text>
                         </View>
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Community', data: 7 })}
+                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Export & Import Trade', data: 6 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../assets/images/Community.png')} />
+                            <Image style={styles.cardImg} source={require('../assets/images/logistics.png')} />
                             <Text style={styles.cardText}>
-                                Community</Text>
+                                Export & Import Trade</Text>
+                        </View>
+                    </TouchableRipple>
+                    <TouchableRipple
+                        rippleColor={colors.gray300}
+                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Machinery & Supplies', data: 7 })}
+                        style={styles.card}>
+                        <View style={{ alignItems: 'center' }}>
+                            <Image style={styles.cardImg} source={require('../assets/images/machine.png')} />
+                            <Text style={styles.cardText}>
+                            Machinery & Supplies</Text>
                         </View>
                     </TouchableRipple>
                     <View style={{
@@ -184,7 +184,7 @@ const Home = ({ navigation }) => {
                     <AdCard />
                 </ScrollView>
                 <View style={styles.row}>
-                <Text style={{ fontFamily: fonts.BOLD, fontSize: 16, color: colors.black}}>Popular in Property  for Sale for Sale</Text>
+                    <Text style={{ fontFamily: fonts.BOLD, fontSize: 16, color: colors.black }}>Popular in Property  for Sale for Sale</Text>
                     <Icon
                         onPress={() => navigation.navigate('SearchedResults')}
                         name='arrow-right'
@@ -266,7 +266,6 @@ const styles = StyleSheet.create({
     cardImg: {
         width: 38,
         height: 38,
-        resizeMode: 'contain'
     },
     banner: {
         backgroundColor: colors.white,

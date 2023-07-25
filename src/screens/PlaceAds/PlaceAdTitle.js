@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import { TextInput, Button } from 'react-native-paper';
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 
-const PlaceAdTitle = ({navigation}) => {
+const PlaceAdTitle = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={styles.centeredView}>
@@ -19,13 +19,13 @@ const PlaceAdTitle = ({navigation}) => {
           <TextInput
             theme={{ colors: { text: colors.gray, placeholder: colors.gray, } }}
             mode='outlined'
-            placeholder='eg. 1 Bedroom available in Al Barsha'
+            placeholder={`eg: ABC ${route.params.title} `}
             activeOutlineColor={colors.gray}
             keyboardType='number-pad'
             style={styles.input}
           />
           <Button
-            onPress={() => {navigation.navigate('PlaceAdPreCategory')}}
+            onPress={() => { navigation.navigate('PlaceAdSubCategory', route.params) }}
             mode="contained"
             style={styles.button}
             labelStyle={styles.ButtonLabel}

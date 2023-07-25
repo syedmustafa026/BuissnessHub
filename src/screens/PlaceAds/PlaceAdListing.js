@@ -30,83 +30,88 @@ const PlaceAdListing = ({ navigation }) => {
                     <View style={styles.cards}>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('PlaceAdTitle',{title: 'Property for Rent', data: 0})}
-                        style={styles.card}>
-                        <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../../assets/images/propertyRent.png')} />
-                            <Text style={styles.cardText}>Property for Rent</Text>
-                        </View>
-                    </TouchableRipple>
-                    <TouchableRipple
-                        rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('PlaceAdTitle',{title: 'Property for Sale', data: 1})}
+                        onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Business for Sale', data: 0 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../../assets/images/propertySale.png')} />
-                            <Text style={styles.cardText}>
-                                Property for Sale</Text>
+                            <Text style={styles.cardText}>Business for Sale</Text>
                         </View>
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('PlaceAdTitle',{title: 'Rooms for Rent', data: 2})}
+                        onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Shares for Sale', data: 1 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../../assets/images/room.png')} />
+                            <Image style={styles.cardImg} source={require('../../assets/images/shares.png')} />
                             <Text style={styles.cardText}>
-                                Rooms for Rent</Text>
+                                Shares for Sale</Text>
                         </View>
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Motors', data: 3})}
+                        onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Business Ideas', data: 2 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../../assets/images/motor.png')} />
+                            <Image style={[styles.cardImg,{width:48,height:48}]} source={require('../../assets/images/buisnessidea.png')} />
                             <Text style={styles.cardText}>
-                                Motors</Text>
+                                Business Ideas</Text>
                         </View>
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Classified', data: 4})}
+                        onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Investors', data: 3 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../../assets/images/classified.png')} />
+                            <Image style={[styles.cardImg,{width:47,height:47}]} source={require('../../assets/images/investors.png')} />
                             <Text style={styles.cardText}>
-                                Home Appliances</Text>
+                                Investors</Text>
                         </View>
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Furniture & Garden', data: 5})}
+                        onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Investors Required', data: 4 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../../assets/images/furniture.png')} />
+                            <Image style={styles.cardImg} source={require('../../assets/images/investorsreq.png')} />
                             <Text style={styles.cardText}>
-                                Furniture & Garden</Text>
+                                Investors Required</Text>
                         </View>
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Mobile & Tablets', data: 6})}
+                        onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Franchise Opportunities', data: 5 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../../assets/images/mobile.png')} />
+                            <Image style={[styles.cardImg,{width:42,height:42}]} source={require('../../assets/images/franchise.png')} />
                             <Text style={styles.cardText}>
-                                Mobile & Tablets</Text>
+                                Franchise Opportunities</Text>
                         </View>
                     </TouchableRipple>
                     <TouchableRipple
                         rippleColor={colors.gray300}
-                        onPress={() => navigation.navigate('PlaceAdCategory',{title: 'Community', data: 7})}
+                        onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Export & Import Trade', data: 6 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../../assets/images/Community.png')} />
+                            <Image style={styles.cardImg} source={require('../../assets/images/logistics.png')} />
                             <Text style={styles.cardText}>
-                                Community</Text>
+                                Export & Import Trade</Text>
                         </View>
                     </TouchableRipple>
+                    <TouchableRipple
+                        rippleColor={colors.gray300}
+                        onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Machinery & Supplies', data: 7 })}
+                        style={styles.card}>
+                        <View style={{ alignItems: 'center' }}>
+                            <Image style={styles.cardImg} source={require('../../assets/images/machine.png')} />
+                            <Text style={styles.cardText}>
+                             Machinery &  Supplies </Text>
+                        </View>
+                    </TouchableRipple>
+                    <View style={{
+                        width: wp('28'),
+                        height: hp('13'),
+                        marginRight: 12,
+                    }} />
                 </View>
                 </View>
             </View>
@@ -156,7 +161,6 @@ const styles = StyleSheet.create({
     cardImg: {
         width: 38,
         height: 38,
-        resizeMode: 'contain'
     },
     h1: {
         color: colors.black,
