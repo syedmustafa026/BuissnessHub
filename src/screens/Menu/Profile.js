@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
@@ -17,8 +17,7 @@ const Profile = ({ navigation }) => {
                         onPress={() => navigation.navigate('EditProfile')}
                         mode="contained"
                         icon={'pencil'}
-                        color={colors.white}
-                        style={[styles.button]}
+                        style={styles.button}
                         labelStyle={styles.ButtonLabel}
                     >Edit</Button>
                 </View>
@@ -55,7 +54,7 @@ const Profile = ({ navigation }) => {
             </View>
             <View style={{ padding: 20, marginTop: 30, backgroundColor: colors.white }}>
                 <Text style={styles.topicHeading}> Account Settings</Text>
-                <TouchableOpacity style={styles.selectRow}>
+                {/* <TouchableOpacity style={styles.selectRow}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Icon
                             name='account-circle-outline'
@@ -69,7 +68,7 @@ const Profile = ({ navigation }) => {
                             size={16}
                             color={colors.black} />
                     </View>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <TouchableOpacity onPress={()=>navigation.navigate('ChangePassword')} style={styles.selectRow}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Icon
@@ -85,7 +84,16 @@ const Profile = ({ navigation }) => {
                             color={colors.black} />
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.selectRow}>
+                <TouchableOpacity
+                onPress={()=>{ Alert.alert("Sure", "Are you sure you want to delete your account?", [{
+                    text: "Yes",
+                    onPress: () => navigation.navigate("BottomNavigator")
+                  }, {
+                    text: "Cancel",
+                  }], {
+                    cancelable: true
+                  })}}
+                style={styles.selectRow}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Icon
                             name='trash-can-outline'

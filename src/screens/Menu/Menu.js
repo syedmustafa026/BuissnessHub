@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
@@ -8,9 +8,12 @@ import { Button } from "react-native-paper";
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 import LoginModal from "../../components/Modals/LoginModal"
+import CallusModal from "../../components/Modals/CallUsModal";
 
-const Menu = ({navigation}) => {
-    const [modalVisible, setModalVisible] = useState(false)
+const Menu = ({ navigation }) => {
+    const [loginModal, setLoginModal] = useState(false)
+    const [callUsModal, setCallUsModal] = useState(false)
+
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -22,7 +25,7 @@ const Menu = ({navigation}) => {
                     </View>
                 </View>
                 <Button
-                    onPress={() => setModalVisible(false)}
+                    onPress={() => setLoginModal(false)}
                     mode="contained"
                     color={colors.white}
                     style={[styles.button]}
@@ -30,7 +33,7 @@ const Menu = ({navigation}) => {
                 >Login</Button>
                 <Text style={styles.signup}>Don't have an account? Create one</Text>
                 <Separator /> */}
-                <View style={{ backgroundColor: colors.infoLight, marginVertical: 12,marginHorizontal:15, paddingHorizontal: 5, paddingVertical: 15, borderRadius: 10 }}>
+                <View style={{ backgroundColor: colors.infoLight, marginVertical: 12, marginHorizontal: 15, paddingHorizontal: 5, paddingVertical: 15, borderRadius: 10 }}>
                     <View style={[styles.header]}>
                         <Image style={styles.image} source={require("../../assets/images/Community.png")} />
                         <View style={{ flexDirection: 'column' }}>
@@ -39,18 +42,17 @@ const Menu = ({navigation}) => {
                         </View>
                     </View>
                     <Button
-                        onPress={() => setModalVisible(false)}
+                        onPress={() => setLoginModal(false)}
                         mode="contained"
                         icon={'check-decagram'}
                         color={colors.white}
                         style={[styles.button]}
                         labelStyle={styles.ButtonLabel}
                     >Verify your account</Button>
-
                 </View>
                 <View style={{ padding: 22 }}>
                     <Text style={styles.topicHeading}>My Account</Text>
-                    <TouchableOpacity onPress={()=>navigation.navigate("Profile")} style={styles.selectRow}>
+                    <TouchableOpacity onPress={() => navigation.navigate("Profile")} style={styles.selectRow}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Icon
                                 name='account-circle-outline'
@@ -65,7 +67,9 @@ const Menu = ({navigation}) => {
                                 color={colors.black} />
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.selectRow}>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate("PublicProfile")}
+                        style={styles.selectRow}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Icon
                                 name='account-circle-outline'
@@ -80,7 +84,9 @@ const Menu = ({navigation}) => {
                                 color={colors.black} />
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.selectRow}>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate("MyAds")}
+                        style={styles.selectRow}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Icon
                                 name='notebook-minus-outline'
@@ -95,7 +101,9 @@ const Menu = ({navigation}) => {
                                 color={colors.black} />
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.selectRow}>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate("SavedSearches")}
+                        style={styles.selectRow}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Icon
                                 name='book-search-outline'
@@ -112,7 +120,7 @@ const Menu = ({navigation}) => {
                     </TouchableOpacity>
                     <Separator />
                 </View>
-                <View style={{ padding: 22 }}>
+                {/* <View style={{ padding: 22 }}>
                     <Text style={styles.topicHeading}>Settings</Text>
                     <TouchableOpacity style={styles.selectRow}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -147,7 +155,7 @@ const Menu = ({navigation}) => {
                         </View>
                     </TouchableOpacity>
                     <Separator />
-                </View>
+                </View> */}
                 <View style={{ paddingHorizontal: 22 }}>
                     <Text style={styles.topicHeading}>Others</Text>
                     <TouchableOpacity style={styles.selectRow}>
@@ -165,7 +173,7 @@ const Menu = ({navigation}) => {
                                 color={colors.black} />
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.selectRow}>
+                    <TouchableOpacity onPress={() => setCallUsModal(true)} style={styles.selectRow}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Icon
                                 name='phone'
@@ -195,6 +203,7 @@ const Menu = ({navigation}) => {
                                 color={colors.black} />
                         </View>
                     </TouchableOpacity>
+
                     <TouchableOpacity style={styles.selectRow}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Icon
@@ -210,8 +219,29 @@ const Menu = ({navigation}) => {
                                 color={colors.black} />
                         </View>
                     </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {
+                            Alert.alert("Sure", "Are you sure you want to Logout?", [{
+                                text: "Yes",
+                                onPress: () => navigation.navigate("BottomNavigator")
+                            }, {
+                                text: "Cancel",
+                            }], {
+                                cancelable: true
+                            })
+                        }}
+                        style={styles.selectRow}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Icon
+                                name='power'
+                                size={24}
+                                color={colors.black} />
+                            <Text style={styles.selectText}>Logout</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
-                <LoginModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
+                <LoginModal modalVisible={loginModal} setModalVisible={setLoginModal} />
+                <CallusModal modalVisible={callUsModal} setModalVisible={setCallUsModal} />
             </ScrollView>
         </SafeAreaView>
 

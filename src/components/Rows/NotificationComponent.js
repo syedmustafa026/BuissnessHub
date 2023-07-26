@@ -1,7 +1,5 @@
 import React from "react";
-import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { View, Image, Text, StyleSheet } from 'react-native'
 import { Appbar } from "react-native-paper";
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"

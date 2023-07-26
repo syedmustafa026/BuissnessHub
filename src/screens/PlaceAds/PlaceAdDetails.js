@@ -43,7 +43,7 @@ const PlaceAdDetails = ({ navigation, route }) => {
         <View style={{ justifyContent: 'center', marginVertical: 16 }}>
           <Text style={styles.h2}>You're Almost There!</Text>
           <Text style={[styles.h4, { textAlign: 'center', marginBottom: 12 }]}>Include as much details and pictures as possible and set the right price!</Text>
-          <Text onPress={() => navigation.goBack()} style={[styles.h4, { color: colors.primary }]}>{route.params.title} &gt; {route.params.category}</Text>
+          <Text onPress={() => navigation.goBack()} style={[styles.h4, { color: colors.primary }]}>{route?.params?.title} &gt; {route?.params?.category}</Text>
         </View>
         <View>
           <TextInput

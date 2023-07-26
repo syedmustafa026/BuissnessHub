@@ -4,10 +4,10 @@ import { Chip } from 'react-native-paper';
 
 import * as colors from "../../utilities/colors"
 
-const SelectHorizontalChip = ({ name, handlePress }) => (
+const SelectHorizontalChip = ({ name,selected, handlePress }) => (
     <View style={{marginTop: 12}}>
         <Chip
-            style={[styles.chip, (name === 'office' && styles.active)]}
+            style={[styles.chip, (name === selected && styles.active)]}
             mode='outlined'
             onPress={() => console.log('Pressed')}
         >{name}
@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
         borderWidth: 0.7
     },
     active:{
-        borderColor: colors.black,
-        borderWidth: 2
+        borderColor: colors.primary,
+        borderWidth: 1
     }
 })
 export default SelectHorizontalChip;

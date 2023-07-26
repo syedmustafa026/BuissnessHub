@@ -30,6 +30,9 @@ import ConfirmReportAd from '../screens/AdDetails/ConfirmReportAd'
 import Profile from '../screens/Menu/Profile'
 import EditProfile from '../screens/Menu/EditProfile'
 import ChangePassword from '../screens/Menu/ChangePassword'
+import MyAds from '../screens/Menu/MyAds'
+import SavedSearches from '../screens/SavedSearches'
+import PublicProfile from '../screens/PublicProfile'
 
 const Stack = createNativeStackNavigator()
 
@@ -72,6 +75,9 @@ const StackNavigator = () => {
                 <Stack.Screen options={{ headerShown: true, title: 'Profile', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="Profile" component={Profile} />
                 <Stack.Screen options={{ headerShown: true, title: 'Edit Personal Details', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="EditProfile" component={EditProfile} />
                 <Stack.Screen options={{ headerShown: true, title: 'Change your Password', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="ChangePassword" component={ChangePassword} />
+                <Stack.Screen options={{ headerShown: true, title: 'My Ads', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="MyAds" component={MyAds} />
+                <Stack.Screen options={{ headerShown: true, headerTitleAlign: 'center',title:'Saved Searches', headerStyle: { shadowColor: "#000", shadowOffset: { width: 0, height: 2, }, shadowOpacity: 0.23, shadowRadius: 2.62, elevation: 4, }, }} name="SavedSearches" component={SavedSearches} />
+                <Stack.Screen name="PublicProfile" component={PublicProfile} />
 
             </Stack.Navigator>
         </NavigationContainer>
