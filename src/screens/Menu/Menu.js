@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native'
+import { View, Image, Text, SafeAreaView, StyleSheet,Linking, TouchableOpacity, ScrollView, Alert } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
@@ -9,13 +9,16 @@ import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 import LoginModal from "../../components/Modals/LoginModal"
 import CallusModal from "../../components/Modals/CallUsModal";
+import VerifiedModal from "../../components/Modals/VerifiedModal";
 
 const Menu = ({ navigation }) => {
     const [loginModal, setLoginModal] = useState(false)
     const [callUsModal, setCallUsModal] = useState(false)
+    const [verifiedModal, setVerifiedModal] = useState(false)
 
     return (
         <SafeAreaView style={styles.container}>
+            <VerifiedModal visible={verifiedModal} setModalVisible={setVerifiedModal} />
             <ScrollView showsVerticalScrollIndicator={false}>
                 {/* <View style={styles.header}>
                     <Image style={styles.image} source={require("../../assets/images/Community.png")} />
@@ -37,12 +40,12 @@ const Menu = ({ navigation }) => {
                     <View style={[styles.header]}>
                         <Image style={styles.image} source={require("../../assets/images/Community.png")} />
                         <View style={{ flexDirection: 'column' }}>
-                            <Text numberOfLines={1} style={styles.heading}>Hi Mustafa Ahmed</Text>
-                            <Text style={styles.text}>syedmustafaahmed@gmail.com</Text>
+                            <Text numberOfLines={1} style={styles.heading}>Hi Arora Pawas</Text>
+                            <Text style={styles.text}>arorapawas@gmail.com</Text>
                         </View>
                     </View>
                     <Button
-                        onPress={() => setLoginModal(false)}
+                        onPress={() => setVerifiedModal(true)}
                         mode="contained"
                         icon={'check-decagram'}
                         color={colors.white}
@@ -158,7 +161,7 @@ const Menu = ({ navigation }) => {
                 </View> */}
                 <View style={{ paddingHorizontal: 22 }}>
                     <Text style={styles.topicHeading}>Others</Text>
-                    <TouchableOpacity style={styles.selectRow}>
+                    <TouchableOpacity onPress={() => Linking.openURL('https://businesshub.jdesigntechnologies.com/#')} style={styles.selectRow}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Icon
                                 name='message-reply-text-outline'
@@ -188,7 +191,7 @@ const Menu = ({ navigation }) => {
                                 color={colors.black} />
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.selectRow}>
+                    <TouchableOpacity onPress={() => Linking.openURL('https://businesshub.jdesigntechnologies.com/#')} style={styles.selectRow}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Icon
                                 name='note-text-outline'
@@ -204,7 +207,7 @@ const Menu = ({ navigation }) => {
                         </View>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.selectRow}>
+                    <TouchableOpacity onPress={() => Linking.openURL('https://businesshub.jdesigntechnologies.com/#')} style={styles.selectRow}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Icon
                                 name='post-outline'

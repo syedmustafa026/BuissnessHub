@@ -28,12 +28,12 @@ const Profile = ({ navigation }) => {
                             <View style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
                                 <View style={styles.row}>
                                     <Icon name='account-outline' color={colors.gray} size={20} />
-                                    <Text style={styles.h2}>Syed Mustafa</Text>
+                                    <Text style={styles.h2}>Arora Pawas</Text>
                                 </View>
                                 <View style={styles.row}>
                                     <View style={styles.row}>
                                         <Icon name='email-outline' color={colors.gray} size={20} />
-                                        <Text style={styles.h2}>syedmustafaahmed026@gmail.com</Text>
+                                        <Text style={styles.h2}>arorapawas@gmail.com</Text>
                                     </View>
                                     <Icon name='check-circle' color={colors.green} size={20} />
                                 </View>
@@ -44,7 +44,7 @@ const Profile = ({ navigation }) => {
                                 </View>
                                 <View style={styles.row}>
                                     <Icon name='facebook' color={colors.gray} size={20} />
-                                    <Text style={styles.h2}> Syed Mustafa </Text>
+                                    <Text style={styles.h2}>Arora Pawas </Text>
                                     <Icon name='check-circle' color={colors.green} size={20} />
                                 </View>
                             </View>

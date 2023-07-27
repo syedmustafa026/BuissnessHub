@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Image, KeyboardAvoidingView, SafeAreaView, ScrollView, Platform } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import * as colors from "../../utilities/colors"
@@ -11,8 +11,6 @@ import RadioButtonModal from '../../components/Modals/RadioButtonModal'
 
 const PlaceAdDetails = ({ navigation, route }) => {
   const [title, setTitle] = useState("")
-  const [value, setValue] = useState('first')
-  const [modal, setModal] = useState(false)
   const [imageUri, setImageUri] = useState(null)
 
   const OpenGallery = () => {
@@ -39,13 +37,11 @@ const PlaceAdDetails = ({ navigation, route }) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <RadioButtonModal visible={modal} setVisible={setModal} value={value} onValueChange={setValue} />
         <View style={{ justifyContent: 'center', marginVertical: 16 }}>
           <Text style={styles.h2}>You're Almost There!</Text>
           <Text style={[styles.h4, { textAlign: 'center', marginBottom: 12 }]}>Include as much details and pictures as possible and set the right price!</Text>
           <Text onPress={() => navigation.goBack()} style={[styles.h4, { color: colors.primary }]}>{route?.params?.title} &gt; {route?.params?.category}</Text>
         </View>
-        <View>
           <TextInput
             label="Title"
             value={title}
@@ -90,7 +86,7 @@ const PlaceAdDetails = ({ navigation, route }) => {
             onChangeText={text => setTitle(text)}
           />
           <TextInput
-            label="Description"
+            placeholder='Describe your item'
             value={title}
             mode='outlined'
             multiline={true}
@@ -102,19 +98,11 @@ const PlaceAdDetails = ({ navigation, route }) => {
             }}
             onChangeText={text => setTitle(text)}
           />
-          <TouchableOpacity activeOpacity={0.6}
-            onPress={() => setModal(true)} style={styles.selectButton}>
-            <Text style={styles.selectLabel}>Usage</Text>
-            <Icon
-              name='chevron-down'
-              size={24}
-              color={colors.black} />
-          </TouchableOpacity>
           <TextInput
-            label="Kilometers"
+            label="Locate your item"
             value={title}
             mode='outlined'
-            keyboardType='number-pad'
+            keyboardType='default'
             activeOutlineColor={colors.gray}
             style={{
               backgroundColor: colors.white,
@@ -122,65 +110,7 @@ const PlaceAdDetails = ({ navigation, route }) => {
             }}
             onChangeText={text => setTitle(text)}
           />
-          <TouchableOpacity activeOpacity={0.6}
-            onPress={() => setModal(true)} style={styles.selectButton}>
-            <Text style={styles.selectLabel}>Usage</Text>
-            <Icon
-              name='chevron-down'
-              size={24}
-              color={colors.black} />
-          </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.6}
-            onPress={() => setModal(true)} style={styles.selectButton}>
-            <Text style={styles.selectLabel}>Year</Text>
-            <Icon
-              name='chevron-down'
-              size={24}
-              color={colors.black} />
-          </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.6}
-            onPress={() => setModal(true)} style={styles.selectButton}>
-            <Text style={styles.selectLabel}>Seller Type</Text>
-            <Icon
-              name='chevron-down'
-              size={24}
-              color={colors.black} />
-          </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.6}
-            onPress={() => setModal(true)} style={styles.selectButton}>
-            <Text style={styles.selectLabel}>Warranty</Text>
-            <Icon
-              name='chevron-down'
-              size={24}
-              color={colors.black} />
-          </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.6}
-            onPress={() => setModal(true)} style={styles.selectButton}>
-            <Text style={styles.selectLabel}>Final Drive System</Text>
-            <Icon
-              name='chevron-down'
-              size={24}
-              color={colors.black} />
-          </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.6}
-            onPress={() => setModal(true)} style={styles.selectButton}>
-            <Text style={styles.selectLabel}>Wheels</Text>
-            <Icon
-              name='chevron-down'
-              size={24}
-              color={colors.black} />
-          </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.6}
-            onPress={() => setModal(true)} style={styles.selectButton}>
-            <Text style={styles.selectLabel}>Manufacturer</Text>
-            <Icon
-              name='chevron-down'
-              size={24}
-              color={colors.black} />
-          </TouchableOpacity>
-          <Image style={{ width: "90%", height: 160, alignSelf: 'center', marginVertical: 14 }} source={require('../../assets/images/map.png')} />
-
-        </View>
+          <Image style={{ width: "98%", height: 160, alignSelf: 'center', marginVertical: 14 }} source={require('../../assets/images/map.png')} />
       </ScrollView>
       <Button
         onPress={() => { navigation.navigate("PlaceAdTermsConditions") }}
@@ -189,7 +119,7 @@ const PlaceAdDetails = ({ navigation, route }) => {
         style={[styles.button, { marginTop: 8, backgroundColor: colors.primary }]}
         labelStyle={[styles.ButtonLabel, { color: colors.white }]}
       >Next</Button>
-    </SafeAreaView>
+    </SafeAreaView >
   )
 }
 

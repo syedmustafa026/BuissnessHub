@@ -49,7 +49,7 @@ const PublicProfile = ({ navigation }) => {
       <View style={styles.header}>
         <Image style={styles.image} source={require("../assets/images/Community.png")} />
         <View style={{ flexDirection: 'column' }}>
-          <Text numberOfLines={1} style={styles.heading}>Mustafa Ahmed</Text>
+          <Text numberOfLines={1} style={styles.heading}>  Arora Pawas</Text>
           <Text style={styles.text}>Joined on July 2023</Text>
         </View>
       </View>
