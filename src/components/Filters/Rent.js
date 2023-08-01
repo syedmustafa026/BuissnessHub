@@ -153,8 +153,6 @@ const styles = StyleSheet.create({
         color: colors.black,
         fontSize: 20,
         zIndex: 2,
-
-        fontFamily: fonts.BOLD,
         fontFamily: fonts.BOLD,
     },
     h2: {
