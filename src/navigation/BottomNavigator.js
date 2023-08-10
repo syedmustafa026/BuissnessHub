@@ -22,7 +22,7 @@ const BottomNavigator = () => {
         tabBarStyle: {
           borderTopLeftRadius: 10,
           borderTopRightRadius: 10,
-          height: 70,
+          height: 100,
           paddingTop: 10,
           shadowColor: '#000',
           shadowOffset: {
