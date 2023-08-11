@@ -53,6 +53,7 @@ const AdDetails = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
                 <View style={{
+                    zIndex: -1,
                     padding: 15,
                     paddingHorizontal: 20,
                     backgroundColor: colors.white
@@ -251,7 +252,7 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 0,
     },
     box:
-    {
+    { zIndex: -1,
         padding: 15,
         paddingHorizontal: 20,
         marginTop: 10,

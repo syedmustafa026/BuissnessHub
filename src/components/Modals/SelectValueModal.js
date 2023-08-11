@@ -1,6 +1,6 @@
 import React from 'react'
-import { Modal, StyleSheet, Text, View } from 'react-native'
-import { Button, RadioButton, TouchableRipple } from 'react-native-paper'
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Button, RadioButton } from 'react-native-paper'
 import Separator from '../../components/Extras/Separator'
 
 import * as fonts from '../../utilities/fonts'
@@ -25,12 +25,12 @@ const SelectValueModal = (props) => {
               {
                 ['4 wheels', '2 wheels', '6 wheels'].map((value, key) => {
                   return (
-                    <TouchableRipple onPress={() => console.log('prdd')} rippleColor={colors.gray}>
+                    <TouchableOpacity onPress={() => console.log('prdd')} activeOpacity={0.7}>
                       <View style={styles.row} key={key}>
                         <Text style={styles.label}>{value}</Text>
                         <RadioButton value={key} color={colors.primaryLight} />
                       </View>
-                    </TouchableRipple>
+                    </TouchableOpacity>
                   )
                 })
               }
@@ -44,7 +44,7 @@ const SelectValueModal = (props) => {
             labelStyle={styles.ButtonLabel}
           >Select</Button>
         </View>
-    </View>
+      </View>
     </Modal >
   )
 }

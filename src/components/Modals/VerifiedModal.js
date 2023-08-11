@@ -10,7 +10,7 @@ import * as fonts from "../../utilities/fonts"
 const VerifiedModal = (props) => {
   return (
     <Modal
-      animationType="slide"
+      animationType="fade"
       transparent={true}
       visible={props.visible}
     >

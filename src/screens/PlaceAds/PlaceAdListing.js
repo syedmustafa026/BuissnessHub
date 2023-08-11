@@ -4,8 +4,6 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-nat
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
-import { Searchbar, TouchableRipple } from 'react-native-paper';
-
 
 const PlaceAdListing = ({ navigation }) => {
 
@@ -28,17 +26,17 @@ const PlaceAdListing = ({ navigation }) => {
                         <Text style={styles.h4}>Choose the category that your ad fits into?</Text>
                     </View>
                     <View style={styles.cards}>
-                    <TouchableRipple
-                        rippleColor={colors.gray300}
+                    <TouchableOpacity
+                       activeOpacity={0.7}
                         onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Business for Sale', data: 0 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../../assets/images/propertySale.png')} />
                             <Text style={styles.cardText}>Business for Sale</Text>
                         </View>
-                    </TouchableRipple>
-                    <TouchableRipple
-                        rippleColor={colors.gray300}
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                       activeOpacity={0.7}
                         onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Shares for Sale', data: 1 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
@@ -46,9 +44,9 @@ const PlaceAdListing = ({ navigation }) => {
                             <Text style={styles.cardText}>
                                 Shares for Sale</Text>
                         </View>
-                    </TouchableRipple>
-                    <TouchableRipple
-                        rippleColor={colors.gray300}
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                       activeOpacity={0.7}
                         onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Business Ideas', data: 2 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
@@ -56,9 +54,9 @@ const PlaceAdListing = ({ navigation }) => {
                             <Text style={styles.cardText}>
                                 Business Ideas</Text>
                         </View>
-                    </TouchableRipple>
-                    <TouchableRipple
-                        rippleColor={colors.gray300}
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                       activeOpacity={0.7}
                         onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Investors', data: 3 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
@@ -66,9 +64,9 @@ const PlaceAdListing = ({ navigation }) => {
                             <Text style={styles.cardText}>
                                 Investors</Text>
                         </View>
-                    </TouchableRipple>
-                    <TouchableRipple
-                        rippleColor={colors.gray300}
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                       activeOpacity={0.7}
                         onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Investors Required', data: 4 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
@@ -76,9 +74,9 @@ const PlaceAdListing = ({ navigation }) => {
                             <Text style={styles.cardText}>
                                 Investors Required</Text>
                         </View>
-                    </TouchableRipple>
-                    <TouchableRipple
-                        rippleColor={colors.gray300}
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                       activeOpacity={0.7}
                         onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Franchise Opportunities', data: 5 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
@@ -86,9 +84,9 @@ const PlaceAdListing = ({ navigation }) => {
                             <Text style={styles.cardText}>
                                 Franchise Opportunities</Text>
                         </View>
-                    </TouchableRipple>
-                    <TouchableRipple
-                        rippleColor={colors.gray300}
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                       activeOpacity={0.7}
                         onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Export & Import Trade', data: 6 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
@@ -96,9 +94,9 @@ const PlaceAdListing = ({ navigation }) => {
                             <Text style={styles.cardText}>
                                 Export & Import Trade</Text>
                         </View>
-                    </TouchableRipple>
-                    <TouchableRipple
-                        rippleColor={colors.gray300}
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                       activeOpacity={0.7}
                         onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Machinery & Supplies', data: 7 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
@@ -106,7 +104,7 @@ const PlaceAdListing = ({ navigation }) => {
                             <Text style={styles.cardText}>
                              Machinery &  Supplies </Text>
                         </View>
-                    </TouchableRipple>
+                    </TouchableOpacity>
                     <View style={{
                         width: wp('28'),
                         height: hp('13'),

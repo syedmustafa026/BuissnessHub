@@ -116,7 +116,7 @@ const PlaceAdDetails = ({ navigation, route }) => {
         onPress={() => { navigation.navigate("PlaceAdTermsConditions") }}
         mode="contained"
         color={colors.white}
-        style={[styles.button, { marginTop: 8, backgroundColor: colors.primary }]}
+        style={[styles.button, { width:"90%", marginTop: 8, backgroundColor: colors.primary,marginVertical:4 }]}
         labelStyle={[styles.ButtonLabel, { color: colors.white }]}
       >Next</Button>
     </SafeAreaView >

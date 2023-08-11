@@ -7,15 +7,14 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 
-import { TouchableRipple } from 'react-native-paper';
 import { useNavigation } from "@react-navigation/native";
 
 
 const PropertyDetailsCard = () => {
     const navigation = useNavigation()
     return (
-        <TouchableRipple
-            rippleColor={colors.gray300}
+        <TouchableOpacity
+            activeOpacity={0.7}
             onPress={() => navigation.navigate('AdDetails')}
             style={styles.card}>
             <View>
@@ -45,7 +44,7 @@ const PropertyDetailsCard = () => {
                         <Text style={styles.cardText}>3059 Sqft.</Text>
                     </View>
                     <Text style={{ color: colors.black, fontFamily: fonts.REGULAR }} >Type 3E | Single Row | Available End of July</Text>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 12 }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 4 }}>
                         <Icon
                             name='map-marker-outline'
                             size={24}
@@ -74,7 +73,7 @@ const PropertyDetailsCard = () => {
                     </TouchableOpacity>
                 </View>
             </View>
-        </TouchableRipple>
+        </TouchableOpacity>
     )
 }
 const styles = StyleSheet.create({
@@ -86,7 +85,7 @@ const styles = StyleSheet.create({
     },
     card: {
         width: "95%",
-        height: hp('54'),
+        height: hp('50'),
         borderColor: colors.white,
         borderWidth: 1,
         backgroundColor: colors.gray100,
@@ -105,7 +104,7 @@ const styles = StyleSheet.create({
     },
     cardImg: {
         width: "100%",
-        height: hp('25'),
+        height: hp('20'),
         borderRadius: 10,
         borderBottomLeftRadius: 0,
         borderBottomRightRadius: 0,

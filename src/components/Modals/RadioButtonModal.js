@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { RadioButton, TouchableRipple } from 'react-native-paper'
+import { RadioButton } from 'react-native-paper'
 import Separator from '../../components/Extras/Separator'
 
 import * as fonts from '../../utilities/fonts'
@@ -11,12 +11,12 @@ const RadioButtonModal = (props) => {
   const Item = ({ item, key }) => {
     return (
       <RadioButton.Group onValueChange={(value) => props.onValueChange(value)} value={props.value}>
-        <TouchableRipple key={key} onPress={() => props.onValueChange(props.value)} rippleColor={colors.gray200}>
+        <TouchableOpacity key={key} onPress={() => props.onValueChange(props.value)} activeOpacity={0.7}>
           <View style={styles.row}>
             <Text style={styles.label}>{item}</Text>
             <RadioButton value={key} color={colors.primaryLight} />
           </View>
-        </TouchableRipple>
+        </TouchableOpacity>
       </RadioButton.Group>
     )
   }

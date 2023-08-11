@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
-import { TouchableRipple } from 'react-native-paper';
 
 const PaymentMethod = ({ navigation }) => {
 
@@ -14,8 +13,8 @@ const PaymentMethod = ({ navigation }) => {
       <View style={{ justifyContent: 'center', marginVertical: 16 }}>
         <Text style={styles.h1}>Choose how you want to sell your Car</Text>
       </View>
-      <TouchableRipple
-        rippleColor={colors.gray300}
+      <TouchableOpacity
+        activeOpacity={0.7}
         onPress={() => navigation.navigate('Checkout')}
         style={styles.card}>
         <View>
@@ -40,9 +39,9 @@ const PaymentMethod = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
-      </TouchableRipple>
-      <TouchableRipple
-        rippleColor={colors.gray300}
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.7}
         onPress={() => navigation.navigate('Checkout')}
         style={styles.card}>
         <View>
@@ -68,7 +67,7 @@ const PaymentMethod = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
-      </TouchableRipple>
+      </TouchableOpacity>
             <Text style={{fontFamily:fonts.SEMIBOLD,fontSize:14,marginHorizontal:12}}>All prices listed above are exclusive of 5% VAT.</Text>
     </SafeAreaView>
   );

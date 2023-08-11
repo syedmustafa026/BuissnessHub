@@ -6,13 +6,12 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 
-import { TouchableRipple } from 'react-native-paper';
 
 
 const SelectBoxChip = ({ name, icon, handlePress }) => {
     return (
-        <TouchableRipple
-            rippleColor={colors.gray300}
+        <TouchableOpacity
+            activeOpacity={0.7}
             onPress={() => console.log('ee')}
             style={[styles.card, (name === 'Residential' && styles.active)]}>
             <View style={[styles.selectButton]}>
@@ -22,7 +21,7 @@ const SelectBoxChip = ({ name, icon, handlePress }) => {
                     color={colors.gray} />
                 <Text style={styles.h2}>{name}</Text>
             </View>
-        </TouchableRipple>
+        </TouchableOpacity>
     )
 }
 const styles = StyleSheet.create({

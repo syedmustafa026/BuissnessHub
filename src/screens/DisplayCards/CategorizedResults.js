@@ -22,7 +22,7 @@ const CategorizedResults = ({navigation}) => {
                 <MaterialIcon
                 onPress={()=>navigation.goBack()}
                     name='arrow-back-ios'
-                    size={24}
+                    size={18}
                     color={colors.black} />
                 <Searchbar
                     style={styles.search}
@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
     },
     search: {
         width: wp('85'),
-        height: hp('6.5'),
         backgroundColor: colors.white,
         borderColor: colors.gray300,
         borderWidth: 1,

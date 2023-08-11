@@ -20,7 +20,7 @@ const Menu = ({ navigation }) => {
         <SafeAreaView style={styles.container}>
             <VerifiedModal visible={verifiedModal} setModalVisible={setVerifiedModal} />
             <ScrollView showsVerticalScrollIndicator={false}>
-                {/* <View style={styles.header}>
+                <View style={styles.header}>
                     <Image style={styles.image} source={require("../../assets/images/Community.png")} />
                     <View style={{ flexDirection: 'column' }}>
                         <Text style={styles.heading}>Hi there,</Text>
@@ -28,15 +28,15 @@ const Menu = ({ navigation }) => {
                     </View>
                 </View>
                 <Button
-                    onPress={() => setLoginModal(false)}
+                    onPress={() => setLoginModal(true)}
                     mode="contained"
                     color={colors.white}
                     style={[styles.button]}
                     labelStyle={styles.ButtonLabel}
                 >Login</Button>
                 <Text style={styles.signup}>Don't have an account? Create one</Text>
-                <Separator /> */}
-                <View style={{ backgroundColor: colors.infoLight, marginVertical: 12, marginHorizontal: 15, paddingHorizontal: 5, paddingVertical: 15, borderRadius: 10 }}>
+                <Separator />
+                {/* <View style={{ backgroundColor: colors.infoLight, marginVertical: 12, marginHorizontal: 15, paddingHorizontal: 5, paddingVertical: 15, borderRadius: 10 }}>
                     <View style={[styles.header]}>
                         <Image style={styles.image} source={require("../../assets/images/Community.png")} />
                         <View style={{ flexDirection: 'column' }}>
@@ -52,7 +52,7 @@ const Menu = ({ navigation }) => {
                         style={[styles.button]}
                         labelStyle={styles.ButtonLabel}
                     >Verify your account</Button>
-                </View>
+                </View> */}
                 <View style={{ padding: 22 }}>
                     <Text style={styles.topicHeading}>My Account</Text>
                     <TouchableOpacity onPress={() => navigation.navigate("Profile")} style={styles.selectRow}>

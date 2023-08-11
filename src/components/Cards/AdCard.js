@@ -5,15 +5,14 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-nat
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 
-import { TouchableRipple } from 'react-native-paper';
 import { useNavigation } from "@react-navigation/native";
 
 
 const AdCard = () => {
     const navigation = useNavigation()
     return (
-        <TouchableRipple
-            rippleColor={colors.gray300}
+        <TouchableOpacity
+            activeOpacity={0.7}
             onPress={() => navigation.navigate('AdDetails')}
             style={styles.card}>
             <View >
@@ -25,7 +24,7 @@ const AdCard = () => {
                 </View>
 
             </View>
-        </TouchableRipple>
+        </TouchableOpacity>
     )
 }
 const styles = StyleSheet.create({

@@ -1,5 +1,5 @@
 import React from "react"
-import { Image, Linking, Modal, StyleSheet, View, Text, FlatList, TouchableOpacity } from "react-native"
+import { Modal, StyleSheet, View, Text, FlatList, TouchableOpacity } from "react-native"
 import { Button, IconButton, } from "react-native-paper"
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
@@ -11,7 +11,7 @@ import ThinNameRow from "../Rows/ThinNameRow"
 const SortModal = (props) => {
   return (
     <Modal
-      animationType="slide"
+      animationType="fade"
       transparent={true}
       visible={props.visible}
     >

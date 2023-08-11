@@ -6,14 +6,13 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 
-import { TouchableRipple } from 'react-native-paper'
 import { useNavigation } from "@react-navigation/native"
 
 const FavoriteCard = () => {
   const navigation = useNavigation()
   return (
-    <TouchableRipple
-      rippleColor={colors.gray300}
+    <TouchableOpacity
+      activeOpacity={0.7}
       onPress={() => navigation.navigate('AdDetails')}
       style={styles.card}>
       <View>
@@ -43,7 +42,7 @@ const FavoriteCard = () => {
         </View>
 
       </View>
-    </TouchableRipple>
+    </TouchableOpacity>
   )
 }
 const styles = StyleSheet.create({

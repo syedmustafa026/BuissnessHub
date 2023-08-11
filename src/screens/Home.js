@@ -7,7 +7,7 @@ import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
-import { Searchbar, TouchableRipple } from 'react-native-paper'
+import { Searchbar } from 'react-native-paper'
 import AdCard from "../components/Cards/AdCard"
 import VerifiedModal from "../components/Modals/VerifiedModal"
 
@@ -43,17 +43,17 @@ const Home = ({ navigation }) => {
             </View>
             <ScrollView>
                 <View style={styles.cards}>
-                    <TouchableRipple
-                        rippleColor={colors.gray300}
+                    <TouchableOpacity
+                        activeOpacity={0.7}
                         onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Business for Sale', data: 0 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/propertySale.png')} />
                             <Text style={styles.cardText}>Business for Sale</Text>
                         </View>
-                    </TouchableRipple>
-                    <TouchableRipple
-                        rippleColor={colors.gray300}
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={0.7}
                         onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Shares for Sale', data: 1 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
@@ -61,9 +61,9 @@ const Home = ({ navigation }) => {
                             <Text style={styles.cardText}>
                                 Shares for Sale</Text>
                         </View>
-                    </TouchableRipple>
-                    <TouchableRipple
-                        rippleColor={colors.gray300}
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={0.7}
                         onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Business Ideas', data: 2 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
@@ -71,9 +71,9 @@ const Home = ({ navigation }) => {
                             <Text style={styles.cardText}>
                                 Business Ideas</Text>
                         </View>
-                    </TouchableRipple>
-                    <TouchableRipple
-                        rippleColor={colors.gray300}
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={0.7}
                         onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Investors', data: 3 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
@@ -81,9 +81,9 @@ const Home = ({ navigation }) => {
                             <Text style={styles.cardText}>
                                 Investors</Text>
                         </View>
-                    </TouchableRipple>
-                    <TouchableRipple
-                        rippleColor={colors.gray300}
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={0.7}
                         onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Investors Required', data: 4 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
@@ -91,9 +91,9 @@ const Home = ({ navigation }) => {
                             <Text style={styles.cardText}>
                                 Investors Required</Text>
                         </View>
-                    </TouchableRipple>
-                    <TouchableRipple
-                        rippleColor={colors.gray300}
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={0.7}
                         onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Franchise Opportunities', data: 5 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
@@ -101,9 +101,9 @@ const Home = ({ navigation }) => {
                             <Text style={styles.cardText}>
                                 Franchise Opportunities</Text>
                         </View>
-                    </TouchableRipple>
-                    <TouchableRipple
-                        rippleColor={colors.gray300}
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={0.7}
                         onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Export & Import Trade', data: 6 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
@@ -111,9 +111,9 @@ const Home = ({ navigation }) => {
                             <Text style={styles.cardText}>
                                 Export & Import Trade</Text>
                         </View>
-                    </TouchableRipple>
-                    <TouchableRipple
-                        rippleColor={colors.gray300}
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={0.7}
                         onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Machinery & Supplies', data: 7 })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
@@ -121,7 +121,7 @@ const Home = ({ navigation }) => {
                             <Text style={styles.cardText}>
                             Machinery & Supplies</Text>
                         </View>
-                    </TouchableRipple>
+                    </TouchableOpacity>
                     <View style={{
                         width: wp('28'),
                         height: hp('13'),
@@ -222,7 +222,6 @@ const styles = StyleSheet.create({
     },
     search: {
         width: wp('85'),
-        height: hp('6.5'),
         backgroundColor: colors.white,
         borderColor: colors.gray300,
         borderWidth: 1,

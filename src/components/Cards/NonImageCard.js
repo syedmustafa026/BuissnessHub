@@ -7,15 +7,14 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 
-import { TouchableRipple } from 'react-native-paper'
 import { useNavigation } from "@react-navigation/native"
 import Separator from "../Extras/Separator"
 
 const NonImageCard = () => {
   const navigation = useNavigation()
   return (
-    <TouchableRipple
-      rippleColor={colors.gray300}
+    <TouchableOpacity
+     activeOpacity={0.7}
       onPress={() => navigation.navigate('AdDetails')}
       style={styles.card}>
       <View>
@@ -52,7 +51,7 @@ const NonImageCard = () => {
 
         </View>
       </View>
-    </TouchableRipple>
+    </TouchableOpacity>
   )
 }
 const styles = StyleSheet.create({
@@ -64,7 +63,7 @@ const styles = StyleSheet.create({
   },
   card: {
     width: "98%",
-    height: hp('26'),
+    height: hp('28'),
     borderColor: colors.white,
     borderWidth: 1,
     backgroundColor: colors.gray100,

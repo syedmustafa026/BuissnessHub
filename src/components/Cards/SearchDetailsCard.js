@@ -7,7 +7,6 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 
-import { TouchableRipple } from 'react-native-paper'
 import { useNavigation } from "@react-navigation/native"
 import Separator from "../Extras/Separator"
 
@@ -15,8 +14,8 @@ import Separator from "../Extras/Separator"
 const SearchDetailsCard = () => {
   const navigation = useNavigation()
   return (
-    <TouchableRipple
-      rippleColor={colors.gray300}
+    <TouchableOpacity
+      activeOpacity={0.7}
       onPress={() => navigation.navigate('AdDetails')}
       style={styles.card}>
       <View>
@@ -30,9 +29,9 @@ const SearchDetailsCard = () => {
           <Text numberOfLines={1} style={{ color: colors.primary, fontFamily: fonts.SEMIBOLD, fontSize: 18,marginBottom:4 }} >AED 175,000 </Text>
           <Text numberOfLines={1} style={{ color: colors.black, fontFamily: fonts.SEMIBOLD, fontSize: 18,marginBottom:4 }} >BMW M3. Other </Text>
           <Text numberOfLines={1} style={{ color: colors.black, fontFamily: fonts.REGULAR }} >Type 3E | Single Row | Available End of July // JUly 2022</Text>
-          <Text numberOfLines={1} style={{ color: colors.black, fontFamily: fonts.REGULAR, marginTop: 4, marginRight: 8 }} ><Text style={{ fontFamily: fonts.BOLD }}>Kms: </Text> 43,000 <Text style={{ fontFamily: fonts.BOLD }}> Year: </Text>2022</Text>
+          <Text numberOfLines={1} style={{ color: colors.black, fontFamily: fonts.REGULAR, marginRight: 8 }} ><Text style={{ fontFamily: fonts.BOLD }}>Kms: </Text> 43,000 <Text style={{ fontFamily: fonts.BOLD }}> Year: </Text>2022</Text>
 
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 12 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 6 }}>
             <Icon
               name='map-marker-outline'
               size={24}
@@ -41,7 +40,7 @@ const SearchDetailsCard = () => {
           </View>
           <Separator />
         </View>
-        <View style={{ flexDirection: 'row',justifyContent:'space-evenly',marginHorizontal:8 }}>
+        <View style={{ flexDirection: 'row',justifyContent:'space-evenly',marginHorizontal:8,marginVertical:4 }}>
         <TouchableOpacity
             activeOpacity={0.6}
             style={styles.button}>
@@ -70,7 +69,7 @@ const SearchDetailsCard = () => {
           </TouchableOpacity>
         </View>
       </View>
-    </TouchableRipple>
+    </TouchableOpacity>
   )
 }
 const styles = StyleSheet.create({
