@@ -1,0 +1,1 @@
+export const publicUrl = "http://businesshub.jdesigntechnologies.com/api/"

@@ -10,7 +10,6 @@ const LoginModal = (props) => {
         <View style={styles.centeredView}>
             <Modal
                 animationType="slide"
-                transparent={true}
                 visible={props.modalVisible}
             >
                 <View style={styles.centeredView}>
@@ -49,7 +48,7 @@ const LoginModal = (props) => {
                                 style={{ width: 25, height: 25 }}
                                 source={require("../../assets/images/facebook.png")}
                             />
-                            <Text style={{ color: 'gray', paddingHorizontal: 15, fontSize: 18, fontFamily:fonts.REGULAR}}>Continue with Facebook</Text>
+                            <Text style={{ color: 'gray', paddingHorizontal: 15, fontSize: 18, fontFamily: fonts.REGULAR }}>Continue with Facebook</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             activeOpacity={0.8}
@@ -58,9 +57,10 @@ const LoginModal = (props) => {
                                 style={{ width: 30, height: 30 }}
                                 source={require("../../assets/images/google.png")}
                             />
-                            <Text style={{ color: 'gray', paddingHorizontal: 15, fontSize: 18, fontFamily:fonts.REGULAR}}>Continue with Google</Text>
+                            <Text style={{ color: 'gray', paddingHorizontal: 15, fontSize: 18, fontFamily: fonts.REGULAR }}>Continue with Google</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
+                            onPress={() => { props.setModalVisible(false), props.navigation.navigate("Login") }}
                             activeOpacity={0.8}
                             style={styles.button}>
                             <Icon
@@ -68,11 +68,11 @@ const LoginModal = (props) => {
                                 size={25}
                                 color={colors.primaryLight}
                             />
-                            <Text style={{ color: colors.gray, paddingHorizontal: 15, fontSize: 18, fontFamily:fonts.REGULAR}}>Continue with Email</Text>
+                            <Text style={{ color: colors.gray, paddingHorizontal: 15, fontSize: 18, fontFamily: fonts.REGULAR }}>Continue with Email</Text>
                         </TouchableOpacity>
                         <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-                            <Text style={{ color: colors.primaryLight, marginTop: 30, paddingHorizontal: 15, fontSize: 14, fontFamily:fonts.REGULAR}}>Don't have an account? Create one</Text>
-                            <Text style={{ color: 'grey', marginTop: 30, paddingHorizontal: 15, textAlign: 'center', fontSize: 12, fontFamily:fonts.REGULAR}}>By Signing in I agree to the <Text style={{ color: colors.blue, textDecorationLine: 'underline' }}>Terms and Conditions</Text> and  <Text style={{ color: colors.blue, textDecorationLine: 'underline' }}>Privacy Policy</Text></Text>
+                            <Text style={{ color: colors.primaryLight, marginTop: 30, paddingHorizontal: 15, fontSize: 14, fontFamily: fonts.REGULAR }}>Don't have an account? Create one</Text>
+                            <Text style={{ color: 'grey', marginTop: 30, paddingHorizontal: 15, textAlign: 'center', fontSize: 12, fontFamily: fonts.REGULAR }}>By Signing in I agree to the <Text style={{ color: colors.blue, textDecorationLine: 'underline' }}>Terms and Conditions</Text> and  <Text style={{ color: colors.blue, textDecorationLine: 'underline' }}>Privacy Policy</Text></Text>
                         </View>
                     </View>
                 </View>
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         color: 'white',
-        fontFamily:fonts.BOLD,
+        fontFamily: fonts.BOLD,
         textAlign: 'center',
     },
     header: {
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     h1: {
         color: colors.black,
         fontSize: hp('3'),
-        fontFamily:fonts.BOLD,
+        fontFamily: fonts.BOLD,
         marginBottom: hp('4')
     },
     button: {

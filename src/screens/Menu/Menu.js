@@ -15,7 +15,7 @@ const Menu = ({ navigation }) => {
     const [loginModal, setLoginModal] = useState(false)
     const [callUsModal, setCallUsModal] = useState(false)
     const [verifiedModal, setVerifiedModal] = useState(false)
-
+console.log(loginModal);
     return (
         <SafeAreaView style={styles.container}>
             <VerifiedModal visible={verifiedModal} setModalVisible={setVerifiedModal} />
@@ -34,7 +34,7 @@ const Menu = ({ navigation }) => {
                     style={[styles.button]}
                     labelStyle={styles.ButtonLabel}
                 >Login</Button>
-                <Text style={styles.signup}>Don't have an account? Create one</Text>
+                <Text onPress={ () => navigation.navigate("Signup")} style={styles.signup}>Don't have an account? Create one</Text>
                 <Separator />
                 {/* <View style={{ backgroundColor: colors.infoLight, marginVertical: 12, marginHorizontal: 15, paddingHorizontal: 5, paddingVertical: 15, borderRadius: 10 }}>
                     <View style={[styles.header]}>
@@ -243,7 +243,7 @@ const Menu = ({ navigation }) => {
                         </View>
                     </TouchableOpacity>
                 </View>
-                <LoginModal modalVisible={loginModal} setModalVisible={setLoginModal} />
+                <LoginModal navigation={navigation} modalVisible={loginModal} setModalVisible={setLoginModal} />
                 <CallusModal modalVisible={callUsModal} setModalVisible={setCallUsModal} />
             </ScrollView>
         </SafeAreaView>

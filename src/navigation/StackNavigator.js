@@ -30,6 +30,8 @@ import ChangePassword from '../screens/Menu/ChangePassword'
 import MyAds from '../screens/Menu/MyAds'
 import SavedSearches from '../screens/SavedSearches'
 import PublicProfile from '../screens/PublicProfile'
+import Login from '../screens/Menu/Login'
+import Signup from '../screens/Menu/Signup'
 
 const Stack = createNativeStackNavigator()
 
@@ -39,6 +41,8 @@ const StackNavigator = () => {
             <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='BottomNavigator' >
                 <Stack.Screen name="Splash" component={Splash} />
                 <Stack.Screen name="OnBoard" component={OnBoard} />
+                <Stack.Screen options={{ headerShown: true, title: null }} name="Login" component={Login} />
+                <Stack.Screen options={{ headerShown: true, title: null }} name="Signup" component={Signup} />
 
                 <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
                 <Stack.Screen name="Home" component={Home} />
