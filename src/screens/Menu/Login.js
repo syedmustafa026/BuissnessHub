@@ -4,10 +4,28 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-nat
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 import { TextInput, Button } from 'react-native-paper'
+import Toast from '../../components/Extras/Toast'
+import { validateEmail, validatePassword } from "../../utilities/validations"
 
 const Login = ({ navigation }) => {
-    const [email, setemail] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
     const [togglePassword, setTogglePassword] = useState(true)
+
+    const handleLogin = () => {
+        try {
+            if (!email && !password) throw new Error('Enter the required feilds')
+            if (!validateEmail(email)) throw new Error('Enter valid email')
+            if (!password) throw new Error('Enter password')
+            if (!validatePassword(password)) throw new Error('Enter minimum 6 digits password')
+            if (validateEmail(email) && validatePassword(password)) {
+                console.log(email, password);
+            }
+        } catch (error) {
+            Toast(error.message)
+        }
+    }
     return (
         <SafeAreaView style={styles.container}>
 
@@ -19,6 +37,7 @@ const Login = ({ navigation }) => {
                     mode='outlined'
                     activeOutlineColor={colors.gray}
                     style={styles.input}
+                    onChangeText={(txt) => setEmail(txt)}
                 />
                 <TextInput
                     theme={{ colors: { text: colors.black, placeholder: colors.gray, } }}
@@ -26,6 +45,7 @@ const Login = ({ navigation }) => {
                     mode='outlined'
                     secureTextEntry={togglePassword}
                     activeOutlineColor={colors.gray}
+                    onChangeText={(txt) => setPassword(txt)}
                     style={styles.input}
                     right={<TextInput.Icon
                         icon={togglePassword ? "eye-off-outline" : "eye-outline"}
@@ -36,7 +56,7 @@ const Login = ({ navigation }) => {
                 />
                 <Text style={{ fontFamily: fonts.MEDIUM, color: colors.blue, textAlign: 'center', marginVertical: 8 }}>Forgot your password?</Text>
                 <Button
-                    onPress={() => { navigation.goBack() }}
+                    onPress={handleLogin}
                     mode="contained"
                     color={colors.white}
                     style={[styles.button, { marginTop: 16, backgroundColor: colors.primary }]}

@@ -1,14 +1,50 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View, Image, KeyboardAvoidingView, SafeAreaView, ScrollView } from 'react-native'
+import React, { useState, useRef } from 'react'
+import { StyleSheet, Text, KeyboardAvoidingView, SafeAreaView, ScrollView } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 import { TextInput, Button } from 'react-native-paper'
+import Toast from '../../components/Extras/Toast'
+import { validateEmail, validatePassword } from "../../utilities/validations"
+import { publicUrl } from "../../utilities/constants"
+import Recaptcha from 'react-native-recaptcha-that-works';
 
 const Signup = ({ navigation }) => {
-  const [name, setname] = useState('')
-  const [email, setemail] = useState('')
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPasswordl] = useState('')
+
   const [togglePassword, setTogglePassword] = useState(true)
+
+  const recaptchaRef = useRef();
+
+  const send = () => {
+    console.log('send!');
+    recaptchaRef.current.open()
+  }
+
+  const onVerify = token => {
+    console.log('success!', token);
+  }
+
+  const onExpire = () => {
+    console.warn('expired!');
+  }
+  const handleSignup = () => {
+    try {
+      //   if (!email && !password) throw new Error('Enter the required feilds')
+      //   if (!validateEmail(email)) throw new Error('Enter valid email')
+      //   if (!password) throw new Error('Enter password')
+      //   if (!name) throw new Error('Enter password')
+      //   if (!validatePassword(password)) throw new Error('Enter minimum 6 digits password')
+      //   if (validateEmail(email) && validatePassword(password)) {
+      //     console.log(email, password);
+      //   }
+      send()
+    } catch (error) {
+      Toast(error.message)
+    }
+  }
   return (
     <SafeAreaView style={styles.container}>
 
@@ -42,10 +78,17 @@ const Signup = ({ navigation }) => {
             onPress={() => setTogglePassword(!togglePassword)}
           />}
         />
+        <Recaptcha
+          ref={recaptchaRef}
+          siteKey={"6LeyoQ4nAAAAALQ7qfYdJwmcV-ChoKw4pYjCO6MU"}
+          baseUrl={publicUrl}
+          onVerify={onVerify}
+          onExpire={onExpire}
+          size="invisible"
+        />
         <Button
-          onPress={() => { navigation.goBack() }}
+          onPress={handleSignup}
           mode="contained"
-          color={colors.white}
           style={[styles.button, { marginTop: 16, backgroundColor: colors.primary }]}
           labelStyle={[styles.ButtonLabel, { color: colors.white }]}
         >SIGNUP</Button>
