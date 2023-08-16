@@ -1,29 +1,44 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, Image, KeyboardAvoidingView, SafeAreaView, ScrollView } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
-import * as colors from "../../utilities/colors"
-import * as fonts from "../../utilities/fonts"
 import { TextInput, Button } from 'react-native-paper'
+
 import Toast from '../../components/Extras/Toast'
 import { validateEmail, validatePassword } from "../../utilities/validations"
+
+import * as colors from "../../utilities/colors"
+import * as fonts from "../../utilities/fonts"
+import * as functions from '../../utilities/functions'
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
+    const [loading, setLoading] = useState(false)
     const [togglePassword, setTogglePassword] = useState(true)
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
         try {
-            if (!email && !password) throw new Error('Enter the required feilds')
-            if (!validateEmail(email)) throw new Error('Enter valid email')
-            if (!password) throw new Error('Enter password')
-            if (!validatePassword(password)) throw new Error('Enter minimum 6 digits password')
-            if (validateEmail(email) && validatePassword(password)) {
-                console.log(email, password);
+            setLoading(true)
+
+            if (!email && !password) throw new Error("Enter the required feilds")
+            if (!validateEmail(email)) throw new Error("Enter email")
+            if (!validatePassword(password)) throw new Error("Enter password")
+
+            const payload = {
+                email: email,
+                password: password
             }
-        } catch (error) {
+            const response = await functions.login(payload)
+            if (!response.status) throw new Error(response.message)
+            await functions.setItem("user", response.user)
+            navigation.replace("BottomNavigator")
+        }
+        catch (error) {
+            setLoading(false)
             Toast(error.message)
+        }
+        finally {
+            setLoading(false)
         }
     }
     return (
@@ -58,6 +73,7 @@ const Login = ({ navigation }) => {
                 <Button
                     onPress={handleLogin}
                     mode="contained"
+                    loading={loading}
                     color={colors.white}
                     style={[styles.button, { marginTop: 16, backgroundColor: colors.primary }]}
                     labelStyle={[styles.ButtonLabel, { color: colors.white }]}

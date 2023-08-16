@@ -8,18 +8,20 @@ import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 import Separator from "../../components/Extras/Separator";
 
-const EditProfile = ({ navigation }) => {
+const EditProfile = ({ navigation, route }) => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.imgCon}>
-                <Image style={styles.image} source={require("../../assets/images/Community.png")} />
-                <Icon style={{ position: 'absolute', bottom: 30, right: 170 }} name='pencil-circle' color={colors.gray} size={28} />
+                <TouchableOpacity activeOpacity={0.6}>
+                <Image style={styles.image} source={{ uri: route.params.image_url }} />
+                <Icon style={{ position: 'absolute', bottom: 0, left: 70 }} name='pencil-circle' color={colors.gray} size={28} />
+                </TouchableOpacity>
             </View>
             <View style={{ marginHorizontal: 20 }}>
                 <Text style={styles.h2}>Name</Text>
                 <TouchableOpacity style={styles.selectRow}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Text style={styles.selectText}>Syed Mustafa</Text>
+                        <Text style={styles.selectText}>{route.params.name}</Text>
                     </View>
                     <View style={{ flexDirection: 'row' }}>
                         <Icon name='pencil' color={colors.gray} size={20} />
@@ -77,8 +79,10 @@ const styles = StyleSheet.create({
         position: 'relative'
     },
     image: {
-        width: wp('18'),
-        height: hp('18'),
+        width: 100,
+        height: 100,
+        marginVertical: 10,
+        marginRight: 12,
         borderRadius: 100,
         resizeMode: 'contain'
     },
@@ -129,6 +133,7 @@ const styles = StyleSheet.create({
     },
     selectText: {
         fontSize: 16,
+        marginLeft:8,
         color: colors.gray,
         fontFamily: fonts.SEMIBOLD
     },

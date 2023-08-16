@@ -1,48 +1,66 @@
 import React, { useState, useRef } from 'react'
 import { StyleSheet, Text, KeyboardAvoidingView, SafeAreaView, ScrollView } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
-import * as colors from "../../utilities/colors"
-import * as fonts from "../../utilities/fonts"
 import { TextInput, Button } from 'react-native-paper'
 import Toast from '../../components/Extras/Toast'
 import { validateEmail, validatePassword } from "../../utilities/validations"
 import { publicUrl } from "../../utilities/constants"
 import Recaptcha from 'react-native-recaptcha-that-works';
+import * as functions from '../../utilities/functions'
+import * as colors from "../../utilities/colors"
+import * as fonts from "../../utilities/fonts"
 
 const Signup = ({ navigation }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState(false)
   const [password, setPasswordl] = useState('')
+  const [token, setToken] = useState(null)
 
   const [togglePassword, setTogglePassword] = useState(true)
 
   const recaptchaRef = useRef();
 
   const send = () => {
-    console.log('send!');
+    setLoading(true)
     recaptchaRef.current.open()
   }
 
-  const onVerify = token => {
-    console.log('success!', token);
+  const onVerify = async token => {
+    setToken(token)
+    await handleSignup()
   }
 
   const onExpire = () => {
     console.warn('expired!');
   }
-  const handleSignup = () => {
+  const handleSignup = async () => {
     try {
-      //   if (!email && !password) throw new Error('Enter the required feilds')
-      //   if (!validateEmail(email)) throw new Error('Enter valid email')
-      //   if (!password) throw new Error('Enter password')
-      //   if (!name) throw new Error('Enter password')
-      //   if (!validatePassword(password)) throw new Error('Enter minimum 6 digits password')
-      //   if (validateEmail(email) && validatePassword(password)) {
-      //     console.log(email, password);
-      //   }
-      send()
+      if (!email && !password) throw new Error('Enter the required feilds')
+      if (!validateEmail(email)) throw new Error('Enter valid email')
+      if (!password) throw new Error('Enter password')
+      if (!name) throw new Error('Enter password')
+      if (!validatePassword(password)) throw new Error('Enter minimum 6 digits password')
+      else if (token == null) send()
+      else if (name && validateEmail(email) && validatePassword(password)) {
+        const payload = {
+          name: name,
+          email: email,
+          password: password,
+          password_confirmation: password,
+          "g-recaptcha-response": token,
+        }
+        const response = await functions.register(payload)
+        if (!response.status) throw new Error(response.message)
+        Toast("Register Successfully")
+        navigation.replace("Login")
+      }
+
     } catch (error) {
       Toast(error.message)
+    }
+    finally {
+      setLoading(false)
     }
   }
   return (
@@ -52,7 +70,8 @@ const Signup = ({ navigation }) => {
         <Text style={styles.h1}>Signup to BuisnessHub</Text>
         <TextInput
           theme={{ colors: { text: colors.black, placeholder: colors.gray, } }}
-          label="First Name"
+          label="Full Name"
+          onChangeText={(txt) => setName(txt)}
           mode='outlined'
           activeOutlineColor={colors.gray}
           style={styles.input}
@@ -60,6 +79,7 @@ const Signup = ({ navigation }) => {
         <TextInput
           theme={{ colors: { text: colors.black, placeholder: colors.gray, } }}
           label="Email"
+          onChangeText={(txt) => setEmail(txt)}
           mode='outlined'
           activeOutlineColor={colors.gray}
           style={styles.input}
@@ -67,6 +87,7 @@ const Signup = ({ navigation }) => {
         <TextInput
           theme={{ colors: { text: colors.black, placeholder: colors.gray, } }}
           label="Password"
+          onChangeText={(txt) => setPasswordl(txt)}
           mode='outlined'
           secureTextEntry={togglePassword}
           activeOutlineColor={colors.gray}
@@ -87,6 +108,7 @@ const Signup = ({ navigation }) => {
           size="invisible"
         />
         <Button
+          loading={loading}
           onPress={handleSignup}
           mode="contained"
           style={[styles.button, { marginTop: 16, backgroundColor: colors.primary }]}

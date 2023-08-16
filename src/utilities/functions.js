@@ -1,5 +1,6 @@
 import axios from "axios"
 import { apiUrl } from '../utilities/constants'
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 export const login = async (payload) => {
     try {
@@ -129,3 +130,40 @@ export const UpdateProfile = async (payload) => {
         return error.message
     }
 }
+
+export const setItem = async (key, value) => {
+    try {
+      await AsyncStorage.setItem(key, JSON.stringify(value))
+      return 'set'
+    } catch (error) {
+      return error.message
+    }
+  }
+  
+  export const getItem = async (key) => {
+    try {
+      return JSON.parse(await AsyncStorage.getItem(key))
+    } catch (error) {
+      return error.message
+    }
+  }
+  
+  export const removeItem = async (key) => {
+    try {
+      await AsyncStorage.removeItem(key)
+  
+      return 'removed'
+    } catch (error) {
+      return error.message
+    }
+  }
+  
+  export const clearStorage = async () => {
+    try {
+      await AsyncStorage.clear()
+  
+      return 'cleared'
+    } catch (error) {
+      return error.message
+    }
+  }

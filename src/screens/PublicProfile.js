@@ -10,7 +10,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 const Tab = createMaterialTopTabNavigator();
 
 
-const PublicProfile = ({ navigation }) => {
+const PublicProfile = ({ navigation,route }) => {
   const Ratings = () => {
     return (
       <SafeAreaView style={styles.container}>
@@ -18,7 +18,7 @@ const PublicProfile = ({ navigation }) => {
       </SafeAreaView>
     )
   }
-  const Ads = () => {
+  const Ads = ({ route }) => {
     return (
       <SafeAreaView style={styles.container}>
         <Image source={require("../assets/images/smallCactus.jpeg")} style={styles.img1} />
@@ -47,9 +47,9 @@ const PublicProfile = ({ navigation }) => {
           color={colors.gray} />
       </View>
       <View style={styles.header}>
-        <Image style={styles.image} source={require("../assets/images/Community.png")} />
+        <Image style={styles.image} source={{ uri: route.params.image_url }} />
         <View style={{ flexDirection: 'column' }}>
-          <Text numberOfLines={1} style={styles.heading}>  Arora Pawas</Text>
+          <Text numberOfLines={1} style={styles.heading}> {route.params.name}</Text>
           <Text style={styles.text}>Joined on July 2023</Text>
         </View>
       </View>
@@ -74,19 +74,22 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: 8
+    marginHorizontal:20
   },
   img: {
-    marginTop:40,
+    marginTop: 40,
     width: 400,
     height: 400,
     alignSelf: 'center'
   },
   image: {
-    width: wp('16'),
-    height: hp('16'),
+    width: 60,
+    height: 60,
+    marginVertical: 5,
+    marginRight:12,
+    borderRadius: 100,
     resizeMode: 'contain'
-  },
+},
   h1: {
     color: colors.black,
     fontSize: 20,

@@ -1,12 +1,15 @@
-import React, { useState } from "react";
-import { View, Image, Text, SafeAreaView, StyleSheet,Linking, TouchableOpacity, ScrollView, Alert } from 'react-native'
+import React, { useState, useEffect } from "react";
+import { View, Image, Text, SafeAreaView, StyleSheet, Linking, TouchableOpacity, ScrollView, Alert } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import Separator from '../../components/Extras/Separator'
-import { Button } from "react-native-paper";
+import { ActivityIndicator, Button } from "react-native-paper";
+
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
+import * as functions from '../../utilities/functions'
+
 import LoginModal from "../../components/Modals/LoginModal"
 import CallusModal from "../../components/Modals/CallUsModal";
 import VerifiedModal from "../../components/Modals/VerifiedModal";
@@ -15,47 +18,68 @@ const Menu = ({ navigation }) => {
     const [loginModal, setLoginModal] = useState(false)
     const [callUsModal, setCallUsModal] = useState(false)
     const [verifiedModal, setVerifiedModal] = useState(false)
-console.log(loginModal);
+    const [user, setUser] = useState(false)
+    const [loading, setLoading] = useState(true)
+
+    const getUser = async () => {
+        const response = await functions.getItem('user')
+        setUser(response)
+    }
+    useEffect(() => {
+        getUser()
+        setLoading(false)
+    }, [])
+    if (loading) {
+        return (
+            <View style={styles.errorContainer}>
+                <ActivityIndicator animating={true} size={"small"} color={colors.primary} />
+            </View>
+        )
+    }
     return (
         <SafeAreaView style={styles.container}>
             <VerifiedModal visible={verifiedModal} setModalVisible={setVerifiedModal} />
             <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={styles.header}>
-                    <Image style={styles.image} source={require("../../assets/images/Community.png")} />
-                    <View style={{ flexDirection: 'column' }}>
-                        <Text style={styles.heading}>Hi there,</Text>
-                        <Text style={styles.text}>Sign in for more personalized experienced</Text>
-                    </View>
-                </View>
-                <Button
-                    onPress={() => setLoginModal(true)}
-                    mode="contained"
-                    color={colors.white}
-                    style={[styles.button]}
-                    labelStyle={styles.ButtonLabel}
-                >Login</Button>
-                <Text onPress={ () => navigation.navigate("Signup")} style={styles.signup}>Don't have an account? Create one</Text>
-                <Separator />
-                {/* <View style={{ backgroundColor: colors.infoLight, marginVertical: 12, marginHorizontal: 15, paddingHorizontal: 5, paddingVertical: 15, borderRadius: 10 }}>
-                    <View style={[styles.header]}>
-                        <Image style={styles.image} source={require("../../assets/images/Community.png")} />
-                        <View style={{ flexDirection: 'column' }}>
-                            <Text numberOfLines={1} style={styles.heading}>Hi Arora Pawas</Text>
-                            <Text style={styles.text}>arorapawas@gmail.com</Text>
+                {user ?
+                    <View style={{ backgroundColor: colors.infoLight, marginVertical: 12, marginHorizontal: 15, paddingHorizontal: 5, paddingVertical: 15, borderRadius: 10 }}>
+                        <View style={[styles.header]}>
+                            <Image style={styles.image} source={user ? { uri: user.image_url } : require("../../assets/images/Community.png")} />
+                            <View style={{ flexDirection: 'column' }}>
+                                <Text numberOfLines={1} style={styles.heading}>Hi {user.name}</Text>
+                                <Text style={styles.text}>{user.email}</Text>
+                            </View>
                         </View>
-                    </View>
-                    <Button
-                        onPress={() => setVerifiedModal(true)}
-                        mode="contained"
-                        icon={'check-decagram'}
-                        color={colors.white}
-                        style={[styles.button]}
-                        labelStyle={styles.ButtonLabel}
-                    >Verify your account</Button>
-                </View> */}
+                        <Button
+                            onPress={() => functions.removeItem('user')}
+                            mode="contained"
+                            icon={'check-decagram'}
+                            color={colors.white}
+                            style={[styles.button]}
+                            labelStyle={styles.ButtonLabel}
+                        >Verify your account</Button>
+                        <Separator />
+                    </View> :
+                    <View>
+                        <View style={styles.header}>
+                            <Image style={styles.image} source={require("../../assets/images/Community.png")} />
+                            <View style={{ flexDirection: 'column' }}>
+                                <Text style={styles.heading}>Hi there,</Text>
+                                <Text style={styles.text}>Sign in for more personalized experienced</Text>
+                            </View>
+                        </View>
+                        <Button
+                            onPress={() => setLoginModal(true)}
+                            mode="contained"
+                            color={colors.white}
+                            style={[styles.button]}
+                            labelStyle={styles.ButtonLabel}
+                        >Login</Button>
+                        <Text onPress={() => navigation.navigate("Signup")} style={styles.signup}>Don't have an account? Create one</Text>
+                        <Separator />
+                    </View>}
                 <View style={{ padding: 22 }}>
                     <Text style={styles.topicHeading}>My Account</Text>
-                    <TouchableOpacity onPress={() => navigation.navigate("Profile")} style={styles.selectRow}>
+                    <TouchableOpacity onPress={() => navigation.navigate("Profile", user)} style={styles.selectRow}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Icon
                                 name='account-circle-outline'
@@ -71,7 +95,7 @@ console.log(loginModal);
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={() => navigation.navigate("PublicProfile")}
+                        onPress={() => navigation.navigate("PublicProfile", user)}
                         style={styles.selectRow}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Icon
@@ -259,22 +283,27 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         alignSelf: 'center',
-        marginVertical: -18
+        marginBottom:8
     },
     image: {
-        width: wp('16'),
-        height: hp('16'),
+        width: 60,
+        height: 60,
+        marginVertical: 5,
+        borderRadius: 100,
         resizeMode: 'contain'
+
     },
     heading: {
         color: colors.black,
         fontSize: 26,
+        marginLeft: 20,
         fontFamily: fonts.BOLD,
 
     },
     text: {
         color: colors.gray,
         fontSize: 14,
+        marginLeft: 20,
         marginHorizontal: wp('2')
     },
     signup: {
@@ -317,6 +346,11 @@ const styles = StyleSheet.create({
         color: colors.primaryLight,
         fontSize: 16,
         fontFamily: fonts.SEMIBOLD
+    },
+    errorContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: colors.primaryDark
     },
 })
 export default Menu
