@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import { TextInput, Button } from 'react-native-paper';
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
+import Toast from '../../components/Extras/Toast';
 
 const PlaceAdTitle = ({ navigation, route }) => {
+  const [title, setTitle] = useState('')
+
+  const handleButton = () => {
+    if (!title) Toast("Enter Ad title")
+    else {
+      navigation.navigate('PlaceAdSubCategory', { title: title, data: route.params.data, city: route.params.city })
+    }
+  }
 
   return (
     <SafeAreaView style={styles.centeredView}>
@@ -19,13 +28,13 @@ const PlaceAdTitle = ({ navigation, route }) => {
           <TextInput
             theme={{ colors: { text: colors.gray, placeholder: colors.gray, } }}
             mode='outlined'
-            placeholder={`eg: ABC ${route.params.title} `}
+            placeholder={`eg: ABC ${route.params.data.name} `}
             activeOutlineColor={colors.gray}
-            keyboardType='number-pad'
             style={styles.input}
+            onChangeText={(txt) => setTitle(txt)}
           />
           <Button
-            onPress={() => { navigation.navigate('PlaceAdSubCategory', route.params) }}
+            onPress={handleButton}
             mode="contained"
             style={styles.button}
             labelStyle={styles.ButtonLabel}

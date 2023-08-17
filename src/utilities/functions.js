@@ -44,7 +44,7 @@ export const resetPassword = async (payload) => {
 
 export const getListing = async () => {
     try {
-        const { data: response } = await axios.get(`${apiUrl}/categories/list`)
+        const { data: response } = await axios.post(`${apiUrl}/category/list`)
         const json = response
         return json
     } catch (error) {
@@ -54,7 +54,7 @@ export const getListing = async () => {
 
 export const getSubCategories = async (payload) => {
     try {
-        const { data: response } = await axios.post(`${apiUrl}/subcategories/list`, payload)
+        const { data: response } = await axios.post(`${apiUrl}subcategory/list`, payload)
         const json = response
         return json
     } catch (error) {
@@ -62,7 +62,7 @@ export const getSubCategories = async (payload) => {
     }
 }
 
-export const SaveListingTitle = async (payload) => {
+export const saveListingTitle = async (payload) => {
     try {
         const { data: response } = await axios.post(`${apiUrl}/listing/save-listing-title`, payload)
         const json = response
@@ -72,7 +72,7 @@ export const SaveListingTitle = async (payload) => {
     }
 }
 
-export const SubmitListingDetail = async (payload) => {
+export const submitListingDetail = async (payload) => {
     try {
         const { data: response } = await axios.post(`${apiUrl}/listing/save-ad`, payload)
         const json = response
@@ -82,9 +82,9 @@ export const SubmitListingDetail = async (payload) => {
     }
 }
 
-export const AgreeTermsConditions = async (listing_id) => {
+export const agreeTermsConditions = async (listing_id) => {
     try {
-        const { data: response } = await axios.post(`${apiUrl}/listing/agree-to-terms/${listing_id}`, payload)
+        const { data: response } = await axios.post(`${apiUrl}/listing/agree-to-terms/${listing_id}`)
         const json = response
         return json
     } catch (error) {
@@ -92,7 +92,7 @@ export const AgreeTermsConditions = async (listing_id) => {
     }
 }
 
-export const Logout = async () => {
+export const logout = async () => {
     try {
         const { data: response } = await axios.post(`${apiUrl}/logout`)
         const json = response
@@ -102,7 +102,7 @@ export const Logout = async () => {
     }
 }
 
-export const UpdatePassword = async (listing_id) => {
+export const updatePassword = async (payload) => {
     try {
         const { data: response } = await axios.post(`${apiUrl}/update-password`, payload)
         const json = response
@@ -112,16 +112,16 @@ export const UpdatePassword = async (listing_id) => {
     }
 }
 
-export const User = async () => { //
+export const user = async () => { //
     try {
-        const { data: response } = await axios.get(`${apiUrl}/user-data`)
+        const { data: response } = await axios.post(`${apiUrl}/user-data`)
         const json = response
         return json
     } catch (error) {
         return error.message
     }
 }
-export const UpdateProfile = async (payload) => {
+export const updateProfile = async (payload) => {
     try {
         const { data: response } = await axios.post(`${apiUrl}/update-profile`, payload)
         const json = response

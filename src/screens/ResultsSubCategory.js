@@ -8,10 +8,9 @@ import { categories } from '../utilities/categories'
 import Separator from '../components/Extras/Separator'
 
 const ResultsSubCategory = ({ route, navigation }) => {
-
   useEffect(() => {
     navigation.setOptions({
-      title: route.params.title
+      title: route.params.name
     })
   }, [])
   return (
@@ -20,11 +19,11 @@ const ResultsSubCategory = ({ route, navigation }) => {
         <View style={styles.modalView}>
           <View style={{ justifyContent: 'center', marginBottom: 1 }}>
             <FlatList
-              data={categories[route.params.data]}
+              data={route.params.sub_categories}
               renderItem={({ item }) => (<ThinNameRow name={item.name} handlePress={() => navigation.navigate('SearchedResults')} />)}
               keyExtractor={(item, index) => index.toString()}
               ItemSeparatorComponent={<Separator />}
-              ListFooterComponent={<><Separator /><ThinNameRow name={`All in ${route.params.title}`} style={{ fontFamily: fonts.SEMIBOLD }} navigation={navigation} dir={'SearchedResults'} /></>}
+              ListFooterComponent={<><Separator /><ThinNameRow name={`All in ${route.params.name}`} style={{ fontFamily: fonts.SEMIBOLD }} navigation={navigation} dir={'SearchedResults'} /></>}
             />
           </View>
         </View>

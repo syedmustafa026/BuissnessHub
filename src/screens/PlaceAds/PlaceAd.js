@@ -8,7 +8,7 @@ import Separator from '../../components/Extras/Separator'
 const Item = ({ name, navigation }) => {
     return (
         <>
-            <TouchableOpacity onPress={() => navigation.navigate('PlaceAdListing')} activeOpacity={0.5} style={styles.row}>
+            <TouchableOpacity onPress={() => navigation.navigate('PlaceAdListing', { city: name })} activeOpacity={0.5} style={styles.row}>
                 <Text style={styles.h2}>{name}</Text>
             </TouchableOpacity>
             <Separator />
@@ -21,16 +21,6 @@ const PlaceAd = ({ navigation }) => {
         <SafeAreaView style={styles.container}>
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
-                    {/* <Icon
-                        style={{
-                            position: 'absolute',
-                            left: 10,
-                            top: 30
-                        }}
-                        name='close'
-                        size={24}
-                        onPress={() => navigation.goBack()}
-                        color={colors.gray} /> */}
                     <View style={{ justifyContent: 'center', marginVertical: 16 }}>
                         <Text style={styles.h1}>Select a City</Text>
                         <Text style={styles.h4}>Where should we place your ad?</Text>

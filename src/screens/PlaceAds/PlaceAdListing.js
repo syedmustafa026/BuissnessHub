@@ -1,12 +1,49 @@
-import React from 'react';
-import { Image, FlatList, StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { ActivityIndicator, Image, FlatList, StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
+import Toast from "../../components/Extras/Toast"
+import * as functions from "../../utilities/functions"
 
-const PlaceAdListing = ({ navigation }) => {
+const PlaceAdListing = ({ navigation,route }) => {
+    const [category, setCategory] = useState(null)
+    const [loading, setLoading] = useState(true)
 
+    const ItemCard = (item) => {
+        return (
+            <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={() => navigation.navigate('PlaceAdTitle', { data: item.data, city: route.params.city })}
+                style={styles.card}>
+                <View style={{ alignItems: 'center' }}>
+                    <Image style={styles.cardImg} source={{ uri: item.image }} />
+                    <Text style={styles.cardText}>{item.name}</Text>
+                </View>
+            </TouchableOpacity>
+        )
+    }
+    const getCategories = async () => {
+        try {
+            const response = await functions.getListing()
+            if (!response.status) throw new Error(response.message)
+            setCategory(response.data)
+            if (response.status) setLoading(false)
+        } catch (error) {
+            Toast(error.message)
+        }
+    }
+    useEffect(() => {
+        getCategories()
+    }, [])
+    if (loading) {
+        return (
+            <View style={styles.errorContainer}>
+                <ActivityIndicator animating={true} size={"medium"} color={colors.primary} />
+            </View>
+        )
+    }
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.centeredView}>
@@ -26,91 +63,18 @@ const PlaceAdListing = ({ navigation }) => {
                         <Text style={styles.h4}>Choose the category that your ad fits into?</Text>
                     </View>
                     <View style={styles.cards}>
-                    <TouchableOpacity
-                       activeOpacity={0.7}
-                        onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Business for Sale', data: 0 })}
-                        style={styles.card}>
-                        <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../../assets/images/propertySale.png')} />
-                            <Text style={styles.cardText}>Business for Sale</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                       activeOpacity={0.7}
-                        onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Shares for Sale', data: 1 })}
-                        style={styles.card}>
-                        <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../../assets/images/shares.png')} />
-                            <Text style={styles.cardText}>
-                                Shares for Sale</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                       activeOpacity={0.7}
-                        onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Business Ideas', data: 2 })}
-                        style={styles.card}>
-                        <View style={{ alignItems: 'center' }}>
-                            <Image style={[styles.cardImg,{width:48,height:48}]} source={require('../../assets/images/buisnessidea.png')} />
-                            <Text style={styles.cardText}>
-                                Business Ideas</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                       activeOpacity={0.7}
-                        onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Investors', data: 3 })}
-                        style={styles.card}>
-                        <View style={{ alignItems: 'center' }}>
-                            <Image style={[styles.cardImg,{width:47,height:47}]} source={require('../../assets/images/investors.png')} />
-                            <Text style={styles.cardText}>
-                                Investors</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                       activeOpacity={0.7}
-                        onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Investors Required', data: 4 })}
-                        style={styles.card}>
-                        <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../../assets/images/investorsreq.png')} />
-                            <Text style={styles.cardText}>
-                                Investors Required</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                       activeOpacity={0.7}
-                        onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Franchise Opportunities', data: 5 })}
-                        style={styles.card}>
-                        <View style={{ alignItems: 'center' }}>
-                            <Image style={[styles.cardImg,{width:42,height:42}]} source={require('../../assets/images/franchise.png')} />
-                            <Text style={styles.cardText}>
-                                Franchise Opportunities</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                       activeOpacity={0.7}
-                        onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Export & Import Trade', data: 6 })}
-                        style={styles.card}>
-                        <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../../assets/images/logistics.png')} />
-                            <Text style={styles.cardText}>
-                                Export & Import Trade</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                       activeOpacity={0.7}
-                        onPress={() => navigation.navigate('PlaceAdTitle', { title: 'Machinery & Supplies', data: 7 })}
-                        style={styles.card}>
-                        <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../../assets/images/machine.png')} />
-                            <Text style={styles.cardText}>
-                             Machinery &  Supplies </Text>
-                        </View>
-                    </TouchableOpacity>
-                    <View style={{
-                        width: wp('28'),
-                        height: hp('13'),
-                        marginRight: 12,
-                    }} />
-                </View>
+                        <FlatList
+                            contentContainerStyle={styles.cards}
+                            data={category}
+                            renderItem={({ item }) => (<ItemCard name={item.name} image={item.image_url} data={item} />)}
+                            keyExtractor={(item, index) => index.toString()}
+                            ListFooterComponent={<View style={{
+                                width: wp('28'),
+                                height: hp('13'),
+                                marginRight: 12,
+                            }} />}
+                        />
+                    </View>
                 </View>
             </View>
         </SafeAreaView>
@@ -123,9 +87,9 @@ const styles = StyleSheet.create({
     },
     cards: {
         paddingHorizontal: wp('4'),
-        alignItems:'center',
+        alignItems: 'center',
         paddingVertical: hp('3'),
-        justifyContent:'center',
+        justifyContent: 'center',
         flexDirection: 'row',
         flexWrap: 'wrap'
     },
@@ -180,6 +144,11 @@ const styles = StyleSheet.create({
         color: colors.black,
         fontFamily: fonts.REGULAR,
         textAlign: 'center'
+    },
+    errorContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 });
 

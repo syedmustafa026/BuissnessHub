@@ -1,22 +1,58 @@
-import React, { useState } from "react"
-import { View, Image, Text, SafeAreaView, StatusBar, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import React, { useEffect, useState } from "react"
+import { View, Image, Text, SafeAreaView, StatusBar, FlatList, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
+import * as functions from "../utilities/functions"
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
-import { Searchbar } from 'react-native-paper'
+import { ActivityIndicator, Searchbar } from 'react-native-paper'
 import AdCard from "../components/Cards/AdCard"
+import Toast from "../components/Extras/Toast"
 import VerifiedModal from "../components/Modals/VerifiedModal"
 
 const Home = ({ navigation }) => {
     const [searchQuery, setSearchQuery] = useState('')
     const [verifiedModal, setVerifiedModal] = useState(false)
+    const [category, setCategory] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     const onChangeSearch = query => setSearchQuery(query)
-
+    const getCategories = async () => {
+        try {
+            const response = await functions.getListing()
+            if (!response.status) throw new Error(response.message)
+            setCategory(response.data)
+            if (response.status) setLoading(false)
+        } catch (error) {
+            Toast(error.message)
+        }
+    }
+    useEffect(() => {
+        getCategories()
+    }, [])
+    const ItemCard = (item) => {
+        return (
+            <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={() => navigation.navigate('ResultsSubCategory', item.data)}
+                style={styles.card}>
+                <View style={{ alignItems: 'center' }}>
+                    <Image style={styles.cardImg} source={{ uri: item.image }} />
+                    <Text style={styles.cardText}>{item.name}</Text>
+                </View>
+            </TouchableOpacity>
+        )
+    }
+    if (loading) {
+        return (
+            <View style={styles.errorContainer}>
+                <ActivityIndicator animating={true} size={"medium"} color={colors.primary} />
+            </View>
+        )
+    }
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar
@@ -43,18 +79,31 @@ const Home = ({ navigation }) => {
             </View>
             <ScrollView>
                 <View style={styles.cards}>
+                    <FlatList
+                        contentContainerStyle={styles.cards}
+                        data={category}
+                        renderItem={({ item }) => (<ItemCard name={item.name} image={item.image_url} data={item} />)}
+                        keyExtractor={(item, index) => index.toString()}
+                        ListFooterComponent={<View style={{
+                            width: wp('28'),
+                            height: hp('13'),
+                            marginRight: 12,
+                        }} />}
+                    />
+                </View>
+                {/*
                     <TouchableOpacity
                         activeOpacity={0.7}
-                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Business for Sale', data: 0 })}
+                        // onPress={() => navigation.navigate('ResultsSubCategory', { data: category[0] })}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/propertySale.png')} />
-                            <Text style={styles.cardText}>Business for Sale</Text>
+                            <Text style={styles.cardText}>{category[0]?.name}</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={0.7}
-                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Shares for Sale', data: 1 })}
+                        // onPress={() => navigation.navigate('ResultsSubCategory', {data: category[1]})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/shares.png')} />
@@ -64,27 +113,27 @@ const Home = ({ navigation }) => {
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={0.7}
-                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Business Ideas', data: 2 })}
+                        // onPress={() => navigation.navigate('ResultsSubCategory', {data: category[1]})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={[styles.cardImg,{width:48,height:48}]} source={require('../assets/images/buisnessidea.png')} />
+                            <Image style={[styles.cardImg, { width: 48, height: 48 }]} source={require('../assets/images/buisnessidea.png')} />
                             <Text style={styles.cardText}>
                                 Business Ideas</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={0.7}
-                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Investors', data: 3 })}
+                        // onPress={() => navigation.navigate('ResultsSubCategory', {data: category[1]})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={[styles.cardImg,{width:47,height:47}]} source={require('../assets/images/investors.png')} />
+                            <Image style={[styles.cardImg, { width: 47, height: 47 }]} source={require('../assets/images/investors.png')} />
                             <Text style={styles.cardText}>
                                 Investors</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={0.7}
-                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Investors Required', data: 4 })}
+                        // onPress={() => navigation.navigate('ResultsSubCategory', {data: category[1]})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/investorsreq.png')} />
@@ -94,17 +143,17 @@ const Home = ({ navigation }) => {
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={0.7}
-                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Franchise Opportunities', data: 5 })}
+                        // onPress={() => navigation.navigate('ResultsSubCategory', {data: category[1]})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
-                            <Image style={[styles.cardImg,{width:42,height:42}]} source={require('../assets/images/franchise.png')} />
+                            <Image style={[styles.cardImg, { width: 42, height: 42 }]} source={require('../assets/images/franchise.png')} />
                             <Text style={styles.cardText}>
                                 Franchise Opportunities</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={0.7}
-                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Export & Import Trade', data: 6 })}
+                        // onPress={() => navigation.navigate('ResultsSubCategory', {data: category[1]})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/logistics.png')} />
@@ -114,12 +163,12 @@ const Home = ({ navigation }) => {
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={0.7}
-                        onPress={() => navigation.navigate('ResultsSubCategory', { title: 'Machinery & Supplies', data: 7 })}
+                        // onPress={() => navigation.navigate('ResultsSubCategory', {data: category[1]})}
                         style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Image style={styles.cardImg} source={require('../assets/images/machine.png')} />
                             <Text style={styles.cardText}>
-                            Machinery & Supplies</Text>
+                                Machinery & Supplies</Text>
                         </View>
                     </TouchableOpacity>
                     <View style={{
@@ -127,7 +176,7 @@ const Home = ({ navigation }) => {
                         height: hp('13'),
                         marginRight: 12,
                     }} />
-                </View>
+                </View> */}
                 <TouchableOpacity onPress={() => setVerifiedModal(true)} activeOpacity={0.8} style={styles.banner} >
                     <View style={{
                         backgroundColor: '#cfe1fc',
@@ -282,6 +331,10 @@ const styles = StyleSheet.create({
         shadowRadius: 2.62,
         borderRadius: 10,
         elevation: 4,
-    }
+    },
+    errorContainer: {
+        flex: 1,
+        justifyContent: 'center',
+    },
 })
 export default Home

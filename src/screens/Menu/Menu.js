@@ -21,6 +21,23 @@ const Menu = ({ navigation }) => {
     const [user, setUser] = useState(false)
     const [loading, setLoading] = useState(true)
 
+    const logoutUser = () => {
+        Alert.alert("Sure", "Are you sure you want to Logout?", [{
+            text: "Yes",
+            onPress: async () => {
+                const response = await functions.logout()
+                console.log(response);
+                navigation.replace("BottomNavigator")
+                if (response.status) {
+                    await functions.removeItem('user')
+                }
+            }
+        }, {
+            text: "Cancel",
+        }], {
+            cancelable: true
+        })
+    }
     const getUser = async () => {
         const response = await functions.getItem('user')
         setUser(response)
@@ -32,7 +49,7 @@ const Menu = ({ navigation }) => {
     if (loading) {
         return (
             <View style={styles.errorContainer}>
-                <ActivityIndicator animating={true} size={"small"} color={colors.primary} />
+                <ActivityIndicator animating={true} size={"medium"} color={colors.primary} />
             </View>
         )
     }
@@ -247,16 +264,7 @@ const Menu = ({ navigation }) => {
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={() => {
-                            Alert.alert("Sure", "Are you sure you want to Logout?", [{
-                                text: "Yes",
-                                onPress: () => navigation.navigate("BottomNavigator")
-                            }, {
-                                text: "Cancel",
-                            }], {
-                                cancelable: true
-                            })
-                        }}
+                        onPress={logoutUser}
                         style={styles.selectRow}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Icon
@@ -283,7 +291,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         alignSelf: 'center',
-        marginBottom:8
+        marginBottom: 8
     },
     image: {
         width: 60,
@@ -350,7 +358,6 @@ const styles = StyleSheet.create({
     errorContainer: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: colors.primaryDark
     },
 })
 export default Menu

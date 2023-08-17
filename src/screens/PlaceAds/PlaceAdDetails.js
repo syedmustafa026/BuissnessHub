@@ -42,81 +42,81 @@ const PlaceAdDetails = ({ navigation, route }) => {
           <Text style={[styles.h4, { textAlign: 'center', marginBottom: 12 }]}>Include as much details and pictures as possible and set the right price!</Text>
           <Text onPress={() => navigation.goBack()} style={[styles.h4, { color: colors.primary }]}>{route?.params?.title} &gt; {route?.params?.category}</Text>
         </View>
-          <TextInput
-            label="Title"
-            value={title}
-            mode='outlined'
-            activeOutlineColor={colors.gray}
-            style={{
-              backgroundColor: colors.white,
-              borderBlockColor: colors.gray,
-            }}
-            onChangeText={text => setTitle(text)}
-          />
-          <Button
-            onPress={() => { OpenGallery() }}
-            mode="contained"
-            icon={'camera'}
-            color={colors.white}
-            style={[styles.button, { marginTop: 8, }]}
-            labelStyle={styles.ButtonLabel}
-          >Add pictures</Button>
-          <TextInput
-            label="Phone Number"
-            value={title}
-            mode='outlined'
-            activeOutlineColor={colors.gray}
-            keyboardType='number-pad'
-            style={{
-              backgroundColor: colors.white,
-              borderBlockColor: colors.gray,
-            }}
-            onChangeText={text => setTitle(text)}
-          />
-          <TextInput
-            label="Price"
-            value={title}
-            mode='outlined'
-            activeOutlineColor={colors.gray}
-            keyboardType='number-pad'
-            style={{
-              backgroundColor: colors.white,
-              borderBlockColor: colors.gray,
-            }}
-            onChangeText={text => setTitle(text)}
-          />
-          <TextInput
-            placeholder='Describe your item'
-            value={title}
-            mode='outlined'
-            multiline={true}
-            activeOutlineColor={colors.gray}
-            style={{
-              height: 180,
-              backgroundColor: colors.white,
-              borderBlockColor: colors.gray,
-            }}
-            onChangeText={text => setTitle(text)}
-          />
-          <TextInput
-            label="Locate your item"
-            value={title}
-            mode='outlined'
-            keyboardType='default'
-            activeOutlineColor={colors.gray}
-            style={{
-              backgroundColor: colors.white,
-              borderBlockColor: colors.gray,
-            }}
-            onChangeText={text => setTitle(text)}
-          />
-          <Image style={{ width: "98%", height: 160, alignSelf: 'center', marginVertical: 14 }} source={require('../../assets/images/map.png')} />
+        <TextInput
+          label="Title"
+          value={title}
+          mode='outlined'
+          activeOutlineColor={colors.gray}
+          style={{
+            backgroundColor: colors.white,
+            borderBlockColor: colors.gray,
+          }}
+          onChangeText={text => setTitle(text)}
+        />
+        <Button
+          onPress={() => { OpenGallery() }}
+          mode="contained"
+          icon={'camera'}
+          color={colors.white}
+          style={[styles.button, { marginTop: 8, }]}
+          labelStyle={styles.ButtonLabel}
+        >Add pictures</Button>
+        <TextInput
+          label="Phone Number"
+          value={title}
+          mode='outlined'
+          activeOutlineColor={colors.gray}
+          keyboardType='number-pad'
+          style={{
+            backgroundColor: colors.white,
+            borderBlockColor: colors.gray,
+          }}
+          onChangeText={text => setTitle(text)}
+        />
+        <TextInput
+          label="Price"
+          value={title}
+          mode='outlined'
+          activeOutlineColor={colors.gray}
+          keyboardType='number-pad'
+          style={{
+            backgroundColor: colors.white,
+            borderBlockColor: colors.gray,
+          }}
+          onChangeText={text => setTitle(text)}
+        />
+        <TextInput
+          placeholder='Describe your item'
+          value={title}
+          mode='outlined'
+          multiline={true}
+          activeOutlineColor={colors.gray}
+          style={{
+            height: 180,
+            backgroundColor: colors.white,
+            borderBlockColor: colors.gray,
+          }}
+          onChangeText={text => setTitle(text)}
+        />
+        <TextInput
+          label="Locate your item"
+          value={title}
+          mode='outlined'
+          keyboardType='default'
+          activeOutlineColor={colors.gray}
+          style={{
+            backgroundColor: colors.white,
+            borderBlockColor: colors.gray,
+          }}
+          onChangeText={text => setTitle(text)}
+        />
+        <Image style={{ width: "98%", height: 160, alignSelf: 'center', marginVertical: 14 }} source={require('../../assets/images/map.png')} />
       </ScrollView>
       <Button
-        onPress={() => { navigation.navigate("PlaceAdTermsConditions") }}
+        onPress={() => { navigation.navigate("PlaceAdTermsConditions", { listing_id: route.params.listing_id }) }}
         mode="contained"
         color={colors.white}
-        style={[styles.button, { width:"90%", marginTop: 8, backgroundColor: colors.primary,marginVertical:4 }]}
+        style={[styles.button, { width: "90%", marginTop: 8, backgroundColor: colors.primary, marginVertical: 4 }]}
         labelStyle={[styles.ButtonLabel, { color: colors.white }]}
       >Next</Button>
     </SafeAreaView >

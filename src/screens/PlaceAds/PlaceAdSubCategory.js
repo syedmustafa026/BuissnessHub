@@ -1,15 +1,30 @@
 import React from 'react';
 import { Modal, FlatList, StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 import Separator from '../../components/Extras/Separator'
 import ArrowRow from '../../components/Rows/ArrowRow'
-import { categories } from '../../utilities/categories';
+import * as functions from "../../utilities/functions"
+import Toast from "../../components/Extras/Toast"
 
 const PlaceAdSubCategory = ({ navigation, route }) => {
-  console.log(route.params);
+
+  const saveTitle = async (item) => {
+    try {
+      const response = await functions.saveListingTitle({
+        category_id: item.category_id,
+        subcategory_id: item.id
+      })
+      if (!response.status) throw new Error(response.message)
+      if (response.status) {
+        navigation.navigate("PlaceAdDetails", { title: route.params.title, category: item.name, listing_id: response.listing_id })
+      }
+    } catch (error) {
+      Toast(error.message)
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ justifyContent: 'center', marginVertical: 16 }}>
@@ -18,8 +33,8 @@ const PlaceAdSubCategory = ({ navigation, route }) => {
           &gt;<Text onPress={() => navigation.goBack()} style={{ color: colors.primary }}>  Ad title</Text>  &gt; {route.params.title}</Text>
       </View>
       <FlatList
-        data={categories[route.params.data]}
-        renderItem={({ item }) => (<ArrowRow name={item.name} handlePress={() => navigation.navigate("PlaceAdDetails",{title: route.params.title,category: item.name})} />)}
+        data={route.params.data.sub_categories}
+        renderItem={({ item }) => (<ArrowRow name={item.name} handlePress={() => saveTitle(item)} />)}
         keyExtractor={(item, index) => index.toString()}
         ItemSeparatorComponent={<Separator />}
       />

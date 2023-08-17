@@ -5,12 +5,10 @@ import * as fonts from "../../utilities/fonts"
 
 const ThinNameRow = (props) => {
   return (
-    <>
-      <TouchableOpacity onPress={props.handlePress} activeOpacity={0.5} style={styles.row}>
-        <Text style={[styles.h2, props.style]}>{props.name}</Text>
+    
+      <TouchableOpacity onPress={props.handlePress} activeOpacity={0.6} style={styles.row}>
+        <Text onPress={props.handlePress} style={[styles.h2, props.style]}>{props.name}</Text>
       </TouchableOpacity>
-     
-    </>
   )
 }
 
