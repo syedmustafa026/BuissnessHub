@@ -189,7 +189,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: colors.white,
     borderBlockColor: colors.gray,
-    height: 45,
     color: colors.gray,
     fontFamily: fonts.SEMIBOLD
   },

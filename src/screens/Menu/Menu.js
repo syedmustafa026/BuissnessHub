@@ -84,13 +84,14 @@ const Menu = ({ navigation }) => {
                                 <Text style={styles.text}>Sign in for more personalized experienced</Text>
                             </View>
                         </View>
+                        <TouchableOpacity activeOpacity={0.8} onPress={() => setLoginModal(true)}>
                         <Button
-                            onPress={() => setLoginModal(true)}
                             mode="contained"
                             color={colors.white}
                             style={[styles.button]}
                             labelStyle={styles.ButtonLabel}
                         >Login</Button>
+                        </TouchableOpacity>
                         <Text onPress={() => navigation.navigate("Signup")} style={styles.signup}>Don't have an account? Create one</Text>
                         <Separator />
                     </View>}

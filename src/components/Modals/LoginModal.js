@@ -11,6 +11,7 @@ const LoginModal = (props) => {
             <Modal
                 animationType="slide"
                 visible={props.modalVisible}
+                onDismiss={() => props.setModalVisible(false)}
             >
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
@@ -71,7 +72,7 @@ const LoginModal = (props) => {
                             <Text style={{ color: colors.gray, paddingHorizontal: 15, fontSize: 18, fontFamily: fonts.REGULAR }}>Continue with Email</Text>
                         </TouchableOpacity>
                         <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-                            <Text style={{ color: colors.primaryLight, marginTop: 30, paddingHorizontal: 15, fontSize: 14, fontFamily: fonts.REGULAR }}>Don't have an account? Create one</Text>
+                            <Text onPress={() => { props.setModalVisible(false), props.navigation.navigate("Signup") }} style={{ color: colors.primaryLight, marginTop: 30, paddingHorizontal: 15, fontSize: 14, fontFamily: fonts.REGULAR }}>Don't have an account? Create one</Text>
                             <Text style={{ color: 'grey', marginTop: 30, paddingHorizontal: 15, textAlign: 'center', fontSize: 12, fontFamily: fonts.REGULAR }}>By Signing in I agree to the <Text style={{ color: colors.blue, textDecorationLine: 'underline' }}>Terms and Conditions</Text> and  <Text style={{ color: colors.blue, textDecorationLine: 'underline' }}>Privacy Policy</Text></Text>
                         </View>
                     </View>
