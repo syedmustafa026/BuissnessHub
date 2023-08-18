@@ -5,16 +5,21 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 import { TextInput, Button, RadioButton } from 'react-native-paper'
-import SelectValueModal from '../../components/Modals/SelectValueModal'
 import { launchImageLibrary } from 'react-native-image-picker'
-import RadioButtonModal from '../../components/Modals/RadioButtonModal'
+import * as functions from "../../utilities/functions"
+import Toast from "../../components/Extras/Toast"
 
 const PlaceAdDetails = ({ navigation, route }) => {
   const [title, setTitle] = useState("")
-  const [imageUri, setImageUri] = useState(null)
-  const [images, setImages] = useState([])
+  const [mobile, setMobile] = useState("")
+  const [price, setPrice] = useState("")
+  const [description, setDescription] = useState("")
+  const [location, setLocation] = useState("")
+  const [coordinates, setCoordinates] = useState({
+    lat: 25.1972,
+    lng: 55.2744
+  })
   const [img, setImg] = useState([])
-
   const OpenGallery = () => {
     const options = {
       storageOptions: {
@@ -28,16 +33,44 @@ const PlaceAdDetails = ({ navigation, route }) => {
         console.log("user Cancelled ")
       }
       else {
-        console.log(response);
-        setImages([...images, response.assets[0].uri])
         setImg([...img, response])
       }
     })
   }
-
+  console.log(route.params.listing_id);
   const RemoveImage = val => {
     const imags = img.filter(image => image?.assets[0]?.uri !== val)
     setImg(imags)
+  }
+  const onSubmit = async () => {
+    try {
+      if (!title) throw new Error("Enter Title")
+      if (!mobile) throw new Error("Enter Mobile number")
+      if (!price) throw new Error("Enter Price")
+      if (img.length === 0) throw new Error("Enter Price")
+      if (!description) throw new Error("Enter Description")
+      if (!location) throw new Error("Enter Location Address")
+      else {
+        const response = await functions.submitListingDetail({
+          listing_id: route.params.listing_id,
+          title: title,
+          phone: mobile,
+          price: price,
+          description: description,
+          location_name: location,
+          latitude: coordinates.lat,
+          longitude: coordinates.lng,
+          images: img
+        })
+        console.log(response);
+        if (response.status) {
+          navigation.navigate("PlaceAdTermsConditions",
+            { listing_id: route.params.listing_id })
+        }
+      }
+    } catch (error) {
+      Toast(error.message);
+    }
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -62,7 +95,6 @@ const PlaceAdDetails = ({ navigation, route }) => {
           style={{
             borderWidth: 1,
             borderColor: 'gray',
-            // padding: 10,
             borderStyle: 'dashed',
             marginTop: 10,
             borderRadius: 10,
@@ -119,16 +151,13 @@ const PlaceAdDetails = ({ navigation, route }) => {
                 </TouchableOpacity>
               </View>
               {img.map((val, index) => {
-                // console.log(val)
                 return (
                   <>
                     <View style={{ marginVertical: 10, bottom: 10 }}>
                       <TouchableOpacity
-                        // key={Math.random() * 1000}
                         onPress={() => RemoveImage(val?.assets[0]?.uri)}
                         style={{
                           flexDirection: 'row-reverse',
-                          // position: 'absolute',
                           elevation: 10,
                           zIndex: 1,
                         }}>
@@ -152,7 +181,6 @@ const PlaceAdDetails = ({ navigation, route }) => {
                               ? null
                               : val?.assets[0]?.uri,
                         }}
-                      // source={{uri: val}}
                       />
                     </View>
                   </>
@@ -163,20 +191,21 @@ const PlaceAdDetails = ({ navigation, route }) => {
         </View>
         <TextInput
           label="Phone Number"
-          value={title}
           mode='outlined'
           activeOutlineColor={colors.gray}
           keyboardType='number-pad'
+          maxLength={10}
           style={{
-
             backgroundColor: colors.white,
             borderBlockColor: colors.gray,
           }}
-          onChangeText={text => setTitle(text)}
+          onChangeText={text => setMobile(text)}
+          left={<TextInput.Affix
+            text='+971'
+          />}
         />
         <TextInput
           label="Price"
-          value={title}
           mode='outlined'
           activeOutlineColor={colors.gray}
           keyboardType='number-pad'
@@ -184,11 +213,10 @@ const PlaceAdDetails = ({ navigation, route }) => {
             backgroundColor: colors.white,
             borderBlockColor: colors.gray,
           }}
-          onChangeText={text => setTitle(text)}
+          onChangeText={text => setPrice(text)}
         />
         <TextInput
           placeholder='Describe your item'
-          value={title}
           mode='outlined'
           multiline={true}
           activeOutlineColor={colors.gray}
@@ -197,11 +225,10 @@ const PlaceAdDetails = ({ navigation, route }) => {
             backgroundColor: colors.white,
             borderBlockColor: colors.gray,
           }}
-          onChangeText={text => setTitle(text)}
+          onChangeText={text => setDescription(text)}
         />
         <TextInput
-          label="Locate your item"
-          value={title}
+          label="Location"
           mode='outlined'
           keyboardType='default'
           activeOutlineColor={colors.gray}
@@ -209,12 +236,12 @@ const PlaceAdDetails = ({ navigation, route }) => {
             backgroundColor: colors.white,
             borderBlockColor: colors.gray,
           }}
-          onChangeText={text => setTitle(text)}
+          onChangeText={text => setLocation(text)}
         />
         <Image style={{ width: "98%", height: 160, alignSelf: 'center', marginVertical: 14 }} source={require('../../assets/images/map.png')} />
       </ScrollView>
       <Button
-        onPress={() => { navigation.navigate("PlaceAdTermsConditions", { listing_id: route.params.listing_id }) }}
+        onPress={onSubmit}
         mode="contained"
         color={colors.white}
         style={[styles.button, { width: "90%", marginTop: 8, backgroundColor: colors.primary, marginVertical: 4 }]}

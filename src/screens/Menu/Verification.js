@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView, Text, StyleSheet, View } from 'react-native'
 import { TextInput, Button } from 'react-native-paper'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
@@ -7,62 +7,19 @@ import Toast from "../../components/Extras/Toast"
 
 import * as fonts from '../../utilities/fonts'
 import * as colors from '../../utilities/colors'
-
-// const { getVerificationCode, verification } = functions
+import ChangePasswordModal from '../../components/Modals/ChangePasswordModal'
 
 const Verification = ({ route, navigation }) => {
   const [changePasswordModal, setChangePasswordModal] = useState(false)
-  const [timer, setTimer] = useState('')
-  const [code, setCode] = useState('15:00')
+  const [code, setCode] = useState('')
 
-  const countDownTimer = () => {
-    let countDownDate = new Date().getTime() + 15 * 60 * 1000;
-    let x = setInterval(() => {
 
-      let now = new Date().getTime();
-
-      let distance = countDownDate - now;
-
-      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      setTimer(`${minutes}:${seconds}`)
-
-      if (distance < 0) {
-        clearInterval(x);
-        setTimer(null)
-      }
-    }, 1000);
-  }
-  const handleSendCodeAgain = async () => {
-    const response = await forgotPassword({ email: route.params.email })
-    if (!response.status) Toast(response.message)
-    if (response.status) {
-      Toast(`Code again sent to ${email}`)
-    }
-  }
-  const handleContinue = async () => {
-    try {
-      if (code.length < 6) return Toast('Enter 6 digit verification code')
-      const response = await verifyEmail({ email: route.params.email, password_code: code })
-      if (!response.status) return Toast(response.message)
-      if (response.status) {
-        setChangePasswordModal(true)
-      }
-    } catch (error) {
-      Toast(error.message)
-    }
-  }
-  useEffect(() => {
-    countDownTimer()
-  }, [])
 
   return (
     <SafeAreaView style={styles.container}>
       <ChangePasswordModal
         visible={changePasswordModal}
         setVisible={setChangePasswordModal}
-        email={route.params.email}
         code={code}
         navigation={navigation} />
       <View style={styles.section}>
@@ -86,10 +43,6 @@ const Verification = ({ route, navigation }) => {
             onChangeText={(value) => { setCode(value) }}
           />
         </View>
-        {timer != null ?
-          <Text style={styles.h4}>  Code will expire in {timer}</Text> :
-          <Text onPress={handleSendCodeAgain} style={styles.h4}>{"  Send Code again!"}</Text>
-        }
         <View
           style={styles.btns}>
           <Button

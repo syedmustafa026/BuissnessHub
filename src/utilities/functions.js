@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react'
 import axios from "axios"
 import { apiUrl } from '../utilities/constants'
 import AsyncStorage from "@react-native-async-storage/async-storage"
@@ -45,6 +46,25 @@ export const resetPassword = async (payload) => {
 export const getListing = async () => {
     try {
         const { data: response } = await axios.post(`${apiUrl}/category/list`)
+        const json = response
+        return json
+    } catch (error) {
+        return error.message
+    }
+}
+export const getAds = async (subcategory_id) => {
+    try {
+        const { data: response } = await axios.post(`${apiUrl}/ads/${subcategory_id}`)
+        const json = response
+        return json
+    } catch (error) {
+        return error.message
+    }
+}
+
+export const getAdDetails = async (ad_id) => {
+    try {
+        const { data: response } = await axios.post(`${apiUrl}/ads/detail/${ad_id}`)
         const json = response
         return json
     } catch (error) {
@@ -130,7 +150,24 @@ export const updateProfile = async (payload) => {
         return error.message
     }
 }
-
+export const getUserAds = async () => {
+    try {
+        const { data: response } = await axios.post(`${apiUrl}/user/ads`)
+        const json = response
+        return json
+    } catch (error) {
+        return error.message
+    }
+}
+export const getVerificationCode = async () => {
+    try {
+        const { data: response } = await axios.post(`${apiUrl}/reset-code-check`)
+        const json = response
+        return json
+    } catch (error) {
+        return error.message
+    }
+}
 export const setItem = async (key, value) => {
     try {
       await AsyncStorage.setItem(key, JSON.stringify(value))

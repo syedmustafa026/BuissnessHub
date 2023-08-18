@@ -27,8 +27,8 @@ const Menu = ({ navigation }) => {
             onPress: async () => {
                 const response = await functions.logout()
                 console.log(response);
-                navigation.replace("BottomNavigator")
                 if (response.status) {
+                    navigation.replace("BottomNavigator")
                     await functions.removeItem('user')
                 }
             }
@@ -84,18 +84,20 @@ const Menu = ({ navigation }) => {
                                 <Text style={styles.text}>Sign in for more personalized experienced</Text>
                             </View>
                         </View>
-                        <TouchableOpacity activeOpacity={0.8} onPress={() => setLoginModal(true)}>
-                        <Button
-                            mode="contained"
-                            color={colors.white}
-                            style={[styles.button]}
-                            labelStyle={styles.ButtonLabel}
-                        >Login</Button>
+                        <TouchableOpacity
+                            activeOpacity={0.8}
+                            onPress={() => setLoginModal(true)}>
+                            <Button
+                                mode="contained"
+                                color={colors.white}
+                                style={[styles.button]}
+                                labelStyle={styles.ButtonLabel}
+                            >Login</Button>
                         </TouchableOpacity>
                         <Text onPress={() => navigation.navigate("Signup")} style={styles.signup}>Don't have an account? Create one</Text>
                         <Separator />
                     </View>}
-                <View style={{ padding: 22 }}>
+                {user && <View style={{ padding: 22 }}>
                     <Text style={styles.topicHeading}>My Account</Text>
                     <TouchableOpacity onPress={() => navigation.navigate("Profile", user)} style={styles.selectRow}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -164,7 +166,7 @@ const Menu = ({ navigation }) => {
                         </View>
                     </TouchableOpacity>
                     <Separator />
-                </View>
+                </View>}
                 {/* <View style={{ padding: 22 }}>
                     <Text style={styles.topicHeading}>Settings</Text>
                     <TouchableOpacity style={styles.selectRow}>
@@ -201,7 +203,7 @@ const Menu = ({ navigation }) => {
                     </TouchableOpacity>
                     <Separator />
                 </View> */}
-                <View style={{ paddingHorizontal: 22 }}>
+                <View style={{ padding: 22 }}>
                     <Text style={styles.topicHeading}>Others</Text>
                     <TouchableOpacity onPress={() => Linking.openURL('https://businesshub.jdesigntechnologies.com/#')} style={styles.selectRow}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -264,7 +266,7 @@ const Menu = ({ navigation }) => {
                                 color={colors.black} />
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity
+                    {user != null && <TouchableOpacity
                         onPress={logoutUser}
                         style={styles.selectRow}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -274,7 +276,7 @@ const Menu = ({ navigation }) => {
                                 color={colors.black} />
                             <Text style={styles.selectText}>Logout</Text>
                         </View>
-                    </TouchableOpacity>
+                    </TouchableOpacity>}
                 </View>
                 <LoginModal navigation={navigation} modalVisible={loginModal} setModalVisible={setLoginModal} />
                 <CallusModal modalVisible={callUsModal} setModalVisible={setCallUsModal} />

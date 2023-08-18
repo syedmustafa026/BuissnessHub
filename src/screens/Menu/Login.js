@@ -29,8 +29,10 @@ const Login = ({ navigation }) => {
                 password: password
             }
             const response = await functions.login(payload)
+            console.log(response);
             if (!response.status) throw new Error(response.message)
             await functions.setItem("user", response.user)
+            await functions.setItem("header-token", response.token)
             navigation.replace("BottomNavigator")
         }
         catch (error) {

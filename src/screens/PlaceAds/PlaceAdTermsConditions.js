@@ -16,7 +16,7 @@ const PlaceAdTermsConditions = ({ navigation, route }) => {
       console.log(response);
       if (!response.status) throw new Error(response.message)
       if (response.status) {
-        navigation.navigate("PaymentMethod")
+        navigation.navigate("Verification")
       }
     } catch (error) {
       Toast(error.message)

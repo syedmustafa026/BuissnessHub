@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Home from '../screens/Home'
 import Favorites from '../screens/Favorites'
@@ -8,10 +8,12 @@ import Menu from '../screens/Menu/Menu'
 
 import * as colors from "../utilities/colors"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import * as functions from '../utilities/functions'
 
 const Tab = createBottomTabNavigator()
 
 const BottomNavigator = () => {
+
   return (
     <Tab.Navigator
       initialRouteName={'Home'}

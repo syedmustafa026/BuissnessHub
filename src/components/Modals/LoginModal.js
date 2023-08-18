@@ -7,7 +7,6 @@ import * as fonts from "../../utilities/fonts"
 
 const LoginModal = (props) => {
     return (
-        <View style={styles.centeredView}>
             <Modal
                 animationType="slide"
                 visible={props.modalVisible}
@@ -78,7 +77,6 @@ const LoginModal = (props) => {
                     </View>
                 </View>
             </Modal>
-        </View>
     );
 };
 
