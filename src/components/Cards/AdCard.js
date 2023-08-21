@@ -8,19 +8,19 @@ import * as fonts from "../../utilities/fonts"
 import { useNavigation } from "@react-navigation/native";
 
 
-const AdCard = () => {
+const AdCard = (item) => {
     const navigation = useNavigation()
     return (
         <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() => navigation.navigate('AdDetails')}
+            onPress={() => navigation.navigate('AdDetails',item.item)}
             style={styles.card}>
             <View >
-                <Image style={styles.cardImg} source={require('../../assets/images/ad.jpeg')} />
+                <Image style={styles.cardImg} source={{ uri: item.item?.main_image_url }} />
                 <View style={{ margin: 5 }}>
-                    <Text style={{ color: colors.primary, fontFamily: fonts.BOLD }} >AED 175,000</Text>
-                    <Text style={{ color: colors.black, fontFamily: fonts.BOLD }} >3 beds . 4 baths</Text>
-                    <Text numberOfLines={1} style={{ color: colors.gray }} >Faya at Bloom Garison</Text>
+                    <Text style={{ color: colors.primary, fontFamily: fonts.BOLD }} >AED {item.item?.price || "2000"}</Text>
+                    <Text style={{ color: colors.black, fontFamily: fonts.BOLD }} >{item.item?.title || "Buisness name"}</Text>
+                    <Text numberOfLines={1} style={{ color: colors.gray }} >{item.item?.created_at_time_diff}</Text>
                 </View>
 
             </View>

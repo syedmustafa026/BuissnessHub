@@ -11,12 +11,13 @@ import { useNavigation } from "@react-navigation/native"
 import Separator from "../Extras/Separator"
 
 
-const SearchDetailsCard = () => {
+const SearchDetailsCard = (item) => {
   const navigation = useNavigation()
+  const data = item.item
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      onPress={() => navigation.navigate('AdDetails')}
+      onPress={() => navigation.navigate('AdDetails', data)}
       style={styles.card}>
       <View>
         <MaterialIcon
@@ -24,24 +25,24 @@ const SearchDetailsCard = () => {
           name='favorite-outline'
           size={24}
           color={colors.white} />
-        <Image style={styles.cardImg} source={require('../../assets/images/ad.jpeg')} />
+        <Image style={styles.cardImg} source={{ uri: data.main_image_url || "https://img.freepik.com/free-photo/flat-lay-business-concept_53876-24738.jpg?w=1800&t=st=1692634541~exp=1692635141~hmac=2f344c4cded45934ccf853d9e57742feaf6d25761dd047252dbb97524eec9d86" }} />
         <View style={{ margin: 5, padding: 4 }}>
-          <Text numberOfLines={1} style={{ color: colors.primary, fontFamily: fonts.SEMIBOLD, fontSize: 18,marginBottom:4 }} >AED 175,000 </Text>
-          <Text numberOfLines={1} style={{ color: colors.black, fontFamily: fonts.SEMIBOLD, fontSize: 18,marginBottom:4 }} >BMW M3. Other </Text>
-          <Text numberOfLines={1} style={{ color: colors.black, fontFamily: fonts.REGULAR }} >Type 3E | Single Row | Available End of July // JUly 2022</Text>
-          <Text numberOfLines={1} style={{ color: colors.black, fontFamily: fonts.REGULAR, marginRight: 8 }} ><Text style={{ fontFamily: fonts.BOLD }}>Kms: </Text> 43,000 <Text style={{ fontFamily: fonts.BOLD }}> Year: </Text>2022</Text>
+          <Text numberOfLines={1} style={{ color: colors.primary, fontFamily: fonts.SEMIBOLD, fontSize: 18, marginBottom: 4 }} >{data.price || "AED 175,000"}</Text>
+          <Text numberOfLines={1} style={{ color: colors.black, fontFamily: fonts.SEMIBOLD, fontSize: 18, marginBottom: 4 }} >{data.title || "XYZ Business for sale"} </Text>
+          <Text numberOfLines={1} style={{ color: colors.black, fontFamily: fonts.REGULAR }} >{data.description || "description description description"}</Text>
+          <Text numberOfLines={1} style={{ color: colors.black, fontFamily: fonts.REGULAR, marginVertical: 4 }} >{data.created_at_time_diff || "description description description"}</Text>
 
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 6 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 4 }}>
             <Icon
               name='map-marker-outline'
               size={24}
               color={colors.gray} />
-            <Text style={styles.cardText}>AL-Mira Square</Text>
+            <Text style={styles.cardText}>{data.location_name || "Al mira square"}</Text>
           </View>
           <Separator />
         </View>
-        <View style={{ flexDirection: 'row',justifyContent:'space-evenly',marginHorizontal:8,marginVertical:4 }}>
-        <TouchableOpacity
+        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginHorizontal: 8, marginVertical: 4 }}>
+          <TouchableOpacity
             activeOpacity={0.6}
             style={styles.button}>
             <Icon

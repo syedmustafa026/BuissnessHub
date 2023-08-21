@@ -71,7 +71,7 @@ export const getListing = async () => {
         return error.message
     }
 }
-export const getAds = async (subcategory_id) => {
+export const getPostedAds = async (subcategory_id) => {
     try {
         const { data: response } = await axios.post(`${apiUrl}/ads/${subcategory_id}`)
         const json = response
@@ -170,7 +170,7 @@ export const updatePassword = async (payload) => {
     }
 }
 
-export const user = async () => { //
+export const user = async () => { 
     try {
         const { data: response } = await axios.post(`${apiUrl}/user-data`, {
             headers: await getHeader()

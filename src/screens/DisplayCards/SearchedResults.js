@@ -12,9 +12,9 @@ import SearchDetailsCard from "../../components/Cards/SearchDetailsCard";
 import NonImageCard from "../../components/Cards/NonImageCard";
 import SortModal from "../../components/Modals/SortModal";
 
-const SearchedResults = ({ navigation }) => {
+const SearchedResults = ({ route, navigation }) => {
   const [sortModal, setSortModal] = useState(false)
-
+  console.log(route.params);
   return (
     <SafeAreaView style={styles.container}>
       <SortModal visible={sortModal} setModalVisible={setSortModal} />
@@ -52,17 +52,12 @@ const SearchedResults = ({ navigation }) => {
           <Text style={{ fontSize: 16, margin: 10, color: colors.black, fontFamily: fonts.SEMIBOLD }}>SORT</Text>
         </TouchableOpacity>
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.cards}>
-          <SearchDetailsCard />
-          <SearchDetailsCard />
-          <SearchDetailsCard />
-          <SearchDetailsCard />
-          <SearchDetailsCard />
-          <SearchDetailsCard />
+          <FlatList
+            data={route.params}
+            renderItem={({ item }) => (<SearchDetailsCard item={item} />)}
+            keyExtractor={(item, index) => index.toString()}
+          />
 
-        </View>
-      </ScrollView>
     </SafeAreaView>
   )
 }

@@ -12,7 +12,8 @@ const PlaceAdSubCategory = ({ navigation, route }) => {
 
   const saveTitle = async (item) => {
     try {
-
+const res = await functions.getHeader()
+console.log(res);
       const response = await functions.saveListingTitle({
         category_id: item.category_id,
         subcategory_id: item.id

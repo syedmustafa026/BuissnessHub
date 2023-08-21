@@ -1,18 +1,33 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FlatList, StyleSheet, View, SafeAreaView } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
+
+import ThinNameRow from '../components/Rows/ThinNameRow'
+import Separator from '../components/Extras/Separator'
+import Toast from '../components/Extras/Toast'
+
 import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
-import ThinNameRow from '../components/Rows/ThinNameRow'
-import { categories } from '../utilities/categories'
-import Separator from '../components/Extras/Separator'
-
+import * as functions from "../utilities/functions"
 const ResultsSubCategory = ({ route, navigation }) => {
+  const [ads, setAds] = useState([])
+
   useEffect(() => {
     navigation.setOptions({
       title: route.params.name
     })
   }, [])
+  const getAds = async (id) => {
+    try {
+      const response = await functions.getPostedAds(id)
+      if (!response) throw new Error(response.message)
+      if (response) {
+        navigation.navigate("SearchedResults", response)
+      }
+    } catch (error) {
+      Toast(error.message || "Server Error")
+    }
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.centeredView}>
@@ -20,7 +35,7 @@ const ResultsSubCategory = ({ route, navigation }) => {
           <View style={{ justifyContent: 'center', marginBottom: 1 }}>
             <FlatList
               data={route.params.sub_categories}
-              renderItem={({ item }) => (<ThinNameRow name={item.name} handlePress={() => navigation.navigate('SearchedResults')} />)}
+              renderItem={({ item }) => (<ThinNameRow name={item.name} handlePress={() => getAds(item.id)} />)}
               keyExtractor={(item, index) => index.toString()}
               ItemSeparatorComponent={<Separator />}
               ListFooterComponent={<><Separator /><ThinNameRow name={`All in ${route.params.name}`} style={{ fontFamily: fonts.SEMIBOLD }} navigation={navigation} dir={'SearchedResults'} /></>}

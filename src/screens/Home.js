@@ -18,6 +18,7 @@ const Home = ({ navigation }) => {
     const [verifiedModal, setVerifiedModal] = useState(false)
     const [category, setCategory] = useState(null)
     const [loading, setLoading] = useState(true)
+    const [ads, setAds] = useState([])
 
     const onChangeSearch = query => setSearchQuery(query)
     const getCategories = async () => {
@@ -29,11 +30,17 @@ const Home = ({ navigation }) => {
         } catch (error) {
             Toast(error.message || "Server Error")
         }
+
     }
-    useEffect(() => {
-        getCategories()
-        functions.getHeader()
-    }, [])
+    const getAds = async () => {
+        try {
+            const response = await functions.getPostedAds(1)
+            setAds(response)
+        } catch (error) {
+            Toast(error.message || "Server Error")
+        }
+
+    }
     const ItemCard = (item) => {
         return (
             <TouchableOpacity
@@ -47,11 +54,36 @@ const Home = ({ navigation }) => {
             </TouchableOpacity>
         )
     }
+
+    useEffect(() => {
+        getCategories()
+        getAds()
+    }, [])
     if (loading) {
         return (
             <View style={styles.errorContainer}>
                 <ActivityIndicator animating={true} size={"medium"} color={colors.primary} />
             </View>
+        )
+    }
+    const ListingCategory = ({name}) => {
+        return (
+            <>
+                <View style={styles.row}>
+                    <Text style={{ fontFamily: fonts.BOLD, fontSize: 16, color: colors.black, }}>Popular in {name}</Text>
+                    <Icon
+                        onPress={() => navigation.navigate('SearchedResults')}
+                        name='arrow-right'
+                        size={24}
+                        color={colors.black} />
+                </View>
+                <FlatList showsHorizontalScrollIndicator={false}
+                    horizontal
+                    data={ads}
+                    renderItem={({ item }) => (<AdCard item={item} />)}
+                    keyExtractor={(item, index) => index.toString()}
+                />
+            </>
         )
     }
     return (
@@ -92,92 +124,7 @@ const Home = ({ navigation }) => {
                         }} />}
                     />
                 </View>
-                {/*
-                    <TouchableOpacity
-                        activeOpacity={0.7}
-                        // onPress={() => navigation.navigate('ResultsSubCategory', { data: category[0] })}
-                        style={styles.card}>
-                        <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../assets/images/propertySale.png')} />
-                            <Text style={styles.cardText}>{category[0]?.name}</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        activeOpacity={0.7}
-                        // onPress={() => navigation.navigate('ResultsSubCategory', {data: category[1]})}
-                        style={styles.card}>
-                        <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../assets/images/shares.png')} />
-                            <Text style={styles.cardText}>
-                                Shares for Sale</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        activeOpacity={0.7}
-                        // onPress={() => navigation.navigate('ResultsSubCategory', {data: category[1]})}
-                        style={styles.card}>
-                        <View style={{ alignItems: 'center' }}>
-                            <Image style={[styles.cardImg, { width: 48, height: 48 }]} source={require('../assets/images/buisnessidea.png')} />
-                            <Text style={styles.cardText}>
-                                Business Ideas</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        activeOpacity={0.7}
-                        // onPress={() => navigation.navigate('ResultsSubCategory', {data: category[1]})}
-                        style={styles.card}>
-                        <View style={{ alignItems: 'center' }}>
-                            <Image style={[styles.cardImg, { width: 47, height: 47 }]} source={require('../assets/images/investors.png')} />
-                            <Text style={styles.cardText}>
-                                Investors</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        activeOpacity={0.7}
-                        // onPress={() => navigation.navigate('ResultsSubCategory', {data: category[1]})}
-                        style={styles.card}>
-                        <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../assets/images/investorsreq.png')} />
-                            <Text style={styles.cardText}>
-                                Investors Required</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        activeOpacity={0.7}
-                        // onPress={() => navigation.navigate('ResultsSubCategory', {data: category[1]})}
-                        style={styles.card}>
-                        <View style={{ alignItems: 'center' }}>
-                            <Image style={[styles.cardImg, { width: 42, height: 42 }]} source={require('../assets/images/franchise.png')} />
-                            <Text style={styles.cardText}>
-                                Franchise Opportunities</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        activeOpacity={0.7}
-                        // onPress={() => navigation.navigate('ResultsSubCategory', {data: category[1]})}
-                        style={styles.card}>
-                        <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../assets/images/logistics.png')} />
-                            <Text style={styles.cardText}>
-                                Export & Import Trade</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        activeOpacity={0.7}
-                        // onPress={() => navigation.navigate('ResultsSubCategory', {data: category[1]})}
-                        style={styles.card}>
-                        <View style={{ alignItems: 'center' }}>
-                            <Image style={styles.cardImg} source={require('../assets/images/machine.png')} />
-                            <Text style={styles.cardText}>
-                                Machinery & Supplies</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <View style={{
-                        width: wp('28'),
-                        height: hp('13'),
-                        marginRight: 12,
-                    }} />
-                </View> */}
+
                 <TouchableOpacity onPress={() => setVerifiedModal(true)} activeOpacity={0.8} style={styles.banner} >
                     <View style={{
                         backgroundColor: '#cfe1fc',
@@ -201,54 +148,13 @@ const Home = ({ navigation }) => {
                         <MaterialIcon name="arrow-forward-ios" style={{ margin: 10, alignSelf: 'center' }} size={20} color={colors.primaryLight} />
                     </View>
                 </TouchableOpacity>
-                <View style={styles.row}>
-                    <Text style={{ fontFamily: fonts.BOLD, fontSize: 16, color: colors.black, }}>Popular in Used Cars for Rent</Text>
-                    <Icon
-                        onPress={() => navigation.navigate('SearchedResults')}
-                        name='arrow-right'
-                        size={24}
-                        color={colors.black} />
+                <View >
                 </View>
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    <AdCard />
-                    <AdCard />
-                    <AdCard />
-                    <AdCard />
-                    <AdCard />
-                    <AdCard />
-                </ScrollView>
-                <View style={styles.row}>
-                    <Text style={{ fontFamily: fonts.BOLD, fontSize: 16, color: colors.black }}>Popular in Used Resdients for Sale</Text>
-                    <Icon
-                        onPress={() => navigation.navigate('SearchedResults')}
-                        name='arrow-right'
-                        size={24}
-                        color={colors.black} />
-                </View>
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    <AdCard />
-                    <AdCard />
-                    <AdCard />
-                    <AdCard />
-                    <AdCard />
-                    <AdCard />
-                </ScrollView>
-                <View style={styles.row}>
-                    <Text style={{ fontFamily: fonts.BOLD, fontSize: 16, color: colors.black }}>Popular in Property  for Sale for Sale</Text>
-                    <Icon
-                        onPress={() => navigation.navigate('SearchedResults')}
-                        name='arrow-right'
-                        size={24}
-                        color={colors.black} />
-                </View>
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    <AdCard />
-                    <AdCard />
-                    <AdCard />
-                    <AdCard />
-                    <AdCard />
-                    <AdCard />
-                </ScrollView>
+                <FlatList
+                    data={category}
+                    renderItem={({ item }) => (<ListingCategory name={item.name} />)}
+                    keyExtractor={(item, index) => index.toString()}
+                />
             </ScrollView>
         </SafeAreaView>
     )

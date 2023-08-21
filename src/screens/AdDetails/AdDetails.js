@@ -11,11 +11,11 @@ import Separator from '../../components/Extras/Separator'
 import MakeOfferModal from "../../components/Modals/MakeOfferModal";
 import ConfirmPhoneModal from "../../components/Modals/ConfirmPhoneModal";
 
-const AdDetails = ({ navigation }) => {
+const AdDetails = ({ navigation, route }) => {
     const [makeOfferModal, setMakeOfferModal] = useState(false)
     const [confirmPhoneModal, setConfirmPhoneModal] = useState(false)
     const [makeOfferValue, setMakeOfferValue] = useState('')
-
+    const data = route.params
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
@@ -30,7 +30,7 @@ const AdDetails = ({ navigation }) => {
                             size={28}
                             color={colors.black} />
                     </TouchableOpacity>
-                    <Image style={styles.mainImg} source={require('../../assets/images/ad.jpeg')} />
+                    <Image style={styles.mainImg} source={{ uri: data.main_image_url } || require('../../assets/images/ad.jpeg')} />
                     <TouchableOpacity
                         onPress={() => navigation.goBack()}
                         style={[styles.shareIcon, { right: 90, bottom: -20 }]}
@@ -58,25 +58,20 @@ const AdDetails = ({ navigation }) => {
                     paddingHorizontal: 20,
                     backgroundColor: colors.white
                 }}>
-                    <Text style={{ color: colors.primary, fontFamily: fonts.SEMIBOLD, fontSize: 20 }} >AED 175,000 / yr</Text>
-                    <Text style={{ color: colors.black, fontFamily: fonts.SEMIBOLD, fontSize: 24, marginVertical: 8, marginBottom: 20 }} >Type B | With Study | Big Garder</Text>
+                    <Text style={{ color: colors.primary, fontFamily: fonts.SEMIBOLD, fontSize: 20 }} >{data.price || "AED 175,000"}</Text>
+                    <Text style={{ color: colors.black, fontFamily: fonts.SEMIBOLD, fontSize: 24, marginVertical: 8, marginBottom: 20 }} >{data.title || "XYZ Buisness For Sale"}</Text>
                     <Separator />
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginVertical: 18 }}>
                         <Icon
-                            name='bed-outline'
+                            name='list-status'
                             size={22}
                             color={colors.black} />
-                        <Text style={styles.h4}>3 beds</Text>
+                        <Text style={styles.h4}>Status: {data.status}</Text>
                         <Icon
-                            name='bathtub-outline'
+                            name='calendar'
                             size={22}
                             color={colors.black} />
-                        <Text style={styles.h4}>3 baths</Text>
-                        <Icon
-                            name='arrow-down-thin'
-                            size={22}
-                            color={colors.black} />
-                        <Text style={styles.h4}>3059 Sqft.</Text>
+                        <Text style={styles.h4}>{data.created_at_time_diff}</Text>
                     </View>
                 </View>
                 {/* header finished */}
@@ -86,31 +81,30 @@ const AdDetails = ({ navigation }) => {
                     <Text style={styles.h2}>Details</Text>
                     <View>
                         <View style={styles.row}>
-                            <Text style={styles.boldText}>Color</Text>
-                            <Text style={styles.regularText}>Purple</Text>
+                            <Text style={styles.boldText}>Related</Text>
+                            <Text style={styles.regularText}>{data.title || "No name"}</Text>
                         </View>
                         <Separator />
                         <View style={styles.row}>
-                            <Text style={styles.boldText}>Age</Text>
-                            <Text style={styles.regularText}>1 year</Text>
+                            <Text style={styles.boldText}>Verified</Text>
+                            <Text style={styles.regularText}>{data.is_verified === "1" ? "Yes" : "No"}</Text>
                         </View>
                         <Separator />
                         <View style={styles.row}>
-                            <Text style={styles.boldText}>Condition</Text>
-                            <Text style={styles.regularText}>Used</Text>
+                            <Text style={styles.boldText}>Featured</Text>
+                            <Text style={styles.regularText}>{data.is_featured === "1" ? "Yes" : "No"}</Text>
                         </View>
                         <Separator />
                         <View style={styles.row}>
-                            <Text style={styles.boldText}>Memory</Text>
-                            <Text style={styles.regularText}>64GB</Text>
+                            <Text style={styles.boldText}>SubCategory</Text>
+                            <Text style={styles.regularText}>{data.subcategory_name}</Text>
                         </View>
                         <Separator />
                         <View style={styles.row}>
-                            <Text style={styles.boldText}>warranty</Text>
-                            <Text style={styles.regularText}>1 year</Text>
+                            <Text style={styles.boldText}>Category</Text>
+                            <Text style={styles.regularText}>{data.category_name}</Text>
                         </View>
                         <Separator />
-                        <Text style={styles.highlightedText}>Show More Details</Text>
                     </View>
                     <Button
                         onPress={() => { setMakeOfferModal(true) }}
@@ -124,11 +118,9 @@ const AdDetails = ({ navigation }) => {
                 {/* description start */}
                 <View style={styles.box}>
                     <Text style={styles.h2}>Description</Text>
-                    <Text style={[styles.h4, { marginTop: 4 }]}>Iphone 11 pro max </Text>
-                    <Text style={styles.h4}>Geniune color </Text>
-                    <Text style={styles.h4}>1 year used </Text>
-                    <Text style={styles.h4}>Iphone 11 pro max </Text>
-                    <Text style={styles.highlightedText}>Show More Details</Text>
+                    <Text style={[styles.h4, { marginTop: 4 }]}>{data.description || "No description "}</Text>
+
+                    {/* <Text style={styles.highlightedText}>Show More Details</Text> */}
                 </View>
                 {/* description finished */}
                 {/* location start */}
@@ -140,7 +132,7 @@ const AdDetails = ({ navigation }) => {
                             size={24}
                             style={{ marginLeft: 15 }}
                             color={colors.gray} />
-                        <Text style={styles.h4}>AL-Mira Square</Text>
+                        <Text style={styles.h4}>{data.location_name || "Al mira Square"}</Text>
                     </View>
                     <Image style={{ width: "90%", height: 160, alignSelf: 'center', marginVertical: 14 }} source={require('../../assets/images/map.png')} />
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginHorizontal: 15 }}>
@@ -148,18 +140,19 @@ const AdDetails = ({ navigation }) => {
                             <Image style={styles.image} source={require("../../assets/images/Community.png")} />
                             <View >
                                 <Text style={[styles.regularText, { marginHorizontal: 15 }]}>Seller:</Text>
-                                <Text style={[styles.boldText, { marginHorizontal: 15 }]}>Ali Ali</Text>
+                                <Text style={[styles.boldText, { marginHorizontal: 15 }]}>{data.created_by_user.name}</Text>
                             </View>
                         </View>
                         <View>
-                            <Text style={[styles.regularText, { marginHorizontal: 15 }]}>4 items live:</Text>
-                            <Text style={[styles.boldText, { marginHorizontal: 15, color: colors.primary }]}>See more</Text>
+                            <Text style={[styles.regularText, { marginHorizontal: 15 }]}>Phone Numnber</Text>
+                            <Text style={[styles.boldText, { marginHorizontal: 30, color: colors.primary }]}>{data.created_by_user.phone}</Text>
                         </View>
                     </View>
+                    <Text onPress={() => navigation.navigate('ReportAd')} style={styles.highlightedText}>Report an Ad</Text>
                 </View>
                 {/* location finished */}
                 {/* SimilarAds Start */}
-                <View style={styles.box}>
+                {/* <View style={styles.box}>
                     <Text style={styles.h2}>Similar Ads</Text>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                         <AdCard />
@@ -169,8 +162,7 @@ const AdDetails = ({ navigation }) => {
                         <AdCard />
                         <AdCard />
                     </ScrollView>
-                    <Text onPress={() => navigation.navigate('ReportAd')} style={styles.highlightedText}>Report an Ad</Text>
-                </View>
+                </View> */}
                 {/* SimilarAds Finished */}
             </ScrollView>
             {/* Chat now start */}
@@ -252,7 +244,8 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 0,
     },
     box:
-    { zIndex: -1,
+    {
+        zIndex: -1,
         padding: 15,
         paddingHorizontal: 20,
         marginTop: 10,
