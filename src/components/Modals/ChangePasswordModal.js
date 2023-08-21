@@ -42,7 +42,7 @@ const ChangePasswordModal = (props) => {
         props.setVisible(false)
         props.navigation.goBack()
       }
-      Toast(error.message)
+      Toast(error.message || "Server Error")
     }
   }
 

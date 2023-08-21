@@ -32,12 +32,12 @@ const Login = ({ navigation }) => {
             console.log(response);
             if (!response.status) throw new Error(response.message)
             await functions.setItem("user", response.user)
-            await functions.setItem("header-token", response.token)
+            await functions.setItem("token", response.token)
             navigation.replace("BottomNavigator")
         }
         catch (error) {
             setLoading(false)
-            Toast(error.message)
+            Toast(error.message || "Server Error")
         }
         finally {
             setLoading(false)

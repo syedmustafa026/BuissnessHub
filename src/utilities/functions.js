@@ -3,6 +3,25 @@ import axios from "axios"
 import { apiUrl } from '../utilities/constants'
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
+
+export const getHeader = async () => {
+    const USER_TOKEN = await getItem('token')
+    if (USER_TOKEN != null) {
+        const AuthStr = {
+            Authorization: `Bearer ${USER_TOKEN}`
+        }
+        return AuthStr
+    }
+    else return null
+}
+export const getLoggedInUser = async () => {
+    const user = await getItem('user')
+    if (user != null) {
+        return user
+    }
+    else return null
+}
+
 export const login = async (payload) => {
     try {
         const { data: response } = await axios.post(`${apiUrl}/login`, payload)
@@ -84,7 +103,9 @@ export const getSubCategories = async (payload) => {
 
 export const saveListingTitle = async (payload) => {
     try {
-        const { data: response } = await axios.post(`${apiUrl}/listing/save-listing-title`, payload)
+        const { data: response } = await axios.post(`${apiUrl}/listing/save-listing-title`, {
+            headers: await getHeader()
+        }, payload)
         const json = response
         return json
     } catch (error) {
@@ -94,7 +115,9 @@ export const saveListingTitle = async (payload) => {
 
 export const submitListingDetail = async (payload) => {
     try {
-        const { data: response } = await axios.post(`${apiUrl}/listing/save-ad`, payload)
+        const { data: response } = await axios.post(`${apiUrl}/listing/save-ad`, {
+            headers: await getHeader()
+        }, payload)
         const json = response
         return json
     } catch (error) {
@@ -104,7 +127,9 @@ export const submitListingDetail = async (payload) => {
 
 export const agreeTermsConditions = async (listing_id) => {
     try {
-        const { data: response } = await axios.post(`${apiUrl}/listing/agree-to-terms/${listing_id}`)
+        const { data: response } = await axios.post(`${apiUrl}/listing/agree-to-terms/${listing_id}`, {
+            headers: await getHeader()
+        })
         const json = response
         return json
     } catch (error) {
@@ -112,9 +137,20 @@ export const agreeTermsConditions = async (listing_id) => {
     }
 }
 
+export const verifyPhone = async () => {
+    try {
+        const { data: response } = await axios.post(`${apiUrl}/verify-phone-code`)
+        const json = response
+        return json
+    } catch (error) {
+        return error.message
+    }
+}
 export const logout = async () => {
     try {
-        const { data: response } = await axios.post(`${apiUrl}/logout`)
+        const { data: response } = await axios.post(`${apiUrl}/logout`, {
+            headers: await getHeader()
+        },)
         const json = response
         return json
     } catch (error) {
@@ -124,7 +160,9 @@ export const logout = async () => {
 
 export const updatePassword = async (payload) => {
     try {
-        const { data: response } = await axios.post(`${apiUrl}/update-password`, payload)
+        const { data: response } = await axios.post(`${apiUrl}/update-password`, {
+            headers: await getHeader()
+        }, payload)
         const json = response
         return json
     } catch (error) {
@@ -134,7 +172,9 @@ export const updatePassword = async (payload) => {
 
 export const user = async () => { //
     try {
-        const { data: response } = await axios.post(`${apiUrl}/user-data`)
+        const { data: response } = await axios.post(`${apiUrl}/user-data`, {
+            headers: await getHeader()
+        })
         const json = response
         return json
     } catch (error) {
@@ -143,7 +183,9 @@ export const user = async () => { //
 }
 export const updateProfile = async (payload) => {
     try {
-        const { data: response } = await axios.post(`${apiUrl}/update-profile`, payload)
+        const { data: response } = await axios.post(`${apiUrl}/update-profile`, {
+            headers: await getHeader()
+        }, payload)
         const json = response
         return json
     } catch (error) {
@@ -159,7 +201,7 @@ export const getUserAds = async () => {
         return error.message
     }
 }
-export const getVerificationCode = async () => {
+export const forgetVerificationCode = async () => {
     try {
         const { data: response } = await axios.post(`${apiUrl}/reset-code-check`)
         const json = response
@@ -170,37 +212,37 @@ export const getVerificationCode = async () => {
 }
 export const setItem = async (key, value) => {
     try {
-      await AsyncStorage.setItem(key, JSON.stringify(value))
-      return 'set'
+        await AsyncStorage.setItem(key, JSON.stringify(value))
+        return 'set'
     } catch (error) {
-      return error.message
+        return error.message
     }
-  }
-  
-  export const getItem = async (key) => {
+}
+
+export const getItem = async (key) => {
     try {
-      return JSON.parse(await AsyncStorage.getItem(key))
+        return JSON.parse(await AsyncStorage.getItem(key))
     } catch (error) {
-      return error.message
+        return error.message
     }
-  }
-  
-  export const removeItem = async (key) => {
+}
+
+export const removeItem = async (key) => {
     try {
-      await AsyncStorage.removeItem(key)
-  
-      return 'removed'
+        await AsyncStorage.removeItem(key)
+
+        return 'removed'
     } catch (error) {
-      return error.message
+        return error.message
     }
-  }
-  
-  export const clearStorage = async () => {
+}
+
+export const clearStorage = async () => {
     try {
-      await AsyncStorage.clear()
-  
-      return 'cleared'
+        await AsyncStorage.clear()
+
+        return 'cleared'
     } catch (error) {
-      return error.message
+        return error.message
     }
-  }
+}

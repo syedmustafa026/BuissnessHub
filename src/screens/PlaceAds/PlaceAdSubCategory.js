@@ -12,16 +12,18 @@ const PlaceAdSubCategory = ({ navigation, route }) => {
 
   const saveTitle = async (item) => {
     try {
+
       const response = await functions.saveListingTitle({
         category_id: item.category_id,
         subcategory_id: item.id
       })
       if (!response.status) throw new Error(response.message)
+      console.log("saving",response);
       if (response.status) {
         navigation.navigate("PlaceAdDetails", { title: route.params.title, category: item.name, listing_id: response.listing_id })
       }
     } catch (error) {
-      Toast(error.message)
+      Toast(error.message || "Server Error")
     }
   }
 

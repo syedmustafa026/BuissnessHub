@@ -27,11 +27,12 @@ const Home = ({ navigation }) => {
             setCategory(response.data)
             if (response.status) setLoading(false)
         } catch (error) {
-            Toast(error.message)
+            Toast(error.message || "Server Error")
         }
     }
     useEffect(() => {
         getCategories()
+        functions.getHeader()
     }, [])
     const ItemCard = (item) => {
         return (

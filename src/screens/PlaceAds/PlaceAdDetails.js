@@ -69,7 +69,7 @@ const PlaceAdDetails = ({ navigation, route }) => {
         }
       }
     } catch (error) {
-      Toast(error.message);
+      Toast(error.message || "Server Error");
     }
   }
   return (

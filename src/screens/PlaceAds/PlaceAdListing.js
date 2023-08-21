@@ -31,7 +31,7 @@ const PlaceAdListing = ({ navigation,route }) => {
             setCategory(response.data)
             if (response.status) setLoading(false)
         } catch (error) {
-            Toast(error.message)
+            Toast(error.message || "Server Error")
         }
     }
     useEffect(() => {

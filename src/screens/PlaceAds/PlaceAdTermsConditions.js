@@ -19,7 +19,7 @@ const PlaceAdTermsConditions = ({ navigation, route }) => {
         navigation.navigate("Verification")
       }
     } catch (error) {
-      Toast(error.message)
+      Toast(error.message || "Server Error")
     }
   }
   return (

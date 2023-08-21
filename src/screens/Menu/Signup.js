@@ -57,7 +57,7 @@ const Signup = ({ navigation }) => {
       }
 
     } catch (error) {
-      Toast(error.message)
+      Toast(error.message || "Server Error")
     }
     finally {
       setLoading(false)
