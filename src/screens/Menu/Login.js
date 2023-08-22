@@ -32,6 +32,7 @@ const Login = ({ navigation }) => {
             console.log(response);
             if (!response.status) throw new Error(response.message)
             await functions.setItem("user", response.user)
+            console.log(response.token);
             await functions.setItem("token", response.token)
             navigation.replace("BottomNavigator")
         }
@@ -71,7 +72,7 @@ const Login = ({ navigation }) => {
                         onPress={() => setTogglePassword(!togglePassword)}
                     />}
                 />
-                <Text style={{ fontFamily: fonts.MEDIUM, color: colors.blue, textAlign: 'center', marginVertical: 8 }}>Forgot your password?</Text>
+                <Text onPress={() => navigation.navigate("ForgetPassword")} style={{ fontFamily: fonts.MEDIUM, color: colors.blue, textAlign: 'center', marginVertical: 8 }}>Forgot your password?</Text>
                 <Button
                     onPress={handleLogin}
                     mode="contained"

@@ -144,8 +144,8 @@ const AdDetails = ({ navigation, route }) => {
                             </View>
                         </View>
                         <View>
-                            <Text style={[styles.regularText, { marginHorizontal: 15 }]}>Phone Numnber</Text>
-                            <Text style={[styles.boldText, { marginHorizontal: 30, color: colors.primary }]}>{data.created_by_user.phone}</Text>
+                            <Text style={[styles.regularText, { marginHorizontal: 15 }]}>Phone Number</Text>
+                            <Text style={[styles.boldText, { marginHorizontal: 30, color: colors.primary }]}>{data.created_by_user.phone || "----"}</Text>
                         </View>
                     </View>
                     <Text onPress={() => navigation.navigate('ReportAd')} style={styles.highlightedText}>Report an Ad</Text>

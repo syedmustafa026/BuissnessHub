@@ -8,6 +8,7 @@ import Toast from "../../components/Extras/Toast"
 
 import * as fonts from '../../utilities/fonts'
 import * as colors from '../../utilities/colors'
+import * as functions from '../../utilities/functions'
 import { validateEmail } from '../../utilities/validations'
 
 const ForgetPassword = ({ navigation, route }) => {
@@ -22,12 +23,14 @@ const ForgetPassword = ({ navigation, route }) => {
         Alert.alert("Wait", `Are you sure your email is ${email}`, [{
           text: "Yes",
           onPress: async () => {
-            const response = await forgotPassword({ email: email })
-            if (!response.status) Toast(response.message)
-            if (response.status) {
-              Toast(`Verification code sent to ${email}`)
-              navigation.navigate("Verification", { email: email })
-            }
+            const response = await functions.forgotPassword({ label: email, by: "email" })
+            console.log(response);
+            navigation.navigate("Verification", email)
+            // if (!response.status) Toast(response.message)
+            // if (response.status) {
+            //   Toast(`Verification code sent to ${email}`)
+            //   navigation.navigate("Verification", { email: email })
+            // }
           }
         }, {
           text: "Cancel",
@@ -107,7 +110,7 @@ const styles = StyleSheet.create({
     marginHorizontal: wp("4"),
     marginVertical: hp(".6"),
     fontFamily: fonts.SEMIBOLD,
-    color: colors.primary
+    color: colors.black
   },
   img: {
     width: 36,

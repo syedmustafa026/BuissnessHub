@@ -61,7 +61,7 @@ const Menu = ({ navigation }) => {
                     <View style={{ backgroundColor: colors.infoLight, marginVertical: 12, marginHorizontal: 15, paddingHorizontal: 5, paddingVertical: 15, borderRadius: 10 }}>
                         <View style={[styles.header]}>
                             <Image style={styles.image} source={user ? { uri: user.image_url } : require("../../assets/images/Community.png")} />
-                            <View style={{ flexDirection: 'column' }}>
+                            <View style={{ flexDirection: 'column',width:"70%" }}>
                                 <Text numberOfLines={1} style={styles.heading}>Hi {user.name}</Text>
                                 <Text style={styles.text}>{user.email}</Text>
                             </View>

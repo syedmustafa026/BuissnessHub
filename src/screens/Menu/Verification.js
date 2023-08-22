@@ -4,16 +4,35 @@ import { TextInput, Button } from 'react-native-paper'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 
 import Toast from "../../components/Extras/Toast"
-
+import * as functions from '../../utilities/functions'
 import * as fonts from '../../utilities/fonts'
 import * as colors from '../../utilities/colors'
 import ChangePasswordModal from '../../components/Modals/ChangePasswordModal'
 
-const Verification = ({ route, navigation }) => {
+const Verification = ({ navigation, route }) => {
   const [changePasswordModal, setChangePasswordModal] = useState(false)
   const [code, setCode] = useState('')
 
+  const verifyCode = async () => {
+    try {
+      if (code.length != 7) throw new Error("Enter 7 digit code")
+      if (route.params.by === 'phone') {
+        const response = await functions.verifyPhone({
+          verification_code: parseInt(code)
+        })
+        console.log(response);
+      }
+      if (route.params.by === 'email') {
+        const response = await functions.forgetVerificationCode({
+          password_reset_code: parseInt(code)
+        })
+        console.log(response);
+      }
+    }
+    catch (error) {
 
+    }
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -25,7 +44,7 @@ const Verification = ({ route, navigation }) => {
       <View style={styles.section}>
         <View style={styles.header}>
           <Text style={styles.h1}>Verification Code</Text>
-          <Text style={styles.h4}>A 6 digits code has been sent to {route.params.email}</Text>
+          <Text style={styles.h4}>A 7 digits code has been sent to {route.params.label}</Text>
         </View>
         <View
           style={styles.InputBox}>
@@ -34,20 +53,20 @@ const Verification = ({ route, navigation }) => {
             activeOutlineColor={colors.primary}
             style={styles.Input}
             mode="outlined"
-            placeholder='Enter 6 digits code'
+            placeholder='Enter 7 digits code'
             autoFocus={true}
             activeUnderlineColor={colors.primary}
             keyboardType="phone-pad"
-            maxLength={6}
-            minLength={6}
+            maxLength={7}
+            minLength={7}
             onChangeText={(value) => { setCode(value) }}
           />
         </View>
         <View
           style={styles.btns}>
           <Button
+            onPress={verifyCode}
             mode="contained"
-            onPress={handleContinue}
             style={styles.footerButton}
             contentStyle={styles.footerButtonContent}
             labelStyle={styles.ButtonLabel}
@@ -92,7 +111,7 @@ const styles = StyleSheet.create({
     marginVertical: hp(.5),
     marginHorizontal: wp("3.5"),
     fontFamily: fonts.SEMIBOLD,
-    color: colors.primary
+    color: colors.black
   },
   img: {
     width: wp("8"),

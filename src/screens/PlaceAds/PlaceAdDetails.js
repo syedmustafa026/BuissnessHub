@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, ScrollView, Platform } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -10,6 +10,13 @@ import * as functions from "../../utilities/functions"
 import Toast from "../../components/Extras/Toast"
 
 const PlaceAdDetails = ({ navigation, route }) => {
+  const titleRef = useRef()
+  const mobileRef = useRef()
+  const priceRef = useRef()
+  const descriptionRef = useRef()
+  const locationRef = useRef()
+
+
   const [title, setTitle] = useState("")
   const [mobile, setMobile] = useState("")
   const [price, setPrice] = useState("")
@@ -54,7 +61,7 @@ const PlaceAdDetails = ({ navigation, route }) => {
         const response = await functions.submitListingDetail({
           listing_id: route.params.listing_id,
           title: title,
-          phone: mobile,
+          phone: parseInt(mobile),
           price: price,
           description: description,
           location_name: location,
@@ -82,6 +89,7 @@ const PlaceAdDetails = ({ navigation, route }) => {
         </View>
         <TextInput
           label="Title"
+          ref={titleRef}
           value={title}
           mode='outlined'
           activeOutlineColor={colors.gray}
@@ -191,6 +199,7 @@ const PlaceAdDetails = ({ navigation, route }) => {
         </View>
         <TextInput
           label="Phone Number"
+          ref={mobileRef}
           mode='outlined'
           activeOutlineColor={colors.gray}
           keyboardType='number-pad'
@@ -199,6 +208,7 @@ const PlaceAdDetails = ({ navigation, route }) => {
             backgroundColor: colors.white,
             borderBlockColor: colors.gray,
           }}
+          onSubmitEditing={() => priceRef.current.focus()}
           onChangeText={text => setMobile(text)}
           left={<TextInput.Affix
             text='+971'
@@ -207,6 +217,7 @@ const PlaceAdDetails = ({ navigation, route }) => {
         <TextInput
           label="Price"
           mode='outlined'
+          ref={priceRef}
           activeOutlineColor={colors.gray}
           keyboardType='number-pad'
           style={{
@@ -214,11 +225,14 @@ const PlaceAdDetails = ({ navigation, route }) => {
             borderBlockColor: colors.gray,
           }}
           onChangeText={text => setPrice(text)}
+          onSubmitEditing={() => descriptionRef.current.focus()}
+
         />
         <TextInput
           placeholder='Describe your item'
           mode='outlined'
           multiline={true}
+          ref={descriptionRef}
           activeOutlineColor={colors.gray}
           style={{
             height: 180,
@@ -226,10 +240,12 @@ const PlaceAdDetails = ({ navigation, route }) => {
             borderBlockColor: colors.gray,
           }}
           onChangeText={text => setDescription(text)}
+          onSubmitEditing={() => locationRef.current.focus()}
         />
         <TextInput
           label="Location"
           mode='outlined'
+          ref={locationRef}
           keyboardType='default'
           activeOutlineColor={colors.gray}
           style={{

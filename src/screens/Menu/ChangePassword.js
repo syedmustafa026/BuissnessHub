@@ -23,7 +23,8 @@ const ChangePassword = ({ navigation }) => {
             if (newPassword == confirmPassword) {
                 const response = await functions.updatePassword({
                     old_password: oldPassword,
-                    old_password: newPassword
+                    password: newPassword,
+                    password_confirmation: confirmPassword
                 })
                 console.log(response);
                 if (response.status) {

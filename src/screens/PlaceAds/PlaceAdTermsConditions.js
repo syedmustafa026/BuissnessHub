@@ -12,11 +12,11 @@ const PlaceAdTermsConditions = ({ navigation, route }) => {
   const handleAgree = async () => {
     try {
       console.log(route.params.listing_id);
-      const response = await functions.agreeTermsConditions(route.params.listing_id)
+      const response = await functions.agreeTermsConditions(route.params.listing_id,{})
       console.log(response);
       if (!response.status) throw new Error(response.message)
       if (response.status) {
-        navigation.navigate("Verification")
+        navigation.navigate("Verification",{label:response.phone, by: 'phone'})
       }
     } catch (error) {
       Toast(error.message || "Server Error")
