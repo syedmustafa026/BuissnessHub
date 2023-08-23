@@ -9,22 +9,21 @@ import ThinNameRow from '../Rows/ThinNameRow';
 import Separator from '../Extras/Separator';
 
 const Dropdown = (props) => {
-    // ['Still with the dealer', 'Only used once since it was purchased new', 'Used very rarely, "Used once or twice a week', 'Used as primary mode of transpotation']
     return (
-        <View style={{ position: 'relative' }}>
-            <TouchableOpacity activeOpacity={0.6}
-                onPress={props.toggleModal} style={[styles.selectButton, props.style]}>
-                <Text style={styles.selectLabel}>{props.value}</Text>
+        <View style={{ position: 'relative', width: "100%", zIndex: 3 }}>
+            <TouchableOpacity disabled={props.disabled} activeOpacity={0.6}
+                onPress={props.toggleModal} style={[styles.selectButton, props.style, (props.disabled && { borderColor: colors.gray400, })]}>
+                <Text style={[styles.selectLabel, (props.disabled && { color: colors.gray400, })]}>{props.value}</Text>
                 <Icon
                     name={props.modal ? 'chevron-up' : 'chevron-down'}
                     size={24}
-                    color={colors.black} />
+                    color={props.disabled ? colors.gray400 : colors.black} />
             </TouchableOpacity>
             {props.modal && <View style={styles.dropdown}>
                 <FlatList
                     showsVerticalScrollIndicator={true}
                     data={props.data}
-                    renderItem={({ item }) => (<ThinNameRow handlePress={() => {props.setValue(item),props.setModal(false)}} name={item} />)}
+                    renderItem={({ item }) => (<ThinNameRow handlePress={() => { props.setValue(item), props.setModal(false) }} name={item} />)}
                     keyExtractor={(item, index) => index.toString()}
                     ItemSeparatorComponent={<Separator />}
                 />
@@ -34,7 +33,7 @@ const Dropdown = (props) => {
 };
 const styles = StyleSheet.create({
     selectButton: {
-        width: '95%',
+        width: '90%',
         borderRadius: 5,
         height: 45,
         paddingHorizontal: 4,
@@ -50,11 +49,11 @@ const styles = StyleSheet.create({
         fontSize: hp("2"),
         color: colors.gray,
         textAlign: 'justify',
-        paddingHorizontal: 15,
+        paddingHorizontal: 25,
         paddingVertical: 10,
     },
     dropdown: {
-        width: '95%',
+        width: '75%',
         padding: 8,
         alignSelf: 'center',
         position: 'absolute',

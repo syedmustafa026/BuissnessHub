@@ -1,214 +1,85 @@
-// import React, { useState } from "react";
-// import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
-// import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
-// import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-// import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
-// import { Button } from "react-native-paper"
-// import * as colors from "../../utilities/colors"
-// import * as fonts from "../../utilities/fonts"
-// import Separator from "../../components/Extras/Separator";
-
-// const EditProfile = ({ navigation, route }) => {
-//     return (
-//         <SafeAreaView style={styles.container}>
-//             <View style={styles.imgCon}>
-//                 <TouchableOpacity activeOpacity={0.6}>
-//                 <Image style={styles.image} source={{ uri: route.params.image_url }} />
-//                 <Icon style={{ position: 'absolute', bottom: 0, left: 70 }} name='pencil-circle' color={colors.gray} size={28} />
-//                 </TouchableOpacity>
-//             </View>
-//             <View style={{ marginHorizontal: 20 }}>
-//                 <Text style={styles.h2}>Name</Text>
-//                 <TouchableOpacity style={styles.selectRow}>
-//                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-//                         <Text style={styles.selectText}>{route.params.name}</Text>
-//                     </View>
-//                     <View style={{ flexDirection: 'row' }}>
-//                         <Icon name='pencil' color={colors.gray} size={20} />
-//                     </View>
-//                 </TouchableOpacity>
-//                 <Separator />
-//             </View>
-//             <View style={{ marginHorizontal: 20, marginVertical: 10 }}>
-//                 <Text style={styles.h2}>Mobile Number</Text>
-//                 <TouchableOpacity style={styles.selectRow}>
-//                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-//                         <Text style={styles.selectText}></Text>
-//                     </View>
-//                     <View style={{ flexDirection: 'row' }}>
-//                         <Icon name='pencil' color={colors.gray} size={20} />
-//                     </View>
-//                 </TouchableOpacity>
-//                 <Separator />
-//             </View>
-//             <View style={{ marginHorizontal: 20, marginVertical: 10 }}>
-//                 <Text style={styles.h2}>Facebook</Text>
-//                 <TouchableOpacity style={styles.selectRow}>
-//                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-//                         <Text style={styles.selectText}>Verified</Text>
-//                     </View>
-//                     <View style={{ flexDirection: 'row' }}>
-//                         <Icon name='check-circle' color={colors.green} size={20} />
-//                     </View>
-//                 </TouchableOpacity>
-//                 <Separator />
-//             </View>
-//         </SafeAreaView>
-
-//     )
-// }
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         backgroundColor: colors.white
-//     },
-//     header: {
-//         flexDirection: 'row',
-//         alignItems: 'center',
-//         alignSelf: 'center',
-//         marginVertical: -18
-//     },
-//     row: {
-//         flexDirection: 'row',
-//         alignItems: 'center',
-//         width: 250,
-//     },
-//     imgCon: {
-//         justifyContent: 'center',
-//         alignItems: 'center',
-//         position: 'relative'
-//     },
-//     image: {
-//         width: 100,
-//         height: 100,
-//         marginVertical: 10,
-//         marginRight: 12,
-//         borderRadius: 100,
-//         resizeMode: 'contain'
-//     },
-//     heading: {
-//         color: colors.black,
-//         fontSize: 26,
-//         fontFamily: fonts.BOLD,
-//     },
-//     h1: {
-//         color: colors.black,
-//         fontSize: 16,
-//         zIndex: 2,
-//         marginTop: 12,
-//         fontFamily: fonts.BOLD,
-
-//         textAlign: 'center',
-//     },
-//     h2: {
-//         fontSize: 14,
-//         color: colors.black,
-//         fontFamily: fonts.BOLD,
-//         marginHorizontal: 8,
-//     },
-//     text: {
-//         color: colors.gray,
-//         fontSize: 14,
-//         fontFamily: fonts.SEMIBOLD,
-//         marginHorizontal: wp('2')
-//     },
-//     signup: {
-//         color: colors.primaryLight,
-//         marginTop: 16,
-//         paddingHorizontal: 15,
-//         marginBottom: 14,
-//         fontSize: 14,
-//         fontFamily: fonts.SEMIBOLD,
-//         textAlign: 'center'
-//     },
-//     topicHeading: {
-//         color: colors.secondary,
-//         fontFamily: fonts.SEMIBOLD
-//     },
-//     selectRow: {
-//         marginHorizontal: 5,
-//         marginVertical: 15,
-//         justifyContent: 'space-between',
-//         flexDirection: 'row'
-//     },
-//     selectText: {
-//         fontSize: 16,
-//         marginLeft:8,
-//         color: colors.gray,
-//         fontFamily: fonts.SEMIBOLD
-//     },
-//     button: {
-//         width: '20%',
-//         borderRadius: 5,
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//         alignSelf: 'center',
-//         backgroundColor: colors.white,
-//         borderColor: colors.gray,
-//         borderWidth: 1
-//     },
-//     ButtonLabel: {
-//         color: colors.primaryLight,
-//         fontSize: 16,
-//         fontFamily: fonts.SEMIBOLD
-//     },
-// })
-// export default EditProfile
-
-
-
-
 import React, { useState, useEffect } from "react"
 import { SafeAreaView, StyleSheet, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { TextInput, Button, Switch } from 'react-native-paper'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
-
+import Datetime from 'react-native-modal-datetime-picker'
+import moment from "moment/moment"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
+import { launchImageLibrary } from 'react-native-image-picker'
+
 import * as colors from "../../utilities/colors"
+import * as functions from '../../utilities/functions'
 import * as fonts from "../../utilities/fonts"
+import Dropdown from "../../components/Inputs/Dropdown"
+import Toast from "../../components/Extras/Toast"
 
 const EditProfile = ({ navigation, route }) => {
-    const [email, setEmail] = useState("")
-    const [mobile, setMobile] = useState("")
-    const [username, setUserName] = useState("")
-    const [name, setName] = useState("")
+    const [email, setEmail] = useState(route.params.email)
+    const [phone, setPhone] = useState(route.params.phone)
+    const [name, setName] = useState(route.params.name)
+    const [gender, setGender] = useState(route.params.gender == null ? 'Select Gender' : route.params.gender)
+    const [dob, setDob] = useState(route.params.dob)
+    const [genderModal, setGenderModal] = useState(false)
     const [editIcon, setEditIcon] = useState(true)
-    const [Facebook, setFacebook] = useState(false);
-    const [Instagram, setInstagram] = useState(false);
+    const [offers, setOffers] = useState(route.params.offers_and_bargains)
+    const [newsletter, setNewsletter] = useState(route.params.weekly_newsletter)
+    const [datetimeModal, setDatetimeModal] = useState(false)
+    const [img, setImg] = useState(null)
+    const [image, setImage] = useState(null)
+
+
+    const handleDatetime = (datetime) => {
+        setDatetimeModal(false)
+        setDob(moment(datetime).format('YYYY-MM-DD'))
+    }
+    const OpenGallery = () => {
+        const options = {
+            storageOptions: {
+                path: 'images',
+                mediaType: 'photo',
+            },
+            includeBase64: true,
+            saveToPhotos: true,
+        }
+        launchImageLibrary(options, response => {
+            if (response.didCancel) {
+                console.log("user Cancelled ")
+            }
+            else {
+                console.log(response.assets[0].uri);
+                setImg({ uri: 'data:image/jpg;base64,' + response.assets[0].base64 })
+                setImage(response.assets[0].uri)    
+            }
+        })
+    }
     const handlePress = async () => {
         try {
-            // if (name === "") throw new Error("Enter your name")
-            // if (mobile === "") throw new Error("Enter phone number")
-            //   else{
-            //   let payload = {
-            //     id: user.id,
-            //     name: name,
-            //     email: email,
-            //     mobile: mobile,
-            //     username: username
-            //   }
-            setEditIcon(!editIcon)
-            //   let details = await customerDetails(payload)
-            //   if (!details.status) throw new Error(details.message)
-            //   if (details.status) {
-            //     dispatch(registerDispatch(payload))
-            //     dispatch(loginDispatch(payload))
-            //     navigation.goBack()
-            //   }
-            //   else {
-            //     Toast(details.message)
-            //   }
-            // }
+            console.log(img);
+            const payload = {
+                dob: dob,
+                gender: gender,
+                offers_and_bargains: offers,
+                weekly_newsletter: newsletter,
+                image: img.uri
+            }
+            const response = await functions.updateProfile(payload)
+            console.log(response);
+            if (!response.status) throw new Error(response.message)
+            if (response.status) {
+                setEditIcon(!editIcon)
+                await functions.setItem('user', response.data)
+                Toast("Updated successfully")
+                navigation.replace("BottomNavigator")
+            }
         }
         catch (error) {
-            console.log(error.message)
+            Toast(error.message || "server error")
         }
     }
     useEffect(() => {
         navigation.setOptions({
             headerRight: () => (
-                <Text onPress={() => { editIcon === true ? setEditIcon(false) : handlePress() }} style={styles.h2}>Edit</Text>
+                <Text onPress={() => { editIcon === true ? setEditIcon(!editIcon) : handlePress() }} style={styles.h2}>Edit</Text>
             ),
         })
     }, [])
@@ -218,13 +89,26 @@ const EditProfile = ({ navigation, route }) => {
             <ScrollView>
                 <View style={styles.head}>
                     <View style={styles.imgCon}>
-                        <TouchableOpacity activeOpacity={0.6}>
-                            <Image style={styles.image} source={{ uri: route.params.image_url }} />
+                        <TouchableOpacity
+                            disabled={editIcon ? true : false}
+                            onPress={() => OpenGallery()}
+                            activeOpacity={0.8}>
+                            <Image style={styles.image} source={{ uri: image == null ? route.params.image_url : image }} />
                             <Icon style={{ position: 'absolute', bottom: 0, left: 70 }} name='pencil-circle' color={colors.gray} size={28} />
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={styles.center}>
+                <TouchableOpacity activeOpacity={1} onPress={() => setGenderModal(false)} style={styles.center}>
+                    <View style={styles.InputBox}>
+                        <Dropdown
+                            disabled={editIcon ? true : false}
+                            data={['Male', 'Female', 'Others']}
+                            value={gender}
+                            toggleModal={() => setGenderModal(!genderModal)}
+                            modal={genderModal}
+                            setModal={setGenderModal}
+                            setValue={setGender} />
+                    </View>
                     <View style={styles.InputBoxes}>
                         <View style={styles.InputBox}>
                             <TextInput style={styles.Input}
@@ -247,67 +131,74 @@ const EditProfile = ({ navigation, route }) => {
                                 onChangeText={(value) => setEmail(value)}
                             />
                         </View>
+
                         <View style={styles.InputBox}>
                             <TextInput
                                 theme={{ colors: { text: colors.white, placeholder: colors.primaryLight, } }}
                                 style={styles.Input}
                                 placeholder="Phone number"
                                 activeUnderlineColor={colors.primary}
-                                value={mobile}
+                                value={phone}
                                 disabled={editIcon ? true : false}
                                 maxLength={11}
                                 keyboardType="number-pad"
-                                onChangeText={(value) => setMobile(value)}
+                                onChangeText={(value) => setPhone(value)}
                             />
                         </View>
-                        <View style={styles.InputBox}>
+                        <View
+                            style={styles.InputBox}>
                             <TextInput
+                                disabled={editIcon ? true : false}
                                 theme={{ colors: { text: colors.white, placeholder: colors.primaryLight, } }}
                                 style={styles.Input}
                                 placeholder="Date of Birth"
                                 activeUnderlineColor={colors.primary}
-                                value={mobile}
-                                disabled={editIcon ? true : false}
+                                value={dob}
+                                onPressIn={() => setDatetimeModal(true)}
                                 maxLength={11}
                                 keyboardType="number-pad"
-                                onChangeText={(value) => setMobile(value)}
                             />
                         </View>
-                        <View style={styles.InputBox}>
-                            <TextInput
-                                theme={{ colors: { text: colors.white, placeholder: colors.primaryLight, } }}
-                                style={styles.Input}
-                                placeholder="Gender"
-                                activeUnderlineColor={colors.primary}
-                                value={mobile}
+
+
+                        <View style={styles.row}>
+                            <View style={styles.row}>
+                                <Icon
+                                    name='offer'
+                                    size={22}
+                                    color={colors.gray} />
+                                <Text style={styles.h4}>Offers and bargains  </Text>
+                            </View>
+                            <Switch
                                 disabled={editIcon ? true : false}
-                                maxLength={11}
-                                keyboardType="number-pad"
-                                onChangeText={(value) => setMobile(value)}
-                            />
+                                value={offers}
+                                color={colors.primary}
+                                onValueChange={() => setOffers(!offers)} />
                         </View>
                         <View style={styles.row}>
                             <View style={styles.row}>
                                 <Icon
-                                    name='facebook'
+                                    name='newspaper-variant-multiple-outline'
                                     size={22}
-                                    color={colors.blue} />
-                                <Text style={styles.h4}>Facebook  </Text>
+                                    color={colors.gray} />
+                                <Text style={styles.h4}>Weekly newsletter  </Text>
                             </View>
-                            <Switch value={Facebook} color={colors.blue} onValueChange={() => setFacebook(!Facebook)} />
+                            <Switch
+                                disabled={editIcon ? true : false}
+                                value={newsletter}
+                                color={colors.primary}
+                                onValueChange={() => setNewsletter(!newsletter)} />
                         </View>
-                        <View style={styles.row}>
-                            <View style={styles.row}>
-                                <Icon
-                                    name='instagram'
-                                    size={22}
-                                    color={colors.pink} />
-                                <Text style={styles.h4}>Instagram  </Text>
-                            </View>
-                            <Switch value={Instagram} color={colors.pink} onValueChange={() => setInstagram(!Instagram)} />
-                        </View>
+                        <Datetime
+                            isVisible={datetimeModal}
+                            display="compact"
+                            mode='date'
+                            onConfirm={handleDatetime}
+                            maximumDate={new Date()}
+                            onCancel={() => setDatetimeModal(false)}
+                        />
                     </View>
-                </View>
+                </TouchableOpacity>
                 <View style={styles.btn}>
                     <Button
                         disabled={editIcon ? true : false}
@@ -404,13 +295,22 @@ const styles = StyleSheet.create({
         marginHorizontal: wp("3.5"),
         width: '90%',
     },
+    dropdown: {
+        width: "75%",
+        alignSelf: 'center',
+        backgroundColor: colors.white,
+        borderBlockColor: colors.gray,
+        height: 45,
+        color: colors.gray,
+        fontFamily: fonts.SEMIBOLD
+    },
     btn: {
         justifyContent: "center",
         alignItems: "center"
     },
     footerButton: {
         width: '90%',
-        marginVertical: 8,
+        marginVertical: 16,
         backgroundColor: colors.primary
     },
     footerButtonContent: {

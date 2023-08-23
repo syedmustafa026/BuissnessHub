@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, Image, FlatList } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
@@ -10,7 +10,7 @@ import { Checkbox } from "react-native-paper";
 import Separator from "../../components/Extras/Separator";
 
 const MyAds = ({ navigation }) => {
-  const [checked, setChecked] = React.useState(false)
+  const [checked, setChecked] = useState(false)
 
   const Item = () => {
     return (

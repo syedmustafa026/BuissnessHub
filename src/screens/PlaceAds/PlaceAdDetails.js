@@ -44,7 +44,7 @@ const PlaceAdDetails = ({ navigation, route }) => {
       }
     })
   }
-  console.log(route.params.listing_id);
+
   const RemoveImage = val => {
     const imags = img.filter(image => image?.assets[0]?.uri !== val)
     setImg(imags)
