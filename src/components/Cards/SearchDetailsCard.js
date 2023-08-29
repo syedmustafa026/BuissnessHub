@@ -6,25 +6,41 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
+import * as functions from "../../utilities/functions"
 
 import { useNavigation } from "@react-navigation/native"
 import Separator from "../Extras/Separator"
+import Toast from "../Extras/Toast"
 
 
 const SearchDetailsCard = (item) => {
   const navigation = useNavigation()
   const data = item.item
+
+  const handleAddFavorites = async () => {
+    try {
+      const response = await functions.addFavorite(item.item.id)
+      if (!response.status) throw new Error(response.message)
+      if (response.status) {
+        Toast(response.message)
+      }
+    } catch (error) {
+      Toast(error)
+    }
+  }
   return (
     <TouchableOpacity
       activeOpacity={0.7}
       onPress={() => navigation.navigate('AdDetails', data)}
       style={styles.card}>
       <View>
-        <MaterialIcon
-          style={styles.favIcon}
-          name='favorite-outline'
-          size={24}
-          color={colors.white} />
+        <TouchableOpacity onPress={handleAddFavorites} style={{ zIndex: 4 }}>
+          <MaterialIcon
+            style={styles.favIcon}
+            name='favorite-outline'
+            size={24}
+            color={colors.white} />
+        </TouchableOpacity>
         <Image style={styles.cardImg} source={{ uri: data.main_image_url || "https://img.freepik.com/free-photo/flat-lay-business-concept_53876-24738.jpg?w=1800&t=st=1692634541~exp=1692635141~hmac=2f344c4cded45934ccf853d9e57742feaf6d25761dd047252dbb97524eec9d86" }} />
         <View style={{ margin: 5, padding: 4 }}>
           <Text numberOfLines={1} style={{ color: colors.primary, fontFamily: fonts.SEMIBOLD, fontSize: 18, marginBottom: 4 }} >{data.price || "AED 175,000"}</Text>

@@ -10,7 +10,6 @@ import * as colors from "../utilities/colors"
 import * as fonts from "../utilities/fonts"
 import * as functions from "../utilities/functions"
 const ResultsSubCategory = ({ route, navigation }) => {
-  const [ads, setAds] = useState([])
 
   useEffect(() => {
     navigation.setOptions({

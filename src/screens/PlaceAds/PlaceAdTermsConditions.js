@@ -16,7 +16,7 @@ const PlaceAdTermsConditions = ({ navigation, route }) => {
       console.log(response);
       if (!response.status) throw new Error(response.message)
       if (response.status) {
-        navigation.navigate("Verification",{label:response.phone, by: 'phone'})
+        navigation.navigate("Verification",{label:response.phone, by: 'email'})
       }
     } catch (error) {
       Toast(error.message || "Server Error")

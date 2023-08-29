@@ -3,7 +3,6 @@ import { SafeAreaView, Text, StyleSheet, View } from 'react-native'
 import { TextInput, Button } from 'react-native-paper'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 
-import Toast from "../../components/Extras/Toast"
 import * as functions from '../../utilities/functions'
 import * as fonts from '../../utilities/fonts'
 import * as colors from '../../utilities/colors'

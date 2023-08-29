@@ -23,6 +23,7 @@ const Signup = ({ navigation }) => {
 
   const send = () => {
     setLoading(true)
+    Toast("Waiting for recaptcha verification")
     recaptchaRef.current.open()
   }
 
@@ -41,7 +42,9 @@ const Signup = ({ navigation }) => {
       if (!password) throw new Error('Enter password')
       if (!name) throw new Error('Enter password')
       if (!validatePassword(password)) throw new Error('Enter minimum 6 digits password')
-      else if (token == null) send()
+      else if (token == null) {
+        send()
+      }
       else if (name && validateEmail(email) && validatePassword(password)) {
         const payload = {
           name: name,

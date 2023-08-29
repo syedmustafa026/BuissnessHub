@@ -16,7 +16,6 @@ const PlaceAdSubCategory = ({ navigation, route }) => {
         category_id: item.category_id,
         subcategory_id: item.id
       })
-      console.log("saving", response);
       if (!response.status) throw new Error(response.message)
       if (response.status) {
         navigation.navigate("PlaceAdDetails", { title: route.params.title, category: item.name, listing_id: response.listing_id })

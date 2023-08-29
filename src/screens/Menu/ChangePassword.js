@@ -5,7 +5,6 @@ import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 import * as functions from "../../utilities/functions"
 import { TextInput, Button, RadioButton } from 'react-native-paper'
-import Dropdown from '../../components/Inputs/Dropdown'
 import Toast from '../../components/Extras/Toast'
 import { validatePassword } from '../../utilities/validations'
 

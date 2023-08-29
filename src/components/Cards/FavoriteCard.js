@@ -8,35 +8,33 @@ import * as fonts from "../../utilities/fonts"
 
 import { useNavigation } from "@react-navigation/native"
 
-const FavoriteCard = () => {
+const FavoriteCard = (item) => {
+  const data = item.item
   const navigation = useNavigation()
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      onPress={() => navigation.navigate('AdDetails')}
+      onPress={() => navigation.navigate('AdDetails', data)}
       style={styles.card}>
       <View>
-        <Image style={styles.cardImg} source={require('../../assets/images/ad.jpeg')} />
+        <Image style={styles.cardImg} source={{ uri: data.main_image_url || "https://img.freepik.com/free-photo/flat-lay-business-concept_53876-24738.jpg?w=1800&t=st=1692634541~exp=1692635141~hmac=2f344c4cded45934ccf853d9e57742feaf6d25761dd047252dbb97524eec9d86" }} />
         <View style={{ margin: 5, padding: 4 }}>
-          <Text numberOfLines={1} style={{ color: colors.primary, fontFamily: fonts.SEMIBOLD, fontSize: 16, marginBottom: 4 }} >AED 175,000 </Text>
-          <Text numberOfLines={1} style={{ color: colors.black, fontFamily: fonts.SEMIBOLD, fontSize: 16, marginBottom: 4 }} >BMW M3. Other </Text>
-          <Text numberOfLines={4} style={{ color: colors.black, fontFamily: fonts.REGULAR }} >
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-            a type specimen book. It has survived not only five centuries, but also the leap
-          </Text>
-          <View style={{ flexDirection: 'row', alignItems: 'center',justifyContent:'space-between', marginVertical: 12 }}>
-            <View style={{flexDirection:'row'}}>
+          <Text numberOfLines={1} style={{ color: colors.primary, fontFamily: fonts.SEMIBOLD, fontSize: 16, marginBottom: 4 }} >AED {data.price} </Text>
+          <Text numberOfLines={1} style={{ color: colors.black, fontFamily: fonts.SEMIBOLD, fontSize: 16, marginBottom: 4 }} >{data.title} </Text>
+          <Text numberOfLines={4} style={{ color: colors.black, fontFamily: fonts.REGULAR }} >{data.description} </Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginVertical: 12 }}>
+            <View style={{ flexDirection: 'row' }}>
               <Icon
                 name='map-marker-outline'
                 size={20}
                 color={colors.gray} />
-              <Text style={styles.cardText}>AL-Mira Square-UAE- Abu Dhabi</Text>
+              <Text style={styles.cardText}>{data.location_name}</Text>
             </View>
             <TouchableOpacity>
-            <Icon
-              name='trash-can-outline'
-              size={20}
-              color={colors.gray} />
+              <Icon
+                name='trash-can-outline'
+                size={20}
+                color={colors.gray} />
             </TouchableOpacity>
           </View>
         </View>

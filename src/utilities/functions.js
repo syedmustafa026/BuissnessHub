@@ -112,7 +112,17 @@ export const saveListingTitle = async (payload) => {
         return error.message
     }
 }
-
+export const searchListing = async (payload) => {
+    try {
+        const { data: response } = await axios.post(`${apiUrl}/listing/search`, payload, {
+            headers: await getHeader()
+        })
+        const json = response
+        return json
+    } catch (error) {
+        return error.message
+    }
+}
 export const submitListingDetail = async (payload) => {
     try {
         const { data: response } = await axios.post(`${apiUrl}/listing/save-ad`, payload, {
@@ -157,7 +167,17 @@ export const logout = async () => {
         return error.message
     }
 }
-
+export const deleteAccount = async () => {
+    try {
+        const { data: response } = await axios.post(`${apiUrl}/user/delete-account`, null, {
+            headers: await getHeader()
+        })
+        const json = response
+        return json
+    } catch (error) {
+        return error.message
+    }
+}
 export const updatePassword = async (payload) => {
     try {
         const { data: response } = await axios.post(`${apiUrl}/update-password`, payload, {
@@ -173,6 +193,28 @@ export const updatePassword = async (payload) => {
 export const user = async () => {
     try {
         const { data: response } = await axios.post(`${apiUrl}/user-data`, null, {
+            headers: await getHeader()
+        })
+        const json = response
+        return json
+    } catch (error) {
+        return error.message
+    }
+}
+export const getFavorites = async () => {
+    try {
+        const { data: response } = await axios.post(`${apiUrl}/user/favourites`, null, {
+            headers: await getHeader()
+        })
+        const json = response
+        return json
+    } catch (error) {
+        return error.message
+    }
+}
+export const addFavorite = async (listing_id) => {
+    try {
+        const { data: response } = await axios.post(`${apiUrl}/listing/add-to-favourites/${listing_id}`, null, {
             headers: await getHeader()
         })
         const json = response
