@@ -1,18 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, Image, FlatList } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
+import * as functions from '../../utilities/functions'
 
 import SelectHorizontalChip from "../../components/Chips/SelectHorizonatlChip";
 import { Checkbox } from "react-native-paper";
 import Separator from "../../components/Extras/Separator";
+import Toast from "../../components/Extras/Toast";
 
 const MyAds = ({ navigation }) => {
   const [checked, setChecked] = useState(false)
+  const [ads, setAds] = useState([])
 
-  const Item = () => {
+  const getMyAds = async () => {
+    try {
+      const response = await functions.getUserAds()
+      setAds(response)
+    } catch (error) {
+      Toast(error.message || "Server Error")
+    }
+  }
+  useEffect(() => {
+    getMyAds()
+
+  }, [])
+  const Item = (item) => {
+    const data = item.item
     return (
       <View >
         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
@@ -23,17 +39,18 @@ const MyAds = ({ navigation }) => {
               setChecked(!checked);
             }}
           />
-          <Image style={styles.cardImg} source={require('../../assets/images/ad.jpeg')} />
+          <Image style={styles.cardImg} source={{ uri: data?.main_image_url }} />
           <View >
-            <Text style={styles.h1}>Untitled Draft</Text>
+            <Text style={styles.h1}>{data.title || "Untitled Ad"}</Text>
             <View style={styles.badge}>
-              <Text style={styles.h2}>Draft</Text>
+              <Text style={styles.h2}>{data.status}</Text>
             </View>
-            <Text style={styles.h4}>Last updated 20 July</Text>
+            <Text style={styles.h4}>{data.created_at_time_diff}</Text>
           </View>
         </View>
         <Separator />
-        <Text onPress={() => navigation.navigate('PlaceAdDetails')} style={[styles.h1, { textAlign: 'right', marginVertical: 6, color: colors.primary }]}>Coninue Ad posting</Text>
+        {data.status === "draft" ? <Text onPress={() => navigation.navigate('PlaceAd')} style={[styles.h1, { textAlign: 'right', marginVertical: 6, color: colors.primary }]}>Coninue Ad posting</Text> :
+          <Text onPress={() => navigation.navigate('AdDetails', data)} style={[styles.h1, { textAlign: 'right', marginVertical: 6, color: colors.primary }]}>Show my ad</Text>}
       </View>
     )
   }
@@ -41,7 +58,7 @@ const MyAds = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.head}>
         <FlatList
-          data={['All Ads', 'Live', 'Payment Pending', "Under Review", 'Draft(10)', 'Rejected']}
+          data={['All Ads', 'Live', 'Draft', 'Rejected']}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (<SelectHorizontalChip name={item} selected={"All Ads"} />)}
@@ -71,9 +88,9 @@ const MyAds = ({ navigation }) => {
         </View>
       </TouchableOpacity>
       <FlatList
-        data={['All Ads', 'Live', 'Rejected']}
+        data={ads}
         contentContainerStyle={{ marginTop: 20 }}
-        renderItem={({ item }) => (<Item />)}
+        renderItem={({ item }) => (<Item item={item} />)}
         keyExtractor={(item, index) => index.toString()}
       />
 
@@ -104,7 +121,8 @@ const styles = StyleSheet.create({
   badge: {
     backgroundColor: colors.gray,
     borderRadius: 20,
-    width: 60,
+    width: 80,
+    padding: 2,
     marginHorizontal: 12,
     color: colors.white,
     marginVertical: 4,

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, FlatList } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
-import Separator from '../components/Extras/Separator'
+import { useIsFocused } from '@react-navigation/native';
 import FavoriteCard from "../components/Cards/FavoriteCard";
 import Toast from "../components/Extras/Toast";
 import * as colors from "../utilities/colors"
@@ -17,6 +15,7 @@ const Favorites = ({ navigation, route }) => {
     const [loading, setLoading] = useState(true)
     const [ads, setAds] = useState([])
 
+    const isFocused = useIsFocused();
 
     const getFavoriteAds = async () => {
         try {
@@ -45,8 +44,10 @@ const Favorites = ({ navigation, route }) => {
         }
     }
     useEffect(() => {
-        getUser()
-    }, [])
+        if (isFocused) {
+            getUser()
+        }
+    }, [isFocused])
 
 
     if (loading) {

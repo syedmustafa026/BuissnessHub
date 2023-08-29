@@ -114,9 +114,7 @@ export const saveListingTitle = async (payload) => {
 }
 export const searchListing = async (payload) => {
     try {
-        const { data: response } = await axios.post(`${apiUrl}/listing/search`, payload, {
-            headers: await getHeader()
-        })
+        const { data: response } = await axios.post(`${apiUrl}/listing/search`, payload)
         const json = response
         return json
     } catch (error) {
@@ -213,6 +211,17 @@ export const getFavorites = async () => {
     }
 }
 export const addFavorite = async (listing_id) => {
+    try {
+        const { data: response } = await axios.post(`${apiUrl}/listing/add-to-favourites/${listing_id}`, null, {
+            headers: await getHeader()
+        })
+        const json = response
+        return json
+    } catch (error) {
+        return error.message
+    }
+}
+export const removeFavorite = async (listing_id) => {
     try {
         const { data: response } = await axios.post(`${apiUrl}/listing/add-to-favourites/${listing_id}`, null, {
             headers: await getHeader()

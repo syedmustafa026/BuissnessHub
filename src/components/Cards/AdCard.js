@@ -10,17 +10,18 @@ import { useNavigation } from "@react-navigation/native";
 
 const AdCard = (item) => {
     const navigation = useNavigation()
+    const data = item.item
     return (
         <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() => navigation.navigate('AdDetails',item.item)}
+            onPress={() => navigation.navigate('AdDetails',data)}
             style={styles.card}>
             <View >
-                <Image style={styles.cardImg} source={{ uri: item.item?.main_image_url }} />
+                <Image style={styles.cardImg} source={{ uri: data?.main_image_url }} />
                 <View style={{ margin: 5 }}>
-                    <Text style={{ color: colors.primary, fontFamily: fonts.BOLD }} >AED {item.item?.price || "2000"}</Text>
-                    <Text style={{ color: colors.black, fontFamily: fonts.BOLD }} >{item.item?.title || "Buisness name"}</Text>
-                    <Text numberOfLines={1} style={{ color: colors.gray }} >{item.item?.created_at_time_diff}</Text>
+                    <Text style={{ color: colors.primary, fontFamily: fonts.BOLD }} >AED {data?.price || "2000"}</Text>
+                    <Text style={{ color: colors.black, fontFamily: fonts.BOLD }} >{data?.title || "Buisness name"}</Text>
+                    <Text numberOfLines={1} style={{ color: colors.gray }} >{data?.created_at_time_diff}</Text>
                 </View>
 
             </View>

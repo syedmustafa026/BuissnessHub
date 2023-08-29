@@ -17,6 +17,7 @@ const Profile = ({ navigation, route }) => {
             if (!response.status) throw new Error(response.message)
             console.log(response);
             if (response.status) {
+                await functions.removeItem("user")
                 Toast("Your account has been deleted")
                 navigation.replace("BottomNavigator")
             }

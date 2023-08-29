@@ -12,15 +12,34 @@ import { ActivityIndicator, Searchbar } from 'react-native-paper'
 import AdCard from "../components/Cards/AdCard"
 import Toast from "../components/Extras/Toast"
 import VerifiedModal from "../components/Modals/VerifiedModal"
+import SearchDropdown from "../components/Inputs/SearchDropdown"
 
 const Home = ({ navigation }) => {
     const [searchQuery, setSearchQuery] = useState('')
+    const [searchResult, setSearchResult] = useState([])
     const [verifiedModal, setVerifiedModal] = useState(false)
     const [category, setCategory] = useState(null)
     const [loading, setLoading] = useState(true)
     const [ads, setAds] = useState([])
+    const [dropdownModal, setDropdownModal] = useState(true)
+    const [showDropdown, setShowDropdown] = useState(false)
 
-    const onChangeSearch = query => setSearchQuery(query)
+    const onChangeSearch = async (query) => {
+        try {
+            if (query === "") setShowDropdown(false)
+            const response = await functions.searchListing({
+                key_words: query,
+                mode: "API"
+            })
+            if (response.status) {
+                console.log(response?.data);
+                setSearchResult(response.data)
+                response.data.length > 0 ? setShowDropdown(true) : setShowDropdown(false)
+            }
+        } catch (error) {
+            Toast(error)
+        }
+    }
     const getCategories = async () => {
         try {
             const response = await functions.getListing()
@@ -66,7 +85,7 @@ const Home = ({ navigation }) => {
             </View>
         )
     }
-    const ListingCategory = ({name}) => {
+    const ListingCategory = ({ name }) => {
         return (
             <>
                 <View style={styles.row}>
@@ -88,74 +107,77 @@ const Home = ({ navigation }) => {
     }
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar
-                barStyle="light-content"
-                backgroundColor={colors.white}
-            />
-            <VerifiedModal visible={verifiedModal} setModalVisible={setVerifiedModal} />
-            <View style={styles.searchBar}>
-                <Searchbar
-                    style={styles.search}
-                    placeholder="What are you looking for?"
-                    onChangeText={onChangeSearch}
-                    value={searchQuery}
-                    blurOnSubmit={true}
-                    onSubmitEditing={() => navigation.navigate("SearchedResults")}
+            <TouchableOpacity activeOpacity={1} onPress={() => setShowDropdown(false)}>
+                <StatusBar
+                    barStyle="light-content"
+                    backgroundColor={colors.white}
                 />
-                <TouchableOpacity activeOpacity={0.6}>
-                    <Icon
-                        onPress={() => navigation.navigate('Notifications')}
-                        name='bell-outline'
-                        size={28}
-                        color={colors.gray500} />
-                </TouchableOpacity>
-            </View>
-            <ScrollView>
-                <View style={styles.cards}>
-                    <FlatList
-                        contentContainerStyle={styles.cards}
-                        data={category}
-                        renderItem={({ item }) => (<ItemCard name={item.name} image={item.image_url} data={item} />)}
-                        keyExtractor={(item, index) => index.toString()}
-                        ListFooterComponent={<View style={{
-                            width: wp('28'),
-                            height: hp('13'),
-                            marginRight: 12,
-                        }} />}
-                    />
-                </View>
-
-                <TouchableOpacity onPress={() => setVerifiedModal(true)} activeOpacity={0.8} style={styles.banner} >
-                    <View style={{
-                        backgroundColor: '#cfe1fc',
-                        width: '27%',
-                        height: 140,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        borderRadius: 10,
-                        borderTopRightRadius: 0,
-                        borderBottomRightRadius: 0
-                    }}>
-                        <MaterialIcon name="verified" size={45} color={colors.primary} />
-                    </View >
-                    <View style={{ flexDirection: 'row', marginHorizontal: 10, marginVertical: 16 }}>
-                        <View>
-                            <Text style={{ fontFamily: fonts.BOLD, fontSize: 16, color: colors.black }}>Become a verified user</Text>
-                            <Text style={{ fontFamily: fonts.SEMIBOLD, fontSize: 14, color: colors.gray }}>Build Trust</Text>
-                            <Text style={{ fontFamily: fonts.SEMIBOLD, fontSize: 14, color: colors.gray }}>Unlock exclusive rewards</Text>
-                            <Text style={{ fontFamily: fonts.BOLD, fontSize: 14, marginTop: 10, color: colors.primary }}>Get Started</Text>
-                        </View>
-                        <MaterialIcon name="arrow-forward-ios" style={{ margin: 10, alignSelf: 'center' }} size={20} color={colors.primaryLight} />
+                <VerifiedModal visible={verifiedModal} setModalVisible={setVerifiedModal} />
+                <View style={styles.searchBar}>
+                    <View style={styles.InputBox}>
+                        <SearchDropdown
+                            showDropdown={showDropdown}
+                            data={searchResult}
+                            navigation={navigation}
+                            value={searchQuery}
+                            onChangeSearch={onChangeSearch}
+                            setValue={setSearchQuery} />
                     </View>
-                </TouchableOpacity>
-                <View >
+                    <TouchableOpacity activeOpacity={0.6}>
+                        <Icon
+                            onPress={() => navigation.navigate('Notifications')}
+                            name='bell-outline'
+                            size={28}
+                            color={colors.gray500} />
+                    </TouchableOpacity>
                 </View>
-                <FlatList
-                    data={category}
-                    renderItem={({ item }) => (<ListingCategory name={item.name} />)}
-                    keyExtractor={(item, index) => index.toString()}
-                />
-            </ScrollView>
+                <ScrollView>
+                    <View style={styles.cards}>
+                        <FlatList
+                            contentContainerStyle={styles.cards}
+                            data={category}
+                            renderItem={({ item }) => (<ItemCard name={item.name} image={item.image_url} data={item} />)}
+                            keyExtractor={(item, index) => index.toString()}
+                            ListFooterComponent={<View style={{
+                                width: wp('28'),
+                                height: hp('13'),
+                                marginRight: 12,
+                            }} />}
+                        />
+                    </View>
+
+                    <TouchableOpacity onPress={() => setVerifiedModal(true)} activeOpacity={0.8} style={styles.banner} >
+                        <View style={{
+                            backgroundColor: '#cfe1fc',
+                            width: '27%',
+                            height: 140,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            borderRadius: 10,
+                            borderTopRightRadius: 0,
+                            borderBottomRightRadius: 0
+                        }}>
+                            <MaterialIcon name="verified" size={45} color={colors.primary} />
+                        </View >
+                        <View style={{ flexDirection: 'row', marginHorizontal: 10, marginVertical: 16 }}>
+                            <View>
+                                <Text style={{ fontFamily: fonts.BOLD, fontSize: 16, color: colors.black }}>Become a verified user</Text>
+                                <Text style={{ fontFamily: fonts.SEMIBOLD, fontSize: 14, color: colors.gray }}>Build Trust</Text>
+                                <Text style={{ fontFamily: fonts.SEMIBOLD, fontSize: 14, color: colors.gray }}>Unlock exclusive rewards</Text>
+                                <Text style={{ fontFamily: fonts.BOLD, fontSize: 14, marginTop: 10, color: colors.primary }}>Get Started</Text>
+                            </View>
+                            <MaterialIcon name="arrow-forward-ios" style={{ margin: 10, alignSelf: 'center' }} size={20} color={colors.primaryLight} />
+                        </View>
+                    </TouchableOpacity>
+                    <View >
+                    </View>
+                    <FlatList
+                        data={category}
+                        renderItem={({ item }) => (<ListingCategory name={item.name} />)}
+                        keyExtractor={(item, index) => index.toString()}
+                    />
+                </ScrollView>
+            </TouchableOpacity>
         </SafeAreaView>
     )
 }

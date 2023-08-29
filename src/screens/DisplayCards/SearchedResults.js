@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView, FlatList } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/FontAwesome5'
@@ -14,7 +14,12 @@ import SortModal from "../../components/Modals/SortModal";
 
 const SearchedResults = ({ route, navigation }) => {
   const [sortModal, setSortModal] = useState(false)
-  console.log(route.params);
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: `${route.params.length} Result found`
+    })
+  }, [])
   return (
     <SafeAreaView style={styles.container}>
       <SortModal visible={sortModal} setModalVisible={setSortModal} />
@@ -52,11 +57,11 @@ const SearchedResults = ({ route, navigation }) => {
           <Text style={{ fontSize: 16, margin: 10, color: colors.black, fontFamily: fonts.SEMIBOLD }}>SORT</Text>
         </TouchableOpacity>
       </View>
-          <FlatList
-            data={route.params}
-            renderItem={({ item }) => (<SearchDetailsCard item={item} />)}
-            keyExtractor={(item, index) => index.toString()}
-          />
+      <FlatList
+        data={route.params}
+        renderItem={({ item }) => (<SearchDetailsCard item={item} />)}
+        keyExtractor={(item, index) => index.toString()}
+      />
 
     </SafeAreaView>
   )

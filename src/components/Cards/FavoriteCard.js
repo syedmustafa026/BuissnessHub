@@ -5,12 +5,27 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
+import * as functions from "../../utilities/functions"
 
 import { useNavigation } from "@react-navigation/native"
+import Toast from "../Extras/Toast"
 
 const FavoriteCard = (item) => {
   const data = item.item
   const navigation = useNavigation()
+
+  const handleRemoveFavorites = async () => {
+    try {
+      const response = await functions.removeFavorite(data.id)
+      // if (!response.status) throw new Error(response.message)
+      console.log(response);
+      if (response.status) {
+        Toast(response.message)
+      }
+    } catch (error) {
+      Toast(error)
+    }
+  }
   return (
     <TouchableOpacity
       activeOpacity={0.7}
@@ -32,6 +47,7 @@ const FavoriteCard = (item) => {
             </View>
             <TouchableOpacity>
               <Icon
+                onPress={handleRemoveFavorites}
                 name='trash-can-outline'
                 size={20}
                 color={colors.gray} />
