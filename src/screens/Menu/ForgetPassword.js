@@ -23,7 +23,7 @@ const ForgetPassword = ({ navigation, route }) => {
         Alert.alert("Wait", `Are you sure your email is ${email}`, [{
           text: "Yes",
           onPress: async () => {
-            const response = await functions.forgotPassword({ label: email, by: "email" })
+            const response = await functions.forgotPassword({ label: email, by: "forget" })
             console.log(response);
             navigation.navigate("Verification", email)
             // if (!response.status) Toast(response.message)

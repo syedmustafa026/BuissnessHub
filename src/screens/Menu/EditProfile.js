@@ -60,7 +60,7 @@ const EditProfile = ({ navigation, route }) => {
                 gender: gender,
                 offers_and_bargains: offers,
                 weekly_newsletter: newsletter,
-                image: img.uri
+                image: img?.uri
             }
             const response = await functions.updateProfile(payload)
             console.log(response);

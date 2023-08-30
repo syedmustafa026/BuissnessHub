@@ -3,18 +3,39 @@ import { View, Image, Text, StyleSheet } from 'react-native'
 import { Appbar } from "react-native-paper";
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
+import moment from "moment";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import * as functions from "../../utilities/functions"
+import Toast from "../Extras/Toast"
 
-const SavedSearchComponent = () => {
+const SavedSearchComponent = (item) => {
+
+  const data = item.item
+
+  const deleteItem = async () => {
+    try {
+      const response = await functions.removeSearchedItem(data.id)
+      console.log(response);
+      if (response.status) {
+        Toast(response.message)
+      }
+    } catch (error) {
+      Toast(error)
+    }
+  }
   return (
-    <View style={{ padding: 15, flexDirection: 'row',justifyContent:'space-between' }}>
+    <View style={{ padding: 15, flexDirection: 'row', justifyContent: 'space-between' }}>
       <View style={{ paddingHorizontal: 15, }}>
-        <Text style={styles.h1}>Buisness of Shares sale</Text>
-        <View style={{flexDirection:'row'}}>
-        <Text style={styles.h2}>Sale of Shares</Text>
-        <Text style={styles.h4}>19 July 2023!</Text>
+        <Text style={styles.h1}>{data.key_words}</Text>
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={styles.h4}>{moment(data.createdAt).format("DD-MMMM-YYYY")}</Text>
         </View>
       </View>
-      <Appbar.Action icon="dots-vertical" />
+      <Icon
+        onPress={deleteItem}
+        name='trash-can-outline'
+        size={24}
+        color={colors.primary} />
     </View>
   )
 }
@@ -33,7 +54,7 @@ const styles = StyleSheet.create({
     color: colors.gray,
     fontFamily: fonts.SEMIBOLD,
     marginVertical: 2,
-    marginRight:8
+    marginRight: 8
   },
   h4: {
     fontSize: 12,

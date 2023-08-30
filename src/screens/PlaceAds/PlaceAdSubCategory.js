@@ -11,26 +11,31 @@ import Toast from "../../components/Extras/Toast"
 const PlaceAdSubCategory = ({ navigation, route }) => {
 
   const saveTitle = async (item) => {
-    try {
-      const response = await functions.saveListingTitle({
-        category_id: item.category_id,
-        subcategory_id: item.id
-      })
-      if (!response.status) throw new Error(response.message)
-      if (response.status) {
-        navigation.navigate("PlaceAdDetails", { title: route.params.title, category: item.name, listing_id: response.listing_id })
+    if (route.params?.by === "filters") {
+      navigation.replace("Filters", { sub: item })
+    }
+    else {
+      try {
+        const response = await functions.saveListingTitle({
+          category_id: item.category_id,
+          subcategory_id: item.id
+        })
+        if (!response.status) throw new Error(response.message)
+        if (response.status) {
+          navigation.navigate("PlaceAdDetails", { title: route.params.title, category: item.name, listing_id: response.listing_id })
+        }
+      } catch (error) {
+        Toast(error.message || "Server Error")
       }
-    } catch (error) {
-      Toast(error.message || "Server Error")
     }
   }
-
+  console.log(route.params.by);
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ justifyContent: 'center', marginVertical: 16 }}>
-        <Text style={styles.h2}>Now Choose the right category for your ad:</Text>
-        <Text style={styles.h4}><Text onPress={() => navigation.navigate('PlaceAdListing')} style={{ color: colors.primary }}>...  </Text>
-          &gt;<Text onPress={() => navigation.goBack()} style={{ color: colors.primary }}>  Ad title</Text>  &gt; {route.params.title}</Text>
+        <Text style={styles.h2}>{route.params?.by === "filters" ? "Select sub category for filter ads" : "Now Choose the right category for your ad:"}</Text>
+        {route.params?.by === "filters" ? null : <Text style={styles.h4}><Text onPress={() => navigation.navigate('PlaceAdListing')} style={{ color: colors.primary }}>...  </Text>
+          &gt;<Text onPress={() => navigation.goBack()} style={{ color: colors.primary }}>  Ad title</Text>  &gt; {route.params.title}</Text>}
       </View>
       <FlatList
         data={route.params.data.sub_categories}

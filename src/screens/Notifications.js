@@ -9,42 +9,42 @@ import NotificationComponent from "../components/Rows/NotificationComponent";
 
 const Notifications = ({ navigation }) => {
   return (
-    <SafeAreaView style={styles.container}>
-      {/* <FlatList
-        data={['All Residential', 'office', 'industrial', "retail", 'Iran', 'kuwait', 'UAE']}
-        renderItem={({ item }) => (<NotificationComponent opened={true} />)}
-        keyExtractor={(item, index) => index.toString()}
-      /> */}
-      <NotificationComponent opened={true} />
-      <NotificationComponent />
-      <NotificationComponent />
-    </SafeAreaView>
-    //  <SafeAreaView style={styles.center}>
-    //    <Image source={require("../assets/images/ringbell.jpeg")} style={styles.img} />
-    //   <Text style={{
-    //     fontFamily: fonts.REGULAR,
-    //     fontSize: 24,
-    //     marginHorizontal: 12,
-    //     textAlign: 'center', color: colors.black
-    //   }}>No Notification... yet! </Text>
-    //   <Text style={{
-    //     fontFamily: fonts.REGULAR,
-    //     fontSize: 14,
-    //     marginHorizontal: 28,
-    //     textAlign: 'center', color: colors.black
-    //   }}>View ad Recommendation and news by Buissness Hub</Text>
-    //   <TouchableOpacity
-    //     onPress={() => navigation.goBack()}
-    //     activeOpacity={0.8}
-    //     style={styles.button}>
-    //     <Text style={{
-    //       color: colors.black,
-    //       paddingHorizontal: 15,
-    //       fontSize: 18,
-    //       fontFamily: fonts.REGULAR
-    //     }}>Explore Now</Text>
-    //   </TouchableOpacity> 
-    //  </SafeAreaView>
+    // <SafeAreaView style={styles.container}>
+    //   {/* <FlatList
+    //     data={['All Residential', 'office', 'industrial', "retail", 'Iran', 'kuwait', 'UAE']}
+    //     renderItem={({ item }) => (<NotificationComponent opened={true} />)}
+    //     keyExtractor={(item, index) => index.toString()}
+    //   /> */}
+    //   <NotificationComponent opened={true} />
+    //   <NotificationComponent />
+    //   <NotificationComponent />
+    // </SafeAreaView>
+     <SafeAreaView style={styles.center}>
+       <Image source={require("../assets/images/ringbell.jpeg")} style={styles.img} />
+      <Text style={{
+        fontFamily: fonts.REGULAR,
+        fontSize: 24,
+        marginHorizontal: 12,
+        textAlign: 'center', color: colors.black
+      }}>No Notification... yet! </Text>
+      <Text style={{
+        fontFamily: fonts.REGULAR,
+        fontSize: 14,
+        marginHorizontal: 28,
+        textAlign: 'center', color: colors.black
+      }}>View ad Recommendation and news by Buissness Hub</Text>
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        activeOpacity={0.8}
+        style={styles.button}>
+        <Text style={{
+          color: colors.black,
+          paddingHorizontal: 15,
+          fontSize: 18,
+          fontFamily: fonts.REGULAR
+        }}>Explore Now</Text>
+      </TouchableOpacity> 
+     </SafeAreaView>
   )
 }
 const styles = StyleSheet.create({

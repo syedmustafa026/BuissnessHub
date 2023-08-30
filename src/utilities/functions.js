@@ -8,7 +8,9 @@ export const getHeader = async () => {
     const USER_TOKEN = await getItem('token')
     if (USER_TOKEN != null) {
         const AuthStr = {
-            Authorization: `Bearer ${USER_TOKEN}`
+            Authorization: `Bearer ${USER_TOKEN}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
         }
         return AuthStr
     }
@@ -71,6 +73,15 @@ export const getListing = async () => {
         return error.message
     }
 }
+export const popularAds = async () => {
+    try {
+        const { data: response } = await axios.post(`${apiUrl}/popular-ads`)
+        const json = response
+        return json
+    } catch (error) {
+        return error.message
+    }
+}
 export const getPostedAds = async (subcategory_id) => {
     try {
         const { data: response } = await axios.post(`${apiUrl}/ads/${subcategory_id}`)
@@ -121,6 +132,7 @@ export const searchListing = async (payload) => {
         return error.message
     }
 }
+
 export const submitListingDetail = async (payload) => {
     try {
         const { data: response } = await axios.post(`${apiUrl}/listing/save-ad`, payload, {
@@ -145,9 +157,22 @@ export const agreeTermsConditions = async (listing_id) => {
     }
 }
 
-export const verifyPhone = async () => {
+export const verifyEmail = async () => {
     try {
-        const { data: response } = await axios.post(`${apiUrl}/verify-phone-code`)
+        const { data: response } = await axios.post(`${apiUrl}/verify-email`, null, {
+            headers: await getHeader()
+        })
+        const json = response
+        return json
+    } catch (error) {
+        return error.message
+    }
+}
+export const verifyEmailCode = async () => {
+    try {
+        const { data: response } = await axios.post(`${apiUrl}/verify-email-code`, null, {
+            headers: await getHeader()
+        })
         const json = response
         return json
     } catch (error) {
@@ -168,6 +193,39 @@ export const logout = async () => {
 export const deleteAccount = async () => {
     try {
         const { data: response } = await axios.post(`${apiUrl}/user/delete-account`, null, {
+            headers: await getHeader()
+        })
+        const json = response
+        return json
+    } catch (error) {
+        return error.message
+    }
+}
+export const removeSearchedItem = async (search_id) => {
+    try {
+        const { data: response } = await axios.post(`${apiUrl}/search/delete/${search_id}`, null, {
+            headers: await getHeader()
+        })
+        const json = response
+        return json
+    } catch (error) {
+        return error.message
+    }
+}
+export const deleteSavedSearches = async () => {
+    try {
+        const { data: response } = await axios.post(`${apiUrl}/search/delete-all`, null, {
+            headers: await getHeader()
+        })
+        const json = response
+        return json
+    } catch (error) {
+        return error.message
+    }
+}
+export const savedSearches = async () => {
+    try {
+        const { data: response } = await axios.post(`${apiUrl}/user/searches`, null, {
             headers: await getHeader()
         })
         const json = response
@@ -223,7 +281,7 @@ export const addFavorite = async (listing_id) => {
 }
 export const removeFavorite = async (listing_id) => {
     try {
-        const { data: response } = await axios.post(`${apiUrl}/listing/add-to-favourites/${listing_id}`, null, {
+        const { data: response } = await axios.post(`${apiUrl}/listing/remove-from-favourites/${listing_id}`, null, {
             headers: await getHeader()
         })
         const json = response

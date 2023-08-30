@@ -17,7 +17,7 @@ const SearchedResults = ({ route, navigation }) => {
 
   useEffect(() => {
     navigation.setOptions({
-      title: `${route.params.length} Result found`
+      title: `${route.params?.length || 0} Result found`
     })
   }, [])
   return (

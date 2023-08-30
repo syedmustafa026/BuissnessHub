@@ -17,9 +17,10 @@ const FavoriteCard = (item) => {
   const handleRemoveFavorites = async () => {
     try {
       const response = await functions.removeFavorite(data.id)
-      // if (!response.status) throw new Error(response.message)
-      console.log(response);
       if (response.status) {
+        Toast(response.message)
+      }
+      else {
         Toast(response.message)
       }
     } catch (error) {
@@ -34,16 +35,16 @@ const FavoriteCard = (item) => {
       <View>
         <Image style={styles.cardImg} source={{ uri: data.main_image_url || "https://img.freepik.com/free-photo/flat-lay-business-concept_53876-24738.jpg?w=1800&t=st=1692634541~exp=1692635141~hmac=2f344c4cded45934ccf853d9e57742feaf6d25761dd047252dbb97524eec9d86" }} />
         <View style={{ margin: 5, padding: 4 }}>
-          <Text numberOfLines={1} style={{ color: colors.primary, fontFamily: fonts.SEMIBOLD, fontSize: 16, marginBottom: 4 }} >AED {data.price} </Text>
-          <Text numberOfLines={1} style={{ color: colors.black, fontFamily: fonts.SEMIBOLD, fontSize: 16, marginBottom: 4 }} >{data.title} </Text>
-          <Text numberOfLines={4} style={{ color: colors.black, fontFamily: fonts.REGULAR }} >{data.description} </Text>
+          <Text numberOfLines={1} style={{ color: colors.primary, fontFamily: fonts.SEMIBOLD, fontSize: 16, marginBottom: 4 }} >AED {data.price || 78000} </Text>
+          <Text numberOfLines={1} style={{ color: colors.black, fontFamily: fonts.SEMIBOLD, fontSize: 16, marginBottom: 4 }} >{data.title || "XYZ Buisness for Sale"} </Text>
+          <Text numberOfLines={4} style={{ color: colors.black, fontFamily: fonts.REGULAR }} >{data.description || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to makea type specimen book. It has survived not only five centuries, but also the leap"} </Text>
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginVertical: 12 }}>
             <View style={{ flexDirection: 'row' }}>
               <Icon
                 name='map-marker-outline'
                 size={20}
                 color={colors.gray} />
-              <Text style={styles.cardText}>{data.location_name}</Text>
+              <Text style={styles.cardText}>{data.location_name || "Al mira square"}</Text>
             </View>
             <TouchableOpacity>
               <Icon
@@ -67,7 +68,6 @@ const styles = StyleSheet.create({
     right: 10
   },
   card: {
-
     width: "100%",
     height: hp('46'),
     borderColor: colors.white,

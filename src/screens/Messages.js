@@ -40,7 +40,7 @@ const Messages = ({ route,navigation }) => {
                             fontSize: 16,
                             marginHorizontal: 12,
                             textAlign: 'center', color: colors.primaryLight
-                        }}>Its like a desert in here! You dont have any favorites :( </Text>
+                        }}>Its like a desert in here! You dont have any messages :( </Text>
 
 
                     </SafeAreaView> :

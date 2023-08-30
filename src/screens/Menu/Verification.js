@@ -7,26 +7,38 @@ import * as functions from '../../utilities/functions'
 import * as fonts from '../../utilities/fonts'
 import * as colors from '../../utilities/colors'
 import ChangePasswordModal from '../../components/Modals/ChangePasswordModal'
+import Toast from '../../components/Extras/Toast'
 
 const Verification = ({ navigation, route }) => {
   const [changePasswordModal, setChangePasswordModal] = useState(false)
   const [code, setCode] = useState('')
+  const [user, setUser] = useState(false)
 
+  const getUser = async () => {
+    const response = await functions.getItem('user')
+    setUser(response)
+  }
+  useEffect(() => {
+    getUser()
+  }, [])
+  console.log(user);
   const verifyCode = async () => {
     try {
-      if (code.length != 7) throw new Error("Enter 7 digit code")
-      if (route.params.by === 'phone') {
-        const response = await functions.verifyPhone({
-          verification_code: parseInt(code)
-        })
-        console.log(response);
-      }
-      if (route.params.by === 'email') {
-        const response = await functions.forgetVerificationCode({
-          password_reset_code: parseInt(code)
-        })
-        console.log(response);
-      }
+      // if (code.length != 7) throw new Error("Enter 7 digit code")
+      // if (route.params.by === 'placeAd') {
+      //   const response = await functions.verifyPhone({
+      //     verification_code: parseInt(code)
+      //   })
+      //   console.log(response);
+      // }
+      // if (route.params.by === 'foget') {
+      //   const response = await functions.forgetVerificationCode({
+      //     password_reset_code: parseInt(code)
+      //   })
+      //   console.log(response);
+      // }
+      Toast("Ad posted successfully")
+      navigation.replace("BottomNavigator")
     }
     catch (error) {
 
@@ -43,7 +55,7 @@ const Verification = ({ navigation, route }) => {
       <View style={styles.section}>
         <View style={styles.header}>
           <Text style={styles.h1}>Verification Code</Text>
-          <Text style={styles.h4}>A 7 digits code has been sent to {route.params.label}</Text>
+          <Text style={styles.h4}>A 7 digits code has been sent to {user.email}</Text>
         </View>
         <View
           style={styles.InputBox}>

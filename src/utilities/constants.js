@@ -1,5 +1,5 @@
 export const publicUrl = "http://businesshub.jdesigntechnologies.com"
 export const apiUrl = "http://businesshub.jdesigntechnologies.com/api"
 
-export const siteKey = "6LeyoQ4nAAAAALQ7qfYdJwmcV-ChoKw4pYjCO6MU"
-export const secretKey = "6LeyoQ4nAAAAAIhioSmscHrIWTixCiNTXv4XXekp"
+export const siteKey = "6LdkwOgnAAAAABFlk1YF82FIUG6Y3eTD5ZYky7RG"
+export const secretKey = "6LdkwOgnAAAAABOEggABUYrv7Y4NfCHJCSQgy5UQ"

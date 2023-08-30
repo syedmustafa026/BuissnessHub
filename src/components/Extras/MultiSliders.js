@@ -41,7 +41,7 @@ const Slider = () => {
                 borderRadius: 20,
                 slipDisplacement: 40
             }}
-            values={[0, 100]}
+            values={[0, 10000]}
             sliderLength={350}
             min={0}
             max={100}

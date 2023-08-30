@@ -82,7 +82,7 @@ const AdDetails = ({ navigation, route }) => {
                     <View>
                         <View style={styles.row}>
                             <Text style={styles.boldText}>Related</Text>
-                            <Text style={styles.regularText}>{data.title || "No name"}</Text>
+                            <Text style={[styles.regularText, { width: "56%", textAlign: 'right' }]}>{data.title || "No name"}</Text>
                         </View>
                         <Separator />
                         <View style={styles.row}>
@@ -97,7 +97,7 @@ const AdDetails = ({ navigation, route }) => {
                         <Separator />
                         <View style={styles.row}>
                             <Text style={styles.boldText}>SubCategory</Text>
-                            <Text style={styles.regularText}>{data.subcategory_name}</Text>
+                            <Text numberOfLines={1} style={[styles.regularText, { width: "56%", textAlign: 'right' }]}>{data.subcategory_name}</Text>
                         </View>
                         <Separator />
                         <View style={styles.row}>
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
     regularText: {
         color: colors.gray,
         fontSize: 14,
-        fontFamily: fonts.REGULAR
+        fontFamily: fonts.REGULAR,
     },
     shareIcon: {
         position: "absolute",
@@ -268,7 +268,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingHorizontal: 20,
-        paddingVertical: 15
+        paddingVertical: 15,
+        overflow: 'hidden'
     },
     image: {
         width: wp('12'),

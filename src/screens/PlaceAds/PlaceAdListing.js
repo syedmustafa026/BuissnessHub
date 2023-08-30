@@ -7,15 +7,23 @@ import * as fonts from "../../utilities/fonts"
 import Toast from "../../components/Extras/Toast"
 import * as functions from "../../utilities/functions"
 
-const PlaceAdListing = ({ navigation,route }) => {
+const PlaceAdListing = ({ navigation, route }) => {
     const [category, setCategory] = useState(null)
     const [loading, setLoading] = useState(true)
 
+    const handleTap = (item) => {
+        if (route.params == "category") {
+            navigation.replace("Filters", { category: item.data })
+        }
+        else {
+            navigation.navigate('PlaceAdTitle', { data: item.data, city: route.params.city })
+        }
+    }
     const ItemCard = (item) => {
         return (
             <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => navigation.navigate('PlaceAdTitle', { data: item.data, city: route.params.city })}
+                onPress={() => handleTap(item)}
                 style={styles.card}>
                 <View style={{ alignItems: 'center' }}>
                     <Image style={styles.cardImg} source={{ uri: item.image }} />
@@ -59,8 +67,8 @@ const PlaceAdListing = ({ navigation,route }) => {
                         onPress={() => navigation.goBack()}
                         color={colors.black} />
                     <View style={{ justifyContent: 'center', marginTop: 48 }}>
-                        <Text style={styles.h1}>What are you listing</Text>
-                        <Text style={styles.h4}>Choose the category that your ad fits into?</Text>
+                        <Text style={styles.h1}>{route.params == "category" ? "Select Category " : "What are you listing"}</Text>
+                        <Text style={styles.h4}>{route.params == "category" ? "Filter your ad by category" : "Choose the category that your ad fits into?"}</Text>
                     </View>
                     <View style={styles.cards}>
                         <FlatList

@@ -1,5 +1,5 @@
 import React from "react"
-import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Image, Text, StyleSheet, TouchableOpacity,Linking } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
@@ -21,8 +21,10 @@ const SearchDetailsCard = (item) => {
     try {
       const response = await functions.addFavorite(item.item.id)
       console.log(response);
-      // if (!response.status) throw new Error(response.message)
       if (response.status) {
+        Toast(response.message)
+      }
+      else {
         Toast(response.message)
       }
     } catch (error) {
@@ -61,6 +63,7 @@ const SearchDetailsCard = (item) => {
         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginHorizontal: 8, marginVertical: 4 }}>
           <TouchableOpacity
             activeOpacity={0.6}
+            onPress={()=>Linking.openURL(`tel:${123456789}`)}
             style={styles.button}>
             <Icon
               name='phone'
@@ -79,6 +82,7 @@ const SearchDetailsCard = (item) => {
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.6}
+            onPress={()=>Linking.openURL(`https://wa.me/${923330269568}`)}
             style={styles.button}>
             <Icon
               name='whatsapp'

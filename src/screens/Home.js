@@ -53,12 +53,11 @@ const Home = ({ navigation }) => {
     }
     const getAds = async () => {
         try {
-            const response = await functions.getPostedAds(1)
+            const response = await functions.popularAds()
             setAds(response)
         } catch (error) {
             Toast(error.message || "Server Error")
         }
-
     }
     const ItemCard = (item) => {
         return (
@@ -107,31 +106,31 @@ const Home = ({ navigation }) => {
     }
     return (
         <SafeAreaView style={styles.container}>
-            <TouchableOpacity activeOpacity={1} onPress={() => setShowDropdown(false)}>
-                <StatusBar
-                    barStyle="light-content"
-                    backgroundColor={colors.white}
-                />
-                <VerifiedModal visible={verifiedModal} setModalVisible={setVerifiedModal} />
-                <View style={styles.searchBar}>
-                    <View style={styles.InputBox}>
-                        <SearchDropdown
-                            showDropdown={showDropdown}
-                            data={searchResult}
-                            navigation={navigation}
-                            value={searchQuery}
-                            onChangeSearch={onChangeSearch}
-                            setValue={setSearchQuery} />
-                    </View>
-                    <TouchableOpacity activeOpacity={0.6}>
-                        <Icon
-                            onPress={() => navigation.navigate('Notifications')}
-                            name='bell-outline'
-                            size={28}
-                            color={colors.gray500} />
-                    </TouchableOpacity>
+            <StatusBar
+                barStyle="light-content"
+                backgroundColor={colors.white}
+            />
+            <VerifiedModal visible={verifiedModal} setModalVisible={setVerifiedModal} />
+            <View style={styles.searchBar}>
+                <View style={styles.InputBox}>
+                    <SearchDropdown
+                        showDropdown={showDropdown}
+                        data={searchResult}
+                        navigation={navigation}
+                        value={searchQuery}
+                        onChangeSearch={onChangeSearch}
+                        setValue={setSearchQuery} />
                 </View>
-                <ScrollView>
+                <TouchableOpacity activeOpacity={0.6}>
+                    <Icon
+                        onPress={() => navigation.navigate('Notifications')}
+                        name='bell-outline'
+                        size={28}
+                        color={colors.gray500} />
+                </TouchableOpacity>
+            </View>
+            <ScrollView nestedScrollEnabled={true} style={{ width: "100%" }} >
+                <TouchableOpacity activeOpacity={1} onPress={() => setShowDropdown(false)}>
                     <View style={styles.cards}>
                         <FlatList
                             contentContainerStyle={styles.cards}
@@ -169,16 +168,18 @@ const Home = ({ navigation }) => {
                             <MaterialIcon name="arrow-forward-ios" style={{ margin: 10, alignSelf: 'center' }} size={20} color={colors.primaryLight} />
                         </View>
                     </TouchableOpacity>
-                    <View >
-                    </View>
+                </TouchableOpacity>
+
+                <View >
                     <FlatList
                         data={category}
                         renderItem={({ item }) => (<ListingCategory name={item.name} />)}
                         keyExtractor={(item, index) => index.toString()}
                     />
-                </ScrollView>
-            </TouchableOpacity>
-        </SafeAreaView>
+                </View>
+
+            </ScrollView>
+        </SafeAreaView >
     )
 }
 const styles = StyleSheet.create({

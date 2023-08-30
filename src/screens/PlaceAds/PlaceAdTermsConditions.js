@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Image, StyleSheet, Text, View, KeyboardAvoidingView, SafeAreaView, Platform } from 'react-native';
+import { Modal, Image, StyleSheet, Text, View, KeyboardAvoidingView, Platform } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import { Button } from 'react-native-paper';
 import * as colors from "../../utilities/colors"
@@ -12,11 +12,12 @@ const PlaceAdTermsConditions = ({ navigation, route }) => {
   const handleAgree = async () => {
     try {
       console.log(route.params.listing_id);
-      const response = await functions.agreeTermsConditions(route.params.listing_id,{})
+      const response = await functions.agreeTermsConditions(route.params.listing_id, {})
       console.log(response);
       if (!response.status) throw new Error(response.message)
       if (response.status) {
-        navigation.navigate("Verification",{label:response.phone, by: 'email'})
+        // await functions.verifyEmail()
+        navigation.navigate("Verification", { label: response.phone, by: 'placeAd' })
       }
     } catch (error) {
       Toast(error.message || "Server Error")
