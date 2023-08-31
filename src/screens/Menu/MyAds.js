@@ -10,10 +10,12 @@ import SelectHorizontalChip from "../../components/Chips/SelectHorizonatlChip";
 import { Checkbox } from "react-native-paper";
 import Separator from "../../components/Extras/Separator";
 import Toast from "../../components/Extras/Toast";
+import VerifiedModal from "../../components/Modals/VerifiedModal";
 
 const MyAds = ({ navigation }) => {
   const [checked, setChecked] = useState(false)
   const [ads, setAds] = useState([])
+  const [verifiedModal, setVerifiedModal] = useState(false)
 
   const getMyAds = async () => {
     try {
@@ -29,8 +31,10 @@ const MyAds = ({ navigation }) => {
   }, [])
   const Item = (item) => {
     const data = item.item
+    console.log(data.id);
     return (
       <View >
+         <VerifiedModal visible={verifiedModal} setModalVisible={setVerifiedModal} />
         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
           <Checkbox
             color={colors.secondaryLight}

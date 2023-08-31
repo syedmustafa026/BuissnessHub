@@ -12,8 +12,9 @@ const PlaceAdListing = ({ navigation, route }) => {
     const [loading, setLoading] = useState(true)
 
     const handleTap = (item) => {
+        console.log(item);
         if (route.params == "category") {
-            navigation.replace("Filters", { category: item.data })
+            navigation.navigate("PlaceAdSubCategory", { data: { sub_categories: item.data.sub_categories, by: 'filters', category: item.data.name, categoryId: item.data.id } })
         }
         else {
             navigation.navigate('PlaceAdTitle', { data: item.data, city: route.params.city })

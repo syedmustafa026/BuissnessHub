@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Home from '../screens/Home'
 import Favorites from '../screens/Favorites'
-import Messages from '../screens/Messages'
+import Messages from '../screens/Messages/Messages'
 import PlaceAd from '../screens/PlaceAds/PlaceAd'
 import Menu from '../screens/Menu/Menu'
 

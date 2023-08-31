@@ -55,7 +55,7 @@ const Verification = ({ navigation, route }) => {
       <View style={styles.section}>
         <View style={styles.header}>
           <Text style={styles.h1}>Verification Code</Text>
-          <Text style={styles.h4}>A 7 digits code has been sent to {user.email}</Text>
+          <Text style={styles.h4}>A 5 digits code has been sent to {user?.email || "admin@buisnesshub.com"}</Text>
         </View>
         <View
           style={styles.InputBox}>
@@ -64,7 +64,7 @@ const Verification = ({ navigation, route }) => {
             activeOutlineColor={colors.primary}
             style={styles.Input}
             mode="outlined"
-            placeholder='Enter 7 digits code'
+            placeholder='Enter 5 digits code'
             autoFocus={true}
             activeUnderlineColor={colors.primary}
             keyboardType="phone-pad"

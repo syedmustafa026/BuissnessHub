@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
   },
   card: {
     width: "100%",
-    height: hp('46'),
     borderColor: colors.white,
     borderWidth: 1,
     backgroundColor: colors.gray100,

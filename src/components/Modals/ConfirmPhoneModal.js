@@ -5,15 +5,17 @@ import { TextInput, Button } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
+import { useNavigation } from '@react-navigation/native';
 
 const ConfirmPhoneModal = (props) => {
+    const navigation = useNavigation()
 
     return (
         <Modal
             animationType="slide"
             transparent={true}
             visible={props.visible}
-            onRequestClose={()=>props.setModalVisible(false)}
+            onRequestClose={() => props.setModalVisible(false)}
         >
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
@@ -24,27 +26,30 @@ const ConfirmPhoneModal = (props) => {
                                 size={26}
                                 color={colors.gray} />
                         </TouchableOpacity>
-                        <View style={{ justifyContent: 'center', marginVertical: 8,width:'87%' }}>
-                            <Text style={[styles.h2, { color: colors.black,textAlign:'center' }]}>Confirm Phone Number</Text>
+                        <View style={{ justifyContent: 'center', marginVertical: 2, width: '87%' }}>
+                            <Text style={[styles.h2, { color: colors.black, textAlign: 'center' }]}>Confirm Phone Number</Text>
                         </View>
                     </View>
                     <View style={styles.center}>
                         <Image source={require("../../assets/images/sheild.jpeg")} style={styles.img} />
                         <Text style={styles.h1}>Safety First</Text>
-                        <View style={{ marginVertical: 18 }}>
+                        <View style={{ marginVertical: 10 }}>
                             <Text style={styles.h2}>Only users with verified Phone number can avail all features on BuisnessHub.</Text>
                             <Text style={styles.h2}>Please enter your mobile number to start phone number verification.</Text>
                         </View>
                         <TextInput
                             theme={{ colors: { text: colors.black, placeholder: colors.gray, } }}
                             mode='outlined'
-                            placeholder='+971  5X XXX XXXX'
+                            placeholder=' 5X XXX XXXX'
                             activeOutlineColor={colors.gray}
                             keyboardType='number-pad'
                             style={styles.input}
+                            left={<TextInput.Affix
+                                text='+971'
+                            />}
                         />
                         <Button
-                            onPress={() => { }}
+                            onPress={() => { props.setModalVisible(false), navigation.navigate('Chat', { title: props.name || "John Doe" }) }}
                             mode="contained"
                             style={styles.button}
                             labelStyle={styles.ButtonLabel}
@@ -88,7 +93,7 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: 'row',
-        alignItems:'center',
+        alignItems: 'center',
 
     },
     header: {

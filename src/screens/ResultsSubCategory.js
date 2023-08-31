@@ -22,6 +22,7 @@ const ResultsSubCategory = ({ route, navigation }) => {
       if (!response) throw new Error(response.message)
       if (response) {
         navigation.navigate("SearchedResults", response)
+        console.log(response);
       }
     } catch (error) {
       Toast(error.message || "Server Error")

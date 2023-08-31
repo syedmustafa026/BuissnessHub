@@ -21,8 +21,8 @@ const EditProfile = ({ navigation, route }) => {
     const [dob, setDob] = useState(route.params.dob)
     const [genderModal, setGenderModal] = useState(false)
     const [editIcon, setEditIcon] = useState(true)
-    const [offers, setOffers] = useState(route.params.offers_and_bargains)
-    const [newsletter, setNewsletter] = useState(route.params.weekly_newsletter)
+    const [offers, setOffers] = useState(route.params.offers_and_bargains == "1" ? true : false)
+    const [newsletter, setNewsletter] = useState(route.params.weekly_newsletter == "1" ? true : false)
     const [datetimeModal, setDatetimeModal] = useState(false)
     const [img, setImg] = useState(null)
     const [image, setImage] = useState(null)
@@ -48,19 +48,19 @@ const EditProfile = ({ navigation, route }) => {
             else {
                 console.log(response.assets[0].uri);
                 setImg({ uri: 'data:image/jpg;base64,' + response.assets[0].base64 })
-                setImage(response.assets[0].uri)    
+                setImage(response.assets[0].uri)
             }
         })
     }
     const handlePress = async () => {
         try {
-            console.log(img);
             const payload = {
                 dob: dob,
                 gender: gender,
                 offers_and_bargains: offers,
                 weekly_newsletter: newsletter,
-                image: img?.uri
+                image: img?.uri,
+                name: name
             }
             const response = await functions.updateProfile(payload)
             console.log(response);
@@ -127,11 +127,11 @@ const EditProfile = ({ navigation, route }) => {
                                 placeholder="Email Address"
                                 value={email}
                                 activeUnderlineColor={colors.primary}
-                                disabled={editIcon ? true : false}
+                                disabled={true}
                                 onChangeText={(value) => setEmail(value)}
                             />
                         </View>
-
+                        {/* 
                         <View style={styles.InputBox}>
                             <TextInput
                                 theme={{ colors: { text: colors.white, placeholder: colors.primaryLight, } }}
@@ -144,7 +144,7 @@ const EditProfile = ({ navigation, route }) => {
                                 keyboardType="number-pad"
                                 onChangeText={(value) => setPhone(value)}
                             />
-                        </View>
+                        </View> */}
                         <View
                             style={styles.InputBox}>
                             <TextInput
@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        marginVertical: hp("1"),
+        marginVertical: hp("2"),
     },
     Input: {
         backgroundColor: colors.white,

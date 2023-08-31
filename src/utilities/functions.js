@@ -101,6 +101,15 @@ export const getAdDetails = async (ad_id) => {
         return error.message
     }
 }
+export const filterAds = async () => {
+    try {
+        const { data: response } = await axios.post(`${apiUrl}/listing/filter`)
+        const json = response
+        return json
+    } catch (error) {
+        return error.message
+    }
+}
 
 export const getSubCategories = async (payload) => {
     try {
@@ -144,7 +153,17 @@ export const submitListingDetail = async (payload) => {
         return error.message
     }
 }
-
+export const deleteMyAd = async (payload) => {
+    try {
+        const { data: response } = await axios.post(`${apiUrl}/delete-ad`, payload, {
+            headers: await getHeader()
+        })
+        const json = response
+        return json
+    } catch (error) {
+        return error.message
+    }
+}
 export const agreeTermsConditions = async (listing_id) => {
     try {
         const { data: response } = await axios.post(`${apiUrl}/listing/agree-to-terms/${listing_id}`, null, {

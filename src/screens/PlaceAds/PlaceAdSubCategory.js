@@ -9,10 +9,17 @@ import * as functions from "../../utilities/functions"
 import Toast from "../../components/Extras/Toast"
 
 const PlaceAdSubCategory = ({ navigation, route }) => {
-
+  console.log(route.params);
   const saveTitle = async (item) => {
-    if (route.params?.by === "filters") {
-      navigation.replace("Filters", { sub: item })
+    if (route.params?.data.by === "filters") {
+      navigation.replace("Filters", {
+        filter: {
+          category: route.params.data.category,
+          category_id: route.params.data.categoryId,
+          subcategory_id: item.id,
+          sub_category: item.name
+        }
+      })
     }
     else {
       try {
@@ -29,7 +36,6 @@ const PlaceAdSubCategory = ({ navigation, route }) => {
       }
     }
   }
-  console.log(route.params.by);
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ justifyContent: 'center', marginVertical: 16 }}>

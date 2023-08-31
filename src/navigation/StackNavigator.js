@@ -34,13 +34,14 @@ import Login from '../screens/Menu/Login'
 import Signup from '../screens/Menu/Signup'
 import Verification from '../screens/Menu/Verification'
 import ForgetPassword from '../screens/Menu/ForgetPassword'
+import Chat from '../screens/Messages/Chat'
 
 const Stack = createNativeStackNavigator()
 
 const StackNavigator = () => {
     return (
         <NavigationContainer >
-            <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='Filters' >
+            <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='Splash' >
                 <Stack.Screen name="Splash" component={Splash} />
                 <Stack.Screen name="OnBoard" component={OnBoard} />
                 <Stack.Screen options={{ headerShown: true, title: null }} name="Login" component={Login} />
@@ -65,7 +66,7 @@ const StackNavigator = () => {
                 <Stack.Screen options={{ headerShown: true, title: 'Place an Ad', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="Checkout" component={Checkout} />  */}
                 {/* <Stack.Screen options={{ headerShown: true, title: 'Place an Ad', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="PlaceAdPreCategory" component={PlaceAdPreCategory} /> */}
                 {/* <Stack.Screen options={{ headerShown: true, title: 'Place an Ad', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="PlaceAdAutoFillDetails" component={PlaceAdAutoFillDetails} /> */}
-                {/* <Stack.Screen options={{ headerShown: true, title: 'Place an Ad', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="PlaceAdMotorDetails" component={PlaceAdMotorDetails} /> */}
+                <Stack.Screen options={{ headerShown: true }} name="Chat" component={Chat} />
 
 
                 <Stack.Screen options={{ headerShown: true, headerTitleStyle: { fontSize: 18 } }} name="ResultsSubCategory" component={ResultsSubCategory} />

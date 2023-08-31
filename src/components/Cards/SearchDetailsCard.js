@@ -1,5 +1,5 @@
 import React from "react"
-import { View, Image, Text, StyleSheet, TouchableOpacity,Linking } from 'react-native'
+import { View, Image, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
@@ -63,7 +63,7 @@ const SearchDetailsCard = (item) => {
         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginHorizontal: 8, marginVertical: 4 }}>
           <TouchableOpacity
             activeOpacity={0.6}
-            onPress={()=>Linking.openURL(`tel:${123456789}`)}
+            onPress={() => Linking.openURL(`tel:${123456789}`)}
             style={styles.button}>
             <Icon
               name='phone'
@@ -72,6 +72,7 @@ const SearchDetailsCard = (item) => {
             <Text style={{ color: colors.black, paddingHorizontal: 10, fontSize: 18, fontFamily: fonts.SEMIBOLD }}>Call</Text>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => navigation.navigate('Chat', { title: data.created_by_user?.name || "John Doe" })}
             activeOpacity={0.6}
             style={styles.button}>
             <Icon
@@ -82,7 +83,7 @@ const SearchDetailsCard = (item) => {
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.6}
-            onPress={()=>Linking.openURL(`https://wa.me/${923330269568}`)}
+            onPress={() => Linking.openURL(`https://wa.me/${923330269568}`)}
             style={styles.button}>
             <Icon
               name='whatsapp'

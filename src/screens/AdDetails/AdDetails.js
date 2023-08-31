@@ -10,12 +10,28 @@ import AdCard from '../../components/Cards/AdCard'
 import Separator from '../../components/Extras/Separator'
 import MakeOfferModal from "../../components/Modals/MakeOfferModal";
 import ConfirmPhoneModal from "../../components/Modals/ConfirmPhoneModal";
+import * as functions from "../../utilities/functions"
+import Toast from "../../components/Extras/Toast"
 
 const AdDetails = ({ navigation, route }) => {
     const [makeOfferModal, setMakeOfferModal] = useState(false)
     const [confirmPhoneModal, setConfirmPhoneModal] = useState(false)
     const [makeOfferValue, setMakeOfferValue] = useState('')
     const data = route.params
+
+    const handleAddFavorites = async () => {
+        try {
+            const response = await functions.addFavorite(data.id)
+            if (response.status) {
+                Toast(response.message)
+            }
+            else {
+                Toast(response.message)
+            }
+        } catch (error) {
+            Toast(error)
+        }
+    }
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
@@ -32,7 +48,7 @@ const AdDetails = ({ navigation, route }) => {
                     </TouchableOpacity>
                     <Image style={styles.mainImg} source={{ uri: data.main_image_url } || require('../../assets/images/ad.jpeg')} />
                     <TouchableOpacity
-                        onPress={() => navigation.goBack()}
+                        onPress={handleAddFavorites}
                         style={[styles.shareIcon, { right: 90, bottom: -20 }]}
                         activeOpacity={0.5}>
                         <MaterialIcon
@@ -42,7 +58,7 @@ const AdDetails = ({ navigation, route }) => {
                             color={colors.gray} />
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={() => navigation.goBack()}
+                        onPress={handleAddFavorites}
                         style={styles.shareIcon}
                         activeOpacity={0.5}>
                         <Icon
@@ -182,6 +198,8 @@ const AdDetails = ({ navigation, route }) => {
                 setModalVisible={setMakeOfferModal}
                 value={makeOfferValue}
                 setValue={setMakeOfferValue}
+                navigation={navigation}
+                name={data.created_by_user?.name || "John `doe"}
             />
             <ConfirmPhoneModal
                 visible={confirmPhoneModal}

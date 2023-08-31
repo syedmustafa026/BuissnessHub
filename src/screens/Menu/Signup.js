@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-nat
 import { TextInput, Button } from 'react-native-paper'
 import Toast from '../../components/Extras/Toast'
 import { validateEmail, validatePassword } from "../../utilities/validations"
-import { publicUrl } from "../../utilities/constants"
+import { publicUrl, siteKey } from "../../utilities/constants"
 import Recaptcha from 'react-native-recaptcha-that-works';
 import * as functions from '../../utilities/functions'
 import * as colors from "../../utilities/colors"
@@ -23,7 +23,6 @@ const Signup = ({ navigation }) => {
 
   const send = () => {
     setLoading(true)
-    Toast("Waiting for recaptcha verification")
     recaptchaRef.current.open()
   }
 
@@ -42,7 +41,9 @@ const Signup = ({ navigation }) => {
       if (!password) throw new Error('Enter password')
       if (!name) throw new Error('Enter password')
       if (!validatePassword(password)) throw new Error('Enter minimum 6 digits password')
+
       else if (token == null) {
+        Toast("Waiting for recaptcha verification")
         send()
       }
       else if (name && validateEmail(email) && validatePassword(password)) {
@@ -104,7 +105,7 @@ const Signup = ({ navigation }) => {
         />
         <Recaptcha
           ref={recaptchaRef}
-          siteKey={"6LeyoQ4nAAAAALQ7qfYdJwmcV-ChoKw4pYjCO6MU"}
+          siteKey={siteKey}
           baseUrl={publicUrl}
           onVerify={onVerify}
           onExpire={onExpire}
@@ -112,7 +113,7 @@ const Signup = ({ navigation }) => {
         />
         <Button
           loading={loading}
-          onPress={handleSignup}
+          onPress={send}
           mode="contained"
           style={[styles.button, { marginTop: 16, backgroundColor: colors.primary }]}
           labelStyle={[styles.ButtonLabel, { color: colors.white }]}
