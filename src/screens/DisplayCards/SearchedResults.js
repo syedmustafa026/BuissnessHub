@@ -1,28 +1,56 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView, FlatList } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/FontAwesome5'
-import { Badge } from 'react-native-paper';
+import { Badge } from 'react-native-paper'
 
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
-import PropertyDetailsCard from "../../components/Cards/PropertyDetailsCard";
-import SearchDetailsCard from "../../components/Cards/SearchDetailsCard";
-import NonImageCard from "../../components/Cards/NonImageCard";
-import SortModal from "../../components/Modals/SortModal";
+import PropertyDetailsCard from "../../components/Cards/PropertyDetailsCard"
+import SearchDetailsCard from "../../components/Cards/SearchDetailsCard"
+import NonImageCard from "../../components/Cards/NonImageCard"
+import SortModal from "../../components/Modals/SortModal"
 
 const SearchedResults = ({ route, navigation }) => {
   const [sortModal, setSortModal] = useState(false)
+  const [sortValue, setSortValue] = useState('Default')
+  const [ads, setAds] = useState([])
+
+  const sortByNewestToOldest = route.params.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+  const sortByOldestToNewest = route.params.slice().sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+  const sortByHighPriceToLow = route.params.slice().sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
+  const sortByLowPriceToHigh = route.params.slice().sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
 
   useEffect(() => {
     navigation.setOptions({
       title: `${route.params?.length || 0} Result found`
     })
-  }, [])
+    if (sortValue === "Default") {
+      setAds(route.params)
+      setSortModal(false)
+    }
+    if (sortValue === "Newest to Oldest") {
+      setSortModal(false)
+      setAds(sortByNewestToOldest)
+    }
+    if (sortValue === "Oldest to Newest") {
+      setSortModal(false)
+      setAds(sortByOldestToNewest)
+    }
+    if (sortValue === "Price Highest to Lowest") {
+      setSortModal(false)
+      setAds(sortByHighPriceToLow)
+    }
+    if (sortValue === "Price Lowest to highest") {
+      setSortModal(false)
+      setAds(sortByLowPriceToHigh)
+    }
+  }, [sortValue])
+  console.log(sortValue);
   return (
     <SafeAreaView style={styles.container}>
-      <SortModal visible={sortModal} setModalVisible={setSortModal} />
+      <SortModal visible={sortModal} setModalVisible={setSortModal} setSortValue={setSortValue} />
       <View style={styles.fiterRow}>
         <View style={styles.row}>
           <MaterialIcon
@@ -41,11 +69,11 @@ const SearchedResults = ({ route, navigation }) => {
             size={20}
             color={colors.primary} />
           <Text onPress={() => navigation.navigate("Filters")} style={{ fontSize: 16, margin: 10, color: colors.black, fontFamily: fonts.SEMIBOLD }}>Filters</Text>
-          <Badge size={24} style={{
+          {/* <Badge size={24} style={{
             alignSelf: 'center',
             marginRight: 5,
             backgroundColor: colors.black
-          }}>3</Badge>
+          }}>0</Badge> */}
 
         </View >
         <TouchableOpacity activeOpacity={0.7} onPress={() => setSortModal(true)} style={styles.row}>
@@ -58,7 +86,7 @@ const SearchedResults = ({ route, navigation }) => {
         </TouchableOpacity>
       </View>
       <FlatList
-        data={route.params}
+        data={ads}
         renderItem={({ item }) => (<SearchDetailsCard item={item} />)}
         keyExtractor={(item, index) => index.toString()}
       />

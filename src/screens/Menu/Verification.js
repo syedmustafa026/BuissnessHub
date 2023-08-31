@@ -68,8 +68,8 @@ const Verification = ({ navigation, route }) => {
             autoFocus={true}
             activeUnderlineColor={colors.primary}
             keyboardType="phone-pad"
-            maxLength={7}
-            minLength={7}
+            maxLength={5}
+            minLength={5}
             onChangeText={(value) => { setCode(value) }}
           />
         </View>

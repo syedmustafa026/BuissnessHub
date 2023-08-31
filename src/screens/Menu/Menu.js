@@ -63,7 +63,7 @@ const Menu = ({ navigation }) => {
                             <Image style={styles.image} source={user ? { uri: user.image_url } : require("../../assets/images/Community.png")} />
                             <View style={{ flexDirection: 'column', width: "70%" }}>
                                 <Text numberOfLines={1} style={styles.heading}>Hi {user.name || "User"}</Text>
-                                <Text style={styles.text}>{user.email}</Text>
+                                <Text numberOfLines={1} style={styles.text}>{user.email}</Text>
                             </View>
                         </View>
                         <Button

@@ -23,7 +23,7 @@ const SortModal = (props) => {
             </View>
             <FlatList
               data={["Default", "Newest to Oldest", 'Oldest to Newest', 'Price Highest to Lowest', 'Price Lowest to highest']}
-              renderItem={({ item }) => (<ThinNameRow name={item} handlePress={() => props.setModalVisible(false)} />)}
+              renderItem={({ item }) => (<ThinNameRow name={item} handlePress={() => { props.setSortValue(item) }} />)}
               keyExtractor={(item, index) => index.toString()}
               ItemSeparatorComponent={<Separator />}
             />

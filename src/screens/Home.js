@@ -21,7 +21,6 @@ const Home = ({ navigation }) => {
     const [category, setCategory] = useState(null)
     const [loading, setLoading] = useState(true)
     const [ads, setAds] = useState([])
-    const [dropdownModal, setDropdownModal] = useState(true)
     const [showDropdown, setShowDropdown] = useState(false)
 
     const onChangeSearch = async (query) => {
@@ -118,6 +117,7 @@ const Home = ({ navigation }) => {
                         data={searchResult}
                         navigation={navigation}
                         value={searchQuery}
+                        setShowDropdown={setShowDropdown}
                         onChangeSearch={onChangeSearch}
                         setValue={setSearchQuery} />
                 </View>

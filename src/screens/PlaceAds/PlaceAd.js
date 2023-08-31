@@ -8,25 +8,36 @@ import Toast from '../../components/Extras/Toast';
 import * as functions from '../../utilities/functions'
 import LoginModal from '../../components/Modals/LoginModal';
 
-const Item = ({ name, navigation }) => {
-    return (
-        <>
-            <TouchableOpacity onPress={() => navigation.navigate('PlaceAdListing', { city: name })} activeOpacity={0.5} style={styles.row}>
-                <Text style={styles.h2}>{name}</Text>
-            </TouchableOpacity>
-            <Separator />
-        </>
-    )
-}
+
 const PlaceAd = ({ navigation, route }) => {
+
     const [user, setUser] = useState(false)
     const [loginModal, setLoginModal] = useState(false)
     const [loading, setLoading] = useState(true)
 
+    const handlePressCity = (name) => {
+        if (route.params === "filters") {
+            navigation.navigate("Filters", { city: name })
+        }
+        else {
+
+            navigation.navigate('PlaceAdListing', { city: name })
+        }
+    }
     const getUser = async () => {
         const response = await functions.getItem('user')
         setUser(response)
         setLoading(false)
+    }
+    const Item = ({ name, navigation }) => {
+        return (
+            <>
+                <TouchableOpacity onPress={() => handlePressCity(name)} activeOpacity={0.5} style={styles.row}>
+                    <Text style={styles.h2}>{name}</Text>
+                </TouchableOpacity>
+                <Separator />
+            </>
+        )
     }
     useEffect(() => {
         getUser()
@@ -43,8 +54,8 @@ const PlaceAd = ({ navigation, route }) => {
             {user != null ? <View style={styles.centeredView}>
                 <View style={styles.modalView}>
                     <View style={{ justifyContent: 'center', marginVertical: 16 }}>
-                        <Text style={styles.h1}>Select a City</Text>
-                        <Text style={styles.h4}>Where should we place your ad?</Text>
+                        <Text style={styles.h1}>{route.params === "filters" ? "Location" : "Select a City"}</Text>
+                        <Text style={styles.h4}>{route.params === "filters" ? "Filter your ad by location addresses" : "Where should we place your ad?"}</Text>
                     </View>
                     <FlatList
                         data={['Abu Dhabi', 'Ajman', 'Al Ain', "Dubai", 'Fuljairah', 'Ras al Khaimah', 'Sharjah', 'Umm al Quwain']}

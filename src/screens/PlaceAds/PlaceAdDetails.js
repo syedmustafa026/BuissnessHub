@@ -8,6 +8,7 @@ import { TextInput, Button, RadioButton } from 'react-native-paper'
 import { launchImageLibrary } from 'react-native-image-picker'
 import * as functions from "../../utilities/functions"
 import Toast from "../../components/Extras/Toast"
+import MapView, { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from 'react-native-maps'
 
 const PlaceAdDetails = ({ navigation, route }) => {
   const titleRef = useRef()
@@ -254,6 +255,16 @@ const PlaceAdDetails = ({ navigation, route }) => {
           }}
           onChangeText={text => setLocation(text)}
         />
+        {/* <View>
+          <MapView
+            initialRegion={{
+              latitude: 25.1972,
+              longitude: 55.2744,
+            }}
+            style={styles.map}
+            provider={Platform.OS === 'ios' ? PROVIDER_DEFAULT : PROVIDER_GOOGLE}
+          />
+        </View> */}
         <Image style={{ width: "98%", height: 160, alignSelf: 'center', marginVertical: 14 }} source={require('../../assets/images/map.png')} />
       </ScrollView>
       <Button
@@ -289,6 +300,16 @@ const styles = StyleSheet.create({
     marginBottom: 14,
     textAlign: 'center',
     marginHorizontal: 20
+  },
+  section: {
+    width: "98%",
+    height: 160,
+    justifyContent: 'center',
+  },
+
+  map: {
+    width: "98%",
+    height: 160,
   },
   h4: {
     fontSize: 14,

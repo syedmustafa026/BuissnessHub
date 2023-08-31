@@ -46,7 +46,7 @@ const SearchDetailsCard = (item) => {
         </TouchableOpacity>
         <Image style={styles.cardImg} source={{ uri: data.main_image_url || "https://img.freepik.com/free-photo/flat-lay-business-concept_53876-24738.jpg?w=1800&t=st=1692634541~exp=1692635141~hmac=2f344c4cded45934ccf853d9e57742feaf6d25761dd047252dbb97524eec9d86" }} />
         <View style={{ margin: 5, padding: 4 }}>
-          <Text numberOfLines={1} style={{ color: colors.primary, fontFamily: fonts.SEMIBOLD, fontSize: 18, marginBottom: 4 }} >{data.price || "AED 175,000"}</Text>
+          <Text numberOfLines={1} style={{ color: colors.primary, fontFamily: fonts.SEMIBOLD, fontSize: 18, marginBottom: 4 }} >AED {data.price || " 175,000"}</Text>
           <Text numberOfLines={1} style={{ color: colors.black, fontFamily: fonts.SEMIBOLD, fontSize: 18, marginBottom: 4 }} >{data.title || "XYZ Business for sale"} </Text>
           <Text numberOfLines={1} style={{ color: colors.black, fontFamily: fonts.REGULAR }} >{data.description || "description description description"}</Text>
           <Text numberOfLines={1} style={{ color: colors.black, fontFamily: fonts.REGULAR, marginVertical: 4 }} >{data.created_at_time_diff || "description description description"}</Text>

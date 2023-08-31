@@ -6,7 +6,7 @@ import * as fonts from "../../utilities/fonts"
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 
 const OnBoard = ({ navigation }) => {
-    
+
     const Done = () => (
         <TouchableOpacity
             onPress={() => navigation.navigate('BottomNavigator')}>
@@ -33,9 +33,9 @@ const OnBoard = ({ navigation }) => {
                         image:
                             <Image style={styles.img} source={require('../../assets/images/img2.png')} />,
                         title:
-                            'Find you Home in UAE',
+                            'Buy, sell or find a business',
                         subtitle:
-                            'Explore over 20,000 homes and find exactly what you are looking for with the help of 1000+ trusted agents',
+                            'Explore over 20,000 buisness and find exactly what you are looking for with the help of 1000+ trusted agents',
                     },
                     {
                         backgroundColor:
@@ -43,7 +43,7 @@ const OnBoard = ({ navigation }) => {
                         image:
                             <Image style={styles.img} source={require('../../assets/images/img3.png')} />,
                         title:
-                            'Upgrade your Lifestyle',
+                            'Investment in buisnesses',
                         subtitle:
                             'Choose from over 200,000 used items and unleash your creativity while furnishing your home on a budget or cash out by giving a second life to your previously loved items',
                     },
@@ -53,9 +53,9 @@ const OnBoard = ({ navigation }) => {
                         image:
                             <Image style={styles.img} source={require('../../assets/images/img1.png')} />,
                         title:
-                            'Get yourself a ride',
+                            'Get shares in buisnesses',
                         subtitle:
-                            'Browsw over 25,000 cars for sale in the UAE or put yours up for the sale and the sale and be seen by 1.6 million buyers monthly',
+                            'Browse over 25,000 businesses for sale in the UAE or put yours up for the sale and the sale and be seen by 1.6 million buyers monthly',
                     },
                 ]}
             />

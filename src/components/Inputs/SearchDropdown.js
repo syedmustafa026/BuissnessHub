@@ -23,7 +23,7 @@ const SearchDropdown = (props) => {
         <View style={styles.dropdown}>
           <FlatList
             data={props.data}
-            renderItem={({ item }) => (<ThinNameRow handlePress={() => { props.navigation.navigate("SearchedResults", props.data) }} name={item.title} />)}
+            renderItem={({ item }) => (<ThinNameRow handlePress={() => { props.navigation.navigate("SearchedResults", props.data), props.setShowDropdown(false) }} name={item.title} />)}
             keyExtractor={(item, index) => index.toString()}
             keyboardShouldPersistTaps="always"
             ItemSeparatorComponent={<Separator />}

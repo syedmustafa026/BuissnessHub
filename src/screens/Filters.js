@@ -18,7 +18,19 @@ const Filters = ({ navigation, route }) => {
   const [subcategoryId, setsubcategoryId] = useState(1)
   const [priceFrom, setpriceFrom] = useState("0")
   const [priceTo, setpriceTo] = useState("10000")
+  const [locationName, setLocationName] = useState("Dubai")
 
+  const reset = () => {
+    setcategory('')
+    setcategoryId('')
+    setsubcategory('')
+    setsubcategoryId('')
+    setpriceFrom('0')
+    setpriceTo('100000')
+    setKeywords('')
+    setLocationName('')
+
+  }
   useEffect(() => {
     if (route.params?.filter != undefined) {
       setcategory(route.params?.filter?.category)
@@ -26,8 +38,10 @@ const Filters = ({ navigation, route }) => {
       setsubcategory(route.params?.filter?.sub_category)
       setsubcategoryId(route.params?.filter?.subcategory_id)
     }
+    if (route.params?.city != undefined) {
+      setLocationName(route.params.city)
+    }
   },)
-
   const filter = async () => {
     try {
       const response = await functions.filterAds({
@@ -38,7 +52,6 @@ const Filters = ({ navigation, route }) => {
         keyword: keywords
       })
       if (response) {
-        console.log(response);
         navigation.replace("SearchedResults", response.data)
       }
     } catch (error) {
@@ -56,19 +69,21 @@ const Filters = ({ navigation, route }) => {
             color={colors.gray} />
           <Text style={{ color: colors.black, fontSize: 18, marginHorizontal: 16, fontFamily: fonts.BOLD }}>Filters</Text>
         </View>
-        <Text style={{ color: colors.primary, fontSize: 16, marginHorizontal: 16, marginTop: 12, fontFamily: fonts.BOLD }}>Reset</Text>
+        <Text onPress={reset} style={{ color: colors.primary, fontSize: 16, marginHorizontal: 16, marginTop: 12, fontFamily: fonts.BOLD }}>Reset</Text>
       </View>
       <ScrollView>
         <KeyboardAvoidingView style={{ justifyContent: 'center', marginVertical: 16 }}>
           <View style={{ marginHorizontal: 10, marginVertical: 15, marginTop: 15 }}>
             <Text style={styles.h1}>Location</Text>
-            <TouchableOpacity activeOpacity={0.6}
+            <TouchableOpacity
+              onPress={() => navigation.navigate("PlaceAd", "filters")}
+              activeOpacity={0.6}
               style={styles.selectButton}>
               <Icon
                 name='map-marker'
                 size={24}
                 color={colors.gray} />
-              <Text style={styles.selectLabel}>eg. Dubai Marina</Text>
+              <Text style={styles.selectLabel}>{locationName}</Text>
             </TouchableOpacity>
             <Text style={styles.h4}>Select the cities neighbourhood or buildings that you want to search in</Text>
           </View>
@@ -130,7 +145,6 @@ const Filters = ({ navigation, route }) => {
               <Text style={[styles.selectLabel]}>{subcategory}</Text>
             </TouchableOpacity>
           </View>
-
           <Button
             onPress={filter}
             mode="contained"

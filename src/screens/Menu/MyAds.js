@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, Image, FlatList } from 'react-native'
+import { ActivityIndicator, View, Text, SafeAreaView, StyleSheet, TouchableOpacity, Image, FlatList, Alert } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
@@ -16,33 +17,61 @@ const MyAds = ({ navigation }) => {
   const [checked, setChecked] = useState(false)
   const [ads, setAds] = useState([])
   const [verifiedModal, setVerifiedModal] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [option, setOption] = useState('all')
 
   const getMyAds = async () => {
     try {
       const response = await functions.getUserAds()
-      setAds(response)
+      if (response) {
+        const selected = response.filter(value => value.status == option)
+        setAds(option === "all" ? response : selected)
+      }
+      setLoading(false)
     } catch (error) {
       Toast(error.message || "Server Error")
     }
   }
+  const deleteMyAd = async (id) => {
+    Alert.alert("Sure", "Are you sure you want to delete this ad?", [{
+      text: "Yes",
+      onPress: async () => {
+        const response = await functions.deleteMyAd({
+          ad_id: id
+        })
+        if (response.status) {
+          Toast("Deleted successfully")
+          navigation.goBack()
+        }
+        else {
+          Toast(response.message)
+        }
+      }
+    }, {
+      text: "Cancel",
+    }], {
+      cancelable: true
+    })
+  }
   useEffect(() => {
     getMyAds()
+  }, [option])
 
-  }, [])
   const Item = (item) => {
     const data = item.item
-    console.log(data.id);
+
     return (
       <View >
-         <VerifiedModal visible={verifiedModal} setModalVisible={setVerifiedModal} />
+        <VerifiedModal visible={verifiedModal} setModalVisible={setVerifiedModal} />
         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
-          <Checkbox
+          {/* <Checkbox
             color={colors.secondaryLight}
             status={checked ? 'checked' : 'unchecked'}
             onPress={() => {
               setChecked(!checked);
             }}
-          />
+          /> */}
+          <Icon onPress={() => deleteMyAd(data.id)} name="trash-can-outline" style={{ margin: 10, alignSelf: 'center' }} size={24} color={colors.primaryLight} />
           <Image style={styles.cardImg} source={{ uri: data?.main_image_url }} />
           <View >
             <Text style={styles.h1}>{data.title || "Untitled Ad"}</Text>
@@ -62,10 +91,10 @@ const MyAds = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.head}>
         <FlatList
-          data={['All Ads', 'Live', 'Draft', 'Rejected']}
+          data={['All', 'Pending', 'Draft', 'Rejected', 'Live']}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          renderItem={({ item }) => (<SelectHorizontalChip name={item} selected={"All Ads"} />)}
+          renderItem={({ item }) => (<SelectHorizontalChip handlePress={() => setOption(item.toLowerCase())} name={item.toLowerCase()} selected={option} />)}
           keyExtractor={(item, index) => index.toString()}
         />
       </View>
@@ -91,13 +120,17 @@ const MyAds = ({ navigation }) => {
           <MaterialIcon name="arrow-forward-ios" style={{ margin: 20, alignSelf: 'center' }} size={20} color={colors.primaryLight} />
         </View>
       </TouchableOpacity>
-      <FlatList
-        data={ads}
-        contentContainerStyle={{ marginTop: 20 }}
-        renderItem={({ item }) => (<Item item={item} />)}
-        keyExtractor={(item, index) => index.toString()}
-      />
-
+      {loading ?
+        <View style={styles.errorContainer}>
+          <ActivityIndicator animating={true} size={"small"} color={colors.primary} />
+        </View> :
+        <FlatList
+          data={ads}
+          contentContainerStyle={{ marginTop: 20 }}
+          renderItem={({ item }) => (<Item item={item} />)}
+          keyExtractor={(item, index) => index.toString()}
+        />
+      }
     </SafeAreaView>
   )
 }
@@ -164,6 +197,10 @@ const styles = StyleSheet.create({
     shadowRadius: 2.62,
     borderRadius: 10,
     elevation: 4,
-  }
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
 })
 export default MyAds

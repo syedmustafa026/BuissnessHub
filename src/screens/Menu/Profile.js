@@ -53,12 +53,14 @@ const Profile = ({ navigation, route }) => {
                                         <Icon name='email-outline' color={colors.gray} size={20} />
                                         <Text style={styles.h2}>{route.params.email}</Text>
                                     </View>
-                                    <Icon name='check-circle' color={colors.green} size={20} />
+                                    {route.params.email == null ? <Icon name='close-circle' color={colors.red} size={20} /> :
+                                        <Icon name='check-circle' color={colors.green} size={20} />}
                                 </View>
                                 <View style={styles.row}>
                                     <Icon name='cellphone' color={colors.gray} size={20} />
-                                    <Text style={styles.h2}></Text>
-                                    <Icon name='close-circle' color={colors.red} size={20} />
+                                    <Text style={styles.h2}>{route.params.phone}</Text>
+                                    {route.params.phone == null ? <Icon name='close-circle' color={colors.red} size={20} /> :
+                                        <Icon name='check-circle' color={colors.green} size={20} />}
                                 </View>
                                 {/* <View style={styles.row}>
                                     <Icon name='facebook' color={colors.gray} size={20} />
