@@ -22,10 +22,26 @@ const SearchDropdown = (props) => {
       {props.showDropdown &&
         <View style={styles.dropdown}>
           <FlatList
-            data={props.data}
+            data={props.data.slice(-5)}
             renderItem={({ item }) => (<ThinNameRow handlePress={() => { props.navigation.navigate("SearchedResults", props.data), props.setShowDropdown(false) }} name={item.title} />)}
             keyExtractor={(item, index) => index.toString()}
             keyboardShouldPersistTaps="always"
+            ListFooterComponent={
+              <>
+                <Separator />
+                <Text
+                  onPress={() => {
+                    props.navigation.navigate("SearchedResults", props.data),
+                    props.setShowDropdown(false)
+                  }}
+                  style={{
+                    fontSize: 16,
+                    color: colors.primary,
+                    fontFamily: fonts.SEMIBOLD,
+                    margin: 13
+                  }}>See more...</Text>
+              </>
+            }
             ItemSeparatorComponent={<Separator />}
           />
         </View>}

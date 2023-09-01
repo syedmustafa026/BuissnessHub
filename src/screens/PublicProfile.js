@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ActivityIndicator, View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, FlatList, ScrollView } from 'react-native'
+import { ActivityIndicator, View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, FlatList, ScrollView, Alert } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Button } from "react-native-paper";
@@ -112,7 +112,7 @@ const PublicProfile = ({ navigation, route }) => {
                 <Image source={require("../assets/images/smallCactus.jpeg")} style={styles.img1} />
                 <Text numberOfLines={1} style={styles.heading}>You don't have any ads that are live</Text>
                 <Button
-                  onPress={() => { navigation.navigate('PlaceAdListing') }}
+                  onPress={() => { navigation.navigate('PlaceAd') }}
                   mode="contained"
                   style={styles.button}
                   labelStyle={styles.ButtonLabel}
@@ -140,7 +140,7 @@ const PublicProfile = ({ navigation, route }) => {
       <View style={styles.header}>
         <Image style={styles.image} source={{ uri: route.params.image_url }} />
         <View style={{ flexDirection: 'column' }}>
-          <Text numberOfLines={1} style={styles.heading}> {route.params.name}</Text>
+          <Text numberOfLines={1} style={styles.heading}>{route.params.name}</Text>
           <Text style={styles.text}>Joined on {moment(route.params.createdAt).format("MMMM-YYYY")}</Text>
         </View>
       </View>

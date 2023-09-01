@@ -43,7 +43,7 @@ const OnBoard = ({ navigation }) => {
                         image:
                             <Image style={styles.img} source={require('../../assets/images/img3.png')} />,
                         title:
-                            'Investment in buisnesses',
+                            'Investment in businesses',
                         subtitle:
                             'Choose from over 200,000 used items and unleash your creativity while furnishing your home on a budget or cash out by giving a second life to your previously loved items',
                     },
@@ -53,7 +53,7 @@ const OnBoard = ({ navigation }) => {
                         image:
                             <Image style={styles.img} source={require('../../assets/images/img1.png')} />,
                         title:
-                            'Get shares in buisnesses',
+                            'Get shares in businesses',
                         subtitle:
                             'Browse over 25,000 businesses for sale in the UAE or put yours up for the sale and the sale and be seen by 1.6 million buyers monthly',
                     },

@@ -9,7 +9,6 @@ import * as fonts from "../../utilities/fonts"
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import PropertyDetailsCard from "../../components/Cards/PropertyDetailsCard"
 import SearchDetailsCard from "../../components/Cards/SearchDetailsCard"
-import NonImageCard from "../../components/Cards/NonImageCard"
 import SortModal from "../../components/Modals/SortModal"
 
 const SearchedResults = ({ route, navigation }) => {
@@ -17,10 +16,10 @@ const SearchedResults = ({ route, navigation }) => {
   const [sortValue, setSortValue] = useState('Default')
   const [ads, setAds] = useState([])
 
-  const sortByNewestToOldest = route.params.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-  const sortByOldestToNewest = route.params.slice().sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
-  const sortByHighPriceToLow = route.params.slice().sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
-  const sortByLowPriceToHigh = route.params.slice().sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
+  const sortByNewestToOldest = route.params?.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+  const sortByOldestToNewest = route.params?.slice().sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+  const sortByHighPriceToLow = route.params?.slice().sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
+  const sortByLowPriceToHigh = route.params?.slice().sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
 
   useEffect(() => {
     navigation.setOptions({

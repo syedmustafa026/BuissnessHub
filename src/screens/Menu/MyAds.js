@@ -94,7 +94,7 @@ const MyAds = ({ navigation }) => {
           data={['All', 'Pending', 'Draft', 'Rejected', 'Live']}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          renderItem={({ item }) => (<SelectHorizontalChip handlePress={() => setOption(item.toLowerCase())} name={item.toLowerCase()} selected={option} />)}
+          renderItem={({ item }) => (<SelectHorizontalChip handlePress={() => setOption(item.toLowerCase(),setLoading(true))} name={item.toLowerCase()} selected={option} />)}
           keyExtractor={(item, index) => index.toString()}
         />
       </View>

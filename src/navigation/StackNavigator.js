@@ -75,7 +75,7 @@ const StackNavigator = () => {
                 <Stack.Screen options={{ headerShown: true, title: 'Report an Ad', headerTitleStyle: { fontSize: 16 } }} name="ReportAd" component={ReportAd} />
                 <Stack.Screen options={{ headerShown: true, headerTitleStyle: { fontSize: 16 } }} name="ConfirmReportAd" component={ConfirmReportAd} />
 
-                <Stack.Screen options={{ headerShown: true, title: '2049 Results', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="SearchedResults" component={SearchedResults} />
+                <Stack.Screen options={{ headerShown: true, headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="SearchedResults" component={SearchedResults} />
 
                 <Stack.Screen name="Menu" component={Menu} />
                 <Stack.Screen options={{ headerShown: true, title: 'Profile', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="Profile" component={Profile} />

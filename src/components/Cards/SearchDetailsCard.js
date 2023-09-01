@@ -20,7 +20,6 @@ const SearchDetailsCard = (item) => {
   const handleAddFavorites = async () => {
     try {
       const response = await functions.addFavorite(item.item.id)
-      console.log(response);
       if (response.status) {
         Toast(response.message)
       }
