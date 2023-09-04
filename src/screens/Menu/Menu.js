@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Image, Text, SafeAreaView, StyleSheet, Linking, TouchableOpacity, ScrollView, Alert } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { useIsFocused } from "@react-navigation/native";
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import Separator from '../../components/Extras/Separator'
 import { ActivityIndicator, Button } from "react-native-paper";
@@ -21,12 +22,13 @@ const Menu = ({ navigation }) => {
     const [user, setUser] = useState(false)
     const [loading, setLoading] = useState(true)
 
+    const isFocused = useIsFocused();
+
     const logoutUser = () => {
         Alert.alert("Sure", "Are you sure you want to Logout?", [{
             text: "Yes",
             onPress: async () => {
                 const response = await functions.logout()
-                console.log(response);
                 if (response.status) {
                     navigation.replace("BottomNavigator")
                     await functions.removeItem('user')
@@ -41,11 +43,13 @@ const Menu = ({ navigation }) => {
     const getUser = async () => {
         const response = await functions.getItem('user')
         setUser(response)
+        setLoading(false)
     }
     useEffect(() => {
-        getUser()
-        setLoading(false)
-    }, [])
+        if (isFocused) {
+            getUser()
+        }
+    }, [isFocused])
     if (loading) {
         return (
             <View style={styles.errorContainer}>

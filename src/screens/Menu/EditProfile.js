@@ -56,6 +56,7 @@ const EditProfile = ({ navigation, route }) => {
         try {
             const payload = {
                 dob: dob,
+                phone: phone,
                 gender: gender,
                 offers_and_bargains: offers,
                 weekly_newsletter: newsletter,
@@ -131,20 +132,23 @@ const EditProfile = ({ navigation, route }) => {
                                 onChangeText={(value) => setEmail(value)}
                             />
                         </View>
-                        {/* 
+
                         <View style={styles.InputBox}>
                             <TextInput
                                 theme={{ colors: { text: colors.white, placeholder: colors.primaryLight, } }}
                                 style={styles.Input}
-                                placeholder="Phone number"
+                                placeholder=" Phone Number"
                                 activeUnderlineColor={colors.primary}
                                 value={phone}
                                 disabled={editIcon ? true : false}
-                                maxLength={11}
+                                maxLength={10}
                                 keyboardType="number-pad"
                                 onChangeText={(value) => setPhone(value)}
+                            // left={<TextInput.Affix
+                            //     text='+971'
+                            // />}
                             />
-                        </View> */}
+                        </View>
                         <View
                             style={styles.InputBox}>
                             <TextInput

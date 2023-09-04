@@ -63,14 +63,7 @@ const MyAds = ({ navigation }) => {
     return (
       <View >
         <VerifiedModal visible={verifiedModal} setModalVisible={setVerifiedModal} />
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
-          {/* <Checkbox
-            color={colors.secondaryLight}
-            status={checked ? 'checked' : 'unchecked'}
-            onPress={() => {
-              setChecked(!checked);
-            }}
-          /> */}
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 5, }}>
           <Icon onPress={() => deleteMyAd(data.id)} name="trash-can-outline" style={{ margin: 10, alignSelf: 'center' }} size={24} color={colors.primaryLight} />
           <Image style={styles.cardImg} source={{ uri: data?.main_image_url }} />
           <View >
@@ -94,7 +87,7 @@ const MyAds = ({ navigation }) => {
           data={['All', 'Pending', 'Draft', 'Rejected', 'Live']}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          renderItem={({ item }) => (<SelectHorizontalChip handlePress={() => setOption(item.toLowerCase(),setLoading(true))} name={item.toLowerCase()} selected={option} />)}
+          renderItem={({ item }) => (<SelectHorizontalChip handlePress={() => setOption(item.toLowerCase(), setLoading(true))} name={item.toLowerCase()} selected={option} />)}
           keyExtractor={(item, index) => index.toString()}
         />
       </View>
@@ -126,7 +119,6 @@ const MyAds = ({ navigation }) => {
         </View> :
         <FlatList
           data={ads}
-          contentContainerStyle={{ marginTop: 20 }}
           renderItem={({ item }) => (<Item item={item} />)}
           keyExtractor={(item, index) => index.toString()}
         />

@@ -2,4 +2,6 @@
     <string name="app_name">BusinessHub</string>
     <string name="facebook_app_id">805990104337648</string>
     <string name="facebook_client_token">3f3dd5a4a4c4a9c123201ae53f180b9c</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyABiyWOxgkQoR0m_UcdYE1RoTjTXBLDRyo</string>
+
 </resources>

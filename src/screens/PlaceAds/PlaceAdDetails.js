@@ -5,17 +5,19 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
 import { TextInput, Button, RadioButton } from 'react-native-paper'
+import Geocoder from 'react-native-geocoding'
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { launchImageLibrary } from 'react-native-image-picker'
 import * as functions from "../../utilities/functions"
 import Toast from "../../components/Extras/Toast"
 import MapView, { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from 'react-native-maps'
+import { mapApiKey } from '../../utilities/constants'
 
 const PlaceAdDetails = ({ navigation, route }) => {
   const titleRef = useRef()
   const mobileRef = useRef()
   const priceRef = useRef()
   const descriptionRef = useRef()
-  const locationRef = useRef()
 
 
   const [title, setTitle] = useState("")
@@ -28,6 +30,7 @@ const PlaceAdDetails = ({ navigation, route }) => {
     lng: 55.2744
   })
   const [img, setImg] = useState([])
+  const markers = [coordinates]
   const OpenGallery = () => {
     const options = {
       storageOptions: {
@@ -49,6 +52,17 @@ const PlaceAdDetails = ({ navigation, route }) => {
   const RemoveImage = val => {
     const imags = img.filter(image => image?.assets[0]?.uri !== val)
     setImg(imags)
+  }
+  const getCoordinates = async (address) => {
+    try {
+      Geocoder.init(mapApiKey)
+      const response = await Geocoder.from(address)
+      const { lat, lng } = response.results[0].geometry.location
+      let coordinates = { lat, lng }
+      return coordinates
+    } catch (error) {
+      Toast(error)
+    }
   }
   const onSubmit = async () => {
     try {
@@ -82,14 +96,55 @@ const PlaceAdDetails = ({ navigation, route }) => {
   }
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView keyboardShouldPersistTaps='always' showsVerticalScrollIndicator={false}>
         <View style={{ justifyContent: 'center', marginVertical: 16 }}>
           <Text style={styles.h2}>You're Almost There!</Text>
           <Text style={[styles.h4, { textAlign: 'center', marginBottom: 12 }]}>Include as much details and pictures as possible and set the right price!</Text>
           <Text onPress={() => navigation.goBack()} style={[styles.h4, { color: colors.primary }]}>{route?.params?.title} &gt; {route?.params?.category}</Text>
         </View>
+        <GooglePlacesAutocomplete
+          placeholder='Location Name'
+          enablePoweredByContainer={false}
+          debounce={1000}
+          def
+          keyboardShouldPersistTaps='always'
+          onPress={async (data) => {
+            setLocation(data.description)
+            const coordinate = await getCoordinates(data.description)
+            setCoordinates(coordinate);
+          }}
+          query={{
+            key: mapApiKey,
+            language: 'en',
+          }}
+          styles={{
+            textInputContainer: {
+              borderColor: colors.black,
+              borderWidth: 0.8,
+              alignItems: 'center',
+              borderRadius: 2
+            },
+            textInput: {
+              height: 44,
+              fontSize: 14,
+              color: colors.black
+            },
+            description: {
+              color: colors.black
+            },
+            separator: {
+              backgroundColor: colors.black,
+            },
+            listView: {
+              color: colors.black,
+              borderColor: colors.black,
+              borderWidth: 0.8,
+              borderRadius: 2
+            },
+          }}
+        />
         <TextInput
-          label="Title"
+          placeholder="Title"
           ref={titleRef}
           value={title}
           mode='outlined'
@@ -216,7 +271,7 @@ const PlaceAdDetails = ({ navigation, route }) => {
           />}
         />
         <TextInput
-          label="Price"
+          placeholder="Price"
           mode='outlined'
           ref={priceRef}
           activeOutlineColor={colors.gray}
@@ -241,31 +296,22 @@ const PlaceAdDetails = ({ navigation, route }) => {
             borderBlockColor: colors.gray,
           }}
           onChangeText={text => setDescription(text)}
-          onSubmitEditing={() => locationRef.current.focus()}
         />
-        <TextInput
-          label="Location"
-          mode='outlined'
-          ref={locationRef}
-          keyboardType='default'
-          activeOutlineColor={colors.gray}
-          style={{
-            backgroundColor: colors.white,
-            borderBlockColor: colors.gray,
+        <MapView
+          provider={Platform.OS === 'ios' ? PROVIDER_DEFAULT : PROVIDER_GOOGLE}
+          style={{ width: "90%", height: 160, alignSelf: 'center', marginVertical: 14 }}
+          region={{
+            latitude: coordinates.lat,
+            longitude: coordinates.lng,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121,
           }}
-          onChangeText={text => setLocation(text)}
-        />
-        {/* <View>
-          <MapView
-            initialRegion={{
-              latitude: 25.1972,
-              longitude: 55.2744,
-            }}
-            style={styles.map}
-            provider={Platform.OS === 'ios' ? PROVIDER_DEFAULT : PROVIDER_GOOGLE}
-          />
-        </View> */}
-        <Image style={{ width: "98%", height: 160, alignSelf: 'center', marginVertical: 14 }} source={require('../../assets/images/map.png')} />
+        >
+          <Marker coordinate={{
+            latitude: coordinates.lat,
+            longitude: coordinates.lng,
+          }} />
+        </MapView>
       </ScrollView>
       <Button
         onPress={onSubmit}

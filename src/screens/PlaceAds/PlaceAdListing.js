@@ -12,7 +12,6 @@ const PlaceAdListing = ({ navigation, route }) => {
     const [loading, setLoading] = useState(true)
 
     const handleTap = (item) => {
-        console.log(item);
         if (route.params == "category") {
             navigation.navigate("PlaceAdSubCategory", { data: { sub_categories: item.data.sub_categories, by: 'filters', category: item.data.name, categoryId: item.data.id } })
         }

@@ -9,6 +9,9 @@ import { TextInput, Button, RadioButton } from 'react-native-paper'
 import Slider from '../components/Extras/MultiSliders'
 import * as functions from "../utilities/functions"
 import Toast from "../components/Extras/Toast"
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { mapApiKey } from '../utilities/constants'
+
 const Filters = ({ navigation, route }) => {
 
   const [keywords, setKeywords] = useState(null)
@@ -71,11 +74,11 @@ const Filters = ({ navigation, route }) => {
         </View>
         <Text onPress={reset} style={{ color: colors.primary, fontSize: 16, marginHorizontal: 16, marginTop: 12, fontFamily: fonts.BOLD }}>Reset</Text>
       </View>
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps='always'>
         <KeyboardAvoidingView style={{ justifyContent: 'center', marginVertical: 16 }}>
           <View style={{ marginHorizontal: 10, marginVertical: 15, marginTop: 15 }}>
             <Text style={styles.h1}>Location</Text>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               onPress={() => navigation.navigate("PlaceAd", "filters")}
               activeOpacity={0.6}
               style={styles.selectButton}>
@@ -84,7 +87,56 @@ const Filters = ({ navigation, route }) => {
                 size={24}
                 color={colors.gray} />
               <Text style={styles.selectLabel}>{locationName}</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+            <GooglePlacesAutocomplete
+              placeholder='Ex: Dubai Marina'
+              enablePoweredByContainer={false}
+              debounce={1000}
+              def
+              keyboardShouldPersistTaps='always'
+              onPress={async (data) => {
+                console.log(data);
+                setLocationName(data.description)
+              }}
+              query={{
+                key: mapApiKey,
+                language: 'en',
+              }}
+              styles={{
+                textInputContainer: {
+                  borderColor: colors.black,
+                  borderWidth: 0.8,
+                  alignItems: 'center',
+                  borderRadius: 2,
+                  width: '95%',
+                  marginTop: 8,
+                  alignSelf: 'center',
+                  backgroundColor: colors.white,
+                  borderBlockColor: colors.gray,
+                  color: colors.gray,
+                  fontFamily: fonts.SEMIBOLD
+                },
+                textInput: {
+                  height: 44,
+                  fontSize: 18,
+                  color: colors.black
+                },
+                description: {
+                  color: colors.black
+                },
+                separator: {
+                  backgroundColor: colors.black,
+                },
+                listView: {
+                  color: colors.black,
+                  borderColor: colors.black,
+                  borderWidth: 0.8,
+                  borderRadius: 2,
+                  width: "95%",
+                  alignSelf: "center"
+                },
+              }}
+            />
             <Text style={styles.h4}>Select the cities neighbourhood or buildings that you want to search in</Text>
           </View>
           <View style={{ marginHorizontal: 5, marginVertical: 10 }}>

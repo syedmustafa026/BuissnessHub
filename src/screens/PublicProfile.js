@@ -62,17 +62,9 @@ const PublicProfile = ({ navigation, route }) => {
 
   const Item = (item) => {
     const data = item.item
-    console.log(data?.main_image_url);
     return (
-      <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('AdDetails', data)} >
+      <TouchableOpacity style={{marginVertical:5}} activeOpacity={0.8} onPress={() => navigation.navigate('AdDetails', data)} >
         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8, backgroundColor: colors.white }}>
-          {/* <Checkbox
-            color={colors.secondaryLight}
-            status={checked ? 'checked' : 'unchecked'}
-            onPress={() => {
-              setChecked(!checked);
-            }}
-          /> */}
           <Icon onPress={() => deleteMyAd(data.id)} name="trash-can-outline" style={{ margin: 10, alignSelf: 'center' }} size={24} color={colors.primaryLight} />
           <Image style={styles.cardImg} source={{ uri: data?.main_image_url }} />
           <View >
@@ -102,7 +94,6 @@ const PublicProfile = ({ navigation, route }) => {
               <SafeAreaView style={styles.container}>
                 <FlatList
                   data={ads}
-                  contentContainerStyle={{ marginTop: 20 }}
                   renderItem={({ item }) => (<Item item={item} />)}
                   keyExtractor={(item, index) => index.toString()}
                 />

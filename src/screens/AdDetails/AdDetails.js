@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView, Platform } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
+import MapView, { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from 'react-native-maps';
 import { Button } from "react-native-paper";
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
@@ -18,7 +19,7 @@ const AdDetails = ({ navigation, route }) => {
     const [confirmPhoneModal, setConfirmPhoneModal] = useState(false)
     const [makeOfferValue, setMakeOfferValue] = useState('')
     const data = route.params
-
+    console.log(data.latitude);
     const handleAddFavorites = async () => {
         try {
             const response = await functions.addFavorite(data.id)
@@ -150,7 +151,21 @@ const AdDetails = ({ navigation, route }) => {
                             color={colors.gray} />
                         <Text style={styles.h4}>{data.location_name || "Al mira Square"}</Text>
                     </View>
-                    <Image style={{ width: "90%", height: 160, alignSelf: 'center', marginVertical: 14 }} source={require('../../assets/images/map.png')} />
+                    <MapView
+                        provider={Platform.OS === 'ios' ? PROVIDER_DEFAULT : PROVIDER_GOOGLE}
+                        style={{ width: "90%", height: 160, alignSelf: 'center', marginVertical: 14 }}
+                        region={{
+                            latitude: parseFloat(data.latitude) || 37.78825,
+                            longitude: parseFloat(data.longitude) || -122.4324,
+                            latitudeDelta: 0.015,
+                            longitudeDelta: 0.0121,
+                        }}
+                    >
+                        <Marker coordinate={{
+                            latitude: parseFloat(data.latitude) || 37.78825,
+                            longitude: parseFloat(data.longitude) || -122.4324,
+                        }} />
+                    </MapView>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginHorizontal: 15 }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Image style={styles.image} source={require("../../assets/images/Community.png")} />
@@ -281,6 +296,16 @@ const styles = StyleSheet.create({
         color: colors.black,
         marginHorizontal: 16,
         fontFamily: fonts.SEMIBOLD,
+    },
+    mapContainer: {
+        ...StyleSheet.absoluteFillObject,
+        height: 400,
+        width: 400,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+    },
+    map: {
+        ...StyleSheet.absoluteFillObject,
     },
     row: {
         flexDirection: 'row',
