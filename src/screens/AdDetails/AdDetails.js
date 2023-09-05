@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView, Platform } from 'react-native'
+import { View, Image, Text, SafeAreaView, StyleSheet, TouchableOpacity, Dimensions, ScrollView, Platform } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
@@ -7,7 +7,7 @@ import MapView, { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from 'react-native
 import { Button } from "react-native-paper";
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
-import AdCard from '../../components/Cards/AdCard'
+import Carousel, { Pagination } from 'react-native-snap-carousel';
 import Separator from '../../components/Extras/Separator'
 import MakeOfferModal from "../../components/Modals/MakeOfferModal";
 import ConfirmPhoneModal from "../../components/Modals/ConfirmPhoneModal";
@@ -18,8 +18,30 @@ const AdDetails = ({ navigation, route }) => {
     const [makeOfferModal, setMakeOfferModal] = useState(false)
     const [confirmPhoneModal, setConfirmPhoneModal] = useState(false)
     const [makeOfferValue, setMakeOfferValue] = useState('')
+    const [state, setState] = useState(0)
     const data = route.params
-    console.log(data.latitude);
+    const isCarousel = React.useRef(null)
+    const SLIDER_WIDTH = Dimensions.get('window').width + 80
+    const ITEM_WIDTH = Math.round(SLIDER_WIDTH)
+
+    const imgData = [
+        {
+            title: "Aenean leo",
+            body: "Ut tincidunt tincidunt erat. Sed cursus turpis vitae tortor. Quisque malesuada placerat nisl. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.",
+            imgUrl: "https://picsum.photos/id/11/200/300",
+        },
+        {
+            title: "In turpis",
+            body: "Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ",
+            imgUrl: "https://picsum.photos/id/10/200/300",
+        },
+        {
+            title: "Lorem Ipsum",
+            body: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
+            imgUrl: "https://picsum.photos/id/12/200/300",
+        },
+    ];
+
     const handleAddFavorites = async () => {
         try {
             const response = await functions.addFavorite(data.id)
@@ -33,6 +55,10 @@ const AdDetails = ({ navigation, route }) => {
             Toast(error)
         }
     }
+    const renderItem = ({ item, index }) => {
+        return <Image style={styles.mainImg} source={{ uri: item.imgUrl }} />
+    }
+    console.log(data);
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
@@ -47,7 +73,38 @@ const AdDetails = ({ navigation, route }) => {
                             size={28}
                             color={colors.black} />
                     </TouchableOpacity>
-                    <Image style={styles.mainImg} source={{ uri: data.main_image_url } || require('../../assets/images/ad.jpeg')} />
+                    <Carousel
+                        layout="tinder"
+                        layoutCardOffset={9}
+                        ref={isCarousel}
+                        data={imgData}
+                        renderItem={renderItem}
+                        sliderWidth={SLIDER_WIDTH}
+                        itemWidth={ITEM_WIDTH}
+                        inactiveSlideShift={0}
+                        useScrollView={true}
+                        onSnapToItem={(index) => setState(index)}
+                    />
+                    <Pagination
+                        dotsLength={imgData.length}
+                        activeDotIndex={state}
+                        carouselRef={isCarousel}
+                        containerStyle={{
+                            position: 'absolute',
+                            bottom: -47,
+                            left: Dimensions.get('window').width / 2.66,
+                        }}
+                        dotStyle={{
+                            width: 10,
+                            height: 10,
+                            borderRadius: 5,
+                            marginHorizontal: 0,
+                            backgroundColor: colors.primary
+                        }}
+                        inactiveDotOpacity={0.4}
+                        inactiveDotScale={0.6}
+                        tappableDots={true}
+                    />
                     <TouchableOpacity
                         onPress={handleAddFavorites}
                         style={[styles.shareIcon, { right: 90, bottom: -20 }]}
@@ -75,7 +132,7 @@ const AdDetails = ({ navigation, route }) => {
                     paddingHorizontal: 20,
                     backgroundColor: colors.white
                 }}>
-                    <Text style={{ color: colors.primary, fontFamily: fonts.SEMIBOLD, fontSize: 20 }} >{data.price || "AED 175,000"}</Text>
+                    <Text style={{ color: colors.primary, fontFamily: fonts.SEMIBOLD, fontSize: 20 }} >AED {data.price || "AED 175,000"}</Text>
                     <Text style={{ color: colors.black, fontFamily: fonts.SEMIBOLD, fontSize: 24, marginVertical: 8, marginBottom: 20 }} >{data.title || "XYZ Buisness For Sale"}</Text>
                     <Separator />
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginVertical: 18 }}>
@@ -272,9 +329,6 @@ const styles = StyleSheet.create({
     mainImg: {
         width: "100%",
         height: hp('30'),
-        borderRadius: 10,
-        borderBottomLeftRadius: 0,
-        borderBottomRightRadius: 0,
     },
     box:
     {

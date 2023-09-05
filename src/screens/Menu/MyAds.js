@@ -84,7 +84,7 @@ const MyAds = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.head}>
         <FlatList
-          data={['All', 'Pending', 'Draft', 'Rejected', 'Live']}
+          data={['All', 'Pending', 'Active', 'Draft', 'Rejected']}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (<SelectHorizontalChip handlePress={() => setOption(item.toLowerCase(), setLoading(true))} name={item.toLowerCase()} selected={option} />)}
@@ -161,6 +161,7 @@ const styles = StyleSheet.create({
     color: colors.white,
     textAlign: 'center',
     fontFamily: fonts.MEDIUM,
+    textTransform: 'capitalize'
   },
   h4: {
     fontSize: 14,
