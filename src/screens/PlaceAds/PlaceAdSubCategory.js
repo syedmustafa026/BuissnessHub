@@ -9,7 +9,7 @@ import * as functions from "../../utilities/functions"
 import Toast from "../../components/Extras/Toast"
 
 const PlaceAdSubCategory = ({ navigation, route }) => {
-  console.log(route.params);
+
   const saveTitle = async (item) => {
     if (route.params?.data.by === "filters") {
       navigation.replace("Filters", {

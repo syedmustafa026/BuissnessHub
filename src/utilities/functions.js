@@ -111,16 +111,24 @@ export const filterAds = async () => {
     }
 }
 
-export const getSubCategories = async (payload) => {
+export const getCountries = async (payload) => {
     try {
-        const { data: response } = await axios.post(`${apiUrl}subcategory/list`, payload)
+        const { data: response } = await axios.post(`${apiUrl}/subcategory/list`, payload)
         const json = response
         return json
     } catch (error) {
         return error.message
     }
 }
-
+export const getCities = async (payload) => {
+    try {
+        const { data: response } = await axios.post(`${apiUrl}/get-cities`, payload)
+        const json = response
+        return json
+    } catch (error) {
+        return error.message
+    }
+}
 export const saveListingTitle = async (payload) => {
     try {
         const { data: response } = await axios.post(`${apiUrl}/listing/save-listing-title`, payload, {

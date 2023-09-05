@@ -13,7 +13,6 @@ import Separator from "../components/Extras/Separator";
 
 const Tab = createMaterialTopTabNavigator();
 
-
 const PublicProfile = ({ navigation, route }) => {
   const [loading, setLoading] = useState(true)
   const [ads, setAds] = useState([])
@@ -29,7 +28,7 @@ const PublicProfile = ({ navigation, route }) => {
     try {
       const response = await functions.getUserAds()
       if (response) {
-        const live = response.filter(value => value.status == 'pending')
+        const live = response.filter(value => value.status == 'active')
         setAds(live)
       }
       setLoading(false)
