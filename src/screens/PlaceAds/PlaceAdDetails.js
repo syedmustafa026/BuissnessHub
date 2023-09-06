@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-nat
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
-import { TextInput, Button, RadioButton } from 'react-native-paper'
+import { TextInput, Button } from 'react-native-paper'
 import Geocoder from 'react-native-geocoding'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { launchImageLibrary } from 'react-native-image-picker'
@@ -30,21 +30,20 @@ const PlaceAdDetails = ({ navigation, route }) => {
     lng: 55.2744
   })
   const [img, setImg] = useState([])
-  const markers = [coordinates]
+  // console.log(img[0].assets[0].fileName);
   const OpenGallery = () => {
     const options = {
       storageOptions: {
         path: 'images',
         mediaType: 'photo',
       },
-      saveToPhotos: true,
     }
     launchImageLibrary(options, response => {
       if (response.didCancel) {
         console.log("user Cancelled ")
       }
       else {
-        setImg([...img, response])
+        // setImg([...img, response.assets[0].fileName])
       }
     })
   }
@@ -82,7 +81,9 @@ const PlaceAdDetails = ({ navigation, route }) => {
           location_name: location,
           latitude: coordinates.lat,
           longitude: coordinates.lng,
-          images: img
+          images: img,
+          city: route.params.city,
+          country: route.params.country
         })
         console.log(response);
         if (response.status) {

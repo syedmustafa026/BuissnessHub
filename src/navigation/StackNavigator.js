@@ -35,6 +35,7 @@ import Signup from '../screens/Menu/Signup'
 import Verification from '../screens/Menu/Verification'
 import ForgetPassword from '../screens/Menu/ForgetPassword'
 import Chat from '../screens/Messages/Chat'
+import PlaceAdCity from '../screens/PlaceAds/PlaceAdCity'
 
 const Stack = createNativeStackNavigator()
 
@@ -54,6 +55,7 @@ const StackNavigator = () => {
                 <Stack.Screen options={{ headerShown: true, headerTitleAlign: 'center', headerStyle: { shadowColor: "#000", shadowOffset: { width: 0, height: 2, }, shadowOpacity: 0.23, shadowRadius: 2.62, elevation: 4, }, }} name="Notifications" component={Notifications} />
 
                 <Stack.Screen name="PlaceAd" component={PlaceAd} />
+                <Stack.Screen options={{ headerShown: true, title: '' }} name="PlaceAdCity" component={PlaceAdCity} />
                 <Stack.Screen name="PlaceAdListing" component={PlaceAdListing} />
                 <Stack.Screen name="PlaceAdCategory" component={PlaceAdCategory} />
                 <Stack.Screen options={{ headerShown: true, title: 'Place an Ad', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16 } }} name="PlaceAdSubCategory" component={PlaceAdSubCategory} />

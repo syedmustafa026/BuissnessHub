@@ -16,7 +16,7 @@ const PlaceAdListing = ({ navigation, route }) => {
             navigation.navigate("PlaceAdSubCategory", { data: { sub_categories: item.data.sub_categories, by: 'filters', category: item.data.name, categoryId: item.data.id } })
         }
         else {
-            navigation.navigate('PlaceAdTitle', { data: item.data, city: route.params.city })
+            navigation.navigate('PlaceAdTitle', { data: item.data, city: route.params.city, country: route.params.country })
         }
     }
     const ItemCard = (item) => {

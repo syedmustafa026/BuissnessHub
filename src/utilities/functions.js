@@ -113,7 +113,7 @@ export const filterAds = async () => {
 
 export const getCountries = async (payload) => {
     try {
-        const { data: response } = await axios.post(`${apiUrl}/subcategory/list`, payload)
+        const { data: response } = await axios.post(`${apiUrl}/get-countries`, payload)
         const json = response
         return json
     } catch (error) {

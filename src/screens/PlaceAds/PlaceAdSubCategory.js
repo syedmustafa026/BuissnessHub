@@ -29,7 +29,13 @@ const PlaceAdSubCategory = ({ navigation, route }) => {
         })
         if (!response.status) throw new Error(response.message)
         if (response.status) {
-          navigation.navigate("PlaceAdDetails", { title: route.params.title, category: item.name, listing_id: response.listing_id })
+          navigation.navigate("PlaceAdDetails", {
+            title: route.params.title,
+            category: item.name,
+            listing_id: response.listing_id,
+            city: route.params.city,
+            country: route.params.country
+          })
         }
       } catch (error) {
         Toast(error.message || "Server Error")

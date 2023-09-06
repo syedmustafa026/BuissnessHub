@@ -12,7 +12,7 @@ const PlaceAdTitle = ({ navigation, route }) => {
   const handleButton = () => {
     if (!title) Toast("Enter Ad title")
     else {
-      navigation.navigate('PlaceAdSubCategory', { title: title, data: route.params.data, city: route.params.city })
+      navigation.navigate('PlaceAdSubCategory', { title: title, data: route.params.data, city: route.params.city, country: route.params.country })
     }
   }
 
