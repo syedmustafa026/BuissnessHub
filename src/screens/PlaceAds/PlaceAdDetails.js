@@ -30,7 +30,6 @@ const PlaceAdDetails = ({ navigation, route }) => {
     lng: 55.2744
   })
   const [img, setImg] = useState([])
-  // console.log(img[0].assets[0].fileName);
   const OpenGallery = () => {
     const options = {
       storageOptions: {
@@ -43,7 +42,7 @@ const PlaceAdDetails = ({ navigation, route }) => {
         console.log("user Cancelled ")
       }
       else {
-        // setImg([...img, response.assets[0].fileName])
+        setImg([...img, response])
       }
     })
   }

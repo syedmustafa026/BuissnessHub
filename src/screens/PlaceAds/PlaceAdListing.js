@@ -35,6 +35,7 @@ const PlaceAdListing = ({ navigation, route }) => {
     const getCategories = async () => {
         try {
             const response = await functions.getListing()
+            console.log(response);
             if (!response.status) throw new Error(response.message)
             setCategory(response.data)
             if (response.status) setLoading(false)
