@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { StyleSheet, Text, KeyboardAvoidingView, SafeAreaView, ScrollView } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen"
 import { TextInput, Button } from 'react-native-paper'
@@ -9,21 +9,36 @@ import Recaptcha from 'react-native-recaptcha-that-works';
 import * as functions from '../../utilities/functions'
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
+import { TouchableOpacity } from 'react-native'
+import { View } from 'react-native'
 
-const Signup = ({ navigation }) => {
+const Signup = ({ navigation, route }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [password, setPasswordl] = useState('')
+  const [country, setCountry] = useState('Select your Country')
+  const [city, setCity] = useState('Select your City')
   const [token, setToken] = useState(null)
-
+  const [cityId, setcityId] = useState(null)
+  const [countryId, setcountryId] = useState(null)
   const [togglePassword, setTogglePassword] = useState(true)
-
   const recaptchaRef = useRef();
 
   const send = () => {
-    setLoading(true)
-    recaptchaRef.current.open()
+    try {
+      if (!email && !password && !cityId && !countryId && name) throw new Error('Enter the required feilds')
+      if (!cityId && !countryId) throw new Error('Enter your country and city')
+      if (!validateEmail(email)) throw new Error('Enter valid email')
+      if (!password) throw new Error('Enter password')
+      if (!name) throw new Error('Enter password')
+      if (!validatePassword(password)) throw new Error('Enter minimum 6 digits password')
+      setLoading(true)
+      recaptchaRef.current.open()
+    } catch (error) {
+      Toast(error.message || "Server Error")
+    }
+
   }
 
   const onVerify = async token => {
@@ -36,13 +51,7 @@ const Signup = ({ navigation }) => {
   }
   const handleSignup = async () => {
     try {
-      if (!email && !password) throw new Error('Enter the required feilds')
-      if (!validateEmail(email)) throw new Error('Enter valid email')
-      if (!password) throw new Error('Enter password')
-      if (!name) throw new Error('Enter password')
-      if (!validatePassword(password)) throw new Error('Enter minimum 6 digits password')
-
-      else if (token == null) {
+      if (token == null) {
         Toast("Waiting for recaptcha verification")
         send()
       }
@@ -53,6 +62,8 @@ const Signup = ({ navigation }) => {
           password: password,
           password_confirmation: password,
           "g-recaptcha-response": token,
+          country: countryId,
+          city: cityId
         }
         const response = await functions.register(payload)
         if (!response.status) throw new Error(response.message)
@@ -67,6 +78,15 @@ const Signup = ({ navigation }) => {
       setLoading(false)
     }
   }
+  console.log(countryId, cityId);
+  useEffect(() => {
+    if (route.params?.data != undefined) {
+      setCity(route.params?.data.city)
+      setCountry(route.params?.data.country)
+      setcountryId(route.params?.data.countryId)
+      setcityId(route.params?.data.cityId)
+    }
+  }, [route.params])
   return (
     <SafeAreaView style={styles.container}>
 
@@ -103,6 +123,22 @@ const Signup = ({ navigation }) => {
             onPress={() => setTogglePassword(!togglePassword)}
           />}
         />
+        <View style={{ marginHorizontal: 10, marginVertical: 10 }}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("PlaceAd", "signup")}
+            activeOpacity={0.6}
+            style={[styles.selectButton]}>
+            <Text style={[styles.selectLabel]}>{country}</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ marginHorizontal: 10, marginVertical: 10 }}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("PlaceAd", "signup")}
+            activeOpacity={0.6}
+            style={[styles.selectButton]}>
+            <Text style={[styles.selectLabel]}>{city}</Text>
+          </TouchableOpacity>
+        </View>
         <Recaptcha
           ref={recaptchaRef}
           siteKey={siteKey}
@@ -169,7 +205,6 @@ const styles = StyleSheet.create({
   selectButton: {
     width: '100%',
     borderRadius: 5,
-    height: 45,
     paddingHorizontal: 4,
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -185,7 +220,7 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
     paddingHorizontal: 15,
     paddingVertical: 10,
-    fontFamily: fonts.SEMIBOLD,
+    fontFamily: fonts.REGULAR,
   },
   input: {
     width: '95%',

@@ -14,7 +14,8 @@ const Item = ({ name, handlePress }) => {
         </>
     )
 }
-const ReportAd = ({ navigation }) => {
+
+const ReportAd = ({ navigation, route }) => {
 
     return (
         <SafeAreaView style={styles.container}>
@@ -22,12 +23,12 @@ const ReportAd = ({ navigation }) => {
                 <View style={styles.modalView}>
                     <View style={{ justifyContent: 'center', marginVertical: 16 }}>
                         <Text style={styles.h1}>Report this listing</Text>
-                        <Text style={[styles.h2,{fontFamily:fonts.BOLD}]}>Weight</Text>
+                        <Text style={[styles.h2, { fontFamily: fonts.BOLD }]}>Weight</Text>
                     </View>
-                        <Separator />
+                    <Separator />
                     <FlatList
                         data={['Spam', 'Fraud', 'Miscategorized', "Repetive Listing", 'Copyright Infringement', 'Not available', 'Incorrect Pricing',]}
-                        renderItem={({ item }) => (<Item name={item} handlePress={() => navigation.navigate('ConfirmReportAd',item)} />)}
+                        renderItem={({ item }) => (<Item name={item} handlePress={() => navigation.navigate('ConfirmReportAd', { title: item, ad_id: route.params })} />)}
                         keyExtractor={(item, index) => index.toString()}
                         ItemSeparatorComponent={<Separator />}
                     />
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         zIndex: 2,
         marginHorizontal: 10,
-        marginBottom:4,
+        marginBottom: 4,
         fontFamily: fonts.SEMIBOLD,
     },
     h2: {

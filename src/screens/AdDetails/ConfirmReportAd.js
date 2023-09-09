@@ -4,27 +4,50 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-nat
 import { Button } from 'react-native-paper';
 import * as colors from "../../utilities/colors"
 import * as fonts from "../../utilities/fonts"
+import * as functions from "../../utilities/functions"
+import Toast from "../../components/Extras/Toast"
 
 const ConfirmReportAd = ({ navigation, route }) => {
+
   useEffect(() => {
     navigation.setOptions({
-      title: ` Report as ${route.params}`
+      title: ` Report as ${route.params.title}`
     })
   }, [])
+
+  const reportAnAd = async () => {
+    try {
+      const payload = {
+        ad_id: route.params.ad_id,
+        report_reason: route.params.title,
+        description: `I have chosen to report this ad as ${route.params.title}`
+      }
+      const response = await functions.reportAd(payload)
+      if (response.status) {
+        Toast(response.message)
+        navigation.navigate("BottomNavigator")
+      }
+      else {
+        Toast(response.message)
+      }
+    } catch (error) {
+      Toast(error)
+    }
+  }
   return (
     <SafeAreaView style={styles.centeredView}>
       <View style={styles.modalView}>
 
         <View style={{ marginVertical: 18, marginHorizontal: 12 }}>
-          <Text style={styles.h2}>You have chosen to report this as {route.params}.</Text>
+          <Text style={styles.h2}>You have chosen to report this as {route.params.title}.</Text>
         </View>
         <View style={styles.center}>
           <Button
-            onPress={() => { navigation.navigate('PlaceAdPreCategory') }}
+            onPress={reportAnAd}
             mode="contained"
             style={styles.button}
             labelStyle={styles.ButtonLabel}
-          >Report as {route.params}</Button>
+          >Report as {route.params.title}</Button>
         </View>
       </View>
     </SafeAreaView>

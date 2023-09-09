@@ -230,7 +230,7 @@ const AdDetails = ({ navigation, route }) => {
                             <Text style={[styles.boldText, { marginHorizontal: 30, color: colors.primary }]}>{data.created_by_user?.phone || "----"}</Text>
                         </View>
                     </View>
-                    <Text onPress={() => navigation.navigate('ReportAd')} style={styles.highlightedText}>Report an Ad</Text>
+                    <Text onPress={() => navigation.navigate('ReportAd', data.id)} style={styles.highlightedText}>Report an Ad</Text>
                 </View>
                 {/* location finished */}
                 {/* SimilarAds Start */}

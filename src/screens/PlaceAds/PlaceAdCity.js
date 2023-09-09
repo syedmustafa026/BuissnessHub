@@ -24,7 +24,7 @@ const PlaceAdCity = ({ navigation, route }) => {
   const [loading, setLoading] = useState(true)
 
   const getCities = async () => {
-    const response = await functions.getCities({ country: route.params })
+    const response = await functions.getCities({ country: route.params.country })
     if (response.status) {
       setLoading(false)
       setCities(response.data)
@@ -34,7 +34,14 @@ const PlaceAdCity = ({ navigation, route }) => {
   useEffect(() => {
     getCities()
   }, [])
-
+  const selectCity = (item) => {
+    if (route.params.path === 'signup') {
+      navigation.navigate("Signup", { data: { country: route.params.countryName, city: item.name, countryId: route.params.country, cityId: item.id } })
+    }
+    else {
+      navigation.navigate("PlaceAdListing", { country: route.params.country, city: item.id })
+    }
+  }
   if (loading) {
     return (
       <View style={styles.errorContainer}>
@@ -52,7 +59,7 @@ const PlaceAdCity = ({ navigation, route }) => {
           </View>
           <FlatList
             data={cities}
-            renderItem={({ item }) => (<Item item={item} handlePress={() => navigation.navigate("PlaceAdListing", { country: route.params, city: item.id })} />)}
+            renderItem={({ item }) => (<Item item={item} handlePress={() => selectCity(item)} />)}
             keyExtractor={(item, index) => index.toString()}
           />
         </View>

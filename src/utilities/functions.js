@@ -101,6 +101,7 @@ export const getAdDetails = async (ad_id) => {
         return error.message
     }
 }
+
 export const filterAds = async () => {
     try {
         const { data: response } = await axios.post(`${apiUrl}/listing/filter`)
@@ -132,6 +133,17 @@ export const getCities = async (payload) => {
 export const saveListingTitle = async (payload) => {
     try {
         const { data: response } = await axios.post(`${apiUrl}/listing/save-listing-title`, payload, {
+            headers: await getHeader()
+        })
+        const json = response
+        return json
+    } catch (error) {
+        return error.message
+    }
+}
+export const reportAd = async (payload) => {
+    try {
+        const { data: response } = await axios.post(`${apiUrl}/listing/report-ad`, payload, {
             headers: await getHeader()
         })
         const json = response

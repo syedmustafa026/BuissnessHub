@@ -16,8 +16,8 @@ const Filters = ({ navigation, route }) => {
 
   const [keywords, setKeywords] = useState(null)
   const [category, setcategory] = useState('Buisness for sale')
-  const [categoryId, setcategoryId] = useState(1)
   const [subcategory, setsubcategory] = useState('Buisness services')
+  const [categoryId, setcategoryId] = useState(1)
   const [subcategoryId, setsubcategoryId] = useState(1)
   const [priceFrom, setpriceFrom] = useState("0")
   const [priceTo, setpriceTo] = useState("10000")
@@ -41,10 +41,9 @@ const Filters = ({ navigation, route }) => {
       setsubcategory(route.params?.filter?.sub_category)
       setsubcategoryId(route.params?.filter?.subcategory_id)
     }
-    if (route.params?.city != undefined) {
-      setLocationName(route.params.city)
-    }
-  },)
+
+  },[])
+
   const filter = async () => {
     try {
       const response = await functions.filterAds({
@@ -52,7 +51,7 @@ const Filters = ({ navigation, route }) => {
         subcategory_id: subcategoryId,
         from: parseInt(priceFrom),
         to: parseInt(priceTo),
-        keyword: keywords
+        keyword: keywords,
       })
       if (response) {
         navigation.replace("SearchedResults", response.data)

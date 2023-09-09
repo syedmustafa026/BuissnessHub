@@ -26,12 +26,13 @@ const PlaceAd = ({ navigation, route }) => {
     const [loginModal, setLoginModal] = useState(false)
     const [loading, setLoading] = useState(true)
 
-
     const getUser = async () => {
         const response = await functions.getItem('user')
         setUser(response)
         if (user) getCountries()
+        else setLoading(false)
     }
+
     const getCountries = async () => {
         const response = await functions.getCountries()
         if (response.status) {
@@ -39,9 +40,14 @@ const PlaceAd = ({ navigation, route }) => {
             setCountries(response.data)
         }
     }
-
+    console.log(user);
     useEffect(() => {
-        getUser()
+        if (route.params === 'signup') {
+            getCountries()
+        }
+        else {
+            getUser()
+        }
     }, [user])
 
     if (loading) {
@@ -57,11 +63,11 @@ const PlaceAd = ({ navigation, route }) => {
                 <View style={styles.modalView}>
                     <View style={{ justifyContent: 'center', marginVertical: 16 }}>
                         <Text style={styles.h1}>{"Select your country"}</Text>
-                        <Text style={styles.h4}>{"Where should we place your ad?"}</Text>
+                        <Text style={styles.h4}>{route.params === 'signup' ? "It will helps to find the ad according to your country" : "Where should we place your ad?"}</Text>
                     </View>
                     <FlatList
                         data={countries}
-                        renderItem={({ item }) => (<Item item={item} handlePress={() => navigation.navigate("PlaceAdCity", item.id)} />)}
+                        renderItem={({ item }) => (<Item item={item} handlePress={() => navigation.navigate("PlaceAdCity", { country: item.id, countryName: item.name, path: route.params })} />)}
                         keyExtractor={(item, index) => index.toString()}
                     />
                 </View>
