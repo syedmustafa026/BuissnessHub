@@ -42,7 +42,7 @@ const Filters = ({ navigation, route }) => {
       setsubcategoryId(route.params?.filter?.subcategory_id)
     }
 
-  },[])
+  }, [])
 
   const filter = async () => {
     try {
@@ -183,8 +183,8 @@ const Filters = ({ navigation, route }) => {
             <TouchableOpacity
               onPress={() => navigation.navigate("PlaceAdListing", "category")}
               activeOpacity={0.6}
-              style={[styles.selectButton]}>
-              <Text style={[styles.selectLabel]}>{category}</Text>
+              style={styles.selectButton}>
+              <Text style={styles.selectLabel}>{category}</Text>
             </TouchableOpacity>
           </View>
           <View style={{ marginHorizontal: 10, marginVertical: 10 }}>
@@ -192,8 +192,8 @@ const Filters = ({ navigation, route }) => {
             <TouchableOpacity
               onPress={() => navigation.navigate("PlaceAdListing", "category")}
               activeOpacity={0.6}
-              style={[styles.selectButton]}>
-              <Text style={[styles.selectLabel]}>{subcategory}</Text>
+              style={styles.selectButton}>
+              <Text style={styles.selectLabel}>{subcategory}</Text>
             </TouchableOpacity>
           </View>
           <Button
@@ -231,15 +231,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginHorizontal: 20
   },
-  selectLabel: {
-    fontSize: hp("2"),
-    color: colors.gray,
-    textAlign: 'justify',
-    alignSelf: 'center',
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    fontFamily: fonts.MEDIUM,
-  },
+
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -289,6 +281,15 @@ const styles = StyleSheet.create({
     borderColor: colors.gray,
     borderWidth: 1,
     marginTop: 8,
+  },
+  selectLabel: {
+    fontSize: hp("2"),
+    color: colors.gray,
+    textAlign: 'justify',
+    alignSelf: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    fontFamily: fonts.MEDIUM,
   },
   input: {
     width: '95%',
